@@ -1373,7 +1373,7 @@
             </div>
           </div>
           <div class="hero-art" aria-hidden="true">
-            <img src="" data-electro-img="phones" alt="">
+            <img src="https://i.postimg.cc/6pTxKLF9/Chat-GPT-Image-27-sent-2026-g-12-23-34.png" alt="">
           </div>
         </article>
 
@@ -1482,19 +1482,19 @@
       <div class="section-head"><h3>Популярные категории</h3><a href="#" onclick="openCatalog('all');return false;">Все категории →</a></div>
       <div class="cats">
         <a class="cat active" href="#" onclick="openCatalog('phones');return false;">
-          <img class="cat-img" src="" data-electro-img="phones" alt="Смартфоны">
+          <img class="cat-img" src="https://i.postimg.cc/JhfLPDTg/Chat-GPT-Image-27-sent-2026-g-12-23-14.png" alt="Смартфоны">
           <div class="cat-name">Смартфоны <span class="cat-go"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></div>
         </a>
         <a class="cat" href="#" onclick="openCatalog('earbuds');return false;">
-          <img class="cat-img" src="" data-electro-img="earbuds" alt="Наушники">
+          <img class="cat-img" src="https://i.postimg.cc/NFYwwhvS/Chat-GPT-Image-27-sent-2026-g-12-23-19.png" alt="Наушники">
           <div class="cat-name">Наушники <span class="cat-go"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></div>
         </a>
         <a class="cat" href="#" onclick="openCatalog('laptops');return false;">
-          <img class="cat-img" src="" data-electro-img="laptops" alt="Ноутбуки">
+          <img class="cat-img" src="https://i.postimg.cc/8kBSmCLR/Chat-GPT-Image-27-sent-2026-g-12-23-24.png" alt="Ноутбуки">
           <div class="cat-name">Ноутбуки <span class="cat-go"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></div>
         </a>
         <a class="cat" href="#" onclick="openCatalog('watches');return false;">
-          <img class="cat-img" src="" data-electro-img="watches" alt="Смарт-часы">
+          <img class="cat-img" src="https://i.postimg.cc/ncFtRtkV/Chat-GPT-Image-27-sent-2026-g-12-23-29.png" alt="Смарт-часы">
           <div class="cat-name">Смарт-часы <span class="cat-go"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span></div>
         </a>
       </div>
@@ -1820,7 +1820,7 @@
               </div>
             </div>
 
-            <a class="manager-contact" href="https://t.me/electro_opt" target="_blank" rel="noopener">
+            <a class="manager-contact" href="https://t.me/galk_b2b" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M21.5 3.2 2.8 10.4c-1.3.5-1.3 1.2-.2 1.5l4.8 1.5 1.8 5.7c.2.7.1 1 .8 1 .5 0 .7-.2 1-.6l2.7-2.6 5.6 4.1c1 .6 1.8.3 2-.9L23 4.3c.3-1.3-.5-1.9-1.5-1.1Zm-3.2 3.3-10.4 9.4-.4 3.3-1.6-5.5 12.4-7.2Z"/>
               </svg>
@@ -1923,7 +1923,7 @@
     <div class="sheet-panel">
       <div class="sheet-grab"></div>
       <div class="sheet-title"><b>Видеообзор партии</b><button class="pm-close" type="button" onclick="closeVideo()">Закрыть</button></div>
-      <video id="review-video" class="review" controls playsinline preload="none" poster="" data-electro-poster="phones">
+      <video id="review-video" class="review" controls playsinline preload="none" poster="https://i.postimg.cc/JhfLPDTg/Chat-GPT-Image-27-sent-2026-g-12-23-14.png">
       </video>
       <p style="margin-top:8px;color:#7e8c9f;font-size:12px;font-weight:600">15 сек • живой обзор партии со склада</p>
     </div>
@@ -2011,19 +2011,6 @@
       { id: "laptops", name: "Ноутбуки" },
       { id: "watches", name: "Смарт-часы" }
     ];
-    // Подставляем встроенные изображения после объявления IMG.
-    (function hydrateElectroImages(){
-      const map = { phones: IMG.phones, earbuds: IMG.earbuds, laptops: IMG.laptops, watches: IMG.watches };
-      document.querySelectorAll('[data-electro-img]').forEach(function(el){
-        const key = el.getAttribute('data-electro-img');
-        if (map[key]) el.src = map[key];
-      });
-      document.querySelectorAll('[data-electro-poster]').forEach(function(el){
-        const key = el.getAttribute('data-electro-poster');
-        if (map[key]) el.poster = map[key];
-      });
-    })();
-
     const PRODUCTS = [
       {
         id: "p1", cat: "phones", base: "Смартфон iPhone 16 Pro", box: 5, img: IMG.phones, rating: "4.9", reviews: 128,
