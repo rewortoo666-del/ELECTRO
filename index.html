@@ -8,7 +8,7 @@
   >
   <meta name="theme-color" content="#06090f">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>i-mobile | Симферополь</title>
+  <title>APPLE MARKET | Демо-витрина</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1328,8 +1328,8 @@
           </svg>
         </div>
         <div class="brand-text">
-          <h1>i-mobile</h1>
-          <p>Техника Apple • Симферополь (ул. Тав-Даир, 47)</p>
+          <h1>APPLE MARKET</h1>
+          <p>ДЕМО-ВИТРИНА</p>
         </div>
       </div>
       <div class="header-actions">
@@ -1861,7 +1861,7 @@
   <div id="product-modal" aria-hidden="true">
     <div class="pm-top">
       <button class="pm-close" type="button" onclick="closeProduct()">Закрыть</button>
-      <div class="pm-brand"><b>i-mobile</b><span>Симферополь • ул. Тав-Даир, 47</span></div>
+      <div class="pm-brand"><b>APPLE MARKET</b><span>ДЕМО-ВИТРИНА</span></div>
       <button class="menu-btn" type="button" aria-label="Меню"><span></span></button>
     </div>
     <div class="pm-badges">
@@ -2013,7 +2013,7 @@
       { id: "watches", name: "Смарт-часы" }
     ];
     const PRODUCTS = [
-      // === Топ-3 реальных товара i-mobile ===
+      // === i-mobile (Симферополь) ===
       {
         id: "iph15pm", cat: "phones", base: "iPhone 15 Pro Max 256Gb Natural Titanium", box: 1,
         img: "https://i.postimg.cc/SRPgsWjN/Ajfon-v-percatke-v-magazine-tehniki.png",
@@ -2029,13 +2029,11 @@
         single: true,
         shop: "i-mobile",
         article: "#8665",
-        vars: [
-          { name: "256", label: "256GB", price: 56990 }
-        ],
+        vars: [ { name: "256", label: "256GB", price: 56990 } ],
         chosen: 0
       },
       {
-        id: "iph15p", cat: "phones", base: "iPhone 15 Pro 128Gb Blue Titanium", box: 1,
+        id: "iph15p-im", cat: "phones", base: "iPhone 15 Pro 128Gb Blue Titanium", box: 1,
         img: "https://i.postimg.cc/kg4H7g4V/Smartfon-v-percatke-v-magazine-tehnologij.png",
         images: [
           "https://i.postimg.cc/kg4H7g4V/Smartfon-v-percatke-v-magazine-tehnologij.png",
@@ -2049,17 +2047,13 @@
         single: true,
         shop: "i-mobile",
         article: "#5099",
-        vars: [
-          { name: "128", label: "128GB", price: 47990 }
-        ],
+        vars: [ { name: "128", label: "128GB", price: 47990 } ],
         chosen: 0
       },
       {
-        id: "iph14", cat: "phones", base: "iPhone 14 128Gb Midnight", box: 1,
+        id: "iph14-im", cat: "phones", base: "iPhone 14 128Gb Midnight", box: 1,
         img: "https://i.postimg.cc/Y9qM7wJj/Smartfon-s-ekranom-v-percatke.png",
-        images: [
-          "https://i.postimg.cc/Y9qM7wJj/Smartfon-s-ekranom-v-percatke.png"
-        ],
+        images: [ "https://i.postimg.cc/Y9qM7wJj/Smartfon-s-ekranom-v-percatke.png" ],
         rating: "4.8", reviews: 41,
         unit: "АКБ 100% (заменили в сервисе) • Не топился • Все функции исправны • Полный комплект",
         warranty: "30 дней со дня покупки",
@@ -2068,24 +2062,72 @@
         single: true,
         shop: "i-mobile",
         article: "#8216",
-        vars: [
-          { name: "128", label: "128GB", price: 28990 }
-        ],
+        vars: [ { name: "128", label: "128GB", price: 28990 } ],
         chosen: 0
       },
-      // === Наполнение каталога ===
+      // === АКВА ЭПЛ ===
+      {
+        id: "iph14p", cat: "phones", base: "iPhone 14 Pro 256GB", box: 1,
+        img: "https://i.postimg.cc/9F6ZzCj0/photo-2026-10-14-11-21-55.jpg",
+        images: [
+          "https://i.postimg.cc/9F6ZzCj0/photo-2026-10-14-11-21-55.jpg",
+          "https://i.postimg.cc/Yq5YjMw9/photo-2026-10-14-11-21-57.jpg",
+          "https://i.postimg.cc/J4fZtMWh/photo-2026-10-14-11-21-59.jpg"
+        ],
+        rating: "4.9", reviews: 47,
+        unit: "АКБ 100% • SIM+SIM • Оригинал",
+        warranty: "2 месяца",
+        delivery: "Бесплатно",
+        condition: "Оригинал",
+        single: true,
+        shop: "АКВА ЭПЛ",
+        vars: [ { name: "256", label: "256GB", price: 37990 } ],
+        chosen: 0
+      },
+      {
+        id: "iph13", cat: "phones", base: "iPhone 13 128GB", box: 1,
+        img: "https://i.postimg.cc/Kc95G6z4/photo-2026-10-14-11-28-32.jpg",
+        images: [
+          "https://i.postimg.cc/Kc95G6z4/photo-2026-10-14-11-28-32.jpg",
+          "https://i.postimg.cc/Pf6MXgxx/photo-2026-10-14-11-28-34.jpg",
+          "https://i.postimg.cc/CMv4h315/photo-2026-10-14-11-28-35.jpg"
+        ],
+        rating: "4.8", reviews: 89,
+        unit: "АКБ 100% • SIM+eSIM • Б/У",
+        warranty: "2 недели",
+        delivery: "Бесплатно",
+        condition: "Б/У",
+        single: true,
+        shop: "АКВА ЭПЛ",
+        vars: [ { name: "128", label: "128GB", price: 15990 } ],
+        chosen: 0
+      },
+      // === РЕМЭПЛ ===
+      {
+        id: "iph15p", cat: "phones", base: "iPhone 15 Pro 128GB", box: 1,
+        img: "https://i.postimg.cc/JzTqnSKY/photo-2026-10-13-14-09-21.jpg",
+        images: [ "https://i.postimg.cc/JzTqnSKY/photo-2026-10-13-14-09-21.jpg" ],
+        rating: "4.9", reviews: 31,
+        unit: "АКБ 91% • Натуральный титан • Идеал",
+        warranty: "2 недели",
+        delivery: "Бесплатно",
+        condition: "Идеальное состояние",
+        single: true,
+        shop: "РЕМЭПЛ",
+        vars: [ { name: "128", label: "128GB", price: 64900 } ],
+        chosen: 0
+      },
+      // === Наполнение ===
       {
         id: "e1", cat: "earbuds", base: "AirPods Pro 2 USB-C", box: 1,
         img: IMG.earbuds,
         rating: "4.9", reviews: 156,
         unit: "Новое устройство • Оригинал",
-        warranty: "30 дней со дня покупки",
-        delivery: "Симферополь, ул. Тав-Даир, 47",
+        warranty: "1 год",
+        delivery: "Бесплатно",
         condition: "Новое",
         single: true,
-        vars: [
-          { name: "USB-C", label: "USB-C", price: 18990 }
-        ],
+        vars: [ { name: "USB-C", label: "USB-C", price: 18990 } ],
         chosen: 0
       },
       {
@@ -2093,13 +2135,11 @@
         img: IMG.laptops,
         rating: "4.9", reviews: 73,
         unit: "Новое устройство • Оригинал",
-        warranty: "30 дней со дня покупки",
-        delivery: "Симферополь, ул. Тав-Даир, 47",
+        warranty: "1 год",
+        delivery: "Бесплатно",
         condition: "Новое",
         single: true,
-        vars: [
-          { name: "8/256", label: "8/256GB", price: 89900 }
-        ],
+        vars: [ { name: "8/256", label: "8/256GB", price: 89900 } ],
         chosen: 0
       },
       {
@@ -2107,13 +2147,11 @@
         img: IMG.watches,
         rating: "4.8", reviews: 62,
         unit: "Новое устройство • Оригинал",
-        warranty: "30 дней со дня покупки",
-        delivery: "Симферополь, ул. Тав-Даир, 47",
+        warranty: "1 год",
+        delivery: "Бесплатно",
         condition: "Новое",
         single: true,
-        vars: [
-          { name: "49mm", label: "49mm Titanium", price: 69900 }
-        ],
+        vars: [ { name: "49mm", label: "49mm Titanium", price: 69900 } ],
         chosen: 0
       }
     ];
