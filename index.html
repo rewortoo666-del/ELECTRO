@@ -631,7 +631,7 @@
     }
     .tab { position:relative; }
 
-    /* ===== АКВА ЭПЛ PROFILE REDESIGN ===== */
+    /* ===== i-mobile PROFILE REDESIGN ===== */
     .profile-page { padding-bottom: 18px; }
     .profile-updated {
       margin-top: 8px;
@@ -1360,7 +1360,7 @@
       </div>
     </section>
 
-    <section class="hero" id="homeHero" aria-label="Байеры АКВА ЭПЛ">
+    <section class="hero" id="homeHero" aria-label="Байеры i-mobile">
       <div class="hero-track" id="heroTrack">
 
         <article class="hero-slide is-active">
@@ -1680,7 +1680,7 @@
           </div>
           <div class="brand-text">
             <h1>ELEKTRO</h1>
-            <p>Техника Apple • Вологда</p>
+            <p>Техника Apple • Симферополь</p>
           </div>
         </div>
         <div class="header-actions">
@@ -1713,7 +1713,7 @@
     <section id="screen-profile" class="screen">
       <div class="page-head">
         <h2>Профиль</h2>
-        <small>АКВА ЭПЛ • Кабинет покупателя</small>
+        <small>i-mobile • Кабинет покупателя</small>
       </div>
 
       <div class="profile-page">
@@ -1815,7 +1815,7 @@
             <div class="manager-head">
               <div class="manager-avatar">E</div>
               <div class="manager-copy">
-                <strong>Ваш менеджер АКВА ЭПЛ</strong>
+                <strong>Ваш менеджер i-mobile</strong>
                 <span>На связи по вопросам заказа и отгрузки</span>
               </div>
             </div>
@@ -1889,15 +1889,15 @@
       <div class="pm-chips" id="pm-color"></div>
     </div>
     <button class="take" type="button" onclick="confirmBox()">КУПИТЬ / БРОНЬ</button>
-    <button class="quick" type="button" onclick="confirmBox()">🔄 Trade-in / Рассрочка</button>
+    <button class="quick" type="button" onclick="confirmBox()">🔄 Trade-in / Доставка</button>
     <button class="link-row" type="button" onclick="openVideo()">▶ Смотреть видеообзор (15 сек) ›</button>
     <div class="rev-head">
       <h3>Отзывы покупателей (2)</h3>
       <button class="rev-add" type="button" onclick="toast('Форма отзыва')">+ Написать</button>
     </div>
     <div class="rev-note">Реальные отзывы покупателей</div>
-    <article class="rev-card"><b>Алексей</b> — Вологда<br><small>★ ★★★★★</small><p style="margin-top:6px;font-size:13px">Всё как на фото, АКБ 100%, работает отлично. Гарантия есть.</p></article>
-    <article class="rev-card"><b>Мария</b> — Вологда<br><small>★ ★★★★★</small><p style="margin-top:6px;font-size:13px">Быстро оформили, доставка в тот же день. Рекомендую.</p></article>
+    <article class="rev-card"><b>Артём</b> — Симферополь<br><small>★★★★★</small><p style="margin-top:6px;font-size:13px">Всё как на фото, АКБ соответствует, полный комплект. Гарантия 30 дней.</p></article>
+    <article class="rev-card"><b>Елена</b> — Симферополь<br><small>★★★★★</small><p style="margin-top:6px;font-size:13px">Приехал в магазин на Тав-Даир, быстро оформили, телефон в идеале.</p></article>
     <div class="calc">
       <div class="step">
         <div>
@@ -1972,7 +1972,7 @@
       <div class="co-head">
         <div>
           <h2>Корзина</h2>
-          <p>АКВА ЭПЛ • розничная доставка</p>
+          <p>i-mobile • розничная доставка</p>
         </div>
         <button class="co-cancel" type="button" onclick="hideCheckout(true)">Отмена</button>
       </div>
@@ -2013,9 +2013,61 @@
       { id: "watches", name: "Смарт-часы" }
     ];
     const PRODUCTS = [
-      // === 1-й ряд: АКВА ЭПЛ ===
+      // === i-mobile (Симферополь) ===
       {
-        id: "iph14p", cat: "phones", base: "iPhone 14 Pro 256GB", box: 1, 
+        id: "iph15pm", cat: "phones", base: "iPhone 15 Pro Max 256Gb Natural Titanium", box: 1,
+        img: "https://i.postimg.cc/SRPgsWjN/Ajfon-v-percatke-v-magazine-tehniki.png",
+        images: [
+          "https://i.postimg.cc/SRPgsWjN/Ajfon-v-percatke-v-magazine-tehniki.png",
+          "https://i.postimg.cc/Qxzh1Pv9/Smartfon-v-cernoj-percatke-v-magazine.png"
+        ],
+        rating: "4.9", reviews: 28,
+        unit: "АКБ 85% • В ремонте не был • Не вскрывался, не топился • Полный комплект",
+        warranty: "30 дней со дня покупки",
+        delivery: "Симферополь, ул. Тав-Даир, 47",
+        condition: "Идеал",
+        single: true,
+        shop: "i-mobile",
+        article: "#8665",
+        vars: [ { name: "256", label: "256GB", price: 56990 } ],
+        chosen: 0
+      },
+      {
+        id: "iph15p-im", cat: "phones", base: "iPhone 15 Pro 128Gb Blue Titanium", box: 1,
+        img: "https://i.postimg.cc/kg4H7g4V/Smartfon-v-percatke-v-magazine-tehnologij.png",
+        images: [
+          "https://i.postimg.cc/kg4H7g4V/Smartfon-v-percatke-v-magazine-tehnologij.png",
+          "https://i.postimg.cc/hvp4ktyK/Cernyj-percatocnyj-zahvat-sinego-i-Phone.png"
+        ],
+        rating: "4.9", reviews: 22,
+        unit: "АКБ 87% • В ремонте не был • Не вскрывался, не топился • Полный комплект",
+        warranty: "30 дней со дня покупки",
+        delivery: "Симферополь, ул. Тав-Даир, 47",
+        condition: "Идеал",
+        single: true,
+        shop: "i-mobile",
+        article: "#5099",
+        vars: [ { name: "128", label: "128GB", price: 47990 } ],
+        chosen: 0
+      },
+      {
+        id: "iph14-im", cat: "phones", base: "iPhone 14 128Gb Midnight", box: 1,
+        img: "https://i.postimg.cc/Y9qM7wJj/Smartfon-s-ekranom-v-percatke.png",
+        images: [ "https://i.postimg.cc/Y9qM7wJj/Smartfon-s-ekranom-v-percatke.png" ],
+        rating: "4.8", reviews: 41,
+        unit: "АКБ 100% (заменили в сервисе) • Не топился • Все функции исправны • Полный комплект",
+        warranty: "30 дней со дня покупки",
+        delivery: "Симферополь, ул. Тав-Даир, 47",
+        condition: "Отличное",
+        single: true,
+        shop: "i-mobile",
+        article: "#8216",
+        vars: [ { name: "128", label: "128GB", price: 28990 } ],
+        chosen: 0
+      },
+      // === АКВА ЭПЛ ===
+      {
+        id: "iph14p", cat: "phones", base: "iPhone 14 Pro 256GB", box: 1,
         img: "https://i.postimg.cc/9F6ZzCj0/photo-2026-10-14-11-21-55.jpg",
         images: [
           "https://i.postimg.cc/9F6ZzCj0/photo-2026-10-14-11-21-55.jpg",
@@ -2029,13 +2081,11 @@
         condition: "Оригинал",
         single: true,
         shop: "АКВА ЭПЛ",
-        vars: [
-          { name: "256", label: "256GB", price: 37990 }
-        ],
+        vars: [ { name: "256", label: "256GB", price: 37990 } ],
         chosen: 0
       },
       {
-        id: "iph13", cat: "phones", base: "iPhone 13 128GB", box: 1, 
+        id: "iph13", cat: "phones", base: "iPhone 13 128GB", box: 1,
         img: "https://i.postimg.cc/Kc95G6z4/photo-2026-10-14-11-28-32.jpg",
         images: [
           "https://i.postimg.cc/Kc95G6z4/photo-2026-10-14-11-28-32.jpg",
@@ -2049,19 +2099,14 @@
         condition: "Б/У",
         single: true,
         shop: "АКВА ЭПЛ",
-        vars: [
-          { name: "128", label: "128GB", price: 15990 }
-        ],
+        vars: [ { name: "128", label: "128GB", price: 15990 } ],
         chosen: 0
       },
-
-      // === 2-й ряд: РЕМЭПЛ (Сергей) ===
+      // === РЕМЭПЛ ===
       {
-        id: "iph15p", cat: "phones", base: "iPhone 15 Pro 128GB", box: 1, 
+        id: "iph15p", cat: "phones", base: "iPhone 15 Pro 128GB", box: 1,
         img: "https://i.postimg.cc/JzTqnSKY/photo-2026-10-13-14-09-21.jpg",
-        images: [
-          "https://i.postimg.cc/JzTqnSKY/photo-2026-10-13-14-09-21.jpg"
-        ],
+        images: [ "https://i.postimg.cc/JzTqnSKY/photo-2026-10-13-14-09-21.jpg" ],
         rating: "4.9", reviews: 31,
         unit: "АКБ 91% • Натуральный титан • Идеал",
         warranty: "2 недели",
@@ -2069,13 +2114,12 @@
         condition: "Идеальное состояние",
         single: true,
         shop: "РЕМЭПЛ",
-        vars: [
-          { name: "128", label: "128GB", price: 64900 }
-        ],
+        vars: [ { name: "128", label: "128GB", price: 64900 } ],
         chosen: 0
       },
+      // === Наполнение ===
       {
-        id: "e1", cat: "earbuds", base: "AirPods Pro 2 USB-C", box: 1, 
+        id: "e1", cat: "earbuds", base: "AirPods Pro 2 USB-C", box: 1,
         img: IMG.earbuds,
         rating: "4.9", reviews: 156,
         unit: "Новое устройство • Оригинал",
@@ -2083,15 +2127,11 @@
         delivery: "Бесплатно",
         condition: "Новое",
         single: true,
-        shop: "РЕМЭПЛ",
-        vars: [
-          { name: "USB-C", label: "USB-C", price: 18990 }
-        ],
+        vars: [ { name: "USB-C", label: "USB-C", price: 18990 } ],
         chosen: 0
       },
-      // === остальные для массовки ===
       {
-        id: "l1", cat: "laptops", base: "MacBook Air 13 M2", box: 1, 
+        id: "l1", cat: "laptops", base: "MacBook Air 13 M2", box: 1,
         img: IMG.laptops,
         rating: "4.9", reviews: 73,
         unit: "Новое устройство • Оригинал",
@@ -2099,13 +2139,11 @@
         delivery: "Бесплатно",
         condition: "Новое",
         single: true,
-        vars: [
-          { name: "8/256", label: "8/256GB", price: 89900 }
-        ],
+        vars: [ { name: "8/256", label: "8/256GB", price: 89900 } ],
         chosen: 0
       },
       {
-        id: "w1", cat: "watches", base: "Apple Watch Ultra 2", box: 1, 
+        id: "w1", cat: "watches", base: "Apple Watch Ultra 2", box: 1,
         img: IMG.watches,
         rating: "4.8", reviews: 62,
         unit: "Новое устройство • Оригинал",
@@ -2113,9 +2151,7 @@
         delivery: "Бесплатно",
         condition: "Новое",
         single: true,
-        vars: [
-          { name: "49mm", label: "49mm Titanium", price: 69900 }
-        ],
+        vars: [ { name: "49mm", label: "49mm Titanium", price: 69900 } ],
         chosen: 0
       }
     ];
@@ -2177,8 +2213,8 @@
       const v0 = p.vars[idx];
       const vars = (p.single || p.vars.length <= 1) ? "" : p.vars.map((v, i) => `<button class="var ${i === idx ? "on" : ""}" type="button" onclick="event.stopPropagation();pickVar(this,'${p.id}',${i})">${v.name}</button>`).join("");
       const unitText = p.unit || (p.condition || "Оригинал");
-      const marginHtml = `Гарантия: ${p.warranty || "1 год"}<br>Доставка (Вологда): ${p.delivery || "Бесплатно"}`;
-      const title = p.single ? p.base : (p.base + " " + v0.label);
+      const marginHtml = `Гарантия: ${p.warranty || "30 дней"}<br>Магазин: ${p.delivery || "Симферополь"}`;
+      const title = (p.single ? p.base : (p.base + " " + v0.label)) + (p.article ? " " + p.article : "");
       return `<article class="product-card" id="card-${p.id}" onclick="openProductSheet('${p.id}')">
         <div class="product-photo">
           <button class="fav-btn ${liked ? "on" : ""}" type="button" onclick="event.stopPropagation();toggleFav('${p.id}', this)">♡</button>
@@ -2191,7 +2227,7 @@
         ${vars ? `<div class="vars">${vars}</div>` : ""}
         <div class="margin-box js-margin">${marginHtml}</div>
         <button class="take" type="button" onclick="event.stopPropagation();openProductSheet('${p.id}')">КУПИТЬ / БРОНЬ</button>
-        <button class="quick" type="button" onclick="event.stopPropagation();openProductSheet('${p.id}')">🔄 Trade-in / Рассрочка</button>
+        <button class="quick" type="button" onclick="event.stopPropagation();openProductSheet('${p.id}')">🔄 Trade-in / Доставка</button>
       </article>`;
     }
 
@@ -2310,7 +2346,7 @@
       document.getElementById("pm-thumbs").innerHTML = imgs.map((src,i)=>
         `<img class="${i===0?"on":""}" src="${src}" onclick="document.getElementById('pm-hero').src=this.src;this.parentElement.querySelectorAll('img').forEach(n=>n.classList.remove('on'));this.classList.add('on')">`
       ).join("");
-      document.getElementById("pm-title").textContent = p.single ? p.base : (p.base + " " + v.label);
+      document.getElementById("pm-title").textContent = (p.single ? p.base : (p.base + " " + v.label)) + (p.article ? " " + p.article : "");
       document.getElementById("pm-rate").innerHTML = "★ " + p.rating + " <i>• " + p.reviews + " отзывов</i>";
       document.getElementById("pm-price").textContent = money(v.price);
       document.getElementById("pm-old").textContent = money(old);
@@ -2336,7 +2372,7 @@
       document.getElementById("pm-qty").textContent = modalQty;
       document.getElementById("pm-range").value = modalQty;
       document.getElementById("pm-disc").innerHTML =
-        `<div class="on">Гарантия: ${p.warranty || "1 год"}</div><div class="on">Доставка (Вологда): ${p.delivery || "Бесплатно"}</div>`;
+        `<div class="on">Гарантия: ${p.warranty || "30 дней"}</div><div class="on">Магазин: ${p.delivery || "Симферополь"}</div>`;
       updateLivePrice();
     }
     function setMem(i) { modalVar = i; PRODUCTS.find(x=>x.id===modalId).chosen = i; renderModal(); }
@@ -2747,7 +2783,7 @@
         tg.ready();
         tg.sendData(serialized);
       } catch (e) {
-        console.error("АКВА ЭПЛ sendData error:", e);
+        console.error("i-mobile sendData error:", e);
         toast("Не удалось отправить заказ в Telegram");
         return;
       }
@@ -2772,7 +2808,7 @@
     }
     updateCartBadge();
 
-    /* ===== АКВА ЭПЛ PROFILE ===== */
+    /* ===== i-mobile PROFILE ===== */
     function initElectroProfile() {
       try {
         const tgUser = window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe
@@ -2855,7 +2891,7 @@
     }
 
     function profileMaterial(name) {
-      toast(name + " — файл будет доступен у менеджера АКВА ЭПЛ");
+      toast(name + " — файл будет доступен у менеджера i-mobile");
     }
 
     try {
