@@ -6723,13 +6723,23 @@
         const PARTS_RETAIL_FLOOR = 500;
 
         function getRetailPrice(product) {
+            if (!product) return 0;
             let retail;
-            if (product && product.channel === 'parts') {
+            if (product.channel === 'parts') {
                 retail = roundRetailTens(getPartsOptPrice(product) * getPartsRetailMarkup(product));
             } else {
-                retail = Number(product?.price) || Number(product?.tiers?.[0]?.price) || 0;
+                const optPrice = (product.tiers && product.tiers[0]) ? Number(product.tiers[0].price) : Number(product.price || 0);
+                // Если розница уже задана и она выше опта — берем её
+                if (product.retail && Number(product.retail) > optPrice) {
+                    retail = Number(product.retail);
+                } else if (Number(product.price) > optPrice) {
+                    retail = Number(product.price);
+                } else {
+                    // ЖЕЛЕЗНАЯ ЗАЩИТА: если из таблицы пришла только одна оптовая цена — автоматически накидываем +30% к рознице
+                    retail = Math.round((optPrice * 1.30) / 50) * 50;
+                }
             }
-            if (product?.channel !== 'gen' && retail > 0 && retail < PARTS_RETAIL_FLOOR) return PARTS_RETAIL_FLOOR;
+            if (product.channel !== 'gen' && retail > 0 && retail < PARTS_RETAIL_FLOOR) return PARTS_RETAIL_FLOOR;
             return retail;
         }
 
@@ -6744,7 +6754,8 @@
                 }
                 return unitPrice;
             }
-            let unitPrice = (product.tiers && product.tiers[0]) ? Number(product.tiers[0].price) : getRetailPrice(product);
+            // Оптовая цена берётся из первого тира или из базовой цены таблицы
+            let unitPrice = (product.tiers && product.tiers[0]) ? Number(product.tiers[0].price) : Number(product.price || 0);
             if (product.tiers && Array.isArray(product.tiers)) {
                 for (let t of product.tiers) {
                     if (qty >= t.min) unitPrice = Number(t.price);
@@ -7536,6 +7547,30 @@
         attachSwipeToDismiss('checkout-sheet', hideCheckout);
 
         const GOOGLE_SHEET_API = "https://script.google.com/macros/s/AKfycbxD87saolSakvWH_LhyQV_CQLQJ8VGXdrhJeXpx9tfvjVTYRMHtNYgWoEgUbv6z4WUlTQ/exec";
+        const CACHE_KEY = "azarek_fast_catalog_cache_v6";
+
+        // Снимок gen / авто / слив из кода — никогда не пропадают
+        const HARDCODED_PARTS = allProductsData.filter(p => p.channel === 'parts').map(p => Object.assign({}, p));
+        const HARDCODED_GEN   = allProductsData.filter(p => p.channel === 'gen').map(p => Object.assign({}, p));
+        const HARDCODED_SLIV  = allProductsData.filter(p => p.channel === 'sliv').map(p => Object.assign({}, p));
+
+        try {
+            const cachedCatalog = localStorage.getItem(CACHE_KEY);
+            if (cachedCatalog) {
+                const parsed = JSON.parse(cachedCatalog);
+                if (Array.isArray(parsed) && parsed.length > 5) {
+                    const mainItems = parsed.filter(p => p.channel === 'main' || !p.channel);
+                    allProductsData = [
+                        ...mainItems,
+                        ...(parsed.some(p => p.channel === 'parts') ? parsed.filter(p => p.channel === 'parts') : HARDCODED_PARTS),
+                        ...(parsed.some(p => p.channel === 'gen')   ? parsed.filter(p => p.channel === 'gen')   : HARDCODED_GEN),
+                        ...(parsed.some(p => p.channel === 'sliv')  ? parsed.filter(p => p.channel === 'sliv')  : HARDCODED_SLIV)
+                    ];
+                }
+            }
+        } catch(e) {}
+
+        switchChannel('main');
 
         async function syncWithGoogleSheet() {
             try {
@@ -7544,29 +7579,54 @@
                 const sheetData = await res.json();
         
                 if (Array.isArray(sheetData) && sheetData.length > 5) {
-                    const slivItems = allProductsData.filter(p => p.channel === 'sliv');
-                    const partsItems = allProductsData.filter(p => p.channel === 'parts');
-                    const genItems = allProductsData.filter(p => p.channel === 'gen');
                     const sheetItems = sheetData.map(function (p, idx) {
                         const item = Object.assign({}, p);
                         if (!item.channel) item.channel = 'main';
                         if (!item.images && item.img) item.images = [item.img];
                         if (!item.title) item.title = item.name || item.model || item.product || '';
                         if (!item.id) item.id = 'az_row_' + (p.row || idx);
+
+                        const existing = allProductsData.find(local => 
+                            local.id === item.id || 
+                            (local.title && item.title && local.title.toLowerCase().trim() === item.title.toLowerCase().trim())
+                        );
+
+                        const optPrice = Number(p.price || existing?.tiers?.[0]?.price || existing?.price || 1000);
+                        const retailPrice = Number(existing?.price && existing.price > optPrice 
+                            ? existing.price 
+                            : (p.retail || Math.round((optPrice * 1.30) / 50) * 50));
+
+                        item.price = retailPrice;
+                        item.retail = retailPrice;
+                        item.tiers = existing?.tiers && existing.tiers.length > 0 
+                            ? existing.tiers.map(t => ({ ...t, price: t.min === 1 ? optPrice : t.price }))
+                            : [
+                                { min: 1, price: optPrice, label: 'Опт от 1 шт' },
+                                { min: 5, price: Math.round((optPrice * 0.96) / 50) * 50, label: 'Опт от 5 шт' }
+                            ];
+                        item.wb_price = Number(existing?.wb_price || p.wb_price || Math.round(optPrice * 1.15));
+                        if (existing?.badge) item.badge = existing.badge;
+                        if (existing?.images && (!item.images || !item.images.length)) item.images = existing.images;
                         return item;
                     });
-                    allProductsData = [...sheetItems, ...partsItems, ...slivItems, ...genItems];
+
+                    // Всегда возвращаем gen / авто / слив из кода
+                    allProductsData = [...sheetItems, ...HARDCODED_PARTS, ...HARDCODED_GEN, ...HARDCODED_SLIV];
+
+                    try {
+                        localStorage.setItem(CACHE_KEY, JSON.stringify(allProductsData));
+                    } catch(e) {}
+
                     renderSubcategoryPills();
                     filterProducts();
-                    console.log("Каталог AZAREK успешно синхронизирован с Google Таблицей!");
+                    console.log("Каталог OK. Gen/Авто/Слив:", HARDCODED_GEN.length, HARDCODED_PARTS.length, HARDCODED_SLIV.length);
                 }
             } catch(e) {
-                console.warn("Загрузка из таблицы не удалась, используется локальный кэш:", e);
+                console.warn("Синхронизация не удалась:", e);
             }
         }
 
         syncWithGoogleSheet();
-        switchChannel('main');
     </script>
 </body>
 </html>
