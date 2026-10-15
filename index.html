@@ -1313,6 +1313,233 @@
       }
     }
 
+
+    /* ===== RATE BADGE ===== */
+    .rate-bar {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: #0a1423;
+      border: 1px solid #142847;
+    }
+    .rate-bar .rate-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .rate-bar .rate-info b {
+      font-size: 12px;
+      font-weight: 800;
+      color: #7ec8ff;
+    }
+    .rate-bar .rate-info span {
+      font-size: 9px;
+      font-weight: 600;
+      color: #5f728c;
+    }
+    .rate-bar .rate-ctrl {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .rate-bar input {
+      width: 72px;
+      height: 32px;
+      padding: 0 8px;
+      border-radius: 10px;
+      border: 1px solid #1a4f8c;
+      background: #07111f;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      text-align: center;
+      outline: none;
+    }
+    .rate-bar button {
+      height: 32px;
+      padding: 0 12px;
+      border-radius: 10px;
+      border: 0;
+      background: linear-gradient(90deg,#0066ff,#0099ff);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    /* ===== TRADE-IN SHEET ===== */
+    #tradein-sheet {
+      position: fixed; inset: 0; z-index: 1150;
+      background: rgba(2,6,14,.82);
+      display: flex; align-items: flex-end; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity .25s;
+    }
+    #tradein-sheet.open { opacity: 1; pointer-events: auto; }
+    #tradein-sheet .sheet-panel {
+      width: 100%; max-width: 430px;
+      background: #050811;
+      border-top: 1px solid #1a3a66;
+      border-radius: 20px 20px 0 0;
+      padding: 12px 16px calc(18px + var(--safe-bottom));
+      transform: translateY(30px); transition: transform .28s cubic-bezier(.16,1,.3,1);
+      max-height: 92dvh; overflow: auto;
+    }
+    #tradein-sheet.open .sheet-panel { transform: translateY(0); }
+    .ti-lab {
+      margin: 12px 0 6px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      color: #7e8c9f;
+      text-transform: uppercase;
+    }
+    .ti-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .ti-chip {
+      height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid #1a2d4d;
+      background: #0a1628;
+      color: #9db0c8;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .ti-chip.on {
+      background: #0077ff;
+      border-color: #0077ff;
+      color: #fff;
+    }
+    .ti-result {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #0a1a30, #07101f);
+      border: 1px solid #1a4f8c;
+    }
+    .ti-result .ti-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #c5d3e6;
+    }
+    .ti-result .ti-row:last-child { margin-bottom: 0; }
+    .ti-result .ti-big {
+      font-size: 22px;
+      font-weight: 800;
+      color: #00a6ff;
+    }
+    .ti-result .ti-muted { color: #7e8c9f; font-size: 12px; }
+    .ti-apply {
+      margin-top: 12px;
+      width: 100%;
+      height: 46px;
+      border: 0;
+      border-radius: 14px;
+      background: linear-gradient(90deg,#0066ff,#0099ff);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .ti-note {
+      margin-top: 8px;
+      font-size: 10px;
+      line-height: 1.4;
+      color: #5f728c;
+      font-weight: 600;
+    }
+
+    /* Wholesale tier labels */
+    .tier-badge {
+      display: inline-flex;
+      align-items: center;
+      height: 20px;
+      padding: 0 8px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 800;
+      background: rgba(0,153,255,.12);
+      color: #6fc3ff;
+      border: 1px solid rgba(0,153,255,.25);
+    }
+
+
+    .catalog-search {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      height: 42px;
+      padding: 0 14px;
+      border-radius: 14px;
+      background: #0c121d;
+      border: 1px solid rgba(0, 140, 255, 0.16);
+    }
+    .catalog-search svg {
+      width: 18px; height: 18px;
+      stroke: #5f778d;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .catalog-search input {
+      flex: 1;
+      min-width: 0;
+      height: 100%;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      outline: none;
+    }
+    .catalog-search input::placeholder { color: #5f778d; }
+    .catalog-search .search-clear {
+      width: 22px; height: 22px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      color: #9db0c8;
+      font-size: 14px;
+      line-height: 1;
+      display: none;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .catalog-search.has-value .search-clear { display: grid; }
+
+
+    #admin-sheet {
+      position: fixed; inset: 0; z-index: 1160;
+      background: rgba(2,6,14,.82);
+      display: flex; align-items: flex-end; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity .25s;
+    }
+    #admin-sheet.open { opacity: 1; pointer-events: auto; }
+    #admin-sheet .sheet-panel {
+      width: 100%; max-width: 430px;
+      background: #050811;
+      border-top: 1px solid #1a3a66;
+      border-radius: 20px 20px 0 0;
+      padding: 12px 16px calc(18px + var(--safe-bottom));
+      transform: translateY(30px); transition: transform .28s cubic-bezier(.16,1,.3,1);
+      max-height: 92dvh; overflow: auto;
+    }
+    #admin-sheet.open .sheet-panel { transform: translateY(0); }
+
   </style>
 </head>
 <body>
@@ -1689,6 +1916,11 @@
         </div>
       </div>
       <div class="chips" id="cat-chips"></div>
+      <div class="catalog-search" id="catalog-search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input type="search" id="catalog-search-input" placeholder="Поиск: iPhone 15, AirPods..." autocomplete="off" oninput="onCatalogSearch(this.value)">
+        <button class="search-clear" type="button" onclick="clearCatalogSearch()" aria-label="Очистить">×</button>
+      </div>
       <div class="grid" id="catalog-grid"></div>
     </section>
 
@@ -1803,6 +2035,10 @@
               <span>🛡 Регламент гарантии и брак</span>
               <span class="material-arrow">›</span>
             </button>
+            <button class="material-btn" type="button" onclick="openAdminPanel()" style="border-color:#1b5a9e;background:#09172a">
+              <span>⚙️ Админ-панель</span>
+              <span class="material-arrow">›</span>
+            </button>
           </div>
         </section>
 
@@ -1889,7 +2125,7 @@
       <div class="pm-chips" id="pm-color"></div>
     </div>
     <button class="take" type="button" onclick="confirmBox()">КУПИТЬ / БРОНЬ</button>
-    <button class="quick" type="button" onclick="confirmBox()">🔄 Trade-in / Доставка</button>
+    <button class="quick" type="button" onclick="openTradeIn()">🔄 Trade-in / Оценка</button>
     <button class="link-row" type="button" onclick="openVideo()">▶ Смотреть видеообзор (15 сек) ›</button>
     <div class="rev-head">
       <h3>Отзывы покупателей (2)</h3>
@@ -1910,7 +2146,7 @@
           <button type="button" onclick="chgQty(1)">+</button>
         </div>
       </div>
-      <input class="pm-range" id="pm-range" type="range" min="1" max="5" value="1" oninput="chgQty(0,this.value)">
+      <input class="pm-range" id="pm-range" type="range" min="1" max="50" value="1" oninput="chgQty(0,this.value)">
       <div class="vol-row">
         <div class="disc" id="pm-disc"></div>
         <div class="vol-now"><b id="pm-live">0 ₽</b><span id="pm-live-sub">1 шт</span></div>
@@ -1929,6 +2165,106 @@
       <p style="margin-top:8px;color:#7e8c9f;font-size:12px;font-weight:600">15 сек • живой обзор партии со склада</p>
     </div>
   </div>
+  
+  
+  <div id="admin-sheet" onclick="if(event.target===this)closeAdminPanel()">
+    <div class="sheet-panel">
+      <div class="sheet-grab"></div>
+      <div class="sheet-title">
+        <b>⚙️ Админ-панель</b>
+        <button class="pm-close" type="button" onclick="closeAdminPanel()">Закрыть</button>
+      </div>
+
+      <div id="admin-lock">
+        <div class="ti-lab">Код доступа</div>
+        <div class="rate-bar" style="margin-top:0">
+          <div class="rate-info">
+            <b>Введите PIN</b>
+            <span>Доступ только для администратора</span>
+          </div>
+          <div class="rate-ctrl">
+            <input type="password" id="admin-pin-input" inputmode="numeric" maxlength="8" placeholder="••••" autocomplete="off" onkeydown="if(event.key==='Enter')unlockAdmin()">
+            <button type="button" onclick="unlockAdmin()">Войти</button>
+          </div>
+        </div>
+        <p class="ti-note" id="admin-pin-error" style="color:#ff6b7a;display:none">Неверный код</p>
+      </div>
+
+      <div id="admin-body" style="display:none">
+        <div class="ti-lab">Курс закупки (₽)</div>
+        <div class="rate-bar" style="margin-top:0">
+          <div class="rate-info">
+            <b>Текущий: <span id="rate-display">90.00</span> ₽</b>
+            <span>Базовый курс прайса: 90 ₽ · цены пересчитываются сразу</span>
+          </div>
+          <div class="rate-ctrl">
+            <input type="number" id="rate-input" step="0.1" min="50" max="200" value="90" inputmode="decimal" onkeydown="if(event.key==='Enter')applyRate()">
+            <button type="button" onclick="applyRate()">OK</button>
+          </div>
+        </div>
+
+        <div class="ti-lab" style="margin-top:16px">Быстрые пресеты</div>
+        <div class="ti-chips" id="admin-rate-presets">
+          <button class="ti-chip" type="button" onclick="setRatePreset(85)">85</button>
+          <button class="ti-chip" type="button" onclick="setRatePreset(90)">90</button>
+          <button class="ti-chip" type="button" onclick="setRatePreset(92.5)">92.5</button>
+          <button class="ti-chip" type="button" onclick="setRatePreset(95)">95</button>
+          <button class="ti-chip" type="button" onclick="setRatePreset(100)">100</button>
+        </div>
+
+        <div class="ti-lab" style="margin-top:16px">Общий endpoint (все пользователи)</div>
+        <input class="co-input" id="rate-shared-url" placeholder="https://api.npoint.io/134f674aa87b85ae3009" style="margin-top:6px" onchange="saveSharedUrl(this.value)">
+        <p class="ti-note">Создайте бесплатный JSON на npoint.io → вставьте URL. Тогда курс увидят все клиенты витрины.</p>
+
+        <button class="ti-apply" type="button" onclick="applyRate();closeAdminPanel()">Сохранить и закрыть</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="tradein-sheet" onclick="if(event.target===this)closeTradeIn()">
+    <div class="sheet-panel">
+      <div class="sheet-grab"></div>
+      <div class="sheet-title">
+        <b>🔄 Trade-in — оценка устройства</b>
+        <button class="pm-close" type="button" onclick="closeTradeIn()">Закрыть</button>
+      </div>
+      <div id="ti-target" style="font-size:13px;font-weight:700;color:#9db0c8;margin-bottom:4px"></div>
+
+      <div class="ti-lab">Ваша модель</div>
+      <div class="ti-chips" id="ti-models"></div>
+
+      <div class="ti-lab">Состояние АКБ</div>
+      <div class="ti-chips" id="ti-battery">
+        <button class="ti-chip on" type="button" data-v="good" onclick="setTiBattery(this)">90%+</button>
+        <button class="ti-chip" type="button" data-v="mid" onclick="setTiBattery(this)">80–89%</button>
+        <button class="ti-chip" type="button" data-v="low" onclick="setTiBattery(this)">&lt;80%</button>
+      </div>
+
+      <div class="ti-lab">Дефекты экрана / корпуса</div>
+      <div class="ti-chips" id="ti-defects">
+        <button class="ti-chip on" type="button" data-v="none" onclick="setTiDefects(this)">Нет</button>
+        <button class="ti-chip" type="button" data-v="minor" onclick="setTiDefects(this)">Мелкие</button>
+        <button class="ti-chip" type="button" data-v="major" onclick="setTiDefects(this)">Сильные</button>
+      </div>
+
+      <div class="ti-lab">Был в ремонте?</div>
+      <div class="ti-chips" id="ti-repair">
+        <button class="ti-chip on" type="button" data-v="no" onclick="setTiRepair(this)">Нет</button>
+        <button class="ti-chip" type="button" data-v="yes" onclick="setTiRepair(this)">Да (неофиц.)</button>
+      </div>
+
+      <div class="ti-result" id="ti-result">
+        <div class="ti-row"><span>Оценка trade-in</span><b class="ti-big" id="ti-value">—</b></div>
+        <div class="ti-row"><span>Цена нового</span><b id="ti-new-price">—</b></div>
+        <div class="ti-row"><span>Доплата</span><b class="ti-big" id="ti-topup">—</b></div>
+        <div class="ti-muted" id="ti-summary" style="margin-top:8px"></div>
+      </div>
+
+      <button class="ti-apply" type="button" onclick="applyTradeIn()">Забронировать с Trade-in</button>
+      <p class="ti-note">Оценка ориентировочная. Финальная сумма фиксируется после осмотра в магазине. Не является публичной офертой.</p>
+    </div>
+  </div>
+
   <div id="margin-sheet" onclick="if(event.target===this)closeMargin()">
     <div class="sheet-panel">
       <div class="sheet-grab"></div>
@@ -2183,7 +2519,8 @@
       localStorage.setItem(cleanupKey, "1");
     })();
 
-    function money(n) { return n.toLocaleString("ru-RU") + " ₽"; }
+    /* money() redefined in features block */
+    function money_legacy(n) { return Math.round(n).toLocaleString("ru-RU") + " ₽"; }
     function toast(t) {
       const el = document.getElementById("toast");
       el.textContent = t;
@@ -2222,7 +2559,7 @@
           <span class="rate">★ ${p.rating} (${p.reviews})</span>
         </div>
         <h4 class="js-title">${title}</h4>
-        <div class="price js-price">${money(v0.price)}</div>
+        <div class="price js-price">${money(displayPrice(v0.price))}</div>
         <div class="unit js-unit">${unitText}</div>
         ${vars ? `<div class="vars">${vars}</div>` : ""}
         <div class="margin-box js-margin">${marginHtml}</div>
@@ -2239,9 +2576,44 @@
       el.parentElement.querySelectorAll(".var").forEach(n => n.classList.remove("on"));
       el.classList.add("on");
       card.querySelector(".js-title").textContent = p.base + " " + v.label;
-      card.querySelector(".js-price").textContent = money(v.price);
+      card.querySelector(".js-price").textContent = money(displayPrice(v.price));
       // unit stays the same for retail
       p.chosen = index;
+    }
+
+    let catalogQuery = "";
+
+    function onCatalogSearch(q) {
+      catalogQuery = String(q || "").trim().toLowerCase();
+      const wrap = document.getElementById("catalog-search");
+      if (wrap) wrap.classList.toggle("has-value", !!catalogQuery);
+      renderCatalogGrid();
+    }
+
+    function clearCatalogSearch() {
+      const inp = document.getElementById("catalog-search-input");
+      if (inp) inp.value = "";
+      onCatalogSearch("");
+    }
+
+    function filterBySearch(list) {
+      if (!catalogQuery) return list;
+      return list.filter(p => {
+        const hay = [
+          p.base, p.article, p.unit, p.condition, p.shop,
+          ...(p.vars || []).map(v => v.label + " " + v.name)
+        ].join(" ").toLowerCase();
+        return hay.includes(catalogQuery);
+      });
+    }
+
+    function renderCatalogGrid() {
+      const list = filterBySearch(listByCat(currentCat));
+      const grid = document.getElementById("catalog-grid");
+      if (!grid) return;
+      grid.innerHTML = list.length
+        ? list.map(cardHTML).join("")
+        : '<div class="empty" style="grid-column:1/-1">Ничего не найдено по запросу «' + catalogQuery.replace(/[<>&"]/g,"") + '»</div>';
     }
 
     function openCatalog(cat) {
@@ -2250,7 +2622,12 @@
       document.getElementById("cat-chips").innerHTML = CATS.map(c =>
         `<button class="chip ${c.id === currentCat ? "on" : ""}" type="button" onclick="openCatalog('${c.id}')">${c.name}</button>`
       ).join("");
-      document.getElementById("catalog-grid").innerHTML = listByCat(currentCat).map(cardHTML).join("");
+      // keep search query when switching chips
+      const inp = document.getElementById("catalog-search-input");
+      if (inp && catalogQuery && inp.value !== catalogQuery) {
+        /* keep */
+      }
+      renderCatalogGrid();
     }
 
     function openProduct(id) {
@@ -2339,7 +2716,8 @@
       const p = PRODUCTS.find(x => x.id === modalId);
       if (!p) return;
       const v = p.vars[modalVar];
-      const old = Math.round(v.price / 0.85);
+      const disp = displayPrice(v.price);
+      const old = Math.round(disp / 0.85);
       const sale = Math.round((1 - v.price / old) * 100);
       const imgs = p.images || [p.img, p.img, p.img];
       document.getElementById("pm-hero").src = imgs[0];
@@ -2348,7 +2726,7 @@
       ).join("");
       document.getElementById("pm-title").textContent = (p.single ? p.base : (p.base + " " + v.label)) + (p.article ? " " + p.article : "");
       document.getElementById("pm-rate").innerHTML = "★ " + p.rating + " <i>• " + p.reviews + " отзывов</i>";
-      document.getElementById("pm-price").textContent = money(v.price);
+      document.getElementById("pm-price").textContent = money(displayPrice(v.price));
       document.getElementById("pm-old").textContent = money(old);
       document.getElementById("pm-sale").textContent = "-" + sale + "%";
       document.getElementById("pm-unit").textContent = p.unit || (p.condition || "Оригинал");
@@ -2372,13 +2750,16 @@
       document.getElementById("pm-qty").textContent = modalQty;
       document.getElementById("pm-range").value = modalQty;
       document.getElementById("pm-disc").innerHTML =
-        `<div class="on">Гарантия: ${p.warranty || "30 дней"}</div><div class="on">Магазин: ${p.delivery || "Симферополь"}</div>`;
+        `<div class="on">Гарантия: ${p.warranty || "30 дней"}</div>` +
+        `<div class="on">Магазин: ${p.delivery || "Симферополь"}</div>` +
+        `<div class="on">${tierLabel(modalQty)} · ${money(unitByQty(v.price, modalQty))}/шт</div>`;
       updateLivePrice();
     }
     function setMem(i) { modalVar = i; PRODUCTS.find(x=>x.id===modalId).chosen = i; renderModal(); }
     function setColor(i) { modalColor = i; renderModal(); }
     function unitByQty(price, qty) {
-      return price; // retail - no volume discount in demo
+      const disc = tierDiscount(qty);
+      return Math.round(displayPrice(price) * (1 - disc));
     }
     function updateLivePrice() {
       const p = PRODUCTS.find(x => x.id === modalId);
@@ -2389,7 +2770,7 @@
       const live = document.getElementById("pm-live");
       const sub = document.getElementById("pm-live-sub");
       if (live) live.textContent = money(total);
-      if (sub) sub.textContent = modalQty + " шт • " + money(unit) + "/шт";
+      if (sub) sub.textContent = modalQty + " шт • " + money(unit) + "/шт • " + tierLabel(modalQty);
       document.querySelectorAll("#pm-disc div").forEach(n => {
         n.classList.add("on");
       });
@@ -2399,7 +2780,7 @@
       if (mr) mr.value = modalQty;
     }
     function chgQty(d, abs) {
-      modalQty = Math.max(1, Math.min(8, abs ? Number(abs) : modalQty + d));
+      modalQty = Math.max(1, Math.min(50, abs ? Number(abs) : modalQty + d));
       const q = document.getElementById("pm-qty");
       const r = document.getElementById("pm-range");
       if (q) q.textContent = modalQty;
@@ -2809,6 +3190,371 @@
     updateCartBadge();
 
     /* ===== i-mobile PROFILE ===== */
+
+    /* =========================================================
+       FEATURES: RATE / TRADE-IN / WHOLESALE TIERS
+       ========================================================= */
+
+    const BASE_RATE = 90; // курс, при котором заданы цены в каталоге
+    let currentRate = Number(localStorage.getItem("apple_market_rate") || BASE_RATE);
+
+    function priceCoeff() {
+      const r = Number(currentRate) || BASE_RATE;
+      return r / BASE_RATE;
+    }
+
+    function displayPrice(baseRub) {
+      return Math.round(Number(baseRub) * priceCoeff());
+    }
+
+    function money(n) {
+      return Math.round(n).toLocaleString("ru-RU") + " ₽";
+    }
+
+    
+
+    const ADMIN_PIN = "6262";
+    let adminUnlocked = false;
+    const RATE_STORAGE_KEY = "apple_market_rate";
+    const RATE_META_KEY = "apple_market_rate_meta";
+    // Общий URL: localStorage apple_market_rate_shared_url или пусто
+    function getSharedRateUrl() {
+      try {
+        var u = localStorage.getItem("apple_market_rate_shared_url");
+        if (u) return u;
+      } catch(e) {}
+      // дефолтный общий endpoint (твой npoint)
+      return "https://api.npoint.io/134f674aa87b85ae3009";
+    }
+
+    function openAdminPanel() {
+      adminUnlocked = false;
+      const lock = document.getElementById("admin-lock");
+      const body = document.getElementById("admin-body");
+      const pinInp = document.getElementById("admin-pin-input");
+      const err = document.getElementById("admin-pin-error");
+      if (lock) lock.style.display = "";
+      if (body) body.style.display = "none";
+      if (pinInp) pinInp.value = "";
+      if (err) err.style.display = "none";
+      try { syncRateUI(); } catch(e) {}
+      const el = document.getElementById("admin-sheet");
+      if (el) el.classList.add("open");
+      setTimeout(function(){ if (pinInp) pinInp.focus(); }, 200);
+    }
+
+    function closeAdminPanel() {
+      const el = document.getElementById("admin-sheet");
+      if (el) el.classList.remove("open");
+      adminUnlocked = false;
+    }
+
+    function unlockAdmin() {
+      const pinInp = document.getElementById("admin-pin-input");
+      const err = document.getElementById("admin-pin-error");
+      const code = String(pinInp && pinInp.value || "").trim();
+      if (code !== ADMIN_PIN) {
+        if (err) err.style.display = "block";
+        toast("Неверный PIN");
+        return;
+      }
+      adminUnlocked = true;
+      if (err) err.style.display = "none";
+      const lock = document.getElementById("admin-lock");
+      const body = document.getElementById("admin-body");
+      if (lock) lock.style.display = "none";
+      if (body) body.style.display = "";
+      try { syncRateUI(); } catch(e) {}
+      try {
+        const u = document.getElementById("rate-shared-url");
+        if (u) u.value = getSharedRateUrl();
+      } catch(e) {}
+      toast("Доступ открыт");
+    }
+
+    function saveSharedUrl(url) {
+      try {
+        localStorage.setItem("apple_market_rate_shared_url", String(url || "").trim());
+        toast(url ? "Endpoint сохранён" : "Endpoint очищен");
+      } catch(e) {}
+    }
+
+    function setRatePreset(v) {
+      if (!adminUnlocked) { toast("Сначала введите PIN"); return; }
+      const inp = document.getElementById("rate-input");
+      if (inp) inp.value = v;
+      applyRate();
+    }
+
+    function persistRateEverywhere(rate) {
+      const meta = { rate: rate, updatedAt: new Date().toISOString(), updatedBy: "admin" };
+      try {
+        localStorage.setItem(RATE_STORAGE_KEY, String(rate));
+        localStorage.setItem(RATE_META_KEY, JSON.stringify(meta));
+      } catch(e) {}
+      try {
+        const cs = window.Telegram && Telegram.WebApp && Telegram.WebApp.CloudStorage;
+        if (cs && typeof cs.setItem === "function") {
+          cs.setItem(RATE_STORAGE_KEY, String(rate), function(){});
+          cs.setItem(RATE_META_KEY, JSON.stringify(meta), function(){});
+        }
+      } catch(e) {}
+      const sharedUrl = getSharedRateUrl();
+      if (sharedUrl) {
+        fetch(sharedUrl, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
+          body: JSON.stringify(meta)
+        }).then(function(r){
+          if (r.ok) toast("Курс отправлен всем клиентам");
+        }).catch(function(){});
+      }
+    }
+
+    function loadRateFromSources(cb) {
+      var loaded = null;
+      try {
+        var sp = window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe
+          ? (Telegram.WebApp.initDataUnsafe.start_param || "")
+          : "";
+        var m = String(sp).match(/rate[_-]?(\d+(?:[._]\d+)?)/i);
+        if (m) loaded = parseFloat(m[1].replace("_", "."));
+      } catch(e) {}
+      if (loaded == null) {
+        try {
+          var u = new URL(window.location.href);
+          var q = u.searchParams.get("rate");
+          if (q) loaded = parseFloat(q);
+        } catch(e) {}
+      }
+      function finish(val) {
+        if (Number.isFinite(val) && val >= 50 && val <= 200) {
+          currentRate = Math.round(val * 100) / 100;
+          try { localStorage.setItem(RATE_STORAGE_KEY, String(currentRate)); } catch(e) {}
+        }
+        try { syncRateUI(); } catch(e) {}
+        try { refreshAllPrices(); } catch(e) {}
+        if (typeof cb === "function") cb(currentRate);
+      }
+      var sharedUrl = getSharedRateUrl();
+      if (sharedUrl) {
+        fetch(sharedUrl + (sharedUrl.indexOf("?") >= 0 ? "&" : "?") + "t=" + Date.now(), {
+          method: "GET",
+          headers: { "Accept": "application/json" },
+          cache: "no-store"
+        }).then(function(r){ return r.json(); }).then(function(data){
+          var remote = data && (data.rate != null ? data.rate : data);
+          var n = parseFloat(remote);
+          if (Number.isFinite(n) && n >= 50 && n <= 200) finish(n);
+          else finish(loaded != null ? loaded : currentRate);
+        }).catch(function(){
+          finish(loaded != null ? loaded : currentRate);
+        });
+        return;
+      }
+      try {
+        var cs = window.Telegram && Telegram.WebApp && Telegram.WebApp.CloudStorage;
+        if (cs && typeof cs.getItem === "function") {
+          cs.getItem(RATE_STORAGE_KEY, function(err, value){
+            if (!err && value) {
+              var n = parseFloat(value);
+              if (Number.isFinite(n)) loaded = n;
+            }
+            finish(loaded != null ? loaded : currentRate);
+          });
+          return;
+        }
+      } catch(e) {}
+      finish(loaded != null ? loaded : currentRate);
+    }
+
+    function applyRate() {
+      if (!adminUnlocked) {
+        toast("Сначала введите PIN");
+        return;
+      }
+      const inp = document.getElementById("rate-input");
+      let v = parseFloat(inp && inp.value);
+      if (!Number.isFinite(v) || v < 50 || v > 200) {
+        toast("Укажите курс от 50 до 200");
+        return;
+      }
+      currentRate = Math.round(v * 100) / 100;
+      persistRateEverywhere(currentRate);
+      syncRateUI();
+      refreshAllPrices();
+      toast("Курс обновлён: " + currentRate.toFixed(2) + " ₽");
+    }
+
+
+    function syncRateUI() {
+      const d = document.getElementById("rate-display");
+      const i = document.getElementById("rate-input");
+      if (d) d.textContent = currentRate.toFixed(2);
+      if (i) i.value = currentRate;
+    }
+
+    function refreshAllPrices() {
+      // re-render catalog cards if visible
+      const grid = document.getElementById("catalog-grid");
+      if (grid && grid.innerHTML) {
+        try {
+          if (typeof renderCatalogGrid === "function") renderCatalogGrid();
+          else openCatalog(currentCat);
+        } catch(e) {}
+      }
+      // refresh modal if open
+      if (modalId) {
+        try { renderModal(); } catch(e) {}
+      }
+      // fav grid
+      const favGrid = document.getElementById("fav-grid");
+      if (favGrid && favGrid.innerHTML && !favGrid.querySelector(".empty")) {
+        try { showFav(); } catch(e) {}
+      }
+    }
+
+    /* ----- Wholesale tiers ----- */
+    function tierDiscount(qty) {
+      if (qty >= 30) return 0.12;
+      if (qty >= 15) return 0.08;
+      if (qty >= 5) return 0.05;
+      return 0;
+    }
+    function tierLabel(qty) {
+      if (qty >= 30) return "Крупный опт −12%";
+      if (qty >= 15) return "Средний опт −8%";
+      if (qty >= 5) return "Мелкий опт −5%";
+      return "Розница";
+    }
+
+    /* ----- Trade-in ----- */
+    const TI_MODELS = [
+      { id: "11", name: "iPhone 11", base: 12000 },
+      { id: "12", name: "iPhone 12", base: 16000 },
+      { id: "13", name: "iPhone 13", base: 20000 },
+      { id: "13p", name: "iPhone 13 Pro", base: 24000 },
+      { id: "14", name: "iPhone 14", base: 26000 },
+      { id: "14p", name: "iPhone 14 Pro", base: 32000 },
+      { id: "15", name: "iPhone 15", base: 38000 },
+      { id: "15p", name: "iPhone 15 Pro", base: 45000 }
+    ];
+
+    const TI_BATTERY_MUL = { good: 1.0, mid: 0.92, low: 0.80 };
+    const TI_DEFECT_MUL  = { none: 1.0, minor: 0.90, major: 0.70 };
+    const TI_REPAIR_MUL  = { no: 1.0, yes: 0.85 };
+
+    let tiModel = "13";
+    let tiBattery = "good";
+    let tiDefects = "none";
+    let tiRepair = "no";
+
+    function openTradeIn() {
+      if (!modalId) {
+        toast("Сначала откройте товар");
+        return;
+      }
+      const p = PRODUCTS.find(x => x.id === modalId);
+      if (!p || p.cat !== "phones") {
+        toast("Trade-in доступен для смартфонов");
+        return;
+      }
+      // build model chips
+      const box = document.getElementById("ti-models");
+      if (box) {
+        box.innerHTML = TI_MODELS.map(m =>
+          `<button class="ti-chip ${m.id===tiModel?"on":""}" type="button" data-v="${m.id}" onclick="setTiModel(this)">${m.name}</button>`
+        ).join("");
+      }
+      const tgt = document.getElementById("ti-target");
+      if (tgt) {
+        const v = p.vars[modalVar || 0];
+        tgt.textContent = "Обмен на: " + p.base + (p.article ? " " + p.article : "") + " — " + money(displayPrice(v.price));
+      }
+      calcTradeIn();
+      document.getElementById("tradein-sheet").classList.add("open");
+    }
+
+    function closeTradeIn() {
+      const el = document.getElementById("tradein-sheet");
+      if (el) el.classList.remove("open");
+    }
+
+    function setTiModel(btn) {
+      tiModel = btn.getAttribute("data-v");
+      document.querySelectorAll("#ti-models .ti-chip").forEach(n => n.classList.toggle("on", n === btn));
+      calcTradeIn();
+    }
+    function setTiBattery(btn) {
+      tiBattery = btn.getAttribute("data-v");
+      document.querySelectorAll("#ti-battery .ti-chip").forEach(n => n.classList.toggle("on", n === btn));
+      calcTradeIn();
+    }
+    function setTiDefects(btn) {
+      tiDefects = btn.getAttribute("data-v");
+      document.querySelectorAll("#ti-defects .ti-chip").forEach(n => n.classList.toggle("on", n === btn));
+      calcTradeIn();
+    }
+    function setTiRepair(btn) {
+      tiRepair = btn.getAttribute("data-v");
+      document.querySelectorAll("#ti-repair .ti-chip").forEach(n => n.classList.toggle("on", n === btn));
+      calcTradeIn();
+    }
+
+    function calcTradeIn() {
+      const m = TI_MODELS.find(x => x.id === tiModel) || TI_MODELS[2];
+      let val = m.base;
+      val *= (TI_BATTERY_MUL[tiBattery] || 1);
+      val *= (TI_DEFECT_MUL[tiDefects] || 1);
+      val *= (TI_REPAIR_MUL[tiRepair] || 1);
+      // apply current rate coeff to trade-in base too (bases set at BASE_RATE)
+      val = Math.round(val * priceCoeff());
+      val = Math.max(0, val);
+
+      const p = PRODUCTS.find(x => x.id === modalId);
+      const newPrice = p ? displayPrice(p.vars[modalVar || 0].price) : 0;
+      const topup = Math.max(0, newPrice - val);
+
+      const elV = document.getElementById("ti-value");
+      const elN = document.getElementById("ti-new-price");
+      const elT = document.getElementById("ti-topup");
+      const elS = document.getElementById("ti-summary");
+      if (elV) elV.textContent = money(val);
+      if (elN) elN.textContent = money(newPrice);
+      if (elT) elT.textContent = money(topup);
+      if (elS) {
+        elS.textContent = m.name +
+          " • АКБ " + ({good:"90%+", mid:"80–89%", low:"<80%"}[tiBattery] || "") +
+          " • дефекты: " + ({none:"нет", minor:"мелкие", major:"сильные"}[tiDefects] || "") +
+          " • ремонт: " + ({no:"нет", yes:"да"}[tiRepair] || "");
+      }
+      return { value: val, newPrice: newPrice, topup: topup, model: m.name };
+    }
+
+    function applyTradeIn() {
+      const r = calcTradeIn();
+      const p = PRODUCTS.find(x => x.id === modalId);
+      if (!p) return;
+      toast("Trade-in: " + r.model + " → доплата " + money(r.topup));
+      closeTradeIn();
+      // put into cart-like flow via confirm with note
+      try {
+        const key = p.id + "_ti";
+        // soft save intention
+        const note = "Trade-in: " + r.model + ", оценка " + r.value + ", доплата " + r.topup;
+        sessionStorage.setItem("last_tradein", note);
+      } catch(e) {}
+      confirmBox();
+    }
+
+    // init rate UI
+    try { syncRateUI(); loadRateFromSources(); } catch(e) {}
+    document.addEventListener("DOMContentLoaded", function(){ try { syncRateUI(); loadRateFromSources(); } catch(e) {} });
+
+    try { loadRateFromSources(); } catch(e) {}
+    setInterval(function(){ try { loadRateFromSources(); } catch(e) {} }, 30000);
+
+
     function initElectroProfile() {
       try {
         const tgUser = window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe
