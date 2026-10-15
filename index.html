@@ -2214,9 +2214,17 @@
 
         <div class="ti-lab" style="margin-top:16px">Общий endpoint (все пользователи)</div>
         <input class="co-input" id="rate-shared-url" placeholder="https://api.npoint.io/134f674aa87b85ae3009" style="margin-top:6px" onchange="saveSharedUrl(this.value)">
-        <p class="ti-note">Создайте бесплатный JSON на npoint.io → вставьте URL. Тогда курс увидят все клиенты витрины.</p>
+        <p class="ti-note">По умолчанию: api.npoint.io/134f674aa87b85ae3009</p>
 
-        <button class="ti-apply" type="button" onclick="applyRate();closeAdminPanel()">Сохранить и закрыть</button>
+        <div class="ti-result" style="margin-top:12px">
+          <div class="ti-row"><span>Локальный курс</span><b id="admin-local-rate">—</b></div>
+          <div class="ti-row"><span>Облако (npoint)</span><b id="admin-remote-rate">—</b></div>
+          <div class="ti-muted" id="admin-sync-status" style="margin-top:6px">Нажми «Проверить облако»</div>
+        </div>
+
+        <button class="ti-apply" type="button" style="margin-top:10px;background:#0c121d;border:1px solid #1a4f8c" onclick="checkRemoteRate()">Проверить облако</button>
+        <button class="ti-apply" type="button" onclick="applyRate()">Сохранить курс в облако</button>
+        <button class="ti-apply" type="button" style="margin-top:8px;background:#0c121d;border:1px solid #1a4f8c" onclick="closeAdminPanel()">Закрыть</button>
       </div>
     </div>
   </div>
@@ -3197,6 +3205,7 @@
 
     const BASE_RATE = 90; // курс, при котором заданы цены в каталоге
     let currentRate = Number(localStorage.getItem("apple_market_rate") || BASE_RATE);
+    let lastLocalRateWrite = 0;
 
     function priceCoeff() {
       const r = Number(currentRate) || BASE_RATE;
@@ -3269,6 +3278,7 @@
         const u = document.getElementById("rate-shared-url");
         if (u) u.value = getSharedRateUrl();
       } catch(e) {}
+      try { checkRemoteRate(); } catch(e) {}
       toast("Доступ открыт");
     }
 
@@ -3287,7 +3297,7 @@
     }
 
     function persistRateEverywhere(rate) {
-      const meta = { rate: rate, updatedAt: new Date().toISOString(), updatedBy: "admin" };
+      const meta = { rate: Number(rate), updatedAt: new Date().toISOString(), updatedBy: "admin" };
       try {
         localStorage.setItem(RATE_STORAGE_KEY, String(rate));
         localStorage.setItem(RATE_META_KEY, JSON.stringify(meta));
@@ -3299,16 +3309,91 @@
           cs.setItem(RATE_META_KEY, JSON.stringify(meta), function(){});
         }
       } catch(e) {}
+
       const sharedUrl = getSharedRateUrl();
-      if (sharedUrl) {
-        fetch(sharedUrl, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json", "Accept": "application/json" },
-          body: JSON.stringify(meta)
-        }).then(function(r){
-          if (r.ok) toast("Курс отправлен всем клиентам");
-        }).catch(function(){});
+      if (!sharedUrl) {
+        setAdminSyncStatus("Нет URL облака", "err");
+        return;
       }
+      setAdminSyncStatus("Отправка в облако…", "");
+
+      // надёжная запись: XHR (лучше переживает WebView, чем иногда fetch)
+      try {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", sharedUrl, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.timeout = 12000;
+        xhr.onload = function() {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            // читаем обратно
+            checkRemoteRate(function(remote) {
+              if (Number(remote) === Number(rate)) {
+                setAdminSyncStatus("✓ В облаке: " + remote + " — видно всем", "ok");
+                toast("✓ Курс общий для всех: " + rate);
+              } else {
+                setAdminSyncStatus("Запись сомнительна. Облако: " + remote, "err");
+                toast("Облако: " + remote + " (ожидали " + rate + ")");
+              }
+            });
+          } else {
+            setAdminSyncStatus("Ошибка записи HTTP " + xhr.status, "err");
+            toast("Ошибка записи в облако: " + xhr.status);
+          }
+        };
+        xhr.onerror = function() {
+          setAdminSyncStatus("Сеть/CORS: не удалось записать", "err");
+          toast("Не удалось записать в облако");
+        };
+        xhr.ontimeout = function() {
+          setAdminSyncStatus("Таймаут записи", "err");
+          toast("Таймаут записи в облако");
+        };
+        xhr.send(JSON.stringify(meta));
+      } catch(e) {
+        setAdminSyncStatus(String(e && e.message || e), "err");
+      }
+    }
+
+    function setAdminSyncStatus(text, kind) {
+      var el = document.getElementById("admin-sync-status");
+      var loc = document.getElementById("admin-local-rate");
+      if (loc) loc.textContent = currentRate.toFixed(2) + " ₽";
+      if (!el) return;
+      el.textContent = text;
+      el.style.color = kind === "ok" ? "#3dd68c" : (kind === "err" ? "#ff6b7a" : "#7e8c9f");
+    }
+
+    function checkRemoteRate(cb) {
+      var sharedUrl = getSharedRateUrl();
+      var rem = document.getElementById("admin-remote-rate");
+      var loc = document.getElementById("admin-local-rate");
+      if (loc) loc.textContent = currentRate.toFixed(2) + " ₽";
+      if (!sharedUrl) {
+        if (rem) rem.textContent = "—";
+        setAdminSyncStatus("Нет URL", "err");
+        if (typeof cb === "function") cb(null);
+        return;
+      }
+      setAdminSyncStatus("Читаю облако…", "");
+      var url = sharedUrl + (sharedUrl.indexOf("?") >= 0 ? "&" : "?") + "t=" + Date.now();
+      fetch(url, { method: "GET", cache: "no-store", headers: { "Accept": "application/json" } })
+        .then(function(r){ return r.json(); })
+        .then(function(data){
+          var n = parseFloat(data && data.rate);
+          if (rem) rem.textContent = Number.isFinite(n) ? (n.toFixed(2) + " ₽") : "—";
+          if (Number.isFinite(n)) {
+            setAdminSyncStatus("Облако отвечает: " + n.toFixed(2), "ok");
+          } else {
+            setAdminSyncStatus("Облако без поля rate", "err");
+          }
+          if (typeof cb === "function") cb(Number.isFinite(n) ? n : null);
+        })
+        .catch(function(err){
+          if (rem) rem.textContent = "ошибка";
+          setAdminSyncStatus("Не прочитало облако", "err");
+          if (typeof cb === "function") cb(null);
+        });
     }
 
     function loadRateFromSources(cb) {
@@ -3328,12 +3413,21 @@
         } catch(e) {}
       }
       function finish(val) {
+        // не перетираем курс, если админ только что сохранил локально
+        if (lastLocalRateWrite && (Date.now() - lastLocalRateWrite) < 60000) {
+          try { syncRateUI(); } catch(e) {}
+          if (typeof cb === "function") cb(currentRate);
+          return;
+        }
         if (Number.isFinite(val) && val >= 50 && val <= 200) {
-          currentRate = Math.round(val * 100) / 100;
-          try { localStorage.setItem(RATE_STORAGE_KEY, String(currentRate)); } catch(e) {}
+          var next = Math.round(val * 100) / 100;
+          if (next !== currentRate) {
+            currentRate = next;
+            try { localStorage.setItem(RATE_STORAGE_KEY, String(currentRate)); } catch(e) {}
+            try { refreshAllPrices(); } catch(e) {}
+          }
         }
         try { syncRateUI(); } catch(e) {}
-        try { refreshAllPrices(); } catch(e) {}
         if (typeof cb === "function") cb(currentRate);
       }
       var sharedUrl = getSharedRateUrl();
@@ -3380,12 +3474,16 @@
         return;
       }
       currentRate = Math.round(v * 100) / 100;
-      persistRateEverywhere(currentRate);
+      lastLocalRateWrite = Date.now();
       syncRateUI();
       refreshAllPrices();
-      toast("Курс обновлён: " + currentRate.toFixed(2) + " ₽");
+      try {
+        var loc = document.getElementById("admin-local-rate");
+        if (loc) loc.textContent = currentRate.toFixed(2) + " ₽";
+      } catch(e) {}
+      persistRateEverywhere(currentRate);
+      toast("Локально: " + currentRate.toFixed(2) + " ₽ · пишу в облако…");
     }
-
 
     function syncRateUI() {
       const d = document.getElementById("rate-display");
@@ -3395,23 +3493,38 @@
     }
 
     function refreshAllPrices() {
-      // re-render catalog cards if visible
-      const grid = document.getElementById("catalog-grid");
-      if (grid && grid.innerHTML) {
-        try {
-          if (typeof renderCatalogGrid === "function") renderCatalogGrid();
-          else openCatalog(currentCat);
-        } catch(e) {}
-      }
-      // refresh modal if open
+      // всегда пересобираем каталог
+      try {
+        if (typeof renderCatalogGrid === "function") {
+          renderCatalogGrid();
+        } else if (typeof openCatalog === "function") {
+          openCatalog(currentCat || "all");
+        }
+      } catch(e) { console.error(e); }
+
+      // модалка товара
       if (modalId) {
         try { renderModal(); } catch(e) {}
       }
-      // fav grid
+
+      // избранное
       const favGrid = document.getElementById("fav-grid");
       if (favGrid && favGrid.innerHTML && !favGrid.querySelector(".empty")) {
-        try { showFav(); } catch(e) {}
+        try { if (typeof showFav === "function") showFav(); } catch(e) {}
       }
+
+      // прямое обновление всех видимых цен на карточках (на всякий случай)
+      try {
+        PRODUCTS.forEach(function(p) {
+          var card = document.getElementById("card-" + p.id);
+          if (!card) return;
+          var idx = p.chosen || 0;
+          var v = p.vars[idx];
+          if (!v) return;
+          var el = card.querySelector(".js-price");
+          if (el) el.textContent = money(displayPrice(v.price));
+        });
+      } catch(e) {}
     }
 
     /* ----- Wholesale tiers ----- */
@@ -3552,7 +3665,7 @@
     document.addEventListener("DOMContentLoaded", function(){ try { syncRateUI(); loadRateFromSources(); } catch(e) {} });
 
     try { loadRateFromSources(); } catch(e) {}
-    setInterval(function(){ try { loadRateFromSources(); } catch(e) {} }, 30000);
+    setInterval(function(){ try { loadRateFromSources(); } catch(e) {} }, 15000);
 
 
     function initElectroProfile() {
