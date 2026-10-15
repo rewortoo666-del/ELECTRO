@@ -332,7 +332,8 @@
     }
     .chip.on { background: #0077ff; border-color: #0077ff; color: #fff; }
 
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .grid {
+      align-items: stretch; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .cat-brand {
       display: flex; align-items: center; justify-content: space-between; gap: 8px;
       margin-bottom: 12px;
@@ -355,6 +356,24 @@
       padding: 10px;
       color: #fff;
       text-align: left;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .product-card .card-actions {
+      margin-top: auto;
+      padding-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .product-card .card-actions .take { margin-top: 0; }
+    .product-card .card-actions .quick { margin-top: 0; }
+    .product-card .unit {
+      min-height: 28px;
+    }
+    .product-card .margin-box {
+      min-height: 44px;
     }
     .product-photo {
       position: relative;
@@ -2212,9 +2231,7 @@
           <button class="ti-chip" type="button" onclick="setRatePreset(100)">100</button>
         </div>
 
-        <div class="ti-lab" style="margin-top:16px">Общий endpoint (все пользователи)</div>
-        <input class="co-input" id="rate-shared-url" placeholder="https://api.npoint.io/134f674aa87b85ae3009" style="margin-top:6px" onchange="saveSharedUrl(this.value)">
-        <p class="ti-note">По умолчанию: api.npoint.io/134f674aa87b85ae3009</p>
+        <p class="ti-note" style="margin-top:12px">Общий курс хранится в облаке автоматически. npoint больше не нужен.</p>
 
         <div class="ti-result" style="margin-top:12px">
           <div class="ti-row"><span>Локальный курс</span><b id="admin-local-rate">—</b></div>
@@ -2421,7 +2438,7 @@
         rating: "4.9", reviews: 47,
         unit: "АКБ 100% • SIM+SIM • Оригинал",
         warranty: "2 месяца",
-        delivery: "Бесплатно",
+        delivery: "Вологда · бесплатно",
         condition: "Оригинал",
         single: true,
         shop: "АКВА ЭПЛ",
@@ -2439,7 +2456,7 @@
         rating: "4.8", reviews: 89,
         unit: "АКБ 100% • SIM+eSIM • Б/У",
         warranty: "2 недели",
-        delivery: "Бесплатно",
+        delivery: "Вологда · бесплатно",
         condition: "Б/У",
         single: true,
         shop: "АКВА ЭПЛ",
@@ -2454,7 +2471,7 @@
         rating: "4.9", reviews: 31,
         unit: "АКБ 91% • Натуральный титан • Идеал",
         warranty: "2 недели",
-        delivery: "Бесплатно",
+        delivery: "Вологда · бесплатно",
         condition: "Идеальное состояние",
         single: true,
         shop: "РЕМЭПЛ",
@@ -2571,8 +2588,10 @@
         <div class="unit js-unit">${unitText}</div>
         ${vars ? `<div class="vars">${vars}</div>` : ""}
         <div class="margin-box js-margin">${marginHtml}</div>
-        <button class="take" type="button" onclick="event.stopPropagation();openProductSheet('${p.id}')">КУПИТЬ / БРОНЬ</button>
-        <button class="quick" type="button" onclick="event.stopPropagation();openProductSheet('${p.id}')">🔄 Trade-in / Доставка</button>
+        <div class="card-actions">
+          <button class="take" type="button" onclick="event.stopPropagation();openProductSheet('${p.id}')">КУПИТЬ / БРОНЬ</button>
+          <button class="quick" type="button" onclick="event.stopPropagation();openProductSheet('${p.id}')">🔄 Trade-in / Доставка</button>
+        </div>
       </article>`;
     }
 
@@ -3227,13 +3246,22 @@
     const RATE_STORAGE_KEY = "apple_market_rate";
     const RATE_META_KEY = "apple_market_rate_meta";
     // Общий URL: localStorage apple_market_rate_shared_url или пусто
+    // Общее облако курса (работает из браузера и Telegram WebApp)
+    const KV_NS = "applemarket_simf_v1";
+    const KV_KEY = "rate";
+    function kvGetUrl() {
+      return "https://keyvalue.immanuel.co/api/KeyVal/GetValue/" + KV_NS + "/" + KV_KEY;
+    }
+    function kvSetUrl(value) {
+      return "https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/" + KV_NS + "/" + KV_KEY + "/" + encodeURIComponent(value);
+    }
     function getSharedRateUrl() {
+      // оставлен для совместимости UI; реальный sync идёт через kvGetUrl/kvSetUrl
       try {
         var u = localStorage.getItem("apple_market_rate_shared_url");
         if (u) return u;
       } catch(e) {}
-      // дефолтный общий endpoint (твой npoint)
-      return "https://api.npoint.io/134f674aa87b85ae3009";
+      return kvGetUrl();
     }
 
     function openAdminPanel() {
@@ -3310,46 +3338,37 @@
         }
       } catch(e) {}
 
-      const sharedUrl = getSharedRateUrl();
-      if (!sharedUrl) {
-        setAdminSyncStatus("Нет URL облака", "err");
-        return;
-      }
       setAdminSyncStatus("Отправка в облако…", "");
-
-      // надёжная запись: XHR (лучше переживает WebView, чем иногда fetch)
+      var url = kvSetUrl(rate);
       try {
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", sharedUrl, true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.setRequestHeader("Accept", "application/json");
+        xhr.open("POST", url, true);
         xhr.timeout = 12000;
         xhr.onload = function() {
           if (xhr.status >= 200 && xhr.status < 300) {
-            // читаем обратно
             checkRemoteRate(function(remote) {
               if (Number(remote) === Number(rate)) {
                 setAdminSyncStatus("✓ В облаке: " + remote + " — видно всем", "ok");
                 toast("✓ Курс общий для всех: " + rate);
               } else {
-                setAdminSyncStatus("Запись сомнительна. Облако: " + remote, "err");
-                toast("Облако: " + remote + " (ожидали " + rate + ")");
+                setAdminSyncStatus("Облако ответило: " + remote, "err");
+                toast("Облако: " + remote);
               }
             });
           } else {
             setAdminSyncStatus("Ошибка записи HTTP " + xhr.status, "err");
-            toast("Ошибка записи в облако: " + xhr.status);
+            toast("Ошибка записи: " + xhr.status);
           }
         };
         xhr.onerror = function() {
-          setAdminSyncStatus("Сеть/CORS: не удалось записать", "err");
+          setAdminSyncStatus("Сеть: не удалось записать", "err");
           toast("Не удалось записать в облако");
         };
         xhr.ontimeout = function() {
           setAdminSyncStatus("Таймаут записи", "err");
-          toast("Таймаут записи в облако");
+          toast("Таймаут записи");
         };
-        xhr.send(JSON.stringify(meta));
+        xhr.send();
       } catch(e) {
         setAdminSyncStatus(String(e && e.message || e), "err");
       }
@@ -3365,31 +3384,29 @@
     }
 
     function checkRemoteRate(cb) {
-      var sharedUrl = getSharedRateUrl();
       var rem = document.getElementById("admin-remote-rate");
       var loc = document.getElementById("admin-local-rate");
       if (loc) loc.textContent = currentRate.toFixed(2) + " ₽";
-      if (!sharedUrl) {
-        if (rem) rem.textContent = "—";
-        setAdminSyncStatus("Нет URL", "err");
-        if (typeof cb === "function") cb(null);
-        return;
-      }
       setAdminSyncStatus("Читаю облако…", "");
-      var url = sharedUrl + (sharedUrl.indexOf("?") >= 0 ? "&" : "?") + "t=" + Date.now();
+      var url = kvGetUrl() + "?t=" + Date.now();
       fetch(url, { method: "GET", cache: "no-store", headers: { "Accept": "application/json" } })
-        .then(function(r){ return r.json(); })
-        .then(function(data){
-          var n = parseFloat(data && data.rate);
+        .then(function(r){ return r.text(); })
+        .then(function(text){
+          // API возвращает JSON-строку: "90"
+          var cleaned = String(text || "").trim();
+          if (cleaned.charAt(0) === '"') {
+            try { cleaned = JSON.parse(cleaned); } catch(e) {}
+          }
+          var n = parseFloat(cleaned);
           if (rem) rem.textContent = Number.isFinite(n) ? (n.toFixed(2) + " ₽") : "—";
           if (Number.isFinite(n)) {
             setAdminSyncStatus("Облако отвечает: " + n.toFixed(2), "ok");
           } else {
-            setAdminSyncStatus("Облако без поля rate", "err");
+            setAdminSyncStatus("Облако: пусто/ошибка", "err");
           }
           if (typeof cb === "function") cb(Number.isFinite(n) ? n : null);
         })
-        .catch(function(err){
+        .catch(function(){
           if (rem) rem.textContent = "ошибка";
           setAdminSyncStatus("Не прочитало облако", "err");
           if (typeof cb === "function") cb(null);
@@ -3413,8 +3430,7 @@
         } catch(e) {}
       }
       function finish(val) {
-        // не перетираем курс, если админ только что сохранил локально
-        if (lastLocalRateWrite && (Date.now() - lastLocalRateWrite) < 60000) {
+        if (lastLocalRateWrite && (Date.now() - lastLocalRateWrite) < 15000) {
           try { syncRateUI(); } catch(e) {}
           if (typeof cb === "function") cb(currentRate);
           return;
@@ -3430,36 +3446,21 @@
         try { syncRateUI(); } catch(e) {}
         if (typeof cb === "function") cb(currentRate);
       }
-      var sharedUrl = getSharedRateUrl();
-      if (sharedUrl) {
-        fetch(sharedUrl + (sharedUrl.indexOf("?") >= 0 ? "&" : "?") + "t=" + Date.now(), {
-          method: "GET",
-          headers: { "Accept": "application/json" },
-          cache: "no-store"
-        }).then(function(r){ return r.json(); }).then(function(data){
-          var remote = data && (data.rate != null ? data.rate : data);
-          var n = parseFloat(remote);
+      // читаем общее облако
+      fetch(kvGetUrl() + "?t=" + Date.now(), { method: "GET", cache: "no-store" })
+        .then(function(r){ return r.text(); })
+        .then(function(text){
+          var cleaned = String(text || "").trim();
+          if (cleaned.charAt(0) === '"') {
+            try { cleaned = JSON.parse(cleaned); } catch(e) {}
+          }
+          var n = parseFloat(cleaned);
           if (Number.isFinite(n) && n >= 50 && n <= 200) finish(n);
           else finish(loaded != null ? loaded : currentRate);
-        }).catch(function(){
+        })
+        .catch(function(){
           finish(loaded != null ? loaded : currentRate);
         });
-        return;
-      }
-      try {
-        var cs = window.Telegram && Telegram.WebApp && Telegram.WebApp.CloudStorage;
-        if (cs && typeof cs.getItem === "function") {
-          cs.getItem(RATE_STORAGE_KEY, function(err, value){
-            if (!err && value) {
-              var n = parseFloat(value);
-              if (Number.isFinite(n)) loaded = n;
-            }
-            finish(loaded != null ? loaded : currentRate);
-          });
-          return;
-        }
-      } catch(e) {}
-      finish(loaded != null ? loaded : currentRate);
     }
 
     function applyRate() {
