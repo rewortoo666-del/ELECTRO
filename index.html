@@ -2285,8 +2285,15 @@
         <div class="ti-muted" id="ti-summary" style="margin-top:8px"></div>
       </div>
 
-      <button class="ti-apply" type="button" onclick="applyTradeIn()">Забронировать с Trade-in</button>
-      <p class="ti-note">Оценка ориентировочная. Финальная сумма фиксируется после осмотра в магазине. Не является публичной офертой.</p>
+      <div class="ti-lab" style="margin-top:14px">Рассказ о телефоне (In-Trade)</div>
+      <textarea id="ti-story" rows="4" placeholder="Опишите устройство: цвет, память, комплект, царапины, Face ID, как пользовались, причина сдачи…" style="width:100%;box-sizing:border-box;margin-top:6px;padding:12px;border-radius:12px;border:1px solid rgba(0,140,255,0.2);background:#0a101a;color:#fff;font-size:13px;font-family:inherit;resize:vertical;min-height:90px"></textarea>
+
+      <div class="ti-lab" style="margin-top:12px">Контакты для заявки</div>
+      <input id="ti-name" type="text" placeholder="Имя" style="width:100%;box-sizing:border-box;margin-top:6px;padding:12px;border-radius:12px;border:1px solid rgba(0,140,255,0.2);background:#0a101a;color:#fff;font-size:13px;font-family:inherit">
+      <input id="ti-phone" type="tel" placeholder="Телефон *" style="width:100%;box-sizing:border-box;margin-top:8px;padding:12px;border-radius:12px;border:1px solid rgba(0,140,255,0.2);background:#0a101a;color:#fff;font-size:13px;font-family:inherit">
+
+      <button class="ti-apply" type="button" onclick="applyTradeIn()">Отправить заявку In-Trade</button>
+      <p class="ti-note">Заявка уходит менеджеру In-Trade. Оценка ориентировочная — финал после осмотра. Не оферта.</p>
     </div>
   </div>
 
@@ -3624,17 +3631,62 @@
     function applyTradeIn() {
       const r = calcTradeIn();
       const p = PRODUCTS.find(x => x.id === modalId);
-      if (!p) return;
-      toast("Trade-in: " + r.model + " → доплата " + money(r.topup));
-      closeTradeIn();
-      // put into cart-like flow via confirm with note
+      const story = (document.getElementById("ti-story") || {}).value || "";
+      const name = ((document.getElementById("ti-name") || {}).value || "").trim();
+      const phone = ((document.getElementById("ti-phone") || {}).value || "").trim();
+
+      if (!phone) {
+        toast("Укажите телефон для заявки In-Trade");
+        return;
+      }
+      if (!String(story).trim() || String(story).trim().length < 15) {
+        toast("Опишите телефон подробнее (рассказ о устройстве)");
+        return;
+      }
+
+      const targetName = p ? (p.base + (p.article ? " " + p.article : "")) : "—";
+      const targetPrice = p ? displayPrice(p.vars[modalVar || 0].price) : 0;
+
+      const payload = {
+        type: "in_trade",
+        channel: "In-Trade",
+        name: name || "Клиент In-Trade",
+        phone: phone,
+        story: String(story).trim().slice(0, 2000),
+        tradein: {
+          model: r.model,
+          battery: tiBattery,
+          defects: tiDefects,
+          repair: tiRepair,
+          estimate: r.value,
+          topup: r.topup,
+          summary: (document.getElementById("ti-summary") || {}).textContent || ""
+        },
+        target: {
+          product: targetName,
+          price: targetPrice
+        },
+        total: r.topup,
+        total_sum: r.topup,
+        created_at: new Date().toISOString()
+      };
+
+      const tg = window.Telegram && window.Telegram.WebApp;
+      if (!tg || typeof tg.sendData !== "function") {
+        toast("Откройте витрину через Telegram-бота");
+        try { sessionStorage.setItem("last_intrade", JSON.stringify(payload)); } catch(e) {}
+        return;
+      }
+
       try {
-        const key = p.id + "_ti";
-        // soft save intention
-        const note = "Trade-in: " + r.model + ", оценка " + r.value + ", доплата " + r.topup;
-        sessionStorage.setItem("last_tradein", note);
-      } catch(e) {}
-      confirmBox();
+        tg.ready();
+        tg.sendData(JSON.stringify(payload));
+        toast("Заявка In-Trade отправлена");
+        closeTradeIn();
+      } catch (e) {
+        console.error("In-Trade sendData error:", e);
+        toast("Не удалось отправить заявку In-Trade");
+      }
     }
 
     // init rate UI
