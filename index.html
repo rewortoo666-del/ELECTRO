@@ -3072,10 +3072,17 @@
        * title/name, qty/boxes и total/amount.
        */
       const items = Object.values(cart).map(function(i) {
+        const qty = Math.max(1, Number(i.qty) || 1);
+        const total = Math.max(0, Number(i.total) || 0);
         return {
+          name: String(i.title || "Товар").slice(0, 200),
           title: String(i.title || "Товар").slice(0, 200),
-          qty: Math.max(1, Number(i.qty) || 1),
-          total: Math.max(0, Number(i.total) || 0),
+          qty: qty,
+          boxes: qty,
+          amount: total,
+          total: total,
+          unit_price: qty ? total / qty : total,
+          price: qty ? total / qty : total,
           meta: String(i.meta || "").slice(0, 200)
         };
       });
