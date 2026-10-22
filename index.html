@@ -468,7 +468,7 @@
       transform: translateY(100%);
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       max-width: 430px; margin: 0 auto;
-      padding: calc(10px + var(--safe-top)) 16px calc(24px + var(--safe-bottom));
+      padding: calc(10px + var(--safe-top)) 16px calc(48px + var(--safe-bottom));
     }
     #product-modal.active { transform: translateY(0); }
     .pm-top {
@@ -1611,9 +1611,9 @@
 
         <article class="hero-slide is-active">
           <div class="hero-copy">
-            <div class="hero-badge">⚡ ТОЛЬКО ДЛЯ ОПТОВИКОВ</div>
-            <h2>ЭЛЕКТРОНИКА ПО ОПТОВЫМ ЦЕНАМ</h2>
-            <p>Смартфоны • Наушники • Ноутбуки<br>Аксессуары • Гаджеты</p>
+            <div class="hero-badge">⚡ ОПТ + РОЗНИЦА • ДЕМО</div>
+            <h2>СКЛАД И Б/У В ОДНОЙ ВИТРИНЕ</h2>
+            <p>Новые партии для опта • Б/У с Trade-in<br>Один интерфейс — под ваш формат</p>
             <div class="hero-nav">
               <div class="dots" aria-hidden="true"><i class="active"></i><i></i><i></i></div>
             </div>
@@ -1625,9 +1625,9 @@
 
         <article class="hero-slide">
           <div class="hero-copy">
-            <div class="hero-badge">🔥 НОВИНКИ УЖЕ НА СКЛАДЕ</div>
-            <h2>БЕРИ ПАРТИИ БЫСТРО И ВЫГОДНО</h2>
-            <p>iPhone • AirPods • Apple Watch<br>MacBook • Аксессуары</p>
+            <div class="hero-badge">🔥 НОВЫЕ + Б/У В КАТАЛОГЕ</div>
+            <h2>ПАРТИИ И ШТУЧНЫЙ TRADE-IN</h2>
+            <p>Опт от 3–10 шт • Розница с гарантией<br>Кнопки те же — сценарий разный</p>
             <div class="hero-nav">
               <div class="dots" aria-hidden="true"><i></i><i class="active"></i><i></i></div>
             </div>
@@ -2145,6 +2145,7 @@
     </div>
     <button class="take" type="button" onclick="confirmBox()">КУПИТЬ / БРОНЬ</button>
     <button class="quick" type="button" onclick="openTradeIn()">🔄 Trade-in / Оценка</button>
+    <button class="mg-btn" type="button" onclick="openMargin()">МАРЖИНАЛЬНОСТЬ WB / OZON</button>
     <button class="link-row" type="button" onclick="openVideo()">▶ Смотреть видеообзор (15 сек) ›</button>
     <div class="rev-head">
       <h3>Отзывы покупателей (2)</h3>
@@ -2171,7 +2172,9 @@
         <div class="vol-now"><b id="pm-live">0 ₽</b><span id="pm-live-sub">1 шт</span></div>
       </div>
       <div class="timer">⏳ Бронь фиксируется до оплаты: <span id="pm-timer">01:59:54</span></div>
+      <button class="take" type="button" onclick="confirmBox()" style="margin-top:10px;height:42px;font-size:13px">🛒 КУПИТЬ / БРОНЬ</button>
     </div>
+    <div style="height:28px" aria-hidden="true"></div>
   </div>
 
   
@@ -2381,6 +2384,76 @@
       { id: "watches", name: "Смарт-часы" }
     ];
     const PRODUCTS = [
+      // --- ОПТ: новые устройства (для складов / оптовиков) ---
+      {
+        id: "iph18p-new", cat: "phones", base: "iPhone 18 Pro 256GB Burgundy", box: 5,
+        img: "https://i.postimg.cc/d3PN0pHx/photo-2026-10-22-08-21-18.jpg",
+        images: [
+          "https://i.postimg.cc/d3PN0pHx/photo-2026-10-22-08-21-18.jpg"
+        ],
+        rating: "5.0", reviews: 34,
+        unit: "Новый • Пломба • eSIM • В наличии: 25 шт • Опт от 3 шт",
+        warranty: "1 год (заводская)",
+        delivery: "Склад Москва • отгрузка день в день",
+        condition: "Новый, запечатан",
+        single: false,
+        wholesale: true,
+        shop: "ELECTRO",
+        vars: [ { name: "256", label: "256GB", price: 98900 } ],
+        chosen: 0
+      },
+      {
+        id: "airpods-pro2", cat: "audio", base: "AirPods Pro 2 USB-C", box: 20,
+        img: "https://i.postimg.cc/W3M653Sj/photo-2026-09-10-14-03-55.jpg",
+        images: [
+          "https://i.postimg.cc/W3M653Sj/photo-2026-09-10-14-03-55.jpg"
+        ],
+        rating: "4.9", reviews: 58,
+        unit: "Опт • Партия от 10 шт • Склад Москва • Новые",
+        warranty: "1 год (заводская)",
+        delivery: "Склад Москва • отгрузка день в день",
+        condition: "Новый, оригинал",
+        single: false,
+        wholesale: true,
+        shop: "ELECTRO",
+        vars: [ { name: "std", label: "USB-C", price: 18900 } ],
+        chosen: 0
+      },
+      {
+        id: "aw-ultra2", cat: "watch", base: "Apple Watch Ultra 2", box: 10,
+        img: "https://i.postimg.cc/rmL5RTTN/i.jpg",
+        images: [
+          "https://i.postimg.cc/rmL5RTTN/i.jpg"
+        ],
+        rating: "4.9", reviews: 21,
+        unit: "Новый • Опт от 5 шт • В наличии: 40 шт • Склад Москва",
+        warranty: "1 год (заводская)",
+        delivery: "Склад Москва • отгрузка день в день",
+        condition: "Новый, запечатан",
+        single: false,
+        wholesale: true,
+        shop: "ELECTRO",
+        vars: [ { name: "49", label: "49mm", price: 64900 } ],
+        chosen: 0
+      },
+      {
+        id: "mba-m2", cat: "laptops", base: "MacBook Air 13 M2", box: 5,
+        img: "https://i.postimg.cc/t4Kx8bsq/213.jpg",
+        images: [
+          "https://i.postimg.cc/t4Kx8bsq/213.jpg"
+        ],
+        rating: "5.0", reviews: 17,
+        unit: "Новый • 8/256 • Опт от 3 шт • Склад Москва",
+        warranty: "1 год (заводская)",
+        delivery: "Склад Москва • отгрузка день в день",
+        condition: "Новый, запечатан",
+        single: false,
+        wholesale: true,
+        shop: "ELECTRO",
+        vars: [ { name: "256", label: "8/256", price: 89900 } ],
+        chosen: 0
+      },
+      // --- РОЗНИЦА / б/у (для магазинов б/у и Trade-in) ---
       {
         id: "iph17p-97", cat: "phones", base: "iPhone 17 Pro 256GB", box: 1,
         img: "https://i.postimg.cc/L6ynyCKk/Obzor-dvuh-smartfonov-na-kirpicnoj-stene.png",
@@ -2390,7 +2463,7 @@
         ],
         rating: "4.8", reviews: 12,
         unit: "АКБ 97% • Переклейка экрана • Полный комплект",
-        warranty: "3 месяца (после ремонта)",
+        warranty: "3 месяцев (после ремонта)",
         delivery: "Демо-витрина ELECTRO",
         condition: "После переклейки экрана",
         single: true,
@@ -2413,40 +2486,6 @@
         single: true,
         shop: "ELECTRO",
         vars: [ { name: "128", label: "128GB", price: 43000 } ],
-        chosen: 0
-      },
-      {
-        id: "iph17p-90", cat: "phones", base: "iPhone 17 Pro 256GB", box: 1,
-        img: "https://i.postimg.cc/wxRzKwmJ/Smartfon-na-fone-kirpicnoj-steny.png",
-        images: [
-          "https://i.postimg.cc/wxRzKwmJ/Smartfon-na-fone-kirpicnoj-steny.png",
-          "https://i.postimg.cc/rFSLszgz/Ruka-s-dvuma-smartfonami-na-fone-kirpicnoj-steny.png"
-        ],
-        rating: "4.9", reviews: 8,
-        unit: "АКБ 90% • Белый • SIM • Без ремонта • Полный комплект",
-        warranty: "6 месяцев (без ремонта)",
-        delivery: "Демо-витрина ELECTRO",
-        condition: "Отличное",
-        single: true,
-        shop: "ELECTRO",
-        vars: [ { name: "256", label: "256GB", price: 87000 } ],
-        chosen: 0
-      },
-      {
-        id: "iph14pm-256", cat: "phones", base: "iPhone 14 Pro Max 256GB", box: 1,
-        img: "https://i.postimg.cc/63Nr9jQ6/Roka-turets-viedtalrunis-uz-kiegelu-sienas-fona.png",
-        images: [
-          "https://i.postimg.cc/63Nr9jQ6/Roka-turets-viedtalrunis-uz-kiegelu-sienas-fona.png",
-          "https://i.postimg.cc/d3sGChrw/Smartfon-na-fone-kirpicnoj-steny-(1).png"
-        ],
-        rating: "4.7", reviews: 15,
-        unit: "АКБ 80% • Белый • Без ремонта • Полный комплект",
-        warranty: "6 месяцев (без ремонта)",
-        delivery: "Демо-витрина ELECTRO",
-        condition: "Хорошее",
-        single: true,
-        shop: "ELECTRO",
-        vars: [ { name: "256", label: "256GB", price: 47000 } ],
         chosen: 0
       }
     ];
