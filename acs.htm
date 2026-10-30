@@ -1713,59 +1713,7 @@
     }
 
   
-    /* ===== App splash loader ===== */
-    #app-splash {
-      position: fixed; inset: 0; z-index: 99999;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      background:
-        radial-gradient(80% 50% at 50% 35%, rgba(0,120,255,0.22), transparent 60%),
-        linear-gradient(180deg, #05080f 0%, #0a1220 100%);
-      transition: opacity .45s ease, visibility .45s ease;
-    }
-    #app-splash.hide {
-      opacity: 0; visibility: hidden; pointer-events: none;
-    }
-    .splash-logo {
-      width: 72px; height: 72px; border-radius: 18px; object-fit: cover;
-      box-shadow: 0 0 0 1px rgba(0,160,255,0.35), 0 12px 40px rgba(0,100,255,0.35);
-      animation: splashPop .6s cubic-bezier(.16,1,.3,1) both;
-    }
-    .splash-title {
-      margin-top: 18px; font-size: 22px; font-weight: 800; letter-spacing: 0.1em;
-      text-transform: uppercase; color: #fff;
-      animation: splashFade .5s .15s both;
-    }
-    .splash-sub {
-      margin-top: 6px; font-size: 12px; font-weight: 600; color: #7e8c9f;
-      animation: splashFade .5s .22s both;
-    }
-    .splash-bar {
-      margin-top: 28px; width: 120px; height: 3px; border-radius: 99px;
-      background: rgba(255,255,255,0.08); overflow: hidden;
-      animation: splashFade .5s .28s both;
-    }
-    .splash-bar > i {
-      display: block; height: 100%; width: 40%; border-radius: 99px;
-      background: linear-gradient(90deg, #0077ff, #33bbff, #0077ff);
-      background-size: 200% 100%;
-      animation: splashSlide 1s linear infinite;
-    }
-    .splash-hint {
-      position: absolute; bottom: calc(28px + var(--safe-bottom));
-      font-size: 11px; color: #5a6a7e; font-weight: 600;
-      animation: splashFade .5s .4s both;
-    }
-    @keyframes splashPop {
-      from { opacity: 0; transform: scale(.82); filter: blur(4px); }
-      to { opacity: 1; transform: scale(1); filter: blur(0); }
-    }
-    @keyframes splashFade {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes splashSlide {
-      0% { transform: translateX(-120%); background-position: 0% 0; }
-      100% { transform: translateX(320%); background-position: 100% 0; }
+    100% { transform: translateX(320%); background-position: 100% 0; }
     }
 
     /* extra motion */
@@ -1787,17 +1735,116 @@
       letter-spacing: 0.04em;
     }
 
+  
+    /* ===== Full app boot loader (Telegram) ===== */
+    #app-splash {
+      position: fixed; inset: 0; z-index: 2147483646;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: calc(20px + var(--safe-top)) 24px calc(24px + var(--safe-bottom));
+      background: #06090f;
+      background-image:
+        radial-gradient(90% 55% at 50% 30%, rgba(0,130,255,0.28), transparent 62%),
+        linear-gradient(180deg, #04070c 0%, #0a1220 55%, #06090f 100%);
+      transition: opacity .4s ease, visibility .4s ease, transform .4s ease;
+      -webkit-user-select: none; user-select: none;
+    }
+    #app-splash.hide {
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transform: scale(1.02);
+    }
+    .splash-ring {
+      position: relative; width: 88px; height: 88px;
+      display: grid; place-items: center;
+      animation: splashPop .55s cubic-bezier(.16,1,.3,1) both;
+    }
+    .splash-ring::before {
+      content: ""; position: absolute; inset: 0; border-radius: 50%;
+      border: 2px solid rgba(0,140,255,0.15);
+      border-top-color: #2bb0ff;
+      animation: splashSpin 0.85s linear infinite;
+    }
+    .splash-logo {
+      width: 64px; height: 64px; border-radius: 16px; object-fit: cover;
+      box-shadow: 0 8px 28px rgba(0,100,255,0.4);
+    }
+    .splash-title {
+      margin-top: 20px; font-size: 22px; font-weight: 800; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #fff;
+      animation: splashFade .45s .12s both;
+    }
+    .splash-sub {
+      margin-top: 8px; font-size: 13px; font-weight: 600; color: #8b9bb0;
+      animation: splashFade .45s .18s both;
+    }
+    .splash-pct {
+      margin-top: 22px; font-size: 28px; font-weight: 800; color: #4db3ff;
+      font-variant-numeric: tabular-nums; letter-spacing: 0.02em;
+      animation: splashFade .45s .22s both;
+      text-shadow: 0 0 20px rgba(0,150,255,0.45);
+    }
+    .splash-bar {
+      margin-top: 14px; width: min(220px, 70vw); height: 4px; border-radius: 99px;
+      background: rgba(255,255,255,0.08); overflow: hidden;
+      animation: splashFade .45s .26s both;
+    }
+    .splash-bar > i {
+      display: block; height: 100%; width: 0%; border-radius: 99px;
+      background: linear-gradient(90deg, #0066ee, #33bbff);
+      box-shadow: 0 0 12px rgba(0,160,255,0.55);
+      transition: width .12s linear;
+    }
+    .splash-status {
+      margin-top: 14px; font-size: 12px; font-weight: 600; color: #6a7c92;
+      min-height: 1.2em; animation: splashFade .45s .3s both;
+    }
+    .splash-skeleton {
+      margin-top: 28px; width: min(320px, 88vw);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+      animation: splashFade .5s .35s both;
+    }
+    .splash-skeleton span {
+      height: 72px; border-radius: 14px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.09) 50%, rgba(255,255,255,0.04) 75%);
+      background-size: 200% 100%;
+      animation: splashShimmer 1.2s ease infinite;
+      border: 1px solid rgba(0,140,255,0.08);
+    }
+    .splash-skeleton span:nth-child(2) { animation-delay: .15s; }
+    .splash-skeleton span:nth-child(3) { animation-delay: .3s; }
+    .splash-skeleton span:nth-child(4) { animation-delay: .45s; }
+    @keyframes splashSpin { to { transform: rotate(360deg); } }
+    @keyframes splashPop {
+      from { opacity: 0; transform: scale(.75); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes splashFade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes splashShimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    body.splash-lock { overflow: hidden !important; }
+
   </style>
 </head>
 <body>
 
-  <div id="app-splash" aria-hidden="true">
-    <img class="splash-logo" src="https://i.postimg.cc/prFnSzN4/c42e0a79-c863-4b0c-adf0-9c7ad245c4cb.png" alt="ACS MOBILE">
+  <div id="app-splash" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <div class="splash-ring">
+      <img class="splash-logo" src="https://i.postimg.cc/prFnSzN4/c42e0a79-c863-4b0c-adf0-9c7ad245c4cb.png" alt="ACS MOBILE">
+    </div>
     <div class="splash-title">ACS MOBILE</div>
     <div class="splash-sub">Оптовая витрина</div>
-    <div class="splash-bar"><i></i></div>
-    <div class="splash-hint">Загрузка каталога…</div>
+    <div class="splash-pct" id="splash-pct">0%</div>
+    <div class="splash-bar"><i id="splash-bar"></i></div>
+    <div class="splash-status" id="splash-status">Подключение…</div>
+    <div class="splash-skeleton" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+    </div>
   </div>
+
 
   <div class="app-container">
     <section id="screen-home" class="screen on">
@@ -4066,28 +4113,89 @@
 
   
 
+    
+
     (function bootSplash(){
-      function hide(){
-        var el = document.getElementById("app-splash");
-        if (!el || el.classList.contains("hide")) return;
-        el.classList.add("hide");
-        setTimeout(function(){ try { el.remove(); } catch(e){} }, 500);
-      }
-      // min show ~0.9s, hide after load + fonts/images soft wait
-      var ready = false, minOk = false;
-      function tryHide(){ if (ready && minOk) hide(); }
-      setTimeout(function(){ minOk = true; tryHide(); }, 900);
-      function markReady(){ ready = true; tryHide(); }
-      if (document.readyState === "complete") markReady();
-      else window.addEventListener("load", markReady);
-      // safety: never block more than 2.8s
-      setTimeout(hide, 2800);
+      try { document.body.classList.add("splash-lock"); } catch(e) {}
       try {
         if (window.Telegram && Telegram.WebApp) {
           Telegram.WebApp.ready();
           Telegram.WebApp.expand();
+          if (Telegram.WebApp.disableVerticalSwipes) {
+            try { Telegram.WebApp.disableVerticalSwipes(); } catch(e2) {}
+          }
         }
       } catch(e) {}
+
+      var el = document.getElementById("app-splash");
+      var pctEl = document.getElementById("splash-pct");
+      var barEl = document.getElementById("splash-bar");
+      var stEl = document.getElementById("splash-status");
+      if (!el) return;
+
+      var steps = [
+        [8,  "Подключение…"],
+        [22, "Загрузка витрины…"],
+        [40, "Каталог товаров…"],
+        [58, "Цены и остатки…"],
+        [75, "Оформление…"],
+        [90, "Почти готово…"],
+        [100,"Готово"]
+      ];
+      var i = 0;
+      var started = Date.now();
+      var MIN_MS = 1600;   // явно видно на телефоне
+      var MAX_MS = 3200;
+
+      function setProgress(p, text){
+        p = Math.max(0, Math.min(100, p|0));
+        if (pctEl) pctEl.textContent = p + "%";
+        if (barEl) barEl.style.width = p + "%";
+        if (stEl && text) stEl.textContent = text;
+        try { el.setAttribute("aria-valuenow", String(p)); } catch(e) {}
+      }
+
+      function nextStep(){
+        if (i >= steps.length) return;
+        var s = steps[i++];
+        setProgress(s[0], s[1]);
+        if (i < steps.length) {
+          var delay = 180 + Math.random() * 160;
+          setTimeout(nextStep, delay);
+        }
+      }
+      nextStep();
+
+      var pageLoaded = document.readyState === "complete";
+      function onLoad(){ pageLoaded = true; maybeHide(); }
+      if (!pageLoaded) window.addEventListener("load", onLoad);
+
+      var hidden = false;
+      function hide(){
+        if (hidden) return;
+        hidden = true;
+        setProgress(100, "Готово");
+        setTimeout(function(){
+          el.classList.add("hide");
+          try { document.body.classList.remove("splash-lock"); } catch(e) {}
+          setTimeout(function(){ try { el.remove(); } catch(e) {} }, 420);
+        }, 220);
+      }
+
+      function maybeHide(){
+        var waited = Date.now() - started;
+        if (!pageLoaded) return;
+        if (waited < MIN_MS) {
+          setTimeout(maybeHide, MIN_MS - waited);
+          return;
+        }
+        hide();
+      }
+
+      // if load already done
+      setTimeout(maybeHide, MIN_MS);
+      // hard cap
+      setTimeout(hide, MAX_MS);
     })();
 
   </script>
