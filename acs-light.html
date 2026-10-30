@@ -46,7 +46,10 @@
     @media (max-width: 389px) { .app-container { min-width: 100%; } }
 
     .header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    .brand { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .brand { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; overflow: hidden; }
+    .brand-text { min-width: 0; overflow: hidden; }
+    .brand-text h1 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
+    .brand-text p { overflow: hidden; text-overflow: ellipsis; }
 
     .logo {
       width: 36px; height: 36px; flex-shrink: 0;
@@ -64,6 +67,15 @@
     }
 
     .header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .contact-btn { flex-shrink: 0; max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    @media (max-width: 400px) {
+      .brand-text h1 { font-size: 15px; letter-spacing: 0.04em; }
+      .brand-text p { font-size: 7px; }
+      .contact-btn { padding: 0 10px; font-size: 12px; max-width: 100px; }
+      .contact-btn span.contact-label { display: none; }
+      .header-actions { gap: 6px; }
+    }
+
     .contact-btn {
       height: 36px; padding: 0 14px;
       border: none; border-radius: 20px;
@@ -1870,7 +1882,7 @@
       <div class="header-actions">
         <a class="contact-btn" href="https://t.me/galk_b2b" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 3.2 2.8 10.4c-1.3.5-1.3 1.2-.2 1.5l4.8 1.5 1.8 5.7c.2.7.1 1 .8 1 .5 0 .7-.2 1-.6l2.7-2.6 5.6 4.1c1 .6 1.8.3 2-.9L23 4.3c.3-1.3-.5-1.9-1.5-1.1Zm-3.2 3.3-10.4 9.4-.4 3.3-1.6-5.5 12.4-7.2Z"/></svg>
-          Связаться
+          <span class="contact-label">Связаться</span>
         </a>
         <button onclick="window.location.href='acs.htm'">🌙</button>
         <button class="menu-btn" type="button" aria-label="Меню"><span></span></button>
@@ -2368,7 +2380,7 @@
     </div>
     <div class="pm-unit" id="pm-unit"></div>
     <div id="pm-mem-wrap">
-      <div class="pm-lab">Память</div>
+      <div class="pm-lab" id="pm-mem-lab">Модель</div>
       <div class="pm-chips" id="pm-mem"></div>
     </div>
     <div id="pm-color-wrap">
@@ -2376,7 +2388,7 @@
       <div class="pm-chips" id="pm-color"></div>
     </div>
     <button class="take" type="button" onclick="confirmBox()">КУПИТЬ / БРОНЬ</button>
-    <button class="quick" type="button" onclick="openTradeIn()">🔄 Trade-in / Оценка</button>
+    <button class="quick" type="button" id="pm-tradein-btn" onclick="openTradeIn()" style="display:none">🔄 Trade-in / Оценка</button>
     <button class="mg-btn" type="button" onclick="openMargin()">МАРЖИНАЛЬНОСТЬ WB / OZON</button>
     <button class="link-row" type="button" onclick="openVideo()">▶ Смотреть видеообзор (15 сек) ›</button>
     <div class="rev-head">
@@ -2766,7 +2778,7 @@
         <div class="margin-box js-margin">${marginHtml}</div>
         <div class="card-actions">
           <button class="take" type="button" onclick="event.stopPropagation();openProductSheet('${p.id}')">КУПИТЬ / БРОНЬ</button>
-          <button class="quick" type="button" onclick="event.stopPropagation();openProductSheet('${p.id}')">🔄 Trade-in / Доставка</button>
+          ${supportsTradeIn(p) ? `<button class="quick" type="button" onclick="event.stopPropagation();openProductSheet('${p.id}')">🔄 Trade-in / Доставка</button>` : `<button class="quick" type="button" onclick="event.stopPropagation();openProductSheet('${p.id}')">📦 Опт / Доставка</button>`}
         </div>
       </article>`;
     }
@@ -2927,6 +2939,20 @@
       document.getElementById("pm-thumbs").innerHTML = imgs.map((src,i)=>
         `<img class="${i===0?"on":""}" src="${src}" onclick="document.getElementById('pm-hero').src=this.src;this.parentElement.querySelectorAll('img').forEach(n=>n.classList.remove('on'));this.classList.add('on')">`
       ).join("");
+      
+      // label for variants
+      var memLab = document.getElementById("pm-mem-lab");
+      if (memLab) {
+        var cat = String(p.cat || p.category || "").toLowerCase();
+        if (cat === "cases" || cat.indexOf("чехл") >= 0) memLab.textContent = "Модель";
+        else if (cat === "dyson" || cat.indexOf("dyson") >= 0) memLab.textContent = "Цвет";
+        else if (cat === "watches" || cat.indexOf("час") >= 0) memLab.textContent = "Вариант";
+        else if (/\d+\s*GB|ТБ|TB/i.test(String((p.vars&&p.vars[0]&&p.vars[0].label)||""))) memLab.textContent = "Память";
+        else memLab.textContent = "Модель";
+      }
+      var tiBtn = document.getElementById("pm-tradein-btn");
+      if (tiBtn) tiBtn.style.display = supportsTradeIn(p) ? "" : "none";
+
       document.getElementById("pm-title").textContent = (p.single ? p.base : (p.base + " " + v.label)) + (p.article ? " " + p.article : "");
       document.getElementById("pm-rate").innerHTML = "★ " + p.rating + " <i>• " + p.reviews + " отзывов</i>";
       document.getElementById("pm-price").textContent = money(displayPrice(v.price));
@@ -3805,7 +3831,18 @@
     let tiDefects = "none";
     let tiRepair = "no";
 
+    
+    function supportsTradeIn(p) {
+      if (!p) return false;
+      var c = String(p.cat || p.category || "").toLowerCase();
+      // ACS: только смартфоны. Чехлы/часы/Dyson — без trade-in
+      if (c === "phones" || c === "iphone" || c.indexOf("смартфон") >= 0) return true;
+      return false;
+    }
+
     function openTradeIn() {
+      const __p = PRODUCTS.find(x => x.id === modalId);
+      if (!__p || !supportsTradeIn(__p)) { toast("Trade-in недоступен для этого товара"); return; }
       if (!modalId) {
         toast("Сначала откройте товар");
         return;
