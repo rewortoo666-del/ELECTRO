@@ -44,6 +44,89 @@
     }
     @media (max-width: 389px) { .app-container { min-width: 100%; } }
 
+    
+    /* === ACS visual polish: header === */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 1 1 auto;
+      overflow: hidden;
+    }
+    .brand-text {
+      min-width: 0;
+      overflow: hidden;
+    }
+    .brand-text h1 {
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+    .brand-text p {
+      margin-top: 3px;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      opacity: 0.85;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex: 0 0 auto;
+    }
+    .contact-btn {
+      height: 34px;
+      padding: 0 12px;
+      border-radius: 17px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+    }
+    .contact-btn:active { transform: scale(0.96); }
+    .contact-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .theme-btn, .menu-btn {
+      width: 34px; height: 34px;
+      transition: transform .15s ease, background .2s ease;
+    }
+    .theme-btn:active, .menu-btn:active { transform: scale(0.94); }
+    @media (max-width: 420px) {
+      .brand-text h1 { font-size: 15px; letter-spacing: 0.04em; }
+      .brand-text p { font-size: 7px; }
+      .contact-btn { padding: 0 10px; font-size: 11px; }
+      .contact-btn .contact-label { display: none; }
+      .contact-btn { width: 34px; height: 34px; padding: 0; justify-content: center; border-radius: 50%; }
+    }
+
+    .contact-btn {
+      border: 1px solid rgba(0, 160, 255, 0.28);
+      background: linear-gradient(180deg, rgba(20,40,70,0.95) 0%, rgba(12,22,40,0.95) 100%);
+      color: #fff;
+      box-shadow: 0 0 0 1px rgba(0,140,255,0.08), 0 6px 16px rgba(0,100,255,0.12);
+    }
+    .contact-btn svg { fill: #4db3ff; }
+
     .header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .brand { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; overflow: hidden; }
     .brand-text { min-width: 0; overflow: hidden; }
@@ -57,8 +140,8 @@
     .logo svg { width: 36px; height: 36px; filter: drop-shadow(0 0 8px rgba(0, 140, 255, 0.55)); }
     .logo img { width: 36px; height: 36px; border-radius: 8px; object-fit: cover; filter: drop-shadow(0 0 8px rgba(0, 140, 255, 0.55)); display: block; }
     .brand-text h1 {
-      font-size: 20px; font-weight: 800; line-height: 0.95;
-      letter-spacing: 0.08em; text-transform: uppercase;
+      font-size: 17px; font-weight: 800; line-height: 1;
+      letter-spacing: 0.06em; text-transform: uppercase;
     }
     .brand-text p {
       margin-top: 2px; font-size: 8px; font-weight: 700;
@@ -1582,9 +1665,140 @@
     }
     #admin-sheet.open .sheet-panel { transform: translateY(0); }
 
+  
+    /* === ACS visual polish: surfaces === */
+    .benefits {
+      box-shadow: 0 8px 28px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    .benefit {
+      transition: background .2s ease;
+    }
+    .benefit:active {
+      background: rgba(0,140,255,0.08);
+    }
+    .hero {
+      box-shadow: 0 12px 40px rgba(0,100,255,0.22), inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+    .product-card {
+      transition: transform .18s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+    .product-card:active {
+      transform: scale(0.985);
+    }
+    .cat-card, .pop-cat, .category-card, .home-cat {
+      transition: transform .18s ease, box-shadow .22s ease;
+    }
+    .metric-card, .stat-card, .home-metric {
+      transition: transform .18s ease, box-shadow .22s ease;
+    }
+    .take, .btn-primary, .pm-add {
+      transition: transform .15s ease, filter .2s ease, box-shadow .2s ease;
+    }
+    .take:active, .btn-primary:active, .pm-add:active {
+      transform: scale(0.97);
+      filter: brightness(1.05);
+    }
+    .tabs button, .chip, .pm-chip, .ti-chip {
+      transition: background .18s ease, color .18s ease, transform .12s ease, box-shadow .18s ease;
+    }
+    .tabs button:active, .chip:active, .pm-chip:active {
+      transform: scale(0.96);
+    }
+    /* soft glow on active tab */
+    .tabs button.active, .chip.on, .pm-chip.on {
+      box-shadow: 0 0 0 1px rgba(0,140,255,0.25), 0 6px 16px rgba(0,120,255,0.18);
+    }
+    .app-container {
+      background-image: radial-gradient(120% 60% at 50% -10%, rgba(0,120,255,0.14), transparent 55%);
+    }
+
+  
+    /* ===== App splash loader ===== */
+    #app-splash {
+      position: fixed; inset: 0; z-index: 99999;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background:
+        radial-gradient(80% 50% at 50% 35%, rgba(0,120,255,0.22), transparent 60%),
+        linear-gradient(180deg, #05080f 0%, #0a1220 100%);
+      transition: opacity .45s ease, visibility .45s ease;
+    }
+    #app-splash.hide {
+      opacity: 0; visibility: hidden; pointer-events: none;
+    }
+    .splash-logo {
+      width: 72px; height: 72px; border-radius: 18px; object-fit: cover;
+      box-shadow: 0 0 0 1px rgba(0,160,255,0.35), 0 12px 40px rgba(0,100,255,0.35);
+      animation: splashPop .6s cubic-bezier(.16,1,.3,1) both;
+    }
+    .splash-title {
+      margin-top: 18px; font-size: 22px; font-weight: 800; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #fff;
+      animation: splashFade .5s .15s both;
+    }
+    .splash-sub {
+      margin-top: 6px; font-size: 12px; font-weight: 600; color: #7e8c9f;
+      animation: splashFade .5s .22s both;
+    }
+    .splash-bar {
+      margin-top: 28px; width: 120px; height: 3px; border-radius: 99px;
+      background: rgba(255,255,255,0.08); overflow: hidden;
+      animation: splashFade .5s .28s both;
+    }
+    .splash-bar > i {
+      display: block; height: 100%; width: 40%; border-radius: 99px;
+      background: linear-gradient(90deg, #0077ff, #33bbff, #0077ff);
+      background-size: 200% 100%;
+      animation: splashSlide 1s linear infinite;
+    }
+    .splash-hint {
+      position: absolute; bottom: calc(28px + var(--safe-bottom));
+      font-size: 11px; color: #5a6a7e; font-weight: 600;
+      animation: splashFade .5s .4s both;
+    }
+    @keyframes splashPop {
+      from { opacity: 0; transform: scale(.82); filter: blur(4px); }
+      to { opacity: 1; transform: scale(1); filter: blur(0); }
+    }
+    @keyframes splashFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes splashSlide {
+      0% { transform: translateX(-120%); background-position: 0% 0; }
+      100% { transform: translateX(320%); background-position: 100% 0; }
+    }
+
+    /* extra motion */
+    .product-card {
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(16,24,38,0.98) 0%, rgba(10,16,28,0.98) 100%);
+    }
+    .product-card:hover, .product-card:active {
+      border-color: rgba(0,160,255,0.28);
+      box-shadow: 0 10px 28px rgba(0,80,200,0.18);
+    }
+    .tabbar {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(8,12,20,0.88) !important;
+      border-top: 1px solid rgba(0,140,255,0.12);
+    }
+    .hero-badge {
+      letter-spacing: 0.04em;
+    }
+
   </style>
 </head>
 <body>
+
+  <div id="app-splash" aria-hidden="true">
+    <img class="splash-logo" src="https://i.postimg.cc/prFnSzN4/c42e0a79-c863-4b0c-adf0-9c7ad245c4cb.png" alt="ACS MOBILE">
+    <div class="splash-title">ACS MOBILE</div>
+    <div class="splash-sub">Оптовая витрина</div>
+    <div class="splash-bar"><i></i></div>
+    <div class="splash-hint">Загрузка каталога…</div>
+  </div>
+
   <div class="app-container">
     <section id="screen-home" class="screen on">
     <header class="header">
@@ -3849,6 +4063,32 @@
         if (typeof updateCartBadge === "function") updateCartBadge();
       } catch (e) {}
     });
+
+  
+
+    (function bootSplash(){
+      function hide(){
+        var el = document.getElementById("app-splash");
+        if (!el || el.classList.contains("hide")) return;
+        el.classList.add("hide");
+        setTimeout(function(){ try { el.remove(); } catch(e){} }, 500);
+      }
+      // min show ~0.9s, hide after load + fonts/images soft wait
+      var ready = false, minOk = false;
+      function tryHide(){ if (ready && minOk) hide(); }
+      setTimeout(function(){ minOk = true; tryHide(); }, 900);
+      function markReady(){ ready = true; tryHide(); }
+      if (document.readyState === "complete") markReady();
+      else window.addEventListener("load", markReady);
+      // safety: never block more than 2.8s
+      setTimeout(hide, 2800);
+      try {
+        if (window.Telegram && Telegram.WebApp) {
+          Telegram.WebApp.ready();
+          Telegram.WebApp.expand();
+        }
+      } catch(e) {}
+    })();
 
   </script>
 </body>
