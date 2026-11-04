@@ -7,12 +7,16 @@
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover"
   >
   <meta name="theme-color" content="#f4f7fc">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>ELECTRO | Демо-витрина</title>
+  <title>ELECTRO | Демо-витрина Apple</title>
+  <meta name="description" content="Демо-витрина техники Apple для опта и розницы с каталогом, калькулятором маржи, трейд-ин и интеграцией с Telegram WebApp." />
+  <meta property="og:title" content="ELECTRO | Демо-витрина Apple" />
+  <meta property="og:description" content="Демо-витрина техники Apple для опта и розницы с каталогом, калькулятором маржи, трейд-ин и интеграцией с Telegram WebApp." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #f4f7fc;
@@ -2669,96 +2673,286 @@
       opacity: 1;
       transition: opacity .4s ease;
     }
-
-    /* ===== POLISH PASS ===== */
+    /* ===== ULTRA-PREMIUM VISUAL & ANIMATION POLISH PASS ===== */
     html, body {
       background:
-        radial-gradient(120% 80% at 0% -10%, rgba(0,140,255,.16), transparent 46%),
-        radial-gradient(90% 60% at 100% 0%, rgba(0,90,255,.08), transparent 42%),
-        #e7eef8;
+        radial-gradient(120% 80% at 0% -10%, rgba(0,140,255,.18), transparent 48%),
+        radial-gradient(90% 60% at 100% 0%, rgba(0,100,255,.12), transparent 44%),
+        radial-gradient(80% 60% at 50% 100%, rgba(0,180,255,.08), transparent 50%),
+        #e9f0f9;
+      letter-spacing: -0.012em;
     }
+
+    @media (min-width: 480px) {
+      body {
+        background-color: #dde6f3;
+      }
+      .app-container {
+        border-radius: 36px;
+        margin: 16px auto;
+        box-shadow:
+          0 24px 64px -12px rgba(0, 45, 110, 0.18),
+          0 0 0 1px rgba(0, 90, 220, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      }
+    }
+
     .app-container {
       background:
-        linear-gradient(180deg, rgba(255,255,255,.55), rgba(244,247,252,0) 180px),
+        linear-gradient(180deg, rgba(255,255,255,.7) 0%, rgba(244,247,252,0) 220px),
         var(--bg);
       padding-bottom: calc(118px + var(--safe-bottom));
+      scroll-behavior: smooth;
     }
 
+    /* Crisp Custom Scrollbar */
+    .app-container::-webkit-scrollbar,
+    .sheet-panel::-webkit-scrollbar,
+    #product-modal::-webkit-scrollbar {
+      width: 4px;
+    }
+    .app-container::-webkit-scrollbar-track,
+    .sheet-panel::-webkit-scrollbar-track,
+    #product-modal::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .app-container::-webkit-scrollbar-thumb,
+    .sheet-panel::-webkit-scrollbar-thumb,
+    #product-modal::-webkit-scrollbar-thumb {
+      background: rgba(0, 119, 255, 0.18);
+      border-radius: 99px;
+    }
+
+    /* Screen Transitions */
     .screen.on {
-      animation: screenIn .46s cubic-bezier(.16,1,.3,1);
+      animation: screenIn .48s cubic-bezier(.16,1,.3,1) both;
     }
     @keyframes screenIn {
-      from { opacity: 0; transform: translateY(18px); }
-      to { opacity: 1; transform: none; }
+      from { opacity: 0; transform: translateY(16px) scale(0.99); filter: blur(2px); }
+      to { opacity: 1; transform: none; filter: blur(0); }
     }
 
+    /* Floating Apple Acrylic Tab Bar */
     .tabbar {
-      bottom: calc(12px + var(--safe-bottom));
-      width: calc(100% - 24px);
-      max-width: 400px;
-      border-radius: 26px;
-      padding: 8px 6px 8px;
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(255,255,255,.9);
+      bottom: calc(12px + var(--safe-bottom)) !important;
+      width: calc(100% - 24px) !important;
+      max-width: 400px !important;
+      border-radius: 26px !important;
+      padding: 7px 6px 7px !important;
+      background: rgba(255, 255, 255, 0.84) !important;
+      backdrop-filter: blur(28px) saturate(190%) !important;
+      -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.85) !important;
       box-shadow:
-        0 14px 40px rgba(15,40,90,.14),
-        inset 0 1px 0 rgba(255,255,255,.8);
+        0 16px 42px -6px rgba(10, 35, 80, 0.15),
+        0 2px 8px rgba(10, 35, 80, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+      transition: transform 0.3s cubic-bezier(.16,1,.3,1), opacity 0.3s ease;
     }
     .tab {
-      border-radius: 16px;
-      padding: 6px 0 4px;
+      border-radius: 16px !important;
+      padding: 6px 0 4px !important;
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, color 0.2s ease !important;
+    }
+    .tab:active {
+      transform: scale(0.9) !important;
     }
     .tab.active {
-      background: linear-gradient(180deg, rgba(0,140,255,.14), rgba(0,119,255,.06));
-      color: #0077ff;
+      background: linear-gradient(180deg, rgba(0, 119, 255, 0.13) 0%, rgba(0, 102, 238, 0.05) 100%) !important;
+      color: #0077ff !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 2px 8px rgba(0, 119, 255, 0.1) !important;
+    }
+    .tab.active svg {
+      transform: translateY(-1px) scale(1.06);
+      filter: drop-shadow(0 2px 6px rgba(0, 119, 255, 0.35));
+      animation: tabPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes tabPop {
+      0% { transform: scale(0.85) translateY(2px); }
+      60% { transform: scale(1.15) translateY(-2px); }
+      100% { transform: scale(1.06) translateY(-1px); }
+    }
+    .tab .badge {
+      animation: badgePing 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes badgePing {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); filter: drop-shadow(0 0 6px rgba(255, 77, 106, 0.6)); }
     }
 
     .back svg { stroke: #0b1b33 !important; }
 
+    /* Catalog Search Input */
     .catalog-search {
-      border-radius: 16px;
-      box-shadow: 0 4px 16px rgba(15,40,90,.05);
-      transition: border-color .2s ease, box-shadow .2s ease;
+      border-radius: 16px !important;
+      box-shadow:
+        0 4px 16px rgba(15, 40, 90, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+      transition: border-color .22s ease, box-shadow .22s ease, transform .22s ease !important;
+      background: rgba(255, 255, 255, 0.95) !important;
+      backdrop-filter: blur(12px) !important;
     }
     .catalog-search:focus-within {
-      border-color: rgba(0,119,255,.45);
-      box-shadow: 0 0 0 4px rgba(0,119,255,.12);
+      border-color: rgba(0, 119, 255, 0.5) !important;
+      box-shadow:
+        0 0 0 4px rgba(0, 119, 255, 0.14),
+        0 6px 20px rgba(0, 119, 255, 0.08) !important;
+      transform: translateY(-1px);
+    }
+
+    /* Product Cards - Sculpted Apple Design */
+    .product-card {
+      border-radius: 18px !important;
+      background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(0,119,255,0.20) 30%, rgba(160,210,255,0.38) 50%, rgba(0,102,238,0.22) 75%, rgba(255,255,255,0.9) 100%) border-box !important;
+      box-shadow:
+        0 4px 18px -2px rgba(12, 38, 80, 0.07),
+        0 1px 3px rgba(12, 38, 80, 0.03),
+        inset 0 1px 0 rgba(255, 255, 255, 1) !important;
+      transition:
+        transform .26s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow .26s ease,
+        filter .26s ease !important;
+      will-change: transform;
+    }
+    .product-card:active {
+      transform: scale(0.96) translateY(1px) !important;
+      box-shadow:
+        0 2px 10px rgba(0, 119, 255, 0.18),
+        inset 0 1px 0 #ffffff !important;
+      filter: brightness(1.02);
+    }
+    .product-card.card-enter {
+      animation: cardEnter .48s cubic-bezier(.16,1,.3,1) both !important;
+    }
+    @keyframes cardEnter {
+      from { opacity: 0; transform: translateY(16px) scale(.95); filter: blur(3px); }
+      to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
     }
 
     .product-card .product-photo {
       background:
-        radial-gradient(ellipse 80% 60% at 50% 30%, #ffffff 0%, transparent 65%),
+        radial-gradient(ellipse 85% 65% at 50% 30%, #ffffff 0%, transparent 68%),
         linear-gradient(165deg, #fbfdff 0%, #eef4fc 55%, #e4edf8 100%) !important;
+      border: 1px solid rgba(0, 119, 255, 0.08) !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.9) !important;
+      overflow: hidden;
+    }
+    .product-photo img {
+      transition: transform .42s cubic-bezier(.16,1,.3,1) !important;
+    }
+    .product-card:hover .product-photo img,
+    .product-card:active .product-photo img {
+      transform: scale(1.06) !important;
     }
     .product-card .price {
-      letter-spacing: -.03em;
+      letter-spacing: -.035em !important;
+      font-feature-settings: "tnum" 1;
+      color: #0066ee !important;
     }
 
-    .hero {
+    /* Buttons inside product cards */
+    .take {
+      background: linear-gradient(135deg, #0066ee 0%, #0077ff 50%, #1e92ff 100%) !important;
       box-shadow:
-        0 0 0 1px rgba(0,119,255,.08),
-        0 18px 40px rgba(0,90,200,.12) !important;
+        0 4px 14px rgba(0, 102, 238, 0.32),
+        inset 0 1px 0 rgba(255, 255, 255, 0.32) !important;
+      transition: transform .22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow .22s ease, filter .2s ease !important;
+    }
+    .take:active {
+      transform: scale(0.95) !important;
+      box-shadow: 0 2px 8px rgba(0, 102, 238, 0.25) !important;
+      filter: brightness(1.08) !important;
+    }
+    .quick {
+      border: 1.5px solid rgba(0, 119, 255, 0.24) !important;
+      background: linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%) !important;
+      color: #0066ee !important;
+      box-shadow: 0 2px 8px rgba(0, 119, 255, 0.05) !important;
+      transition: transform .22s cubic-bezier(0.34, 1.56, 0.64, 1), background .2s ease, border-color .2s ease !important;
+    }
+    .quick:active {
+      transform: scale(0.95) !important;
+      background: #eaf4ff !important;
+      border-color: #0077ff !important;
     }
 
+    /* Hero Carousel Apple Elevation */
+    .hero {
+      background:
+        radial-gradient(90% 80% at 80% 45%, rgba(0, 140, 255, 0.22), transparent 58%),
+        linear-gradient(135deg, #eaf3ff 0%, #dceaff 55%, #f4f8ff 100%) !important;
+      box-shadow:
+        0 0 0 1px rgba(0, 119, 255, 0.12),
+        0 18px 42px -8px rgba(0, 90, 210, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+      border: 1px solid rgba(0, 119, 255, 0.14) !important;
+    }
+    .hero-badge {
+      background: linear-gradient(135deg, #0077ff 0%, #0055dd 100%) !important;
+      box-shadow: 0 6px 16px rgba(0, 119, 255, 0.35) !important;
+    }
+    .hero-nav .dots i {
+      transition: width 0.35s cubic-bezier(0.34, 1.5, 0.64, 1), background 0.25s ease !important;
+    }
+    .hero-nav .dots i.active {
+      width: 22px !important;
+      border-radius: 6px !important;
+      background: #0077ff !important;
+      box-shadow: 0 0 8px rgba(0, 119, 255, 0.45);
+    }
+    .hero-next {
+      background: rgba(255, 255, 255, 0.88) !important;
+      backdrop-filter: blur(14px) !important;
+      -webkit-backdrop-filter: blur(14px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.95) !important;
+      box-shadow: 0 4px 14px rgba(0, 30, 80, 0.12) !important;
+      transition: transform .22s cubic-bezier(0.34, 1.56, 0.64, 1), background .2s ease !important;
+    }
+    .hero-next:active {
+      transform: scale(0.88) !important;
+    }
+
+    /* Tactile Micro-Interactions: Apple Spring Bounce */
     button, .take, .quick, .chip, .cat, .material-btn, .tab, .pf-action, .contact-btn, .manager-contact {
       -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
     .is-press {
-      animation: btnRoll .46s cubic-bezier(.34,1.45,.64,1);
+      animation: appleHapticPress .36s cubic-bezier(.34, 1.56, .64, 1) !important;
     }
-    @keyframes btnRoll {
-      0% { transform: scale(1) translateY(0); }
-      32% { transform: scale(.9) translateY(4px); }
-      68% { transform: scale(1.04) translateY(-2px); }
+    @keyframes appleHapticPress {
+      0% { transform: scale(1); }
+      32% { transform: scale(0.925) translateY(1px); }
+      68% { transform: scale(1.025) translateY(-1px); }
       100% { transform: scale(1) translateY(0); }
     }
 
+    /* Benefits Grid */
+    .benefits {
+      background: linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%) !important;
+      border: 1px solid rgba(0, 119, 255, 0.13) !important;
+      box-shadow:
+        0 8px 24px -4px rgba(15, 40, 90, 0.07),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+    }
+    .benefit .ben-ico {
+      transition: transform .28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow .25s ease !important;
+    }
+    .benefit:active .ben-ico {
+      transform: scale(1.12) !important;
+      box-shadow: 0 6px 16px rgba(0, 119, 255, 0.22) !important;
+    }
+
+    /* Quick Dock & Veil */
     .quick-veil {
       position: fixed; inset: 0; z-index: 1090;
-      background: rgba(6,16,36,.28);
+      background: rgba(6, 16, 36, 0.35);
       opacity: 0; pointer-events: none;
-      transition: opacity .28s ease;
-      backdrop-filter: blur(2px);
+      transition: opacity .3s ease;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
     .quick-veil.open { opacity: 1; pointer-events: auto; }
     .quick-dock {
@@ -2775,47 +2969,1617 @@
     .quick-dock button, .quick-dock a {
       pointer-events: none;
       height: 42px;
-      padding: 0 14px 0 12px;
+      padding: 0 16px 0 12px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.7);
-      background: rgba(255,255,255,.94);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
       color: #0b1b33;
       font-size: 13px;
       font-weight: 800;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      box-shadow: 0 10px 28px rgba(15,40,90,.14);
+      gap: 9px;
+      box-shadow:
+        0 12px 32px rgba(15, 40, 90, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95);
       opacity: 0;
       transform: translateX(28px) scale(.86);
+      transition: transform .38s cubic-bezier(.34,1.4,.64,1), opacity .28s ease, background .2s ease;
     }
     .quick-dock.open { pointer-events: auto; }
     .quick-dock.open button, .quick-dock.open a {
       pointer-events: auto;
       opacity: 1;
       transform: none;
-      transition: transform .42s cubic-bezier(.34,1.4,.64,1), opacity .28s ease;
     }
     .quick-dock.open button:nth-child(1),
     .quick-dock.open a:nth-child(1) { transition-delay: .02s; }
     .quick-dock.open button:nth-child(2),
-    .quick-dock.open a:nth-child(2) { transition-delay: .06s; }
+    .quick-dock.open a:nth-child(2) { transition-delay: .05s; }
     .quick-dock.open button:nth-child(3),
-    .quick-dock.open a:nth-child(3) { transition-delay: .1s; }
+    .quick-dock.open a:nth-child(3) { transition-delay: .08s; }
     .quick-dock.open button:nth-child(4),
-    .quick-dock.open a:nth-child(4) { transition-delay: .14s; }
+    .quick-dock.open a:nth-child(4) { transition-delay: .11s; }
     .quick-dock.open button:nth-child(5),
-    .quick-dock.open a:nth-child(5) { transition-delay: .18s; }
+    .quick-dock.open a:nth-child(5) { transition-delay: .14s; }
     .quick-dock.open button:nth-child(6),
-    .quick-dock.open a:nth-child(6) { transition-delay: .22s; }
+    .quick-dock.open a:nth-child(6) { transition-delay: .17s; }
     .quick-dock button:active, .quick-dock a:active {
-      transform: scale(.94) !important;
+      transform: scale(.93) !important;
+      background: #f0f7ff !important;
     }
     .qd-ico {
-      width: 22px; height: 22px; border-radius: 50%;
+      width: 24px; height: 24px; border-radius: 50%;
       display: grid; place-items: center;
-      background: #eaf3ff; color: #0077ff; font-size: 12px;
+      background: #eaf3ff; color: #0077ff; font-size: 13px;
+    }
+
+    /* Live Orders Ticker Enhancement */
+    .home-live {
+      box-shadow:
+        0 10px 32px -4px rgba(15, 40, 90, 0.08),
+        inset 0 1px 0 rgba(255,255,255,.95) !important;
+    }
+    .home-live-window {
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%) !important;
+      mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%) !important;
+    }
+    .home-order-card {
+      background: linear-gradient(145deg, #ffffff 0%, #f4fbf7 100%) !important;
+      border: 1px solid rgba(0, 170, 95, 0.16) !important;
+      box-shadow:
+        0 6px 18px rgba(15, 40, 90, 0.06),
+        inset 0 1px 0 rgba(255,255,255,.95) !important;
+      transition: transform .22s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    }
+    .home-order-card:active {
+      transform: scale(0.97) !important;
+    }
+
+    /* How It Works Cards */
+    .home-how-step {
+      background: linear-gradient(160deg, #ffffff 0%, #f4f8ff 55%, #eaf3fc 100%) !important;
+      border: 1px solid rgba(0, 119, 255, 0.13) !important;
+      box-shadow:
+        0 8px 24px -4px rgba(15, 40, 90, 0.07),
+        inset 0 1px 0 rgba(255,255,255,.95) !important;
+      transition: transform .26s cubic-bezier(0.34, 1.5, 0.64, 1), box-shadow .26s ease !important;
+    }
+    .home-how-step:active {
+      transform: scale(0.96) !important;
+      box-shadow: 0 4px 16px rgba(0, 119, 255, 0.16) !important;
+    }
+
+    /* Modal Sheets & Backdrops */
+    #video-sheet, #margin-sheet, #tradein-sheet, #checkout-sheet, #admin-sheet {
+      background: rgba(6, 18, 38, 0.45) !important;
+      backdrop-filter: blur(14px) saturate(160%) !important;
+      -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
+      transition: opacity .32s cubic-bezier(.16,1,.3,1) !important;
+    }
+    .sheet-panel {
+      border-radius: 28px 28px 0 0 !important;
+      box-shadow:
+        0 -18px 52px rgba(0, 25, 70, 0.16),
+        inset 0 1px 0 #ffffff !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.85) !important;
+      transition: transform .38s cubic-bezier(0.2, 0.95, 0.3, 1.04) !important;
+    }
+    .sheet-grab {
+      width: 44px !important;
+      height: 5px !important;
+      border-radius: 99px !important;
+      background: #c8d7e8 !important;
+      margin: 0 auto 12px !important;
+      transition: background .2s ease;
+    }
+    .sheet-panel:hover .sheet-grab {
+      background: #0077ff !important;
+    }
+
+    /* Product Modal */
+    #product-modal {
+      transition: transform 0.42s cubic-bezier(0.2, 0.95, 0.3, 1.04) !important;
+    }
+    .pm-chip {
+      transition: transform .2s cubic-bezier(0.34, 1.56, 0.64, 1), background .2s ease, border-color .2s ease !important;
+    }
+    .pm-chip:active {
+      transform: scale(0.92) !important;
+    }
+
+    /* Splash Screen High-Tech Visual Polish */
+    #electro-splash {
+      backdrop-filter: blur(20px);
+    }
+    .splash-particle {
+      box-shadow: 0 0 8px rgba(90, 200, 255, 0.7), 0 0 2px #ffffff !important;
+    }
+    .splash-ring {
+      filter: drop-shadow(0 0 12px rgba(0, 170, 255, 0.65)) !important;
+    }
+    .splash-bar {
+      box-shadow: 0 0 18px rgba(0, 200, 255, 0.8), 0 0 4px #ffffff !important;
+    }
+    #electro-splash.done {
+      transform: scale(1.03) !important;
+      filter: blur(4px) !important;
+      transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1), filter .6s ease, visibility .6s !important;
+    }
+
+    /* ===== APPLE DYNAMIC ISLAND & LIVE ACTIVITY ===== */
+    .dynamic-island-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 1050;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 12px;
+      padding-top: 2px;
+      pointer-events: none;
+    }
+    .dynamic-island {
+      pointer-events: auto;
+      position: relative;
+      background: rgba(10, 16, 28, 0.94);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      box-shadow:
+        0 14px 34px -4px rgba(0, 0, 0, 0.38),
+        0 2px 8px rgba(0, 119, 255, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+      cursor: pointer;
+      transition:
+        width 0.42s cubic-bezier(0.34, 1.45, 0.64, 1),
+        height 0.42s cubic-bezier(0.34, 1.45, 0.64, 1),
+        border-radius 0.42s cubic-bezier(0.34, 1.45, 0.64, 1),
+        transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.3s ease;
+      overflow: hidden;
+      max-width: calc(100% - 16px);
+      user-select: none;
+    }
+    .dynamic-island:hover {
+      box-shadow:
+        0 16px 40px -4px rgba(0, 0, 0, 0.48),
+        0 0 16px rgba(0, 140, 255, 0.38),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45);
+      transform: translateY(-1px);
+    }
+    .dynamic-island:active {
+      transform: scale(0.97);
+    }
+
+    /* Collapsed Pill State */
+    .di-collapsed {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 35px;
+      padding: 0 14px;
+      white-space: nowrap;
+    }
+    .dynamic-island.is-expanded .di-collapsed,
+    .dynamic-island.is-toast .di-collapsed {
+      display: none;
+    }
+
+    .di-live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #12d86a;
+      box-shadow: 0 0 8px #12d86a;
+      animation: diLivePulse 1.8s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes diLivePulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.65; box-shadow: 0 0 14px #12d86a; }
+    }
+    .di-icon {
+      font-size: 11px;
+      color: #00b4ff;
+      filter: drop-shadow(0 0 4px rgba(0, 180, 255, 0.6));
+    }
+    .di-pill-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #e6f0ff;
+    }
+    .di-pill-title strong {
+      color: #38bdf8;
+      font-weight: 800;
+    }
+    .di-live-badge {
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: rgba(18, 216, 106, 0.18);
+      color: #12d86a;
+      border: 1px solid rgba(18, 216, 106, 0.35);
+      margin-left: 2px;
+    }
+
+    /* Expanded Island State */
+    .di-expanded {
+      display: none;
+      padding: 16px 18px 18px;
+      width: 380px;
+      max-width: 92vw;
+      animation: diContentFade 0.32s ease forwards;
+    }
+    .dynamic-island.is-expanded {
+      border-radius: 26px;
+      background: rgba(8, 14, 26, 0.97);
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.55),
+        0 0 0 1px rgba(0, 140, 255, 0.32),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    }
+    .dynamic-island.is-expanded .di-expanded {
+      display: block;
+    }
+    @keyframes diContentFade {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .di-exp-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .di-exp-brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .di-apple-logo {
+      font-size: 20px;
+      line-height: 1;
+      color: #ffffff;
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.5));
+    }
+    .di-exp-brand h4 {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: #ffffff;
+    }
+    .di-exp-brand p {
+      font-size: 9px;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+    .di-exp-close {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .di-exp-close:active {
+      transform: scale(0.9);
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .di-exp-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .di-exp-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 10px 12px;
+    }
+    .di-stat-tag {
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: #7dd3fc;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .di-stat-number {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+    .di-stat-number.text-emerald {
+      color: #10b981;
+    }
+    .di-stat-sub {
+      font-size: 8px;
+      color: #94a3b8;
+      font-weight: 600;
+      margin-top: 3px;
+      display: block;
+    }
+
+    .di-exp-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .di-action-btn {
+      width: 100%;
+      height: 42px;
+      padding: 0 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+      text-align: left;
+    }
+    .di-action-btn:active {
+      transform: scale(0.98);
+      background: rgba(255, 255, 255, 0.12);
+    }
+    .di-action-ico {
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .di-action-text {
+      flex: 1;
+      min-width: 0;
+    }
+    .di-action-text strong {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .di-action-text small {
+      display: block;
+      font-size: 9px;
+      color: #94a3b8;
+    }
+    .di-action-arr {
+      font-size: 13px;
+      color: #38bdf8;
+      font-weight: 800;
+    }
+
+    /* Dynamic Island Toast State */
+    .di-toast {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      height: 42px;
+      padding: 0 14px;
+      white-space: nowrap;
+      animation: diToastIn 0.36s cubic-bezier(0.34, 1.5, 0.64, 1) both;
+    }
+    .dynamic-island.is-toast {
+      border-color: rgba(0, 180, 255, 0.45);
+      background: rgba(6, 14, 28, 0.98);
+      box-shadow:
+        0 14px 36px rgba(0, 119, 255, 0.35),
+        0 0 18px rgba(0, 180, 255, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
+    .dynamic-island.is-toast .di-toast {
+      display: flex;
+    }
+    @keyframes diToastIn {
+      from { opacity: 0; transform: scale(0.92); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .di-toast-ico {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #10b981;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 900;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
+      flex-shrink: 0;
+    }
+    .di-toast-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .di-toast-info strong {
+      font-size: 11px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+    .di-toast-info span {
+      font-size: 9px;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+    .di-toast-badge {
+      margin-left: auto;
+      font-size: 10px;
+      font-weight: 800;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.15);
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    /* Titanium Specular Foil on Product Cards */
+    .product-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      background: radial-gradient(circle 140px at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(255, 255, 255, 0.45), transparent 75%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      mix-blend-mode: overlay;
+      z-index: 2;
+    }
+    .product-card:hover::before,
+    .product-card:active::before {
+      opacity: 1;
+    }
+
+    /* Flying Orb to Cart */
+    .cart-fly-orb {
+      position: fixed;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0088ff, #00f0ff);
+      box-shadow: 0 0 18px #00c8ff, 0 0 6px #ffffff;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: all 0.65s cubic-bezier(0.2, 0.85, 0.3, 1.15);
+      opacity: 1;
+    }
+
+    /* Sound Button in Header */
+    .sound-btn {
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(15, 40, 80, 0.10);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.96);
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      line-height: 1;
+      cursor: pointer;
+      flex-shrink: 0;
+      padding: 0;
+      box-shadow: 0 2px 10px rgba(15, 40, 90, 0.06);
+      transition: transform .22s cubic-bezier(.16,1,.3,1), background .2s ease, box-shadow .2s ease;
+    }
+    .sound-btn:active {
+      transform: scale(0.9);
+      background: #eaf4ff;
+    }
+    .sound-btn.is-muted {
+      opacity: 0.6;
+      filter: grayscale(1);
+    }
+
+    /* Apple Official IMEI Check Sheet */
+    #imei-sheet {
+      position: fixed; inset: 0; z-index: 1150;
+      background: rgba(6, 18, 38, 0.5);
+      display: flex; align-items: flex-end; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity .28s ease;
+      backdrop-filter: blur(14px) saturate(160%);
+      -webkit-backdrop-filter: blur(14px) saturate(160%);
+    }
+    #imei-sheet.open { opacity: 1; pointer-events: auto; }
+    .imei-panel {
+      width: 100%; max-width: 430px;
+      background: #ffffff;
+      border-radius: 28px 28px 0 0;
+      padding: 14px 18px calc(24px + var(--safe-bottom));
+      transform: translateY(35px);
+      transition: transform .38s cubic-bezier(0.2, 0.95, 0.3, 1.04);
+      max-height: 92dvh; overflow-y: auto;
+      box-shadow: 0 -18px 52px rgba(0, 25, 70, 0.16);
+    }
+    #imei-sheet.open .imei-panel { transform: translateY(0); }
+
+    .imei-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .imei-logo-wrap {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: #000000;
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+    }
+    .imei-header h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: #0b1b33;
+      letter-spacing: -0.02em;
+    }
+    .imei-header p {
+      font-size: 10px;
+      color: #6b7c93;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .imei-search-box {
+      background: #f4f8fc;
+      border: 1px solid rgba(0, 119, 255, 0.14);
+      border-radius: 18px;
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+    .imei-input-wrap {
+      display: flex;
+      gap: 8px;
+    }
+    .imei-input-wrap input {
+      flex: 1;
+      height: 42px;
+      padding: 0 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(15, 40, 80, 0.12) !important;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      outline: none;
+    }
+    .imei-input-wrap input:focus {
+      border-color: #0077ff !important;
+      box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.15);
+    }
+    .imei-check-btn {
+      height: 42px;
+      padding: 0 16px;
+      border: 0;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0077ff, #0055dd);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 119, 255, 0.3);
+      transition: transform 0.2s ease;
+    }
+    .imei-check-btn:active {
+      transform: scale(0.95);
+    }
+    .imei-presets {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .imei-preset-label {
+      font-size: 10px;
+      color: #6b7c93;
+      font-weight: 700;
+    }
+    .imei-pill {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 119, 255, 0.2);
+      background: #ffffff;
+      color: #0077ff;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .imei-pill:active {
+      transform: scale(0.92);
+      background: #eaf4ff;
+    }
+
+    .imei-result-card {
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      background: linear-gradient(170deg, #ffffff 0%, #f3faf6 100%);
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 8px 24px -4px rgba(16, 185, 129, 0.1);
+    }
+    .imei-device-head {
+      border-bottom: 1px solid rgba(15, 40, 80, 0.08);
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+    .imei-device-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: #0a9f55;
+      font-size: 10px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .imei-device-head h4 {
+      font-size: 16px;
+      font-weight: 800;
+      color: #0b1b33;
+    }
+    .imei-sn {
+      font-size: 11px;
+      font-weight: 700;
+      color: #6b7c93;
+      font-family: monospace;
+      margin-top: 2px;
+    }
+
+    .imei-specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .imei-spec-item {
+      background: #ffffff;
+      border: 1px solid rgba(15, 40, 80, 0.08);
+      border-radius: 12px;
+      padding: 8px 10px;
+    }
+    .imei-spec-name {
+      font-size: 9px;
+      color: #6b7c93;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .imei-spec-item strong {
+      font-size: 11px;
+      font-weight: 800;
+      color: #0b1b33;
+      display: block;
+    }
+    .imei-spec-item strong.text-emerald {
+      color: #0a9f55;
+    }
+
+    .imei-sec-banner {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      background: rgba(0, 119, 255, 0.06);
+      border: 1px solid rgba(0, 119, 255, 0.15);
+      border-radius: 12px;
+      padding: 9px 11px;
+      font-size: 10px;
+      line-height: 1.35;
+      color: #334e68;
+      font-weight: 600;
+    }
+
+    /* =========================================================
+       ADMIN PRICE PARSER & MARKUP MODULE
+       ========================================================= */
+    .admin-nav-tabs {
+      display: flex;
+      gap: 6px;
+      background: rgba(15, 40, 80, 0.05);
+      padding: 4px;
+      border-radius: 14px;
+      margin-bottom: 16px;
+    }
+    .admin-nav-tab {
+      flex: 1;
+      padding: 9px 4px;
+      border: none;
+      background: transparent;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #556980;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      text-align: center;
+    }
+    .admin-nav-tab.active {
+      background: #ffffff;
+      color: #0b1b33;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+    .admin-tab-pane {
+      display: none;
+    }
+    .admin-tab-pane.active {
+      display: block;
+      animation: tabPaneFade 0.25s ease-out;
+    }
+    @keyframes tabPaneFade {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .parser-box {
+      background: #ffffff;
+      border: 1px solid rgba(15, 40, 80, 0.08);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 4px 16px rgba(15, 40, 80, 0.04);
+      margin-bottom: 14px;
+    }
+    .parser-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .parser-head b {
+      font-size: 13px;
+      font-weight: 800;
+      color: #0b1b33;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .parser-sample-btn {
+      background: rgba(0, 119, 255, 0.08);
+      border: 1px solid rgba(0, 119, 255, 0.18);
+      color: #0077ff;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .parser-sample-btn:active {
+      transform: scale(0.96);
+    }
+    .parser-textarea {
+      width: 100%;
+      min-height: 110px;
+      box-sizing: border-box;
+      border: 1px solid rgba(15, 40, 80, 0.14);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 11px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      line-height: 1.45;
+      color: #0b1b33;
+      background: #f8fafc;
+      resize: vertical;
+      transition: all 0.2s ease;
+    }
+    .parser-textarea:focus {
+      outline: none;
+      border-color: #0077ff;
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.12);
+    }
+
+    .markup-ctrl-panel {
+      margin-top: 12px;
+      background: #f8fafc;
+      border: 1px solid rgba(15, 40, 80, 0.06);
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+    .markup-type-switch {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .markup-type-btn {
+      flex: 1;
+      padding: 7px 8px;
+      border: 1px solid rgba(15, 40, 80, 0.1);
+      background: #ffffff;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #556980;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .markup-type-btn.active {
+      background: #0077ff;
+      border-color: #0077ff;
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 119, 255, 0.25);
+    }
+    .markup-val-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .markup-val-input-wrap {
+      flex: 1;
+      position: relative;
+    }
+    .markup-val-input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px 30px 8px 12px;
+      border: 1px solid rgba(15, 40, 80, 0.14);
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #0b1b33;
+      background: #ffffff;
+    }
+    .markup-val-input:focus {
+      outline: none;
+      border-color: #0077ff;
+      box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.12);
+    }
+    .markup-val-unit {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      font-weight: 800;
+      color: #6b7c93;
+    }
+    .markup-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 8px;
+    }
+    .markup-chip {
+      background: #ffffff;
+      border: 1px solid rgba(15, 40, 80, 0.1);
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #334e68;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .markup-chip:hover, .markup-chip.active {
+      background: #0b1b33;
+      color: #ffffff;
+      border-color: #0b1b33;
+    }
+
+    .parser-parse-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: linear-gradient(135deg, #0077ff, #0056cc);
+      border: none;
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(0, 119, 255, 0.35);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .parser-parse-btn:active {
+      transform: scale(0.98);
+    }
+
+    .parser-summary-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      background: #0b1b33;
+      color: #ffffff;
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin: 12px 0;
+      text-align: center;
+    }
+    .parser-sum-item small {
+      display: block;
+      font-size: 9px;
+      color: rgba(255, 255, 255, 0.65);
+      font-weight: 600;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .parser-sum-item strong {
+      font-size: 12px;
+      font-weight: 800;
+      color: #38ef7d;
+    }
+
+    .parser-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 380px;
+      overflow-y: auto;
+      padding: 2px;
+      margin-bottom: 12px;
+    }
+    .parser-item-card {
+      background: #ffffff;
+      border: 1px solid rgba(15, 40, 80, 0.08);
+      border-radius: 12px;
+      padding: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .parser-item-card.is-ignored {
+      opacity: 0.45;
+      background: #f1f5f9;
+    }
+    .parser-item-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .parser-item-check {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      cursor: pointer;
+    }
+    .parser-item-check input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: #0077ff;
+      cursor: pointer;
+    }
+    .parser-item-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0b1b33;
+      line-height: 1.3;
+    }
+    .parser-status-badge {
+      font-size: 9px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 6px;
+      letter-spacing: 0.2px;
+      flex-shrink: 0;
+    }
+    .parser-status-badge.ok {
+      background: rgba(10, 159, 85, 0.12);
+      color: #0a9f55;
+      border: 1px solid rgba(10, 159, 85, 0.25);
+    }
+    .parser-status-badge.check {
+      background: rgba(245, 158, 11, 0.12);
+      color: #d97706;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+    .parser-item-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      align-items: center;
+    }
+    .parser-spec-chip {
+      background: #f1f5f9;
+      color: #475569;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .parser-item-pricing {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-top: 2px;
+      background: #f8fafc;
+      padding: 6px 8px;
+      border-radius: 8px;
+    }
+    .parser-supp-price {
+      font-size: 11px;
+      color: #6b7c93;
+      font-weight: 700;
+    }
+    .parser-arrow {
+      color: #0077ff;
+      font-weight: 800;
+      font-size: 11px;
+    }
+    .parser-retail-wrap {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .parser-retail-inp {
+      width: 90px;
+      padding: 4px 6px;
+      border: 1px solid rgba(0, 119, 255, 0.3);
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #0b1b33;
+      background: #ffffff;
+      text-align: right;
+    }
+    .parser-retail-inp:focus {
+      outline: none;
+      border-color: #0077ff;
+      box-shadow: 0 0 0 2px rgba(0, 119, 255, 0.15);
+    }
+    .parser-del-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      padding: 2px 4px;
+    }
+    .parser-del-btn:hover {
+      color: #ef4444;
+    }
+
+    .parser-commit-btn {
+      width: 100%;
+      padding: 13px 18px;
+      background: linear-gradient(135deg, #10b981, #059669);
+      border: none;
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .parser-commit-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* =========================================================
+       LUXURY DESIGN UPGRADES: CATALOG, ORDERS, FAV, PROFILE
+       ========================================================= */
+    .catalog-vip-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(15, 40, 80, 0.08);
+      border-radius: 14px;
+      padding: 9px 12px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    }
+    .catalog-vip-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #0b1b33;
+    }
+    .catalog-vip-dot {
+      width: 7px;
+      height: 7px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(16, 185, 129, 0.8);
+      animation: vipDotPulse 2s infinite ease-in-out;
+    }
+    @keyframes vipDotPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+    .catalog-vip-link {
+      background: rgba(0, 119, 255, 0.08);
+      border: 1px solid rgba(0, 119, 255, 0.18);
+      color: #0077ff;
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: 10px;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .catalog-filter-scroll {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 2px 0 8px 0;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .catalog-filter-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .catalog-filter-chip {
+      background: #ffffff;
+      border: 1px solid rgba(15, 40, 80, 0.08);
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #475569;
+      white-space: nowrap;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+    }
+    .catalog-filter-chip.active {
+      background: #0b1b33;
+      border-color: #0b1b33;
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(11, 27, 51, 0.25);
+    }
+
+    /* Orders Apple Wallet / Passbook */
+    .orders-pass-card {
+      background: #ffffff;
+      border: 1px solid rgba(15, 40, 80, 0.08);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 4px 20px rgba(15, 40, 80, 0.05);
+      margin-bottom: 14px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .orders-pass-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #0077ff, #38ef7d, #0077ff);
+    }
+    .orders-pass-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .orders-pass-num {
+      font-size: 13px;
+      font-weight: 900;
+      color: #0b1b33;
+      letter-spacing: 0.2px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .orders-pass-date {
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+    }
+    .orders-status-pill {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.12);
+      color: #059669;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    /* Apple Timeline Tracker */
+    .orders-tracker {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      margin: 14px 0 16px 0;
+      padding: 0 6px;
+    }
+    .orders-tracker::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      right: 20px;
+      height: 2px;
+      background: rgba(15, 40, 80, 0.1);
+      z-index: 1;
+    }
+    .orders-track-step {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .orders-step-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 900;
+      color: #94a3b8;
+      transition: all 0.2s ease;
+    }
+    .orders-track-step.done .orders-step-dot {
+      background: #10b981;
+      border-color: #10b981;
+      color: #ffffff;
+    }
+    .orders-track-step.active .orders-step-dot {
+      background: #0077ff;
+      border-color: #0077ff;
+      color: #ffffff;
+      box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.2);
+    }
+    .orders-step-label {
+      font-size: 9px;
+      font-weight: 700;
+      color: #64748b;
+      white-space: nowrap;
+    }
+    .orders-track-step.active .orders-step-label {
+      color: #0077ff;
+      font-weight: 800;
+    }
+
+    .orders-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-top: 1px dashed rgba(15, 40, 80, 0.08);
+    }
+    .orders-item-info strong {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      color: #0b1b33;
+    }
+    .orders-item-info small {
+      font-size: 10px;
+      color: #64748b;
+      font-weight: 600;
+    }
+    .orders-item-price {
+      font-size: 13px;
+      font-weight: 800;
+      color: #0077ff;
+    }
+
+    .orders-total-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(15, 40, 80, 0.08);
+    }
+    .orders-total-row span {
+      font-size: 11px;
+      font-weight: 700;
+      color: #64748b;
+    }
+    .orders-total-row strong {
+      font-size: 16px;
+      font-weight: 900;
+      color: #0b1b33;
+    }
+
+    .orders-btns-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .orders-btn-secondary {
+      padding: 8px 10px;
+      background: #f8fafc;
+      border: 1px solid rgba(15, 40, 80, 0.1);
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #334e68;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      text-decoration: none;
+    }
+    .orders-btn-secondary:hover {
+      background: #f1f5f9;
+    }
+
+    /* Favorites B2B Wholesale Pool */
+    .fav-pool-card {
+      background: linear-gradient(135deg, #0b1b33 0%, #1e3a5f 100%);
+      color: #ffffff;
+      border-radius: 18px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 6px 20px rgba(11, 27, 51, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+    .fav-pool-card::after {
+      content: "";
+      position: absolute;
+      right: 12px;
+      bottom: -15px;
+      font-size: 80px;
+      color: rgba(255, 255, 255, 0.05);
+      font-weight: 900;
+      pointer-events: none;
+    }
+    .fav-pool-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .fav-pool-title {
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .fav-pool-badge {
+      background: rgba(56, 239, 125, 0.2);
+      border: 1px solid rgba(56, 239, 125, 0.4);
+      color: #38ef7d;
+      font-size: 9px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 999px;
+    }
+    .fav-pool-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 8px 10px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .fav-pool-stat-col small {
+      display: block;
+      font-size: 9px;
+      color: rgba(255, 255, 255, 0.65);
+      font-weight: 600;
+    }
+    .fav-pool-stat-col strong {
+      font-size: 13px;
+      font-weight: 900;
+      color: #ffffff;
+    }
+    .fav-pool-stat-col strong.text-emerald {
+      color: #38ef7d;
+    }
+    .fav-pool-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .fav-pool-btn-buy {
+      padding: 9px 12px;
+      background: #0077ff;
+      border: none;
+      border-radius: 10px;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      box-shadow: 0 4px 12px rgba(0, 119, 255, 0.4);
+    }
+    .fav-pool-btn-kp {
+      padding: 9px 12px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 10px;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    /* Profile Titanium VIP Card */
+    .profile-titanium-card {
+      background: linear-gradient(135deg, #1c1d21 0%, #0d0e12 100%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+      color: #ffffff;
+    }
+    .profile-titanium-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .profile-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .profile-card-chip {
+      width: 34px;
+      height: 26px;
+      background: linear-gradient(135deg, #d4af37, #f9df7b);
+      border-radius: 5px;
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+    }
+    .profile-vip-tier-badge {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      background: rgba(212, 175, 55, 0.2);
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      color: #f9df7b;
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+    .profile-card-mid {
+      margin-bottom: 16px;
+    }
+    .profile-partner-id {
+      font-family: monospace;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #f1f5f9;
+      margin-bottom: 4px;
+    }
+    .profile-partner-sub {
+      font-size: 11px;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+    .profile-card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 12px;
+    }
+    .profile-card-stat small {
+      display: block;
+      font-size: 9px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .profile-card-stat strong {
+      font-size: 13px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .profile-services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .profile-service-item {
+      background: #ffffff;
+      border: 1px solid rgba(15, 40, 80, 0.08);
+      border-radius: 12px;
+      padding: 10px 12px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .profile-service-item:active {
+      transform: scale(0.97);
+    }
+    .profile-service-ico {
+      font-size: 18px;
+    }
+    .profile-service-item b {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      color: #0b1b33;
+    }
+    .profile-service-item span {
+      display: block;
+      font-size: 9px;
+      color: #64748b;
+      font-weight: 600;
     }
   </style>
 </head>
@@ -2847,6 +4611,70 @@
 
   <div class="app-container is-booting">
     <section id="screen-home" class="screen on">
+    
+    <!-- APPLE DYNAMIC ISLAND & LIVE ACTIVITY -->
+    <div class="dynamic-island-wrap">
+      <div id="dynamic-island" class="dynamic-island" onclick="toggleDynamicIsland(event)" role="region" aria-label="Dynamic Island Live Status">
+        <div class="di-collapsed" id="di-collapsed">
+          <span class="di-live-dot"></span>
+          <span class="di-icon">⚡</span>
+          <span class="di-pill-title" id="di-pill-title">USD <strong id="di-pill-usd">94.50 ₽</strong> · Склад: 15.4k</span>
+          <span class="di-live-badge">LIVE</span>
+        </div>
+        <div class="di-expanded" id="di-expanded">
+          <div class="di-exp-header">
+            <div class="di-exp-brand">
+              <span class="di-apple-logo"></span>
+              <div>
+                <h4>ELECTRO PRO ACTIVITY</h4>
+                <p id="di-exp-sub">Синхронизация в реальном времени</p>
+              </div>
+            </div>
+            <button class="di-exp-close" type="button" onclick="closeDynamicIsland(event)" aria-label="Закрыть">✕</button>
+          </div>
+          <div class="di-exp-cards">
+            <div class="di-exp-card">
+              <span class="di-stat-tag">КУРС USD (ЦБ/ММВБ)</span>
+              <div class="di-stat-number" id="di-exp-usd-val">94.50 ₽</div>
+              <span class="di-stat-note">Авто-пересчёт цен Apple</span>
+            </div>
+            <div class="di-exp-card">
+              <span class="di-stat-tag">НАЛИЧИЕ В МОСКВЕ</span>
+              <div class="di-stat-number text-emerald">15 420 шт.</div>
+              <span class="di-stat-note">Новые партии Apple</span>
+            </div>
+          </div>
+          <div class="di-exp-actions">
+            <button class="di-action-btn" type="button" onclick="openImeiCheck();closeDynamicIsland(event)">
+              <span class="di-action-ico">🛡️</span>
+              <div class="di-action-text">
+                <strong>Проверка серийного номера Apple</strong>
+                <small>База GSX & Apple Coverage</small>
+              </div>
+              <span class="di-action-arr">→</span>
+            </button>
+            <button class="di-action-btn" type="button" onclick="toggleSoundFx();event.stopPropagation();">
+              <span class="di-action-ico" id="di-sound-ico">🔊</span>
+              <div class="di-action-text">
+                <strong id="di-sound-text">Звуки интерфейса: Включены</strong>
+                <small>Тактильные щелчки Apple Taptic</small>
+              </div>
+              <span class="di-action-arr">⚙</span>
+            </button>
+          </div>
+        </div>
+        <!-- Dynamic Island Cart Notification Morph -->
+        <div class="di-toast" id="di-toast">
+          <div class="di-toast-ico">✓</div>
+          <div class="di-toast-info">
+            <strong id="di-toast-title">Добавлено в заказ</strong>
+            <span id="di-toast-desc">Товар зафиксирован за вами</span>
+          </div>
+          <span class="di-toast-badge" id="di-toast-price"></span>
+        </div>
+      </div>
+    </div>
+
     <header class="header">
       <div class="brand">
         <div class="logo" aria-hidden="true">
@@ -2862,6 +4690,7 @@
         </div>
       </div>
       <div class="header-actions">
+        <button class="sound-btn" id="header-sound-btn" type="button" aria-label="Звуки UI" title="Звуки интерфейса" onclick="toggleSoundFx()">🔊</button>
         <a class="contact-btn" href="https://t.me/galk_b2b" target="_blank" rel="noopener" aria-label="Связаться в Telegram" title="Связаться">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 3.2 2.8 10.4c-1.3.5-1.3 1.2-.2 1.5l4.8 1.5 1.8 5.7c.2.7.1 1 .8 1 .5 0 .7-.2 1-.6l2.7-2.6 5.6 4.1c1 .6 1.8.3 2-.9L23 4.3c.3-1.3-.5-1.9-1.5-1.1Zm-3.2 3.3-10.4 9.4-.4 3.3-1.6-5.5 12.4-7.2Z"/></svg>
           <span class="contact-label">Связаться</span>
@@ -3229,7 +5058,29 @@
           <a class="channel-btn" href="https://t.me/GalkB2B" target="_blank" rel="noopener">Канал</a>
         </div>
       </div>
+
+      <!-- LUXURY VIP WAREHOUSE BAR -->
+      <div class="catalog-vip-bar">
+        <div class="catalog-vip-status">
+          <span class="catalog-vip-dot"></span>
+          <span>Склад Москва / Крым • В наличии 15.4k шт</span>
+        </div>
+        <button type="button" class="catalog-vip-link" onclick="openImeiCheck()">
+          <span>🛡️</span> Проверка GSX
+        </button>
+      </div>
+
       <div class="chips" id="cat-chips"></div>
+
+      <!-- QUICK LUXURY FILTER SCROLL -->
+      <div class="catalog-filter-scroll">
+        <button type="button" class="catalog-filter-chip active" onclick="applyCatalogFilter('all', this)">🔥 Все устройства</button>
+        <button type="button" class="catalog-filter-chip" onclick="applyCatalogFilter('in-stock', this)">⚡ В наличии (сегодня)</button>
+        <button type="button" class="catalog-filter-chip" onclick="applyCatalogFilter('pro-max', this)">💎 Pro & Max серия</button>
+        <button type="button" class="catalog-filter-chip" onclick="applyCatalogFilter('high-margin', this)">🏷 Высокая маржа</button>
+        <button type="button" class="catalog-filter-chip" onclick="applyCatalogFilter('warranty', this)"> AppleCare+ 1 год</button>
+      </div>
+
       <div class="catalog-search" id="catalog-search">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
         <input type="search" id="catalog-search-input" placeholder="Поиск: iPhone 15, AirPods..." autocomplete="off" oninput="onCatalogSearch(this.value)">
@@ -3247,17 +5098,85 @@
     </section>
 
     <section id="screen-orders" class="screen">
-      <div class="page-head"><h2>Заказы</h2></div>
-      <div class="empty" id="orders-box">Пока нет заказов. Выберите товар в каталоге.</div>
+      <div class="page-head" style="display:flex;align-items:center;justify-content:space-between">
+        <h2>Заказы и Доставка</h2>
+        <span class="orders-status-pill" id="orders-badge-count">Активные</span>
+      </div>
+      <div id="orders-box"></div>
     </section>
 
     <section id="screen-fav" class="screen">
-      <div class="page-head"><h2>Избранное</h2></div>
+      <div class="page-head"><h2>Избранное • B2B Пул</h2></div>
+      <div id="fav-pool-container"></div>
       <div class="grid" id="fav-grid"></div>
     </section>
 
     <section id="screen-profile" class="screen">
       <div class="profile-page">
+        <!-- TITANIUM B2B VIP PARTNER CARD -->
+        <div class="profile-titanium-card">
+          <div class="profile-card-top">
+            <div class="profile-card-chip"></div>
+            <div class="profile-vip-tier-badge">TIER 1 VIP BUYER</div>
+          </div>
+          <div class="profile-card-mid">
+            <div class="profile-partner-id" id="pf-partner-id">EL-B2B-84920</div>
+            <div class="profile-partner-sub">Оптовый партнер Apple • Доступ ко всем складам</div>
+          </div>
+          <div class="profile-card-bottom">
+            <div class="profile-card-stat">
+              <small>Скидка на объем</small>
+              <strong id="pf-vip-discount">−3.5% от прайса</strong>
+            </div>
+            <div class="profile-card-stat">
+              <small>Кэшбэк на счет</small>
+              <strong id="pf-vip-cashback">14 200 ₽</strong>
+            </div>
+            <div class="profile-card-stat">
+              <small>Кредит. лимит</small>
+              <strong>500 000 ₽</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- B2B SERVICES SHORTCUTS -->
+        <section class="profile-section">
+          <div class="profile-section-title">
+            <h3>⚡ B2B Инструменты</h3>
+            <span>быстрый доступ</span>
+          </div>
+          <div class="profile-services-grid">
+            <div class="profile-service-item" onclick="openAdminPanel();setTimeout(function(){switchAdminTab('parser')},150)">
+              <span class="profile-service-ico">⚡</span>
+              <div>
+                <b>Загрузка прайса</b>
+                <span>парсер поставщика</span>
+              </div>
+            </div>
+            <div class="profile-service-item" onclick="openImeiCheck()">
+              <span class="profile-service-ico">🛡️</span>
+              <div>
+                <b>Проверка IMEI</b>
+                <span>база GSX Apple</span>
+              </div>
+            </div>
+            <div class="profile-service-item" onclick="printSampleInvoice()">
+              <span class="profile-service-ico">📄</span>
+              <div>
+                <b>Накладная Торг-12</b>
+                <span>бланк заказа</span>
+              </div>
+            </div>
+            <div class="profile-service-item" onclick="profileMaterial('Договор оптовой поставки техники Apple')">
+              <span class="profile-service-ico">📑</span>
+              <div>
+                <b>Договор поставки</b>
+                <span>для юр. лиц</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <!-- HERO -->
         <section class="pf-hero">
           <div class="pf-hero-top">
@@ -3395,9 +5314,11 @@
   <div id="quick-veil" class="quick-veil" onclick="closeQuick()"></div>
   <div id="quick-dock" class="quick-dock" aria-hidden="true">
     <button type="button" onclick="openCatalog('all');closeQuick()"><span class="qd-ico">▦</span>Каталог</button>
+    <button type="button" onclick="openImeiCheck();closeQuick()"><span class="qd-ico">🛡</span>Проверка IMEI</button>
     <button type="button" onclick="showFav();closeQuick()"><span class="qd-ico">♥</span>Избранное</button>
     <button type="button" onclick="showCheckout();closeQuick()"><span class="qd-ico">▣</span>Корзина</button>
     <button type="button" onclick="showScreen('profile');closeQuick()"><span class="qd-ico">☺</span>Профиль</button>
+    <button type="button" onclick="toggleSoundFx();closeQuick()"><span class="qd-ico" id="sound-dock-ico">🔊</span>Звук UI</button>
     <button type="button" onclick="switchToLightTheme();closeQuick()"><span class="qd-ico">☀</span>Тема</button>
     <a href="https://t.me/galk_b2b" target="_blank" rel="noopener" onclick="closeQuick()"><span class="qd-ico">✈</span>Написать</a>
   </div>
@@ -3526,73 +5447,227 @@
       </div>
 
       <div id="admin-body" style="display:none">
-        <div class="ti-lab">Курс закупки (₽)</div>
-        <div class="rate-bar" style="margin-top:0">
-          <div class="rate-info">
-            <b>Текущий: <span id="rate-display">90.00</span> ₽</b>
-            <span>Базовый курс прайса: 90 ₽ · цены пересчитываются сразу</span>
+        <!-- ADMIN NAVIGATION TABS -->
+        <div class="admin-nav-tabs">
+          <button type="button" class="admin-nav-tab active" id="atab-btn-parser" onclick="switchAdminTab('parser')">
+            <span>⚡</span> Прайс & Наценка
+          </button>
+          <button type="button" class="admin-nav-tab" id="atab-btn-rates" onclick="switchAdminTab('rates')">
+            <span>📈</span> Курс & Остатки
+          </button>
+          <button type="button" class="admin-nav-tab" id="atab-btn-manual" onclick="switchAdminTab('manual')">
+            <span>➕</span> Новый товар
+          </button>
+        </div>
+
+        <!-- TAB 1: PARSER & MARKUP -->
+        <div id="atab-pane-parser" class="admin-tab-pane active">
+          <div class="parser-box">
+            <div class="parser-head">
+              <b><span>⚡</span> Загрузка прайса поставщика</b>
+              <button type="button" class="parser-sample-btn" onclick="insertParserSample()">+ Пример прайса</button>
+            </div>
+            <p class="ti-note" style="margin:0 0 10px">Вставьте список из Telegram-канала оптовика. Алгоритм автоматически определит модели, память, цвет и себестоимость.</p>
+            
+            <textarea id="supplier-price-text" class="parser-textarea" placeholder="Вставьте текст прайса из канала поставщика (например: 15 Pro 128 Black 85000 / 16 Pro Max 256 Desert 112000)..."></textarea>
+
+            <div class="markup-ctrl-panel">
+              <div class="ti-lab" style="margin:0 0 8px;font-size:11px">Управление наценкой для витрины</div>
+              <div class="markup-type-switch">
+                <button type="button" class="markup-type-btn active" id="mtype-fixed" onclick="setMarkupMode('fixed')">Фиксированная (₽)</button>
+                <button type="button" class="markup-type-btn" id="mtype-percent" onclick="setMarkupMode('percent')">Процентная (%)</button>
+              </div>
+
+              <div class="markup-val-row">
+                <div class="markup-val-input-wrap">
+                  <input type="number" id="supplier-markup-val" class="markup-val-input" value="3000" min="0" step="500" placeholder="3000" oninput="if(parsedSupplierItems.length)recalculateParsedMarkup()">
+                  <span class="markup-val-unit" id="markup-unit-symbol">₽</span>
+                </div>
+              </div>
+
+              <div class="markup-presets" id="markup-presets-container">
+                <button type="button" class="markup-chip" onclick="applyMarkupPreset(2000)">+2 000 ₽</button>
+                <button type="button" class="markup-chip active" onclick="applyMarkupPreset(3000)">+3 000 ₽</button>
+                <button type="button" class="markup-chip" onclick="applyMarkupPreset(5000)">+5 000 ₽</button>
+                <button type="button" class="markup-chip" onclick="applyMarkupPreset(8000)">+8 000 ₽</button>
+                <button type="button" class="markup-chip" onclick="applyMarkupPreset(10000)">+10 000 ₽</button>
+              </div>
+            </div>
+
+            <button type="button" class="parser-parse-btn" onclick="runPriceParser()">
+              <span>⚡</span> Распарсить и пересчитать
+            </button>
           </div>
-          <div class="rate-ctrl">
-            <input type="number" id="rate-input" step="0.1" min="50" max="200" value="90" inputmode="decimal" onkeydown="if(event.key==='Enter')applyRate()">
-            <button type="button" onclick="applyRate()">OK</button>
+
+          <!-- SMART PREVIEW SECTION -->
+          <div id="parser-preview-section" style="display:none">
+            <div class="ti-lab">Интерактивный предпросмотр (Smart Preview)</div>
+            <p class="ti-note" style="margin:4px 0 10px">Итоговую цену можно подправить вручную прямо в поле перед загрузкой в витрину.</p>
+
+            <div class="parser-summary-bar">
+              <div class="parser-sum-item">
+                <small>Распознано</small>
+                <strong id="parser-stat-count">0 шт</strong>
+              </div>
+              <div class="parser-sum-item">
+                <small>Ср. наценка</small>
+                <strong id="parser-stat-avg-markup">0 ₽</strong>
+              </div>
+              <div class="parser-sum-item">
+                <small>Сумма партии</small>
+                <strong id="parser-stat-total-sum">0 ₽</strong>
+              </div>
+            </div>
+
+            <div id="parser-items-container" class="parser-items-list"></div>
+
+            <button type="button" class="parser-commit-btn" onclick="commitParsedItemsToCatalog()">
+              <span>✓</span> Залить в витрину (1 клик)
+            </button>
           </div>
         </div>
 
-        <div class="ti-lab" style="margin-top:16px">Быстрые пресеты</div>
-        <div class="ti-chips" id="admin-rate-presets">
-          <button class="ti-chip" type="button" onclick="setRatePreset(85)">85</button>
-          <button class="ti-chip" type="button" onclick="setRatePreset(90)">90</button>
-          <button class="ti-chip" type="button" onclick="setRatePreset(92.5)">92.5</button>
-          <button class="ti-chip" type="button" onclick="setRatePreset(95)">95</button>
-          <button class="ti-chip" type="button" onclick="setRatePreset(100)">100</button>
-        </div>
-
-        <p class="ti-note" style="margin-top:12px">Общий курс хранится в облаке автоматически. npoint больше не нужен.</p>
-
-        <div class="ti-result" style="margin-top:12px">
-          <div class="ti-row"><span>Локальный курс</span><b id="admin-local-rate">—</b></div>
-          <div class="ti-row"><span>Облако (npoint)</span><b id="admin-remote-rate">—</b></div>
-          <div class="ti-muted" id="admin-sync-status" style="margin-top:6px">Нажми «Проверить облако»</div>
-        </div>
-
-        <button class="ti-apply" type="button" style="margin-top:10px;background:#ffffff;border:1px solid #1a4f8c" onclick="checkRemoteRate()">Проверить облако</button>
-        <button class="ti-apply" type="button" onclick="applyRate()">Сохранить курс в облако</button>
-
-        <div class="ti-lab" style="margin-top:20px">Наличие товаров</div>
-        <p class="ti-note" style="margin:6px 0 10px">Меняешь остаток → сохраняешь в облако → все клиенты видят обновление</p>
-        <div id="admin-stock-list" class="admin-stock-list"></div>
-        <div class="ti-result" style="margin-top:10px">
-          <div class="ti-muted" id="admin-stock-status">Остатки: локально</div>
-        </div>
-        <button class="ti-apply" type="button" style="margin-top:10px;background:#ffffff;border:1px solid #1a4f8c" onclick="checkRemoteStock()">Проверить остатки в облаке</button>
-        <button class="ti-apply" type="button" onclick="saveStockToCloud()">Сохранить остатки в облако</button>
-
-        <div class="ti-lab" style="margin-top:20px">Добавить товар</div>
-        <p class="ti-note" style="margin:6px 0 10px">Новый товар сохраняется в облако и появляется у всех клиентов</p>
-        <div class="admin-add-form">
-          <input class="co-input" id="ap-name" placeholder="Название * (iPhone 15 Pro 256GB)">
-          <select class="co-input" id="ap-cat" style="appearance:auto">
-            <option value="phones">Смартфоны</option>
-            <option value="earbuds">Наушники</option>
-            <option value="laptops">Ноутбуки</option>
-            <option value="watches">Смарт-часы</option>
-          </select>
-          <div class="admin-add-row">
-            <input class="co-input" id="ap-price" type="number" min="1" inputmode="numeric" placeholder="Цена ₽ *">
-            <input class="co-input" id="ap-stock" type="number" min="0" inputmode="numeric" placeholder="Остаток шт">
+        <!-- TAB 2: RATES & STOCK -->
+        <div id="atab-pane-rates" class="admin-tab-pane">
+          <div class="ti-lab">Курс закупки (₽)</div>
+          <div class="rate-bar" style="margin-top:0">
+            <div class="rate-info">
+              <b>Текущий: <span id="rate-display">90.00</span> ₽</b>
+              <span>Базовый курс прайса: 90 ₽ · цены пересчитываются сразу</span>
+            </div>
+            <div class="rate-ctrl">
+              <input type="number" id="rate-input" step="0.1" min="50" max="200" value="90" inputmode="decimal" onkeydown="if(event.key==='Enter')applyRate()">
+              <button type="button" onclick="applyRate()">OK</button>
+            </div>
           </div>
-          <input class="co-input" id="ap-unit" placeholder="Описание (Новый • Склад Москва)">
-          <input class="co-input" id="ap-img" placeholder="URL фото (необязательно)">
-        </div>
-        <button class="ti-apply" type="button" style="margin-top:10px" onclick="addProductFromAdmin()">+ Добавить товар</button>
-        <button class="ti-apply" type="button" style="margin-top:8px;background:#ffffff;border:1px solid #1a4f8c" onclick="saveCustomCatalogToCloud()">Сохранить товары в облако</button>
-        <div class="ti-result" style="margin-top:10px">
-          <div class="ti-muted" id="admin-catalog-status">Товары: локально</div>
-        </div>
-        <div class="ti-lab" style="margin-top:14px">Мои товары из облака</div>
-        <div id="admin-custom-list" class="admin-stock-list" style="margin-top:8px"></div>
 
-        <button class="ti-apply" type="button" style="margin-top:8px;background:#ffffff;border:1px solid #1a4f8c" onclick="closeAdminPanel()">Закрыть</button>
+          <div class="ti-lab" style="margin-top:16px">Быстрые пресеты курса</div>
+          <div class="ti-chips" id="admin-rate-presets">
+            <button class="ti-chip" type="button" onclick="setRatePreset(85)">85</button>
+            <button class="ti-chip" type="button" onclick="setRatePreset(90)">90</button>
+            <button class="ti-chip" type="button" onclick="setRatePreset(92.5)">92.5</button>
+            <button class="ti-chip" type="button" onclick="setRatePreset(95)">95</button>
+            <button class="ti-chip" type="button" onclick="setRatePreset(100)">100</button>
+          </div>
+
+          <p class="ti-note" style="margin-top:12px">Общий курс хранится в облаке автоматически. npoint больше не нужен.</p>
+
+          <div class="ti-result" style="margin-top:12px">
+            <div class="ti-row"><span>Локальный курс</span><b id="admin-local-rate">—</b></div>
+            <div class="ti-row"><span>Облако (npoint)</span><b id="admin-remote-rate">—</b></div>
+            <div class="ti-muted" id="admin-sync-status" style="margin-top:6px">Нажми «Проверить облако»</div>
+          </div>
+
+          <button class="ti-apply" type="button" style="margin-top:10px;background:#ffffff;border:1px solid #1a4f8c" onclick="checkRemoteRate()">Проверить облако</button>
+          <button class="ti-apply" type="button" onclick="applyRate()">Сохранить курс в облако</button>
+
+          <div class="ti-lab" style="margin-top:20px">Наличие товаров на складе</div>
+          <p class="ti-note" style="margin:6px 0 10px">Меняешь остаток → сохраняешь в облако → все клиенты видят обновление</p>
+          <div id="admin-stock-list" class="admin-stock-list"></div>
+          <div class="ti-result" style="margin-top:10px">
+            <div class="ti-muted" id="admin-stock-status">Остатки: локально</div>
+          </div>
+          <button class="ti-apply" type="button" style="margin-top:10px;background:#ffffff;border:1px solid #1a4f8c" onclick="checkRemoteStock()">Проверить остатки в облаке</button>
+          <button class="ti-apply" type="button" onclick="saveStockToCloud()">Сохранить остатки в облако</button>
+        </div>
+
+        <!-- TAB 3: MANUAL ADD -->
+        <div id="atab-pane-manual" class="admin-tab-pane">
+          <div class="ti-lab">Добавить товар вручную</div>
+          <p class="ti-note" style="margin:6px 0 10px">Новый товар появится на витрине и сохранится в каталоге</p>
+          <div class="admin-add-form">
+            <input class="co-input" id="ap-name" placeholder="Название * (iPhone 16 Pro 256GB)">
+            <select class="co-input" id="ap-cat" style="appearance:auto">
+              <option value="phones">Смартфоны</option>
+              <option value="earbuds">Наушники</option>
+              <option value="laptops">Ноутбуки</option>
+              <option value="watches">Смарт-часы</option>
+            </select>
+            <div class="admin-add-row">
+              <input class="co-input" id="ap-price" type="number" min="1" inputmode="numeric" placeholder="Цена ₽ *">
+              <input class="co-input" id="ap-stock" type="number" min="0" inputmode="numeric" placeholder="Остаток шт">
+            </div>
+            <input class="co-input" id="ap-unit" placeholder="Описание (Новый • Склад Москва)">
+            <input class="co-input" id="ap-img" placeholder="URL фото (необязательно)">
+          </div>
+          <button class="ti-apply" type="button" style="margin-top:10px" onclick="addProductFromAdmin()">+ Добавить товар</button>
+          <button class="ti-apply" type="button" style="margin-top:8px;background:#ffffff;border:1px solid #1a4f8c" onclick="saveCustomCatalogToCloud()">Сохранить товары в облако</button>
+          <div class="ti-result" style="margin-top:10px">
+            <div class="ti-muted" id="admin-catalog-status">Товары: локально</div>
+          </div>
+          <div class="ti-lab" style="margin-top:14px">Добавленные товары</div>
+          <div id="admin-custom-list" class="admin-stock-list" style="margin-top:8px"></div>
+        </div>
+
+        <button class="ti-apply" type="button" style="margin-top:16px;background:#ffffff;border:1px solid #1a4f8c" onclick="closeAdminPanel()">Закрыть панель</button>
+      </div>
+    </div>
+  </div>
+  <!-- APPLE COVERAGE & IMEI CHECK SHEET -->
+  <div id="imei-sheet" class="sheet" onclick="if(event.target===this)closeImeiCheck()">
+    <div class="sheet-panel imei-panel">
+      <div class="sheet-grab"></div>
+      <div class="imei-header">
+        <div class="imei-logo-wrap">
+          <span class="imei-apple-logo"></span>
+        </div>
+        <div>
+          <h3>Официальная проверка Apple</h3>
+          <p>База серийных номеров, GSX и проверка гарантии</p>
+        </div>
+        <button class="pm-close" type="button" onclick="closeImeiCheck()">Закрыть</button>
+      </div>
+
+      <div class="imei-search-box">
+        <div class="imei-input-wrap">
+          <input type="text" id="imei-input" placeholder="Серийный номер или IMEI..." autocomplete="off" spellcheck="false" value="F2LX394K08">
+          <button type="button" class="imei-check-btn" onclick="runImeiCheck()">Проверить</button>
+        </div>
+        <div class="imei-presets">
+          <span class="imei-preset-label">Модели:</span>
+          <button type="button" class="imei-pill" onclick="setImeiPreset('F2LX394K08','iPhone 17 Pro Max 256GB Desert')">iPhone 17 Pro Max</button>
+          <button type="button" class="imei-pill" onclick="setImeiPreset('C02DX812MD6T','MacBook Pro 16 M4 Pro 512GB')">MacBook Pro M4</button>
+          <button type="button" class="imei-pill" onclick="setImeiPreset('GN4C39KL10','AirPods Pro 2 USB-C')">AirPods Pro 2</button>
+        </div>
+      </div>
+
+      <div id="imei-result" class="imei-result-card">
+        <div class="imei-device-head">
+          <div class="imei-device-badge">
+            <span>✓</span>
+            <span>Подтверждено в GSX Apple</span>
+          </div>
+          <h4 id="imei-dev-title">iPhone 17 Pro Max 256GB Desert Titanium</h4>
+          <div class="imei-sn" id="imei-dev-sn">Серийный номер: F2LX394K08</div>
+        </div>
+
+        <div class="imei-specs-grid">
+          <div class="imei-spec-item">
+            <span class="imei-spec-name">Статус активации</span>
+            <strong class="text-emerald" id="imei-dev-act">Не активирован (Новый)</strong>
+          </div>
+          <div class="imei-spec-item">
+            <span class="imei-spec-name">Заводские пломбы</span>
+            <strong class="text-emerald">100% не вскрывался</strong>
+          </div>
+          <div class="imei-spec-item">
+            <span class="imei-spec-name">Официальная гарантия</span>
+            <strong id="imei-dev-war">AppleCare+ до 2027 г.</strong>
+          </div>
+          <div class="imei-spec-item">
+            <span class="imei-spec-name">Регион поставки</span>
+            <strong id="imei-dev-reg">Global / Dual SIM (Nano+eSIM)</strong>
+          </div>
+        </div>
+
+        <div class="imei-sec-banner">
+          <span>🛡️</span>
+          <p>Устройство готово к отгрузке со склада в Москве. При покупке выдаётся гарантийный талон и чек оптовика.</p>
+        </div>
+
+        <button type="button" class="take" style="margin-top:14px" onclick="closeImeiCheck();openCatalog('phones')">
+          Посмотреть наличие в каталоге
+        </button>
       </div>
     </div>
   </div>
@@ -3953,10 +6028,11 @@
       const idx = p.chosen || 0;
       const v0 = p.vars[idx];
       const vars = (p.single || p.vars.length <= 1) ? "" : p.vars.map((v, i) => `<button class="var ${i === idx ? "on" : ""}" type="button" onclick="event.stopPropagation();pickVar(this,'${p.id}',${i})">${v.name}</button>`).join("");
-      const unitText = p.unit || (p.condition || "Оригинал");
-      const marginHtml = `✓ Гарантия ${p.warranty || "30 дней"} · 📍 ${p.delivery || "Москва"}`;
-      const title = (p.single ? p.base : (p.base + " " + v0.label)) + (p.article ? " " + p.article : "");
       const priceNow = displayPrice(v0.price);
+      const unitText = p.unit || (p.condition || "Оригинал");
+      const resellerMargin = Math.round(priceNow * 0.14);
+      const marginHtml = `✓ Гарантия ${p.warranty || "1 год"} · 📍 ${p.delivery || "Москва"} · <span style="color:#0a9f55;font-weight:800">Маржа: +${money(resellerMargin)}</span>`;
+      const title = (p.single ? p.base : (p.base + " " + v0.label)) + (p.article ? " " + p.article : "");
       const showOld = String(p.id).length % 3 === 0;
       const oldPrice = showOld ? Math.round(priceNow * 1.08) : 0;
       const delay = typeof animIndex === "number" ? Math.min(animIndex * 45, 360) : 0;
@@ -3999,6 +6075,17 @@
     }
 
     let catalogQuery = "";
+    let currentCatalogFilter = "all";
+
+    function applyCatalogFilter(filterType, btn) {
+      currentCatalogFilter = filterType;
+      document.querySelectorAll(".catalog-filter-chip").forEach(function(b) {
+        b.classList.remove("active");
+      });
+      if (btn) btn.classList.add("active");
+      playAppleSound("click");
+      renderCatalogGrid();
+    }
 
     function onCatalogSearch(q) {
       catalogQuery = String(q || "").trim().toLowerCase();
@@ -4014,8 +6101,19 @@
     }
 
     function filterBySearch(list) {
-      if (!catalogQuery) return list;
-      return list.filter(p => {
+      var res = list;
+      if (currentCatalogFilter === "in-stock") {
+        res = res.filter(p => getStockInfo(p.id).qty > 0);
+      } else if (currentCatalogFilter === "pro-max") {
+        res = res.filter(p => (p.base + " " + (p.unit || "")).toLowerCase().includes("pro") || (p.base).toLowerCase().includes("max"));
+      } else if (currentCatalogFilter === "high-margin") {
+        res = res.filter(p => p.sale || (p.vars && p.vars[0] && p.vars[0].price > 75000));
+      } else if (currentCatalogFilter === "warranty") {
+        res = res.filter(p => p.cat === "phones" || p.cat === "laptops");
+      }
+
+      if (!catalogQuery) return res;
+      return res.filter(p => {
         const hay = [
           p.base, p.article, p.unit, p.condition, p.shop,
           ...(p.vars || []).map(v => v.label + " " + v.name)
@@ -4030,7 +6128,7 @@
       if (!grid) return;
       grid.innerHTML = list.length
         ? list.map(function(p, i) { return cardHTML(p, i); }).join("")
-        : '<div class="empty" style="grid-column:1/-1">Ничего не найдено по запросу «' + catalogQuery.replace(/[<>&"]/g,"") + '»</div>';
+        : '<div class="empty" style="grid-column:1/-1">Ничего не найдено по фильтрам</div>';
     }
 
     function openCatalog(cat) {
@@ -4085,19 +6183,272 @@
       }
       haptic(nowOn ? "success" : "light");
       toast(nowOn ? "В избранном ♥" : "Убрано из избранного");
+      if (typeof showDynamicIslandToast === "function") {
+        const prod = PRODUCTS.find(x => x.id === id);
+        showDynamicIslandToast(prod ? prod.base : "Избранное", nowOn ? "Добавлено в избранное" : "Удалено из избранного", nowOn ? "♥" : "♡");
+      }
+      if (typeof playAppleSound === "function") playAppleSound(nowOn ? "success" : "click");
     }
     function showFav() {
       showScreen("fav");
       const list = PRODUCTS.filter(p => fav.includes(p.id));
+      const poolContainer = document.getElementById("fav-pool-container");
+      if (poolContainer) {
+        if (list.length > 0) {
+          const totalCost = list.reduce((sum, p) => sum + displayPrice(p.vars[p.chosen || 0].price), 0);
+          const estMargin = Math.round(totalCost * 0.15);
+          poolContainer.innerHTML = `
+            <div class="fav-pool-card">
+              <div class="fav-pool-header">
+                <div class="fav-pool-title">
+                  <span>💎</span>
+                  <b>Оптовый пул избранного</b>
+                </div>
+                <span class="fav-pool-badge">Готово к брони</span>
+              </div>
+              <div class="fav-pool-stats-grid">
+                <div class="fav-pool-stat-col">
+                  <small>Позиций</small>
+                  <strong>${list.length} шт</strong>
+                </div>
+                <div class="fav-pool-stat-col">
+                  <small>Сумма партии</small>
+                  <strong>${money(totalCost)}</strong>
+                </div>
+                <div class="fav-pool-stat-col">
+                  <small>Прогноз маржи</small>
+                  <strong class="text-emerald">+${money(estMargin)}</strong>
+                </div>
+              </div>
+              <div class="fav-pool-actions">
+                <button type="button" class="fav-pool-btn-buy" onclick="buyWholeFavPool()">
+                  <span>⚡</span> Купить весь пул
+                </button>
+                <button type="button" class="fav-pool-btn-kp" onclick="exportFavCommercialOffer()">
+                  <span>📋</span> Экспорт КП
+                </button>
+              </div>
+            </div>
+          `;
+        } else {
+          poolContainer.innerHTML = `
+            <div class="orders-pass-card" style="text-align:center;padding:24px 16px">
+              <span style="font-size:36px;display:block;margin-bottom:8px">🤍</span>
+              <h3 style="font-size:15px;font-weight:800;color:#0b1b33;margin:0 0 6px">Избранное пока пусто</h3>
+              <p style="font-size:12px;color:#64748b;margin:0 0 16px;line-height:1.4">
+                Добавляйте устройства сердечком на витрине, чтобы сформировать единый оптовый заказ или коммерческое предложение.
+              </p>
+              <button type="button" class="take" onclick="openCatalog('all')">Перейти в каталог</button>
+            </div>
+          `;
+        }
+      }
       document.getElementById("fav-grid").innerHTML = list.length
         ? list.map(function(p, i) { return cardHTML(p, i); }).join("")
-        : '<div class="empty" style="grid-column:1/-1">Пока пусто</div>';
+        : "";
     }
+
+    function buyWholeFavPool() {
+      const list = PRODUCTS.filter(p => fav.includes(p.id));
+      if (!list.length) { toast("Избранное пусто"); return; }
+      list.forEach(p => {
+        const v = p.vars[p.chosen || 0];
+        const key = p.id + "-" + (p.chosen || 0) + "-0";
+        if (!cart[key]) {
+          cart[key] = {
+            id: p.id,
+            base: p.base,
+            title: p.base + " " + v.label,
+            price: displayPrice(v.price),
+            color: "Черный",
+            qty: 1,
+            unit: p.unit || "Новый • Склад",
+            total: displayPrice(v.price)
+          };
+        }
+      });
+      saveCart();
+      updateCartBadge();
+      showDynamicIslandToast("Пул устройств", "Добавлено " + list.length + " шт в корзину!", "🛒");
+      playAppleSound("success");
+      showCheckout();
+    }
+
+    function exportFavCommercialOffer() {
+      const list = PRODUCTS.filter(p => fav.includes(p.id));
+      if (!list.length) { toast("Избранное пусто"); return; }
+      const totalCost = list.reduce((sum, p) => sum + displayPrice(p.vars[p.chosen || 0].price), 0);
+      let text = " ELECTRO B2B — Коммерческое предложение\n";
+      text += "Дата: " + new Date().toLocaleDateString("ru-RU") + "\n";
+      text += "Статус: Наличие подтверждено на складе\n";
+      text += "──────────────────────────\n";
+      list.forEach((p, i) => {
+        const v = p.vars[p.chosen || 0];
+        text += (i + 1) + ". " + p.base + " " + v.label + " — " + money(displayPrice(v.price)) + "\n";
+        text += "   • Состояние: 100% Новый / Заводские пломбы\n";
+        text += "   • Гарантия: Официальная гарантия 1 год\n";
+      });
+      text += "──────────────────────────\n";
+      text += "Итоговая сумма партии: " + money(totalCost) + "\n";
+      text += "Менеджер опта: @galk_b2b\n";
+
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function() {
+            toast("✓ КП скопировано в буфер обмена!");
+            playAppleSound("success");
+          }).catch(function() {
+            toast("✓ КП сформировано");
+          });
+        } else {
+          toast("✓ КП сформировано");
+        }
+      } catch(e) {
+        toast("✓ КП сформировано");
+      }
+    }
+
     function renderOrders() {
       const box = document.getElementById("orders-box");
-      if (!orders.length) { box.className = "empty"; box.textContent = "Пока нет заказов. Выберите товар в каталоге."; return; }
-      box.className = "";
-      box.innerHTML = orders.map(o => `<div class="empty" style="margin-bottom:8px;text-align:left"><b>${o.product}</b><br>${money(o.price)} • ${o.date}</div>`).join("");
+      const badge = document.getElementById("orders-badge-count");
+      if (!orders.length) {
+        if (badge) badge.textContent = "0 заказов";
+        box.innerHTML = `
+          <div class="orders-pass-card" style="text-align:center;padding:26px 18px">
+            <span style="font-size:38px;display:block;margin-bottom:8px">📦</span>
+            <h3 style="font-size:16px;font-weight:900;color:#0b1b33;margin:0 0 6px">У вас пока нет оформленных заказов</h3>
+            <p style="font-size:12px;color:#64748b;margin:0 0 16px;line-height:1.45">
+              Все ваши B2B накладные, складской трекинг комплектации и статусы СДЭК сохраняются здесь.
+            </p>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <button type="button" class="take" onclick="openCatalog('all')">Перейти в каталог</button>
+              <button type="button" class="orders-btn-secondary" onclick="createDemoOrder()">
+                <span>⚡</span> Создать демонстрационный B2B заказ
+              </button>
+            </div>
+          </div>
+        `;
+        return;
+      }
+      if (badge) badge.textContent = orders.length + " заказов";
+
+      box.innerHTML = orders.map(function(o, idx) {
+        const orderNum = "EL-2026-X" + (String(o.id).slice(-4) || (idx + 101));
+        const isRecent = idx === 0;
+        return `
+          <div class="orders-pass-card">
+            <div class="orders-pass-head">
+              <div class="orders-pass-num">
+                <span></span>
+                <span>${orderNum}</span>
+              </div>
+              <span class="orders-status-pill">${isRecent ? "В пути (СДЭК)" : "Доставлен"}</span>
+            </div>
+            <div class="orders-pass-date">Оформлен: ${o.date || "Сегодня"} · Склад Москва</div>
+
+            <!-- Apple Tracking Timeline -->
+            <div class="orders-tracker">
+              <div class="orders-track-step done">
+                <div class="orders-step-dot">✓</div>
+                <span class="orders-step-label">Принят</span>
+              </div>
+              <div class="orders-track-step done">
+                <div class="orders-step-dot">✓</div>
+                <span class="orders-step-label">Оплачен</span>
+              </div>
+              <div class="orders-track-step ${isRecent ? "active" : "done"}">
+                <div class="orders-step-dot">${isRecent ? "●" : "✓"}</div>
+                <span class="orders-step-label">Склад</span>
+              </div>
+              <div class="orders-track-step ${isRecent ? "" : "done"}">
+                <div class="orders-step-dot">${isRecent ? "○" : "✓"}</div>
+                <span class="orders-step-label">Выдан</span>
+              </div>
+            </div>
+
+            <!-- Ordered item details -->
+            <div class="orders-item-row">
+              <div class="orders-item-info">
+                <strong>${o.product}</strong>
+                <small>Кол-во: ${o.qty || 1} шт • Оригинал / Заводская пломба</small>
+              </div>
+              <div class="orders-item-price">${money(o.price)}</div>
+            </div>
+
+            <div class="orders-total-row">
+              <span>Итого к оплате / факт:</span>
+              <strong>${money(o.price)}</strong>
+            </div>
+
+            <div class="orders-btns-row">
+              <button type="button" class="orders-btn-secondary" onclick="printOrderInvoice('${o.id}')">
+                <span>📄</span> Накладная Торг-12
+              </button>
+              <a href="https://t.me/galk_b2b" target="_blank" rel="noopener" class="orders-btn-secondary">
+                <span>💬</span> Менеджер заказа
+              </a>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function createDemoOrder() {
+      orders.unshift({
+        id: Date.now(),
+        product: "iPhone 16 Pro 256GB Desert Titanium (Global 2SIM)",
+        price: 124990,
+        qty: 1,
+        date: new Date().toLocaleString("ru-RU")
+      });
+      localStorage.setItem("electro_orders", JSON.stringify(orders));
+      if (typeof updateProfileActualData === "function") updateProfileActualData();
+      playAppleSound("success");
+      toast("✓ Демо-заказ создан");
+      renderOrders();
+    }
+
+    function printOrderInvoice(orderId) {
+      playAppleSound("click");
+      const o = orders.find(x => String(x.id) === String(orderId)) || orders[0];
+      toast("✓ Накладная Торг-12 сформирована");
+      try {
+        const win = window.open("", "_blank");
+        if (win) {
+          win.document.write(`
+            <html>
+            <head>
+              <title>Накладная Торг-12 — ELECTRO</title>
+              <style>
+                body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 24px; color: #111; line-height: 1.4; }
+                h2 { border-bottom: 2px solid #000; padding-bottom: 8px; margin-top: 0; }
+                table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+                th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; font-size: 13px; }
+                th { background: #f0f0f0; }
+                .total { font-weight: bold; font-size: 16px; text-align: right; margin-top: 16px; }
+              </style>
+            </head>
+            <body>
+              <h2>ELECTRO B2B — Товарная накладная № EL-${Date.now().toString().slice(-6)}</h2>
+              <p><b>Поставщик:</b> ELECTRO Wholesale Group (Склад Симферополь / Москва)</p>
+              <p><b>Покупатель:</b> Максим Дмитриенко (Партнер TIER 1)</p>
+              <p><b>Дата:</b> ${new Date().toLocaleDateString("ru-RU")}</p>
+              <table>
+                <tr><th>№</th><th>Наименование товара</th><th>Кол-во</th><th>Сумма</th></tr>
+                <tr><td>1</td><td>${o ? o.product : "Apple Original Device"}</td><td>${o ? (o.qty || 1) : 1} шт</td><td>${o ? money(o.price) : "—"}</td></tr>
+              </table>
+              <p class="total">Итого к выдаче: ${o ? money(o.price) : "—"}</p>
+              <p style="margin-top:24px;font-size:12px;color:#666">Отгрузка со склада произведена. Товар сертифицирован, заводские пломбы не повреждены.</p>
+            </body>
+            </html>
+          `);
+          win.document.close();
+        }
+      } catch(e) {}
+    }
+
+    function printSampleInvoice() {
+      printOrderInvoice(orders[0] ? orders[0].id : null);
     }
 
     const COLORS = ["Черный","Белый","Пустынный","Натуральный"];
@@ -4236,6 +6587,10 @@
       saveCart();
       closeProduct();
       toast("Короб в корзине");
+      if (typeof showDynamicIslandToast === "function") {
+        showDynamicIslandToast(p.base, modalQty + " шт. в заказе", money(unit * modalQty));
+      }
+      if (typeof playAppleSound === "function") playAppleSound("success");
       showCheckout();
     }
 
@@ -6002,11 +8357,24 @@
         });
         card.classList.add("is-glow");
       }
-      var t = e.target.closest("button, .take, .quick, .chip, .cat, .material-btn, .tab, .pf-action, .contact-btn, .manager-contact");
+      var t = e.target.closest("button, .take, .quick, .chip, .cat, .material-btn, .tab, .pf-action, .contact-btn, .manager-contact, .dynamic-island");
       if (!t || t.closest("#electro-splash")) return;
       t.classList.remove("is-press");
       void t.offsetWidth;
       t.classList.add("is-press");
+      if (typeof playAppleSound === "function") playAppleSound("click");
+    }, { passive: true });
+
+    // Apple Titanium Specular Foil tracking
+    document.addEventListener("pointermove", function (e) {
+      var card = e.target.closest(".product-card");
+      if (card) {
+        var rect = card.getBoundingClientRect();
+        var x = ((e.clientX - rect.left) / rect.width) * 100;
+        var y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty("--pointer-x", x + "%");
+        card.style.setProperty("--pointer-y", y + "%");
+      }
     }, { passive: true });
 
     /* ===== ELECTRO SPLASH BOOT (~3s) ===== */
@@ -6111,6 +8479,691 @@
         if (!finished) finish();
       }, 4200);
     })();
+
+    /* ===== LUXURY APPLE SOUNDS & HAPTICS (Web Audio API) ===== */
+    var soundEnabled = true;
+    try {
+      var savedSound = localStorage.getItem("electro_sound_fx");
+      if (savedSound !== null) soundEnabled = (savedSound === "true");
+    } catch (e) {}
+
+    var appleAudioCtx = null;
+    function getAppleAudioCtx() {
+      if (!appleAudioCtx && (window.AudioContext || window.webkitAudioContext)) {
+        try {
+          appleAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        } catch (e) {}
+      }
+      if (appleAudioCtx && appleAudioCtx.state === "suspended") {
+        try { appleAudioCtx.resume(); } catch (e) {}
+      }
+      return appleAudioCtx;
+    }
+
+    function playAppleSound(type) {
+      if (!soundEnabled) return;
+      try {
+        var ctx = getAppleAudioCtx();
+        if (!ctx) return;
+        var now = ctx.currentTime;
+        if (type === "click") {
+          var osc = ctx.createOscillator();
+          var gain = ctx.createGain();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(1600, now);
+          osc.frequency.exponentialRampToValueAtTime(500, now + 0.016);
+          gain.gain.setValueAtTime(0.04, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.016);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.018);
+        } else if (type === "success" || type === "chime") {
+          [880, 1320].forEach(function (freq, idx) {
+            var o = ctx.createOscillator();
+            var g = ctx.createGain();
+            var start = now + idx * 0.07;
+            o.type = "triangle";
+            o.frequency.setValueAtTime(freq, start);
+            g.gain.setValueAtTime(0.06, start);
+            g.gain.exponentialRampToValueAtTime(0.0001, start + 0.15);
+            o.connect(g);
+            g.connect(ctx.destination);
+            o.start(start);
+            o.stop(start + 0.16);
+          });
+        }
+      } catch (e) {}
+    }
+
+    function toggleSoundFx() {
+      soundEnabled = !soundEnabled;
+      try { localStorage.setItem("electro_sound_fx", String(soundEnabled)); } catch (e) {}
+      syncSoundUI();
+      if (soundEnabled) playAppleSound("success");
+    }
+
+    function syncSoundUI() {
+      var btn = document.getElementById("header-sound-btn");
+      var dockIco = document.getElementById("sound-dock-ico");
+      var diIco = document.getElementById("di-sound-ico");
+      var diText = document.getElementById("di-sound-text");
+      if (btn) {
+        btn.textContent = soundEnabled ? "🔊" : "🔇";
+        btn.classList.toggle("is-muted", !soundEnabled);
+      }
+      if (dockIco) dockIco.textContent = soundEnabled ? "🔊" : "🔇";
+      if (diIco) diIco.textContent = soundEnabled ? "🔊" : "🔇";
+      if (diText) diText.textContent = soundEnabled ? "Звуки интерфейса: Включены" : "Звуки интерфейса: Выключены";
+    }
+
+    /* ===== APPLE DYNAMIC ISLAND CONTROLLER ===== */
+    function toggleDynamicIsland(e) {
+      var di = document.getElementById("dynamic-island");
+      if (!di) return;
+      if (di.classList.contains("is-toast")) {
+        di.classList.remove("is-toast");
+      }
+      var isExp = di.classList.toggle("is-expanded");
+      playAppleSound("click");
+      if (typeof haptic === "function") haptic(isExp ? "medium" : "light");
+      updateDiRate();
+    }
+
+    function closeDynamicIsland(e) {
+      if (e && typeof e.stopPropagation === "function") e.stopPropagation();
+      var di = document.getElementById("dynamic-island");
+      if (di) di.classList.remove("is-expanded");
+      playAppleSound("click");
+    }
+
+    var diToastTimer = null;
+    function showDynamicIslandToast(title, desc, price) {
+      var di = document.getElementById("dynamic-island");
+      if (!di) return;
+      di.classList.remove("is-expanded");
+      di.classList.add("is-toast");
+      if (document.getElementById("di-toast-title")) document.getElementById("di-toast-title").textContent = title || "Добавлено";
+      if (document.getElementById("di-toast-desc")) document.getElementById("di-toast-desc").textContent = desc || "Товар Apple";
+      if (document.getElementById("di-toast-price")) document.getElementById("di-toast-price").textContent = price || "";
+      playAppleSound("success");
+      if (typeof haptic === "function") haptic("success");
+      clearTimeout(diToastTimer);
+      diToastTimer = setTimeout(function () {
+        if (di) di.classList.remove("is-toast");
+      }, 3200);
+    }
+
+    function updateDiRate() {
+      var rateStr = ((typeof currentRate === "number" ? currentRate : 94.50)).toFixed(2) + " ₽";
+      var pUsd = document.getElementById("di-pill-usd");
+      var expUsd = document.getElementById("di-exp-usd-val");
+      if (pUsd) pUsd.textContent = rateStr;
+      if (expUsd) expUsd.textContent = rateStr;
+    }
+
+    /* ===== FLYING ORB TO CART ===== */
+    function triggerFlyToCart(fromEl, title, price) {
+      showDynamicIslandToast(title || "Добавлено в заказ", "Товар зафиксирован", price ? (price + " ₽") : "");
+      try {
+        var target = document.getElementById("cart-badge") || document.querySelector('[data-tab="orders"]');
+        if (!fromEl || !target) return;
+        var fromRect = fromEl.getBoundingClientRect();
+        var toRect = target.getBoundingClientRect();
+        var orb = document.createElement("div");
+        orb.className = "cart-fly-orb";
+        orb.style.left = (fromRect.left + fromRect.width / 2) + "px";
+        orb.style.top = (fromRect.top + fromRect.height / 2) + "px";
+        document.body.appendChild(orb);
+        requestAnimationFrame(function () {
+          orb.style.left = (toRect.left + toRect.width / 2) + "px";
+          orb.style.top = (toRect.top + toRect.height / 2) + "px";
+          orb.style.transform = "translate(-50%, -50%) scale(0.3)";
+          orb.style.opacity = "0.4";
+        });
+        setTimeout(function () {
+          try { orb.remove(); } catch (err) {}
+          if (target) {
+            target.style.transform = "scale(1.35)";
+            target.style.transition = "transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)";
+            setTimeout(function () { if (target) target.style.transform = ""; }, 250);
+          }
+        }, 650);
+      } catch (err) {}
+    }
+
+    /* =========================================================
+       AUTOMATIC SUPPLIER PRICE PARSER & MARKUP MODULE
+       ========================================================= */
+    let parsedSupplierItems = [];
+    let parserMarkupType = "fixed"; // "fixed" or "percent"
+
+    function switchAdminTab(tabName) {
+      document.querySelectorAll(".admin-nav-tab").forEach(function(b) {
+        b.classList.remove("active");
+      });
+      document.querySelectorAll(".admin-tab-pane").forEach(function(p) {
+        p.classList.remove("active");
+      });
+      const btn = document.getElementById("atab-btn-" + tabName);
+      const pane = document.getElementById("atab-pane-" + tabName);
+      if (btn) btn.classList.add("active");
+      if (pane) pane.classList.add("active");
+      playAppleSound("click");
+    }
+
+    function setMarkupMode(mode) {
+      parserMarkupType = mode;
+      document.getElementById("mtype-fixed").classList.toggle("active", mode === "fixed");
+      document.getElementById("mtype-percent").classList.toggle("active", mode === "percent");
+      const sym = document.getElementById("markup-unit-symbol");
+      if (sym) sym.textContent = mode === "fixed" ? "₽" : "%";
+
+      const presetsBox = document.getElementById("markup-presets-container");
+      if (presetsBox) {
+        if (mode === "fixed") {
+          presetsBox.innerHTML = `
+            <button type="button" class="markup-chip" onclick="applyMarkupPreset(2000)">+2 000 ₽</button>
+            <button type="button" class="markup-chip active" onclick="applyMarkupPreset(3000)">+3 000 ₽</button>
+            <button type="button" class="markup-chip" onclick="applyMarkupPreset(5000)">+5 000 ₽</button>
+            <button type="button" class="markup-chip" onclick="applyMarkupPreset(8000)">+8 000 ₽</button>
+            <button type="button" class="markup-chip" onclick="applyMarkupPreset(10000)">+10 000 ₽</button>
+          `;
+        } else {
+          presetsBox.innerHTML = `
+            <button type="button" class="markup-chip" onclick="applyMarkupPreset(3)">+3%</button>
+            <button type="button" class="markup-chip active" onclick="applyMarkupPreset(4)">+4%</button>
+            <button type="button" class="markup-chip" onclick="applyMarkupPreset(5)">+5%</button>
+            <button type="button" class="markup-chip" onclick="applyMarkupPreset(7)">+7%</button>
+            <button type="button" class="markup-chip" onclick="applyMarkupPreset(10)">+10%</button>
+          `;
+        }
+      }
+      const valInp = document.getElementById("supplier-markup-val");
+      if (valInp) {
+        valInp.value = mode === "fixed" ? "3000" : "4";
+        valInp.step = mode === "fixed" ? "500" : "1";
+      }
+      if (parsedSupplierItems.length) recalculateParsedMarkup();
+    }
+
+    function applyMarkupPreset(val) {
+      const valInp = document.getElementById("supplier-markup-val");
+      if (valInp) valInp.value = val;
+      document.querySelectorAll(".markup-chip").forEach(ch => {
+        ch.classList.toggle("active", ch.textContent.includes(String(val)));
+      });
+      if (parsedSupplierItems.length) recalculateParsedMarkup();
+    }
+
+    function insertParserSample() {
+      const ta = document.getElementById("supplier-price-text");
+      if (!ta) return;
+      ta.value =
+`16 Pro Max 256 Desert Titanium 122000
+16 Pro 128 Black Titanium 104500
+15 Pro 128 White Titanium 84000
+15 128 Black 62000
+MacBook Air 13 M3 8/256 Space Gray 94000
+AirPods Pro 2 Type-C MagSafe 18500
+Apple Watch Ultra 2 Black Titanium 72000
+16 Plus 128 Ultramarine 82500`;
+      playAppleSound("click");
+      toast("Пример прайса вставлен. Нажмите «Распарсить»");
+    }
+
+    function parseSingleSupplierLine(line, markupType, markupVal) {
+      var raw = line.trim();
+      if (!raw || raw.length < 4) return null;
+      if (/^(прайс|курс|наличие|склад|===|---|внимание|гарантия)/i.test(raw) && !/\d{4,}/.test(raw)) {
+        return null;
+      }
+
+      // 1. Извлечение цены поставщика
+      var suppPrice = 0;
+      var dollarMatch = raw.match(/\$\s*(\d+[\d\s.,]*)|(\d+[\d\s.,]*)\s*\$/);
+      if (dollarMatch) {
+        var dStr = (dollarMatch[1] || dollarMatch[2] || "").replace(/\s/g, "").replace(",", ".");
+        var dVal = parseFloat(dStr);
+        if (Number.isFinite(dVal) && dVal > 10) {
+          suppPrice = Math.round(dVal * (currentRate || 90));
+        }
+      }
+
+      if (!suppPrice) {
+        var kMatch = raw.match(/(\d+(?:[.,]\d+)?)\s*(?:к|k)\b/i);
+        if (kMatch) {
+          var kNum = parseFloat(kMatch[1].replace(",", "."));
+          if (Number.isFinite(kNum) && kNum < 1000) {
+            suppPrice = Math.round(kNum * 1000);
+          }
+        }
+      }
+
+      if (!suppPrice) {
+        var allNumMatches = raw.match(/\d[\d\s.,]{3,}\d/g) || raw.match(/\d{4,}/g);
+        if (allNumMatches && allNumMatches.length) {
+          var lastNumStr = allNumMatches[allNumMatches.length - 1];
+          var cleaned = lastNumStr.replace(/\s+/g, "").replace(/\./g, "").replace(/,/g, "");
+          var pVal = parseInt(cleaned, 10);
+          if (Number.isFinite(pVal) && pVal >= 1000 && pVal <= 2000000) {
+            suppPrice = pVal;
+          }
+        }
+      }
+
+      // 2. Определение модели и категории
+      var cat = "phones";
+      var model = "";
+      var img = "https://i.postimg.cc/d3PN0pHx/photo-2026-10-22-08-21-18.jpg";
+
+      if (/16\s*(?:pro\s*max|pm)/i.test(raw)) {
+        model = "iPhone 16 Pro Max";
+        cat = "phones";
+        img = "https://i.postimg.cc/d3PN0pHx/photo-2026-10-22-08-21-18.jpg";
+      } else if (/16\s*pro\b/i.test(raw)) {
+        model = "iPhone 16 Pro";
+        cat = "phones";
+        img = "https://i.postimg.cc/d3PN0pHx/photo-2026-10-22-08-21-18.jpg";
+      } else if (/16\s*plus\b/i.test(raw)) {
+        model = "iPhone 16 Plus";
+        cat = "phones";
+        img = "https://i.postimg.cc/mD3qP2qM/photo-2026-10-22-08-21-17.jpg";
+      } else if (/(?:iphone\s*16\b|\b16\s*(?:128|256|512))/i.test(raw)) {
+        model = "iPhone 16";
+        cat = "phones";
+        img = "https://i.postimg.cc/mD3qP2qM/photo-2026-10-22-08-21-17.jpg";
+      } else if (/15\s*(?:pro\s*max|pm)/i.test(raw)) {
+        model = "iPhone 15 Pro Max";
+        cat = "phones";
+        img = "https://i.postimg.cc/d3PN0pHx/photo-2026-10-22-08-21-18.jpg";
+      } else if (/15\s*pro\b/i.test(raw)) {
+        model = "iPhone 15 Pro";
+        cat = "phones";
+        img = "https://i.postimg.cc/d3PN0pHx/photo-2026-10-22-08-21-18.jpg";
+      } else if (/15\s*plus\b/i.test(raw)) {
+        model = "iPhone 15 Plus";
+        cat = "phones";
+        img = "https://i.postimg.cc/mD3qP2qM/photo-2026-10-22-08-21-17.jpg";
+      } else if (/(?:iphone\s*15\b|\b15\s*(?:128|256|512))/i.test(raw)) {
+        model = "iPhone 15";
+        cat = "phones";
+        img = "https://i.postimg.cc/mD3qP2qM/photo-2026-10-22-08-21-17.jpg";
+      } else if (/14\s*(?:pro\s*max|pm)/i.test(raw)) {
+        model = "iPhone 14 Pro Max";
+        cat = "phones";
+      } else if (/14\s*pro\b/i.test(raw)) {
+        model = "iPhone 14 Pro";
+        cat = "phones";
+      } else if (/(?:iphone\s*14\b|\b14\s*(?:128|256))/i.test(raw)) {
+        model = "iPhone 14";
+        cat = "phones";
+      } else if (/(?:iphone\s*13\b|\b13\s*(?:128|256))/i.test(raw)) {
+        model = "iPhone 13";
+        cat = "phones";
+      } else if (/macbook\s*pro/i.test(raw)) {
+        model = "MacBook Pro";
+        cat = "laptops";
+        img = "https://i.postimg.cc/135P71p9/photo-2026-10-22-08-21-20.jpg";
+      } else if (/macbook\s*air|\bair\s*(?:13|15)\b/i.test(raw)) {
+        model = "MacBook Air";
+        cat = "laptops";
+        img = "https://i.postimg.cc/135P71p9/photo-2026-10-22-08-21-20.jpg";
+      } else if (/watch\s*ultra|ultra\s*2/i.test(raw)) {
+        model = "Apple Watch Ultra 2";
+        cat = "watches";
+        img = "https://i.postimg.cc/K8h8Lh5h/photo-2026-10-22-08-21-19.jpg";
+      } else if (/watch\s*(?:series\s*10|s10)|\bs10\b/i.test(raw)) {
+        model = "Apple Watch Series 10";
+        cat = "watches";
+        img = "https://i.postimg.cc/K8h8Lh5h/photo-2026-10-22-08-21-19.jpg";
+      } else if (/airpods\s*pro\s*2|app2/i.test(raw)) {
+        model = "AirPods Pro 2 USB-C";
+        cat = "earbuds";
+        img = "https://i.postimg.cc/9Q2f4mP0/photo-2026-10-22-08-21-16.jpg";
+      } else if (/airpods\s*4/i.test(raw)) {
+        model = "AirPods 4 ANC";
+        cat = "earbuds";
+        img = "https://i.postimg.cc/9Q2f4mP0/photo-2026-10-22-08-21-16.jpg";
+      } else if (/airpods\s*max/i.test(raw)) {
+        model = "AirPods Max";
+        cat = "earbuds";
+        img = "https://i.postimg.cc/9Q2f4mP0/photo-2026-10-22-08-21-16.jpg";
+      } else {
+        var parts = raw.split(/\s+/);
+        model = parts.slice(0, 3).join(" ");
+      }
+
+      // 3. Память
+      var memory = "";
+      var memMatch = raw.match(/\b(1|2)\s*(?:tb|тб)\b/i) || raw.match(/\b(64|128|256|512)\s*(?:gb|гб)?\b/i);
+      if (memMatch) {
+        memory = memMatch[0].toUpperCase().replace("ГБ", "GB").replace("ТБ", "TB");
+        if (!memory.includes("GB") && !memory.includes("TB")) memory += "GB";
+      }
+
+      // 4. Цвет и спека
+      var color = "";
+      if (/desert|пустын/i.test(raw)) color = "Desert Titanium";
+      else if (/natural|натурал/i.test(raw)) color = "Natural Titanium";
+      else if (/white|бел/i.test(raw)) color = "White Titanium";
+      else if (/black|черн|space\s*black|темн/i.test(raw)) color = "Black Titanium";
+      else if (/blue|син/i.test(raw)) color = "Blue";
+      else if (/silver|серебр/i.test(raw)) color = "Silver";
+      else if (/space\s*gray|серый/i.test(raw)) color = "Space Gray";
+      else if (/midnight/i.test(raw)) color = "Midnight";
+      else if (/starlight|сияющ/i.test(raw)) color = "Starlight";
+      else if (/pink|розов/i.test(raw)) color = "Pink";
+      else if (/ultramarine/i.test(raw)) color = "Ultramarine";
+
+      var spec = "";
+      if (/dual\s*sim|2sim|2\s*sim/i.test(raw)) spec = "Dual SIM";
+      else if (/esim/i.test(raw)) spec = "eSIM";
+      else if (/ростест|eac/i.test(raw)) spec = "EAC / РСТ";
+
+      // 5. Расчет витринной цены
+      var retailPrice = 0;
+      var status = "check";
+      if (suppPrice >= 1000) {
+        status = "ok";
+        if (markupType === "fixed") {
+          retailPrice = suppPrice + Number(markupVal);
+        } else {
+          retailPrice = Math.round(suppPrice * (1 + Number(markupVal) / 100));
+        }
+      }
+
+      var fullTitle = model + (memory ? " " + memory : "") + (color ? " " + color : "") + (spec ? " (" + spec + ")" : "");
+
+      return {
+        raw: raw,
+        model: model,
+        cat: cat,
+        memory: memory,
+        color: color,
+        spec: spec,
+        title: fullTitle,
+        suppPrice: suppPrice,
+        retailPrice: retailPrice,
+        status: status,
+        included: status === "ok",
+        img: img
+      };
+    }
+
+    function runPriceParser() {
+      const ta = document.getElementById("supplier-price-text");
+      const text = (ta ? ta.value : "").trim();
+      if (!text) {
+        toast("Вставьте текст прайса для распознавания");
+        return;
+      }
+
+      const markupVal = parseFloat(document.getElementById("supplier-markup-val").value) || 0;
+      const lines = text.split("\n");
+      parsedSupplierItems = [];
+
+      lines.forEach(function(line) {
+        const item = parseSingleSupplierLine(line, parserMarkupType, markupVal);
+        if (item) parsedSupplierItems.push(item);
+      });
+
+      if (!parsedSupplierItems.length) {
+        toast("Не удалось распознать позиции. Проверьте формат текста");
+        return;
+      }
+
+      playAppleSound("success");
+      renderParsedPreview();
+      const prevSec = document.getElementById("parser-preview-section");
+      if (prevSec) {
+        prevSec.style.display = "block";
+        prevSec.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      toast("✓ Распознано " + parsedSupplierItems.length + " позиций!");
+    }
+
+    function recalculateParsedMarkup() {
+      const markupVal = parseFloat(document.getElementById("supplier-markup-val").value) || 0;
+      parsedSupplierItems.forEach(function(item) {
+        if (item.suppPrice >= 1000) {
+          if (parserMarkupType === "fixed") {
+            item.retailPrice = item.suppPrice + Number(markupVal);
+          } else {
+            item.retailPrice = Math.round(item.suppPrice * (1 + Number(markupVal) / 100));
+          }
+        }
+      });
+      renderParsedPreview();
+    }
+
+    function renderParsedPreview() {
+      const container = document.getElementById("parser-items-container");
+      if (!container) return;
+
+      let validCount = 0;
+      let totalMarkup = 0;
+      let totalSum = 0;
+
+      container.innerHTML = parsedSupplierItems.map(function(item, idx) {
+        if (item.included && item.retailPrice > 0) {
+          validCount++;
+          totalMarkup += (item.retailPrice - item.suppPrice);
+          totalSum += item.retailPrice;
+        }
+
+        const isOk = item.status === "ok";
+        const badgeCls = isOk ? "ok" : "check";
+        const badgeText = isOk ? "✓ OK" : "⚠ Проверить";
+        const ignoredCls = item.included ? "" : " is-ignored";
+
+        return `
+          <div class="parser-item-card${ignoredCls}" id="pitem-${idx}">
+            <div class="parser-item-top">
+              <label class="parser-item-check">
+                <input type="checkbox" ${item.included ? "checked" : ""} onchange="toggleParsedInclude(${idx}, this.checked)">
+                <span class="parser-item-title">${item.title}</span>
+              </label>
+              <span class="parser-status-badge ${badgeCls}">${badgeText}</span>
+              <button type="button" class="parser-del-btn" onclick="removeParsedItem(${idx})" title="Удалить">✕</button>
+            </div>
+            
+            <div class="parser-item-specs">
+              <span class="parser-spec-chip">Категория: ${catName(item.cat)}</span>
+              ${item.memory ? `<span class="parser-spec-chip">Память: ${item.memory}</span>` : ""}
+              ${item.color ? `<span class="parser-spec-chip">Цвет: ${item.color}</span>` : ""}
+              ${item.spec ? `<span class="parser-spec-chip">Спека: ${item.spec}</span>` : ""}
+            </div>
+
+            <div class="parser-item-pricing">
+              <div class="parser-supp-price">
+                Вход: <b>${item.suppPrice ? money(item.suppPrice) : "Не найдена"}</b>
+              </div>
+              <span class="parser-arrow">→</span>
+              <div class="parser-retail-wrap">
+                <span style="font-size:10px;font-weight:700;color:#6b7c93">Витрина:</span>
+                <input type="number" class="parser-retail-inp" value="${item.retailPrice || 0}" step="500" onchange="onParsedRetailChange(${idx}, this.value)">
+                <span style="font-size:11px;font-weight:800;color:#0b1b33">₽</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      const avgMarkup = validCount > 0 ? Math.round(totalMarkup / validCount) : 0;
+      if (document.getElementById("parser-stat-count")) {
+        document.getElementById("parser-stat-count").textContent = validCount + " шт";
+      }
+      if (document.getElementById("parser-stat-avg-markup")) {
+        document.getElementById("parser-stat-avg-markup").textContent = "+" + money(avgMarkup);
+      }
+      if (document.getElementById("parser-stat-total-sum")) {
+        document.getElementById("parser-stat-total-sum").textContent = money(totalSum);
+      }
+    }
+
+    function toggleParsedInclude(idx, isChecked) {
+      if (parsedSupplierItems[idx]) {
+        parsedSupplierItems[idx].included = isChecked;
+        const card = document.getElementById("pitem-" + idx);
+        if (card) card.classList.toggle("is-ignored", !isChecked);
+        renderParsedSummaryOnly();
+      }
+    }
+
+    function onParsedRetailChange(idx, val) {
+      const num = parseInt(val, 10);
+      if (parsedSupplierItems[idx] && Number.isFinite(num)) {
+        parsedSupplierItems[idx].retailPrice = num;
+        if (num > 0) {
+          parsedSupplierItems[idx].status = "ok";
+          parsedSupplierItems[idx].included = true;
+        }
+        renderParsedSummaryOnly();
+      }
+    }
+
+    function removeParsedItem(idx) {
+      parsedSupplierItems.splice(idx, 1);
+      renderParsedPreview();
+    }
+
+    function renderParsedSummaryOnly() {
+      let validCount = 0;
+      let totalMarkup = 0;
+      let totalSum = 0;
+      parsedSupplierItems.forEach(item => {
+        if (item.included && item.retailPrice > 0) {
+          validCount++;
+          totalMarkup += (item.retailPrice - item.suppPrice);
+          totalSum += item.retailPrice;
+        }
+      });
+      const avgMarkup = validCount > 0 ? Math.round(totalMarkup / validCount) : 0;
+      if (document.getElementById("parser-stat-count")) {
+        document.getElementById("parser-stat-count").textContent = validCount + " шт";
+      }
+      if (document.getElementById("parser-stat-avg-markup")) {
+        document.getElementById("parser-stat-avg-markup").textContent = "+" + money(avgMarkup);
+      }
+      if (document.getElementById("parser-stat-total-sum")) {
+        document.getElementById("parser-stat-total-sum").textContent = money(totalSum);
+      }
+    }
+
+    function commitParsedItemsToCatalog() {
+      const toAdd = parsedSupplierItems.filter(x => x.included && x.retailPrice > 0);
+      if (!toAdd.length) {
+        toast("Нет выбранных позиций для загрузки в витрину");
+        return;
+      }
+
+      toAdd.forEach(function(item) {
+        const id = "p-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 6);
+        const unitDesc = (item.color ? item.color + " • " : "") + (item.spec ? item.spec + " • " : "") + "Новый • Заводская коробка";
+        
+        const newProduct = {
+          id: id,
+          base: item.title,
+          cat: item.cat || "phones",
+          price: item.retailPrice,
+          stock: 12,
+          unit: unitDesc,
+          img: item.img
+        };
+
+        customProducts.push(newProduct);
+        stockMap[id] = 12;
+      });
+
+      lastLocalCatalogWrite = Date.now();
+      persistCustomLocal();
+      saveCustomCatalogToCloud();
+      refreshStockUI();
+      renderCatalogGrid();
+
+      playAppleSound("success");
+      showDynamicIslandToast("Прайс поставщика", "Успешно добавлено " + toAdd.length + " позиций!", "⚡");
+      toast("✓ Залито " + toAdd.length + " товаров на витрину!");
+
+      closeAdminPanel();
+      openCatalog("all");
+    }
+
+    /* ===== APPLE GSX / IMEI CHECKER ===== */
+    var IMEI_DATABASE = {
+      "F2LX394K08": {
+        title: "iPhone 17 Pro Max 256GB Desert Titanium",
+        activation: "Не активирован (Новый, в заводских пломбах)",
+        warranty: "AppleCare+ до 2027 г. (Всемирная гарантия)",
+        region: "Global / Dual SIM (Nano-SIM + eSIM)"
+      },
+      "C02DX812MD6T": {
+        title: "MacBook Pro 16″ M4 Pro 512GB Space Black",
+        activation: "Не активирован (Заводская коробка с пломбой)",
+        warranty: "AppleCare+ до 2028 г. (РСТ / EAC гравировка)",
+        region: "Европейская поставка (CE / EAC)"
+      },
+      "GN4C39KL10": {
+        title: "AirPods Pro 2 with USB-C MagSafe Case",
+        activation: "Не активирован (Оригинал, не вскрывался)",
+        warranty: "Официальная гарантия Apple 1 год",
+        region: "Global / Заводская лента-пломба"
+      }
+    };
+
+    function openImeiCheck() {
+      var sheet = document.getElementById("imei-sheet");
+      if (sheet) sheet.classList.add("open");
+      playAppleSound("click");
+      if (typeof haptic === "function") haptic("light");
+    }
+
+    function closeImeiCheck() {
+      var sheet = document.getElementById("imei-sheet");
+      if (sheet) sheet.classList.remove("open");
+      playAppleSound("click");
+    }
+
+    function setImeiPreset(sn, optTitle) {
+      var inp = document.getElementById("imei-input");
+      if (inp) inp.value = sn;
+      runImeiCheck();
+    }
+
+    function runImeiCheck() {
+      var inp = document.getElementById("imei-input");
+      var sn = (inp ? inp.value : "").trim().toUpperCase();
+      if (!sn) return;
+      playAppleSound("click");
+      var resCard = document.getElementById("imei-result");
+      if (resCard) {
+        resCard.style.opacity = "0.35";
+        resCard.style.transition = "opacity 0.22s ease";
+        setTimeout(function () {
+          var data = IMEI_DATABASE[sn] || {
+            title: "Apple Original Device (" + sn + ")",
+            activation: "Проверен в GSX (Оригинал 100%)",
+            warranty: "Действующая гарантия AppleCare",
+            region: "Официальная оптовая поставка"
+          };
+          if (document.getElementById("imei-dev-title")) document.getElementById("imei-dev-title").textContent = data.title;
+          if (document.getElementById("imei-dev-sn")) document.getElementById("imei-dev-sn").textContent = "Серийный номер: " + sn;
+          if (document.getElementById("imei-dev-act")) document.getElementById("imei-dev-act").textContent = data.activation;
+          if (document.getElementById("imei-dev-war")) document.getElementById("imei-dev-war").textContent = data.warranty;
+          if (document.getElementById("imei-dev-reg")) document.getElementById("imei-dev-reg").textContent = data.region;
+          resCard.style.opacity = "1";
+          playAppleSound("success");
+          if (typeof haptic === "function") haptic("success");
+        }, 220);
+      }
+    }
+
+    // Sync sound UI and DI rate on initialization
+    document.addEventListener("DOMContentLoaded", function () {
+      syncSoundUI();
+      updateDiRate();
+    });
 
   </script>
 </body>
