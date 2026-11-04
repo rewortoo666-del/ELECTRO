@@ -230,19 +230,6 @@ async function startServer() {
 
   app.use(express.json({ limit: "5mb" }));
 
-  // Validate request headers on /api/products
-  app.use("/api/products", (req, res, next) => {
-    try {
-      const headersToCheck: Record<string, string> = {};
-      for (const [k, v] of Object.entries(req.headers)) {
-        if (typeof v === "string") headersToCheck[k] = v;
-      }
-      validateHeaders(headersToCheck);
-      next();
-    } catch (err) {
-      res.status(400).json({ error: err instanceof Error ? err.message : "Invalid headers" });
-    }
-  });
 
   // PRODUCTS API
   app.get("/api/products", (_req, res) => {
