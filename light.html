@@ -29,20 +29,24 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
-      width: 100%; min-height: 100%; background: #000; color: var(--text);
+      width: 100%; height: 100%; min-height: 100%; min-height: 100dvh; min-height: 100svh;
+      background: #000; color: var(--text);
       font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent;
       overscroll-behavior: none;
+      overflow: hidden;
     }
-    body { display: flex; justify-content: center; }
+    body { display: flex; justify-content: center; position: fixed; inset: 0; }
 
     .app-container {
-      width: 100%; max-width: 430px; min-width: 390px; min-height: 100dvh;
-      margin: 0 auto; padding: calc(12px + var(--safe-top)) 16px 90px;
+      width: 100%; max-width: 430px; min-width: 0;
+      height: 100%; height: var(--tg-viewport-height, 100%);
+      min-height: 100%; min-height: 100dvh; min-height: 100svh;
+      margin: 0 auto; padding: calc(12px + var(--safe-top)) 16px calc(90px + var(--safe-bottom));
       background: var(--bg); overflow-y: auto; overflow-x: hidden;
       scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
     }
-    @media (max-width: 389px) { .app-container { min-width: 100%; } }
+    @media (max-width: 389px) { .app-container { min-width: 100%; max-width: 100%; } }
 
     .header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .brand { display: flex; align-items: center; gap: 8px; min-width: 0; }
@@ -3556,13 +3560,35 @@
       return data;
     }
 
-    // открытие WebApp
-    try {
-      if (window.Telegram && Telegram.WebApp) {
-        Telegram.WebApp.ready();
+    // открытие WebApp — сразу на весь экран и на главной
+    (function initTelegramMiniApp() {
+      try {
+        if (!(window.Telegram && Telegram.WebApp)) return;
+        var tg = Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+        try { if (typeof tg.disableVerticalSwipes === "function") tg.disableVerticalSwipes(); } catch (e) {}
+        try { if (typeof tg.requestFullscreen === "function") tg.requestFullscreen(); } catch (e) {}
+        try {
+          if (typeof tg.setHeaderColor === "function") tg.setHeaderColor("#06090f");
+          if (typeof tg.setBackgroundColor === "function") tg.setBackgroundColor("#06090f");
+        } catch (e) {}
+        try {
+          if (tg.viewportStableHeight) {
+            document.documentElement.style.setProperty("--tg-viewport-height", tg.viewportStableHeight + "px");
+          }
+          if (typeof tg.onEvent === "function") {
+            tg.onEvent("viewportChanged", function () {
+              if (tg.isExpanded === false) tg.expand();
+              if (tg.viewportStableHeight) {
+                document.documentElement.style.setProperty("--tg-viewport-height", tg.viewportStableHeight + "px");
+              }
+            });
+          }
+        } catch (e) {}
         electroLeadEvent("webapp_open", { screen: "home" });
-      }
-    } catch (e) {}
+      } catch (e) {}
+    })();
 
     const BASE_RATE = 90; // курс, при котором заданы цены в каталоге
     // Приоритет: electro_usd_rate → apple_market_rate → BASE_RATE
@@ -4586,6 +4612,10 @@
         }
         splash.classList.add("done");
         splash.setAttribute("aria-busy", "false");
+        try {
+          if (typeof goHome === "function") goHome();
+          else if (typeof showScreen === "function") showScreen("home");
+        } catch (e) {}
         setTimeout(function () {
           try { splash.remove(); } catch (e) {
             try { splash.style.display = "none"; } catch (e2) {}
@@ -4693,9 +4723,22 @@
 
     try {
       if (window.Telegram && Telegram.WebApp) {
-        Telegram.WebApp.ready();
-        Telegram.WebApp.expand();
+        var tg = Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+        try { if (typeof tg.disableVerticalSwipes === "function") tg.disableVerticalSwipes(); } catch (e) {}
+        try { if (typeof tg.requestFullscreen === "function") tg.requestFullscreen(); } catch (e) {}
+        try {
+          if (typeof tg.setHeaderColor === "function") tg.setHeaderColor("#06090f");
+          if (typeof tg.setBackgroundColor === "function") tg.setBackgroundColor("#06090f");
+        } catch (e) {}
       }
+    } catch (e) {}
+
+    // Всегда стартуем с главной
+    try {
+      if (typeof goHome === "function") goHome();
+      else if (typeof showScreen === "function") showScreen("home");
     } catch (e) {}
 
     initElectroProfile();
