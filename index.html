@@ -3866,17 +3866,38 @@
       localStorage.setItem(cleanupKey, "1");
     })();
 
-    /* money() redefined in features block */
-    function money_legacy(n) { return Math.round(n).toLocaleString("ru-RU") + " ₽"; }
-    function haptic(type) {
       try {
-        var h = window.Telegram && Telegram.WebApp && Telegram.WebApp.HapticFeedback;
-        if (!h) return;
-        if (type === "success" && h.notificationOccurred) h.notificationOccurred("success");
-        else if (type === "error" && h.notificationOccurred) h.notificationOccurred("error");
-        else if (type === "light" && h.impactOccurred) h.impactOccurred("light");
-        else if (h.impactOccurred) h.impactOccurred("medium");
-      } catch (e) {}
+      if (window.Telegram && window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
+      tg.ready();
+
+      // 1. Разворачиваем на доступную высоту
+      tg.expand();
+
+    // 2. Запрос истинного Fullscreen (доступно с Telegram Bot API 8.0+)
+      if (typeof tg.requestFullscreen === "function") {
+      tg.requestFullscreen();
+    }
+
+    // 3. Отключаем подтверждение закрытия свайпом вниз, чтобы случайно не закрывалось
+      if (typeof tg.enableClosingConfirmation === "function") {
+      tg.enableClosingConfirmation();
+    }
+
+    // 4. Окрашиваем верхний заголовок и фон в цвет приложения (чтобы не было видно перехода/рамки)
+      if (typeof tg.setHeaderColor === "function") {
+      tg.setHeaderColor("#f4f7fc"); // или 'bg_color'
+    }
+     if (typeof tg.setBackgroundColor === "function") {
+      tg.setBackgroundColor("#f4f7fc");
+    }
+      if (typeof tg.setBottomBarColor === "function") {
+      tg.setBottomBarColor("#f4f7fc");
+     }
+   }
+ } catch (e) {
+  console.error("TG Fullscreen error:", e);
+}
     }
     function toast(t) {
       const el = document.getElementById("toast");
