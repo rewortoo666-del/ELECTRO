@@ -5402,14 +5402,65 @@
         // Синхронизация с ключом, который читает светлая тема и другие клиенты
         localStorage.setItem("electro_usd_rate", String(rate));
       } catch(e) {}
+      // Полноэкранный запуск Telegram Mini App
+   (function initTelegramMiniApp() {
       try {
-        const cs = window.Telegram && Telegram.WebApp && Telegram.WebApp.CloudStorage;
-        if (cs && typeof cs.setItem === "function") {
-          cs.setItem(RATE_STORAGE_KEY, String(rate), function(){});
-          cs.setItem(RATE_META_KEY, JSON.stringify(meta), function(){});
-        }
-      } catch(e) {}
+      if (!(window.Telegram && Telegram.WebApp)) return;
 
+      var tg = Telegram.WebApp;
+
+      tg.ready();
+      tg.expand();
+
+    // Отключаем вертикальные жесты сворачивания
+      try {
+      if (typeof tg.disableVerticalSwipes === "function")
+        tg.disableVerticalSwipes();
+     } catch (e) {}
+
+    // Запрашиваем настоящий полноэкранный режим
+      try {
+      if (typeof tg.requestFullscreen === "function")
+        tg.requestFullscreen();
+     } catch (e) {}
+
+    // Светлая верхняя панель в цвет приложения
+      try {
+      if (typeof tg.setHeaderColor === "function")
+        tg.setHeaderColor("#f4f7fc");
+
+      if (typeof tg.setBackgroundColor === "function")
+        tg.setBackgroundColor("#f4f7fc");
+    } catch (e) {}
+
+    // Подстраиваем высоту приложения под Telegram
+    function updateTelegramHeight() {
+      var height = tg.viewportStableHeight || tg.viewportHeight;
+
+      if (height) {
+        document.documentElement.style.setProperty(
+          "--tg-viewport-height",
+          height + "px"
+        );
+      }
+    }
+
+    updateTelegramHeight();
+
+    if (typeof tg.onEvent === "function") {
+      tg.onEvent("viewportChanged", function () {
+        updateTelegramHeight();
+
+        if (tg.isExpanded === false) {
+          tg.expand();
+        }
+      });
+    }
+
+  } catch (e) {
+    console.log("Telegram fullscreen:", e);
+  }
+})();
       setAdminSyncStatus("Отправка в облако…", "");
       var url = kvSetUrl(rate);
       try {
