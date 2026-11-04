@@ -759,16 +759,18 @@
       transform: translateY(100%);
       transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
       max-width: 430px; margin: 0 auto;
-      padding: calc(10px + var(--safe-top)) 16px calc(48px + var(--safe-bottom));
+      padding: calc(18px + var(--safe-top)) 16px calc(48px + var(--safe-bottom));
     }
     #product-modal.active { transform: translateY(0); }
     .pm-top {
       display: flex; align-items: center; justify-content: space-between; gap: 8px;
-      margin-bottom: 12px;
+      margin-top: 10px;
+      margin-bottom: 16px;
     }
     .pm-close {
-      height: 32px; padding: 0 12px; border: 0; border-radius: 10px;
-      background: transparent; color: #3aa0ff; font-size: 14px; font-weight: 800;
+      height: 38px; padding: 0 16px; border: 0; border-radius: 12px;
+      background: rgba(0, 119, 255, 0.08); color: #0077ff; font-size: 14px; font-weight: 800;
+      margin-top: 6px;
     }
     .pm-brand { text-align: center; }
     .pm-brand b { display: block; font-size: 13px; letter-spacing: .08em; }
@@ -887,26 +889,28 @@
 
     /* Product Card Modal Enhancements */
     .pm-drag-handle {
-      width: 44px;
+      width: 48px;
       height: 5px;
       border-radius: 99px;
-      background: rgba(15, 40, 80, 0.18);
-      margin: 0 auto 12px;
+      background: rgba(15, 40, 80, 0.20);
+      margin: 4px auto 14px;
       cursor: pointer;
     }
     .pm-close {
-      height: 34px;
-      padding: 0 14px;
-      border-radius: 10px;
+      height: 38px;
+      padding: 0 16px;
+      border-radius: 12px;
       background: rgba(0, 119, 255, 0.08);
       color: #0077ff;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 800;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
       border: 1px solid rgba(0, 119, 255, 0.16);
+      margin-top: 6px;
       transition: all .2s ease;
+      cursor: pointer;
     }
     .pm-close:active {
       transform: scale(0.94);
@@ -954,59 +958,6 @@
     }
     .pm-close-bottom:active {
       background: #eef5ff;
-      transform: scale(0.97);
-    }
-    /* Sticky thumb bar inside modal */
-    .pm-sticky-bar {
-      position: sticky;
-      bottom: calc(6px + var(--safe-bottom));
-      z-index: 100;
-      display: flex;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      padding: 8px 10px;
-      border-radius: 18px;
-      border: 1px solid rgba(15, 40, 80, 0.08);
-      box-shadow: 0 8px 30px rgba(15, 40, 90, 0.14);
-      margin-top: 18px;
-    }
-    .pm-sticky-close {
-      flex: 0 0 auto;
-      height: 44px;
-      padding: 0 16px;
-      border-radius: 12px;
-      background: #f0f4fa;
-      border: 1px solid rgba(15, 40, 80, 0.10);
-      color: #3b506c;
-      font-size: 13px;
-      font-weight: 800;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      transition: all .2s ease;
-    }
-    .pm-sticky-close:active {
-      transform: scale(0.94);
-      background: #e2eaf5;
-    }
-    .pm-sticky-buy {
-      flex: 1;
-      height: 44px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #0077ff 0%, #0055d4 100%);
-      color: #ffffff;
-      font-size: 13px;
-      font-weight: 800;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(0, 119, 255, 0.35);
-      transition: transform .2s ease;
-    }
-    .pm-sticky-buy:active {
       transform: scale(0.97);
     }
 
@@ -4930,7 +4881,7 @@
       font-weight: 600;
     }
   </style>
-</head>
+<script src="/_aistudio-iframe.js?v=1f94f900"></script></head>
 <body>
   <!-- SPLASH -->
   <div id="electro-splash" aria-live="polite" aria-busy="true">
@@ -5888,14 +5839,8 @@
     <!-- КНОПКА ЗАКРЫТЬ В САМОМ НИЗУ СТРАНИЦЫ -->
     <button class="pm-close-bottom" type="button" onclick="closeProduct()">
       <span>✕</span>
-      <span>Закрыть карточку и вернуться к витрине</span>
+      <span>Закрыть карточку</span>
     </button>
-
-    <!-- СТИКИ БАР НА НИЖНЕЙ КРОМКЕ ДЛЯ УДОБСТВА БОЛЬШОГО ПАЛЬЦА -->
-    <div class="pm-sticky-bar">
-      <button class="pm-sticky-close" type="button" onclick="closeProduct()" aria-label="Закрыть карточку">✕ Закрыть</button>
-      <button class="pm-sticky-buy" type="button" onclick="confirmBox()">КУПИТЬ / БРОНЬ</button>
-    </div>
 
     <div style="height:32px" aria-hidden="true"></div>
   </div>
