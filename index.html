@@ -6248,9 +6248,17 @@
     /* =========================================================
        CLOUD DATABASE REST API CONFIG & CACHING ARCHITECTURE
        ========================================================= */
-    const CLOUD_API_BASE = (typeof window !== "undefined" && window.location && window.location.origin && window.location.protocol.startsWith("http"))
-      ? window.location.origin
-      : "";
+    function getApiBaseUrl() {
+      if (typeof window !== "undefined" && window.location && window.location.origin) {
+        const org = window.location.origin;
+        if (org.includes("onrender.com") || org.includes("localhost") || org.includes("127.0.0.1") || org.includes("run.app")) {
+          return org;
+        }
+      }
+      return "https://electro-ja3x.onrender.com";
+    }
+
+    const CLOUD_API_BASE = getApiBaseUrl();
 
     const DB_CONFIG = {
       url: (CLOUD_API_BASE ? CLOUD_API_BASE : "") + "/api", // ваш адрес API
@@ -7760,10 +7768,13 @@
     let stockMap = {};
 
     function getApiBaseUrl() {
-      if (typeof window !== "undefined" && window.location && window.location.origin && window.location.protocol.startsWith("http")) {
-        return window.location.origin;
+      if (typeof window !== "undefined" && window.location && window.location.origin) {
+        const org = window.location.origin;
+        if (org.includes("onrender.com") || org.includes("localhost") || org.includes("127.0.0.1") || org.includes("run.app")) {
+          return org;
+        }
       }
-      return "";
+      return "https://electro-ja3x.onrender.com";
     }
 
     function kvGetUrl() {
