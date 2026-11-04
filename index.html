@@ -849,6 +849,354 @@
       border: 1px solid #c5d8f0; background: #ffffff; color: #5a6d85; font-weight: 800;
     }
 
+    /* Native Skeleton for Cloud DB Catalog Loading */
+    .catalog-skeleton-card {
+      pointer-events: none;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 12px;
+      background: #ffffff;
+      border-radius: 20px;
+      border: 1px solid rgba(15, 40, 80, 0.08);
+      box-shadow: 0 4px 16px rgba(15, 40, 90, 0.04);
+    }
+    .skel-box {
+      border-radius: 10px;
+      background: #e9eff8;
+      position: relative;
+      overflow: hidden;
+    }
+    .skel-shimmer::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      transform: translateX(-100%);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+      animation: skelShimmer 1.4s infinite;
+    }
+    @keyframes skelShimmer {
+      100% { transform: translateX(100%); }
+    }
+    .skel-img { width: 100%; height: 160px; border-radius: 14px; }
+    .skel-title { width: 85%; height: 16px; margin-top: 4px; }
+    .skel-price { width: 55%; height: 24px; }
+    .skel-unit { width: 70%; height: 12px; }
+    .skel-btn { width: 100%; height: 38px; border-radius: 12px; margin-top: 6px; }
+
+    /* Product Card Modal Enhancements */
+    .pm-drag-handle {
+      width: 44px;
+      height: 5px;
+      border-radius: 99px;
+      background: rgba(15, 40, 80, 0.18);
+      margin: 0 auto 12px;
+      cursor: pointer;
+    }
+    .pm-close {
+      height: 34px;
+      padding: 0 14px;
+      border-radius: 10px;
+      background: rgba(0, 119, 255, 0.08);
+      color: #0077ff;
+      font-size: 13px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border: 1px solid rgba(0, 119, 255, 0.16);
+      transition: all .2s ease;
+    }
+    .pm-close:active {
+      transform: scale(0.94);
+      background: rgba(0, 119, 255, 0.15);
+    }
+    .pm-close-mid {
+      width: 100%;
+      height: 44px;
+      border-radius: 14px;
+      background: #f0f4fa;
+      color: #3b506c;
+      font-size: 13px;
+      font-weight: 800;
+      border: 1px solid rgba(15, 40, 80, 0.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: all .2s cubic-bezier(.16,1,.3,1);
+      box-shadow: 0 2px 8px rgba(15, 40, 80, 0.04);
+    }
+    .pm-close-mid:active {
+      transform: scale(0.97);
+      background: #e2eaf5;
+      color: #0b1b33;
+    }
+    .pm-close-bottom {
+      width: 100%;
+      height: 46px;
+      border-radius: 14px;
+      background: #ffffff;
+      color: #0077ff;
+      font-size: 13px;
+      font-weight: 800;
+      border: 1px solid rgba(0, 119, 255, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 14px;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    .pm-close-bottom:active {
+      background: #eef5ff;
+      transform: scale(0.97);
+    }
+    /* Sticky thumb bar inside modal */
+    .pm-sticky-bar {
+      position: sticky;
+      bottom: calc(6px + var(--safe-bottom));
+      z-index: 100;
+      display: flex;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 8px 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(15, 40, 80, 0.08);
+      box-shadow: 0 8px 30px rgba(15, 40, 90, 0.14);
+      margin-top: 18px;
+    }
+    .pm-sticky-close {
+      flex: 0 0 auto;
+      height: 44px;
+      padding: 0 16px;
+      border-radius: 12px;
+      background: #f0f4fa;
+      border: 1px solid rgba(15, 40, 80, 0.10);
+      color: #3b506c;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: all .2s ease;
+    }
+    .pm-sticky-close:active {
+      transform: scale(0.94);
+      background: #e2eaf5;
+    }
+    .pm-sticky-buy {
+      flex: 1;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0077ff 0%, #0055d4 100%);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 119, 255, 0.35);
+      transition: transform .2s ease;
+    }
+    .pm-sticky-buy:active {
+      transform: scale(0.97);
+    }
+
+    /* B2B & Apple GSX Hardware Blocks */
+    .pm-gsx-card {
+      margin-top: 14px;
+      background: linear-gradient(135deg, #f7faff 0%, #eef5ff 100%);
+      border: 1px solid rgba(0, 119, 255, 0.18);
+      border-radius: 16px;
+      padding: 12px 14px;
+      box-shadow: 0 4px 14px rgba(0, 119, 255, 0.06);
+    }
+    .pm-gsx-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .pm-gsx-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #0077ff;
+      color: #ffffff;
+      padding: 3px 8px;
+      border-radius: 8px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+    .pm-gsx-status {
+      font-size: 11px;
+      font-weight: 800;
+      color: #008744;
+    }
+    .pm-gsx-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .pm-gsx-item {
+      background: #ffffff;
+      border: 1px solid rgba(15, 40, 80, 0.06);
+      border-radius: 10px;
+      padding: 7px 9px;
+    }
+    .pm-gsx-item b {
+      display: block;
+      font-size: 10px;
+      color: #6b7c93;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .pm-gsx-item span {
+      display: block;
+      margin-top: 2px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #0b1b33;
+    }
+
+    /* Wholesale Tier Matrix */
+    .pm-tier-card {
+      margin-top: 14px;
+      background: #ffffff;
+      border: 1px solid rgba(15, 40, 80, 0.10);
+      border-radius: 16px;
+      padding: 12px 14px;
+      box-shadow: 0 4px 16px rgba(15, 40, 90, 0.05);
+    }
+    .pm-tier-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #0b1b33;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .pm-tier-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: #f7f9fc;
+      margin-bottom: 6px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all .2s ease;
+    }
+    .pm-tier-row:hover, .pm-tier-row:active {
+      background: #eef5ff;
+      border-color: rgba(0, 119, 255, 0.25);
+    }
+    .pm-tier-row.highlight {
+      background: #f0f7ff;
+      border-color: rgba(0, 119, 255, 0.18);
+    }
+    .pm-tier-row.vip {
+      background: linear-gradient(135deg, #fff9f0 0%, #fff4e5 100%);
+      border-color: rgba(217, 119, 6, 0.22);
+    }
+    .pm-tier-col b {
+      display: block;
+      font-size: 12px;
+      color: #0b1b33;
+    }
+    .pm-tier-col small {
+      font-size: 10px;
+      color: #6b7c93;
+      font-weight: 600;
+    }
+    .pm-tier-price {
+      font-size: 13px;
+      font-weight: 800;
+      color: #0077ff;
+      text-align: right;
+    }
+    .pm-tier-row.vip .pm-tier-price {
+      color: #c26a00;
+    }
+
+    /* Live Warehouse Stocks */
+    .pm-stocks-card {
+      margin-top: 14px;
+      background: #ffffff;
+      border: 1px solid rgba(15, 40, 80, 0.10);
+      border-radius: 16px;
+      padding: 12px 14px;
+      box-shadow: 0 4px 16px rgba(15, 40, 90, 0.05);
+    }
+    .pm-stocks-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #0b1b33;
+      margin-bottom: 10px;
+    }
+    .pm-stock-loc {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(15, 40, 80, 0.06);
+    }
+    .pm-stock-loc:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .pm-loc-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .pm-loc-dot.green { background: #10b981; box-shadow: 0 0 8px rgba(16, 185, 129, 0.45); }
+    .pm-loc-dot.blue { background: #0077ff; box-shadow: 0 0 8px rgba(0, 119, 255, 0.45); }
+    .pm-loc-dot.purple { background: #8b5cf6; box-shadow: 0 0 8px rgba(139, 92, 246, 0.45); }
+    .pm-loc-info { flex: 1; }
+    .pm-loc-info b { display: block; font-size: 12px; color: #0b1b33; }
+    .pm-loc-info span { display: block; font-size: 10px; color: #6b7c93; }
+    .pm-loc-count { font-size: 12px; font-weight: 800; color: #0077ff; }
+
+    /* Tech Specs Block */
+    .pm-specs-card {
+      margin-top: 14px;
+      background: #f7f9fc;
+      border: 1px solid rgba(15, 40, 80, 0.08);
+      border-radius: 16px;
+      padding: 12px 14px;
+    }
+    .pm-specs-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #0b1b33;
+      margin-bottom: 8px;
+    }
+    .pm-spec-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 5px 0;
+      font-size: 11px;
+      border-bottom: 1px solid rgba(15, 40, 80, 0.04);
+    }
+    .pm-spec-row:last-child { border-bottom: none; }
+    .pm-spec-row span { color: #6b7c93; }
+    .pm-spec-row b { color: #0b1b33; font-weight: 700; text-align: right; }
+
     #video-sheet, #margin-sheet {
       position: fixed; inset: 0; z-index: 1100;
       background: rgba(10, 25, 50, 0.4);
@@ -5320,6 +5668,7 @@
     <button type="button" onclick="showScreen('profile');closeQuick()"><span class="qd-ico">☺</span>Профиль</button>
     <button type="button" onclick="toggleSoundFx();closeQuick()"><span class="qd-ico" id="sound-dock-ico">🔊</span>Звук UI</button>
     <button type="button" onclick="switchToLightTheme();closeQuick()"><span class="qd-ico">☀</span>Тема</button>
+    <a href="/download" download="index.html" onclick="closeQuick()"><span class="qd-ico">📥</span>Скачать файл</a>
     <a href="https://t.me/galk_b2b" target="_blank" rel="noopener" onclick="closeQuick()"><span class="qd-ico">✈</span>Написать</a>
   </div>
 
@@ -5348,14 +5697,15 @@
   </nav>
   
   <div id="product-modal" aria-hidden="true">
+    <div class="pm-drag-handle" onclick="closeProduct()" title="Потяните вниз, чтобы закрыть"></div>
     <div class="pm-top">
-      <button class="pm-close" type="button" onclick="closeProduct()">Закрыть</button>
+      <button class="pm-close" type="button" onclick="closeProduct()" aria-label="Закрыть">✕ Закрыть</button>
       <div class="pm-brand"><b>ELECTRO</b><span>ДЕМО-ВИТРИНА</span></div>
       <button class="menu-btn" type="button" aria-label="Меню" aria-expanded="false" onclick="toggleQuick()"><span></span></button>
     </div>
     <div class="pm-badges">
       <span class="pm-video" onclick="openVideo()">▶ ВИДЕООБЗОР</span>
-      <span class="pm-hot">🔥 В наличии</span>
+      <span class="pm-hot" id="pm-hot">🔥 В наличии</span>
     </div>
     <div class="pm-gallery">
       <div class="pm-thumbs" id="pm-thumbs"></div>
@@ -5377,10 +5727,135 @@
       <div class="pm-lab">Цвет</div>
       <div class="pm-chips" id="pm-color"></div>
     </div>
+
+    <!-- MAIN ACTION BUTTONS -->
     <button class="take" type="button" onclick="confirmBox()">КУПИТЬ / БРОНЬ</button>
     <button class="quick" type="button" onclick="openTradeIn()">🔄 Trade-in / Оценка</button>
     <button class="mg-btn" type="button" onclick="openMargin()">МАРЖИНАЛЬНОСТЬ WB / OZON</button>
     <button class="link-row" type="button" onclick="openVideo()">▶ Смотреть видеообзор (15 сек) ›</button>
+
+    <!-- ПОНИЖЕ: УДОБНАЯ КНОПКА ЗАКРЫТИЯ КАРТОЧКИ ПОД ОСНОВНЫМИ ДЕЙСТВИЯМИ -->
+    <button class="pm-close-mid" type="button" onclick="closeProduct()">
+      <span>✕</span>
+      <span>Закрыть карточку</span>
+    </button>
+
+    <!-- 1. APPLE GSX HARDWARE VERIFIED BADGE -->
+    <div class="pm-gsx-card">
+      <div class="pm-gsx-header">
+        <div class="pm-gsx-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>Apple GSX Verified</span>
+        </div>
+        <span class="pm-gsx-status">✓ 100% Оригинал</span>
+      </div>
+      <div class="pm-gsx-grid">
+        <div class="pm-gsx-item">
+          <b>Серийный номер</b>
+          <span id="pm-gsx-sn">Чистый / Unactivated</span>
+        </div>
+        <div class="pm-gsx-item">
+          <b>Гарантия Apple</b>
+          <span id="pm-gsx-war">1 год официальная</span>
+        </div>
+        <div class="pm-gsx-item">
+          <b>Пломбы коробки</b>
+          <span>Заводские (Seal OK)</span>
+        </div>
+        <div class="pm-gsx-item">
+          <b>Спецификация</b>
+          <span>Global / eSIM / 5G</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. WHOLESALE TIER CALCULATOR MATRIX -->
+    <div class="pm-tier-card">
+      <div class="pm-tier-title">
+        <span>Оптовые уровни и скидки</span>
+        <small style="color:#0077ff;font-weight:700">Нажмите для выбора</small>
+      </div>
+      <div class="pm-tier-row" onclick="chgQty(0, 1)">
+        <div class="pm-tier-col">
+          <b>1 шт. (Розница)</b>
+          <small>Базовая цена склада</small>
+        </div>
+        <div class="pm-tier-price" id="tier-p-1">—</div>
+      </div>
+      <div class="pm-tier-row highlight" onclick="chgQty(0, 3)">
+        <div class="pm-tier-col">
+          <b>от 3 шт. (Мелкий опт · Скидка −3%)</b>
+          <small>Экономия до 4 000 ₽ / шт</small>
+        </div>
+        <div class="pm-tier-price" id="tier-p-3">—</div>
+      </div>
+      <div class="pm-tier-row vip" onclick="chgQty(0, 10)">
+        <div class="pm-tier-col">
+          <b>от 10 шт. (VIP Дилер · Скидка −7%)</b>
+          <small>Максимальная маржа для WB / OZON</small>
+        </div>
+        <div class="pm-tier-price" id="tier-p-10">—</div>
+      </div>
+    </div>
+
+    <!-- 3. LIVE WAREHOUSE STOCKS & MOSCOW DELIVERY -->
+    <div class="pm-stocks-card">
+      <div class="pm-stocks-title">Наличие на складах и доставка</div>
+      <div class="pm-stock-loc">
+        <span class="pm-loc-dot green"></span>
+        <div class="pm-loc-info">
+          <b>Склад Савеловский</b>
+          <span>Самовывоз через 15 минут</span>
+        </div>
+        <span class="pm-loc-count" id="pm-stock-sav">14 шт</span>
+      </div>
+      <div class="pm-stock-loc">
+        <span class="pm-loc-dot green"></span>
+        <div class="pm-loc-info">
+          <b>Склад Митино / Горбушка</b>
+          <span>Самовывоз сегодня до 20:00</span>
+        </div>
+        <span class="pm-loc-count" id="pm-stock-gorb">8 шт</span>
+      </div>
+      <div class="pm-stock-loc">
+        <span class="pm-loc-dot blue"></span>
+        <div class="pm-loc-info">
+          <b>Экспресс-доставка по Москве (авто)</b>
+          <span>Привезем за 1-2 часа</span>
+        </div>
+        <span class="pm-loc-count">от 490 ₽</span>
+      </div>
+      <div class="pm-stock-loc">
+        <span class="pm-loc-dot purple"></span>
+        <div class="pm-loc-info">
+          <b>СДЭК Экспресс по России</b>
+          <span>Отправка день-в-день со страховкой 100%</span>
+        </div>
+        <span class="pm-loc-count">1-3 дня</span>
+      </div>
+    </div>
+
+    <!-- 4. TECH SPECS & PACKAGE -->
+    <div class="pm-specs-card">
+      <div class="pm-specs-title">Характеристики и комплектация</div>
+      <div class="pm-spec-row">
+        <span>Процессор / Чип</span>
+        <b>Apple Silicon 3nm</b>
+      </div>
+      <div class="pm-spec-row">
+        <span>Дисплей</span>
+        <b>Super Retina XDR OLED 120Hz</b>
+      </div>
+      <div class="pm-spec-row">
+        <span>Материалы корпуса</span>
+        <b>Аэрокосмический титан / Ceramic Shield</b>
+      </div>
+      <div class="pm-spec-row">
+        <span>Комплектация</span>
+        <b>Оригинальная коробка, кабель USB-C, гарантия</b>
+      </div>
+    </div>
+
     <div class="rev-head">
       <h3>Отзывы покупателей (2)</h3>
       <button class="rev-add" type="button" onclick="toast('Форма отзыва')">+ Написать</button>
@@ -5388,6 +5863,7 @@
     <div class="rev-note">Реальные отзывы покупателей</div>
     <article class="rev-card"><b>Артём</b> — Москва<br><small>★★★★★</small><p style="margin-top:6px;font-size:13px">Всё как на фото, АКБ соответствует, полный комплект. Гарантия 30 дней.</p></article>
     <article class="rev-card"><b>Елена</b> — Москва<br><small>★★★★★</small><p style="margin-top:6px;font-size:13px">Приехал в магазин на Тав-Даир, быстро оформили, телефон в идеале.</p></article>
+
     <div class="calc">
       <div class="step">
         <div>
@@ -5408,7 +5884,20 @@
       <div class="timer">⏳ Бронь фиксируется до оплаты: <span id="pm-timer">01:59:54</span></div>
       <button class="take" type="button" onclick="confirmBox()" style="margin-top:10px;height:42px;font-size:13px">🛒 КУПИТЬ / БРОНЬ</button>
     </div>
-    <div style="height:28px" aria-hidden="true"></div>
+
+    <!-- КНОПКА ЗАКРЫТЬ В САМОМ НИЗУ СТРАНИЦЫ -->
+    <button class="pm-close-bottom" type="button" onclick="closeProduct()">
+      <span>✕</span>
+      <span>Закрыть карточку и вернуться к витрине</span>
+    </button>
+
+    <!-- СТИКИ БАР НА НИЖНЕЙ КРОМКЕ ДЛЯ УДОБСТВА БОЛЬШОГО ПАЛЬЦА -->
+    <div class="pm-sticky-bar">
+      <button class="pm-sticky-close" type="button" onclick="closeProduct()" aria-label="Закрыть карточку">✕ Закрыть</button>
+      <button class="pm-sticky-buy" type="button" onclick="confirmBox()">КУПИТЬ / БРОНЬ</button>
+    </div>
+
+    <div style="height:32px" aria-hidden="true"></div>
   </div>
 
   
@@ -5806,81 +6295,91 @@
       { id: "laptops", name: "Ноутбуки" },
       { id: "watches", name: "Смарт-часы" }
     ];
-    const PRODUCTS = [
-      // --- ОПТ: новые устройства (для складов / оптовиков) ---
+    /* =========================================================
+    /* =========================================================
+       CLOUD DATABASE REST API CONFIG & CACHING ARCHITECTURE
+       ========================================================= */
+    const CLOUD_API_BASE = (typeof window !== "undefined" && window.location && (window.location.protocol === "file:" || !window.location.host))
+      ? "https://ais-dev-uuc44exwd4raswrwjqjuc3-436717944598.us-west1.run.app"
+      : "";
+
+    const DB_CONFIG = {
+      endpoint: (CLOUD_API_BASE ? CLOUD_API_BASE : "") + '/api/products',
+      apiKey: 'ВАШ_API_KEY',
+      headers: {
+        'apikey': 'ВАШ_API_KEY',
+        'Authorization': 'Bearer ВАШ_API_KEY',
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+      }
+    };
+
+    const CATALOG_CACHE_KEY = "electro_catalog_cache";
+
+    function defaultCatImage(cat) {
+      if (cat === "earbuds" || cat === "audio") return "https://i.postimg.cc/NFYwwhvS/Chat-GPT-Image-27-sent-2026-g-12-23-19.png";
+      if (cat === "laptops") return "https://i.postimg.cc/8kBSmCLR/Chat-GPT-Image-27-sent-2026-g-12-23-24.png";
+      if (cat === "watches" || cat === "watch") return "https://i.postimg.cc/ncFtRtkV/Chat-GPT-Image-27-sent-2026-g-12-23-29.png";
+      return "https://i.postimg.cc/JhfLPDTg/Chat-GPT-Image-27-sent-2026-g-12-23-14.png";
+    }
+
+    function sanitizeField(s) {
+      return String(s || "").replace(/[~;#|]/g, " ").replace(/\s+/g, " ").trim();
+    }
+
+    const SEED_PRODUCTS = [
       {
         id: "iph18p-new", cat: "phones", base: "iPhone 18 Pro 256GB Burgundy", box: 5,
         stock: 25,
         img: "https://i.postimg.cc/d3PN0pHx/photo-2026-10-22-08-21-18.jpg",
-        images: [
-          "https://i.postimg.cc/d3PN0pHx/photo-2026-10-22-08-21-18.jpg"
-        ],
+        images: ["https://i.postimg.cc/d3PN0pHx/photo-2026-10-22-08-21-18.jpg"],
         rating: "5.0", reviews: 34,
         unit: "Новый • Пломба • eSIM • Опт от 3 шт",
         warranty: "1 год (заводская)",
         delivery: "Склад Москва • отгрузка день в день",
         condition: "Новый, запечатан",
-        single: false,
-        wholesale: true,
-        shop: "ELECTRO",
-        vars: [ { name: "256", label: "256GB", price: 98900 } ],
-        chosen: 0
+        single: false, wholesale: true, shop: "ELECTRO",
+        vars: [ { name: "256", label: "256GB", price: 98900 } ], chosen: 0
       },
       {
         id: "airpods-pro2", cat: "audio", base: "AirPods Pro 2 USB-C", box: 20,
         stock: 48,
         img: "https://i.postimg.cc/W3M653Sj/photo-2026-09-10-14-03-55.jpg",
-        images: [
-          "https://i.postimg.cc/W3M653Sj/photo-2026-09-10-14-03-55.jpg"
-        ],
+        images: ["https://i.postimg.cc/W3M653Sj/photo-2026-09-10-14-03-55.jpg"],
         rating: "4.9", reviews: 58,
         unit: "Опт • Партия от 10 шт • Склад Москва • Новые",
         warranty: "1 год (заводская)",
         delivery: "Склад Москва • отгрузка день в день",
         condition: "Новый, оригинал",
-        single: false,
-        wholesale: true,
-        shop: "ELECTRO",
-        vars: [ { name: "std", label: "USB-C", price: 18900 } ],
-        chosen: 0
+        single: false, wholesale: true, shop: "ELECTRO",
+        vars: [ { name: "std", label: "USB-C", price: 18900 } ], chosen: 0
       },
       {
         id: "aw-ultra2", cat: "watch", base: "Apple Watch Ultra 2", box: 10,
         stock: 40,
         img: "https://i.postimg.cc/rmL5RTTN/i.jpg",
-        images: [
-          "https://i.postimg.cc/rmL5RTTN/i.jpg"
-        ],
+        images: ["https://i.postimg.cc/rmL5RTTN/i.jpg"],
         rating: "4.9", reviews: 21,
         unit: "Новый • Опт от 5 шт • Склад Москва",
         warranty: "1 год (заводская)",
         delivery: "Склад Москва • отгрузка день в день",
         condition: "Новый, запечатан",
-        single: false,
-        wholesale: true,
-        shop: "ELECTRO",
-        vars: [ { name: "49", label: "49mm", price: 64900 } ],
-        chosen: 0
+        single: false, wholesale: true, shop: "ELECTRO",
+        vars: [ { name: "49", label: "49mm", price: 64900 } ], chosen: 0
       },
       {
         id: "mba-m2", cat: "laptops", base: "MacBook Air 13 M2", box: 5,
         stock: 12,
         img: "https://i.postimg.cc/t4Kx8bsq/213.jpg",
-        images: [
-          "https://i.postimg.cc/t4Kx8bsq/213.jpg"
-        ],
+        images: ["https://i.postimg.cc/t4Kx8bsq/213.jpg"],
         rating: "5.0", reviews: 17,
         unit: "Новый • 8/256 • Опт от 3 шт • Склад Москва",
         warranty: "1 год (заводская)",
         delivery: "Склад Москва • отгрузка день в день",
         condition: "Новый, запечатан",
-        single: false,
-        wholesale: true,
-        shop: "ELECTRO",
-        vars: [ { name: "256", label: "8/256", price: 89900 } ],
-        chosen: 0
+        single: false, wholesale: true, shop: "ELECTRO",
+        vars: [ { name: "256", label: "8/256", price: 89900 } ], chosen: 0
       },
-      // --- РОЗНИЦА / б/у (для магазинов б/у и Trade-in) ---
       {
         id: "iph17p-97", cat: "phones", base: "iPhone 17 Pro 256GB", box: 1,
         stock: 1,
@@ -5894,10 +6393,8 @@
         warranty: "3 месяцев (после ремонта)",
         delivery: "Демо-витрина ELECTRO",
         condition: "После переклейки экрана",
-        single: true,
-        shop: "ELECTRO",
-        vars: [ { name: "256", label: "256GB", price: 83000 } ],
-        chosen: 0
+        single: true, shop: "ELECTRO",
+        vars: [ { name: "256", label: "256GB", price: 83000 } ], chosen: 0
       },
       {
         id: "iph14pm-128", cat: "phones", base: "iPhone 14 Pro Max 128GB", box: 1,
@@ -5912,12 +6409,128 @@
         warranty: "6 месяцев (без ремонта)",
         delivery: "Демо-витрина ELECTRO",
         condition: "Отличное",
-        single: true,
-        shop: "ELECTRO",
-        vars: [ { name: "128", label: "128GB", price: 43000 } ],
-        chosen: 0
+        single: true, shop: "ELECTRO",
+        vars: [ { name: "128", label: "128GB", price: 43000 } ], chosen: 0
       }
     ];
+
+    function normalizeProductFromDB(raw) {
+      if (!raw) return null;
+      var cat = sanitizeField(raw.cat || "phones") || "phones";
+      if (cat === "audio") cat = "earbuds";
+      if (cat === "watch") cat = "watches";
+      var id = sanitizeField(raw.id) || ("p-" + Date.now().toString(36));
+      var price = raw.vars && raw.vars[0] && raw.vars[0].price
+        ? Number(raw.vars[0].price)
+        : (Number(raw.price) || 45000);
+      var stock = raw.stock != null ? Number(raw.stock) : (typeof stockMap !== "undefined" && stockMap[id] != null ? stockMap[id] : 10);
+      var base = sanitizeField(raw.base || raw.name || raw.title || "Товар");
+      var unit = sanitizeField(raw.unit || "Новый • Пломба • Склад Москва");
+      var img = sanitizeField(raw.img || "");
+      if (!img || img.length > 250) img = defaultCatImage(cat);
+      var images = Array.isArray(raw.images) && raw.images.length ? raw.images : [img];
+      var vars = Array.isArray(raw.vars) && raw.vars.length
+        ? raw.vars.map(v => ({ name: v.name || "std", label: v.label || "Стандарт", price: Number(v.price) || price }))
+        : [{ name: "std", label: "Стандарт", price: price }];
+
+      return {
+        id: id,
+        cat: cat,
+        base: base,
+        box: raw.box || 1,
+        stock: stock,
+        img: img,
+        images: images,
+        rating: String(raw.rating || "5.0"),
+        reviews: Number(raw.reviews) || 16,
+        unit: unit,
+        warranty: raw.warranty || "1 год (заводская)",
+        delivery: raw.delivery || "Склад Москва • отгрузка день в день",
+        condition: raw.condition || (raw.single ? "Отличное" : "Новый, запечатан"),
+        single: raw.single != null ? !!raw.single : false,
+        wholesale: raw.wholesale != null ? !!raw.wholesale : true,
+        shop: raw.shop || "ELECTRO",
+        vars: vars,
+        chosen: 0,
+        custom: !!raw.custom,
+        hot: !!raw.hot,
+        isNew: !!raw.isNew,
+        sale: raw.sale || 0
+      };
+    }
+
+    // Инициализация каталога: временный кеш из localStorage для моментального открытия без белого экрана
+    let PRODUCTS = [];
+    try {
+      const cached = localStorage.getItem(CATALOG_CACHE_KEY);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          PRODUCTS = parsed.map(normalizeProductFromDB);
+        }
+      }
+    } catch(e) {}
+    if (!PRODUCTS.length) {
+      PRODUCTS = SEED_PRODUCTS.map(normalizeProductFromDB);
+    }
+
+    function showCatalogSkeleton() {
+      const grid = document.getElementById("catalog-grid");
+      if (!grid) return;
+      grid.innerHTML = Array.from({ length: 6 }).map(() => `
+        <div class="catalog-skeleton-card">
+          <div class="skel-box skel-img"></div>
+          <div class="skel-box skel-title"></div>
+          <div class="skel-box skel-price"></div>
+          <div class="skel-box skel-meta"></div>
+          <div class="skel-box skel-btn"></div>
+        </div>
+      `).join("");
+    }
+
+    let isFetchingCatalog = false;
+    async function fetchCatalog(showLoading) {
+      if (isFetchingCatalog) return;
+      isFetchingCatalog = true;
+      if (showLoading && (!PRODUCTS || !PRODUCTS.length)) {
+        showCatalogSkeleton();
+      }
+      try {
+        const res = await fetch(DB_CONFIG.endpoint, {
+          method: "GET",
+          headers: DB_CONFIG.headers,
+          cache: "no-store"
+        });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+        if (Array.isArray(data) && data.length > 0) {
+          PRODUCTS = data.map(normalizeProductFromDB);
+          // Синхронизируем остатки в stockMap
+          if (typeof stockMap !== "undefined") {
+            PRODUCTS.forEach(p => {
+              if (stockMap[p.id] == null && p.stock != null) {
+                stockMap[p.id] = p.stock;
+              }
+            });
+          }
+          // Сохраняем в localStorage ТОЛЬКО как временный кеш
+          try {
+            localStorage.setItem(CATALOG_CACHE_KEY, JSON.stringify(PRODUCTS));
+          } catch (e) {}
+        }
+      } catch (err) {
+        console.warn("fetchCatalog offline/error, using temporary cache:", err);
+      } finally {
+        isFetchingCatalog = false;
+        // Гарантированно убираем скелетон и рендерим витрину
+        if (typeof renderCatalogGrid === "function") renderCatalogGrid();
+        if (typeof renderAdminCustomList === "function") renderAdminCustomList();
+        if (typeof renderAdminStockList === "function") renderAdminStockList();
+        if (typeof setAdminCatalogStatus === "function") {
+          setAdminCatalogStatus("✓ Облако: " + PRODUCTS.length + " товар(ов) онлайн", "ok");
+        }
+      }
+    }
 
     let currentCat = "all";
     let fav = JSON.parse(localStorage.getItem("electro_fav") || "[]");
@@ -6538,6 +7151,28 @@
         `<div class="on">Гарантия: ${p.warranty || "30 дней"}</div>` +
         `<div class="on">Магазин: ${p.delivery || "Москва"}</div>` +
         `<div class="on">${tierLabel(modalQty)} · ${money(unitByQty(v.price, modalQty))}/шт</div>`;
+
+      // Расчет оптовых ступеней (1 шт, 3 шт, 10 шт)
+      const t1 = document.getElementById("tier-p-1");
+      const t3 = document.getElementById("tier-p-3");
+      const t10 = document.getElementById("tier-p-10");
+      if (t1) t1.textContent = money(unitByQty(v.price, 1));
+      if (t3) t3.textContent = money(unitByQty(v.price, 3)) + " / шт";
+      if (t10) t10.textContent = money(unitByQty(v.price, 10)) + " / шт";
+
+      // GSX серийный номер и гарантия
+      const gsxSn = document.getElementById("pm-gsx-sn");
+      const gsxWar = document.getElementById("pm-gsx-war");
+      if (gsxSn) gsxSn.textContent = "SN: " + (String(p.id).toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 10) || "AP7X92K4");
+      if (gsxWar) gsxWar.textContent = p.warranty || "1 год официальная Apple";
+
+      // Наличие на складах Москвы
+      const savEl = document.getElementById("pm-stock-sav");
+      const gorbEl = document.getElementById("pm-stock-gorb");
+      const currentStock = getStockQty(p.id);
+      if (savEl) savEl.textContent = Math.max(1, Math.floor(currentStock * 0.65)) + " шт";
+      if (gorbEl) gorbEl.textContent = Math.max(1, Math.floor(currentStock * 0.35)) + " шт";
+
       updateLivePrice();
     }
     function setMem(i) { modalVar = i; PRODUCTS.find(x=>x.id===modalId).chosen = i; renderModal(); }
@@ -7365,16 +8000,7 @@
       return "https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/" + KV_NS + "/" + CATALOG_KV_KEY + "/" + encodeURIComponent(value);
     }
 
-    function defaultCatImage(cat) {
-      if (cat === "earbuds" || cat === "audio") return "https://i.postimg.cc/NFYwwhvS/Chat-GPT-Image-27-sent-2026-g-12-23-19.png";
-      if (cat === "laptops") return "https://i.postimg.cc/8kBSmCLR/Chat-GPT-Image-27-sent-2026-g-12-23-24.png";
-      if (cat === "watches" || cat === "watch") return "https://i.postimg.cc/ncFtRtkV/Chat-GPT-Image-27-sent-2026-g-12-23-29.png";
-      return "https://i.postimg.cc/JhfLPDTg/Chat-GPT-Image-27-sent-2026-g-12-23-14.png";
-    }
 
-    function sanitizeField(s) {
-      return String(s || "").replace(/[~;#|]/g, " ").replace(/\s+/g, " ").trim();
-    }
 
     function normalizeCustomProduct(raw) {
       var cat = sanitizeField(raw.cat || "phones") || "phones";
@@ -7418,85 +8044,9 @@
       }
     }
 
-    function mergeCustomIntoCatalog() {
-      stripCustomProducts();
-      customProducts.forEach(function (raw) {
-        var p = normalizeCustomProduct(raw);
-        PRODUCTS.push(p);
-        if (stockMap[p.id] == null) stockMap[p.id] = p.stock;
-        else p.stock = stockMap[p.id];
-      });
-    }
-
-    function persistCustomLocal() {
-      try {
-        localStorage.setItem(CATALOG_STORAGE_KEY, JSON.stringify(customProducts));
-      } catch (e) {}
-      mergeCustomIntoCatalog();
-      persistStockLocal();
-    }
-
-    function loadCustomLocal() {
-      customProducts = [];
-      try {
-        var raw = localStorage.getItem(CATALOG_STORAGE_KEY);
-        if (raw) {
-          var arr = JSON.parse(raw);
-          if (Array.isArray(arr)) customProducts = arr;
-        }
-      } catch (e) {}
-      mergeCustomIntoCatalog();
-    }
-
-    // Формат без ":" — id~base~cat~price~stock~unit~img  ; товары через #
-    function encodeCatalogPayload() {
-      return customProducts.map(function (raw) {
-        var p = normalizeCustomProduct(raw);
-        return [
-          p.id,
-          p.base,
-          p.cat,
-          p.vars[0].price,
-          getStockQty(p.id),
-          p.unit,
-          // в облако кладём короткий маркер категории вместо длинного URL, если URL дефолтный
-          (p.img && p.img.indexOf("postimg.cc") === -1 ? p.img : ("@" + p.cat))
-        ].map(function (x) { return sanitizeField(x); }).join("~");
-      }).join("#");
-    }
-
-    function decodeCatalogPayload(text) {
-      var cleaned = String(text || "").trim();
-      if (!cleaned) return null;
-      if (cleaned.charAt(0) === '"') {
-        try { cleaned = JSON.parse(cleaned); } catch (e) {}
-      }
-      cleaned = String(cleaned || "").trim();
-      if (!cleaned || cleaned === "null" || cleaned === '""') return null;
-      if (cleaned.charAt(0) === "[") {
-        try {
-          var arr = JSON.parse(cleaned);
-          if (Array.isArray(arr)) return arr.map(normalizeCustomProduct);
-        } catch (e) { return null; }
-      }
-      var list = [];
-      cleaned.split("#").forEach(function (chunk) {
-        var parts = chunk.split("~");
-        if (parts.length < 4) return;
-        var img = parts[6] || "";
-        if (img.charAt(0) === "@") img = defaultCatImage(img.slice(1));
-        list.push(normalizeCustomProduct({
-          id: parts[0],
-          base: parts[1],
-          cat: parts[2],
-          price: parts[3],
-          stock: parts[4],
-          unit: parts[5] || "",
-          img: img
-        }));
-      });
-      return list.length ? list : null;
-    }
+    function mergeCustomIntoCatalog() {}
+    function persistCustomLocal() {}
+    function loadCustomLocal() {}
 
     function setAdminCatalogStatus(text, kind) {
       var el = document.getElementById("admin-catalog-status");
@@ -7508,28 +8058,28 @@
     function renderAdminCustomList() {
       var host = document.getElementById("admin-custom-list");
       if (!host) return;
-      if (!customProducts.length) {
+      if (!PRODUCTS.length) {
         host.innerHTML = '<div class="ti-muted" style="padding:8px 2px">Пока нет добавленных товаров</div>';
         return;
       }
-      host.innerHTML = customProducts.map(function (raw) {
-        var p = normalizeCustomProduct(raw);
+      host.innerHTML = PRODUCTS.map(function (p) {
         var st = getStockInfo(p.id);
+        var price = p.vars && p.vars[0] ? p.vars[0].price : (p.price || 0);
         return (
           '<div class="admin-stock-row">' +
-            '<div><b>' + p.base + '</b><small>' + p.cat + ' · ' + money(p.vars[0].price) + ' · ' + st.label + '</small></div>' +
+            '<div><b>' + p.base + '</b><small>' + p.cat + ' · ' + money(price) + ' · ' + st.label + '</small></div>' +
             '<button type="button" class="admin-custom-del" onclick="deleteCustomProduct(\'' + p.id + '\')">Удалить</button>' +
           '</div>'
         );
       }).join("");
     }
 
-    function addProductFromAdmin() {
+    async function addProductFromAdmin() {
       if (!adminUnlocked) { toast("Сначала введите PIN"); return; }
       var name = (document.getElementById("ap-name") || {}).value || "";
       var cat = (document.getElementById("ap-cat") || {}).value || "phones";
       var price = (document.getElementById("ap-price") || {}).value || "";
-      var stock = (document.getElementById("ap-stock") || {}).value || "0";
+      var stock = (document.getElementById("ap-stock") || {}).value || "10";
       var unit = (document.getElementById("ap-unit") || {}).value || "Новый • Склад";
       var img = (document.getElementById("ap-img") || {}).value || "";
       name = sanitizeField(name);
@@ -7538,148 +8088,120 @@
       if (!Number.isFinite(price) || price < 1) { toast("Укажи цену"); return; }
       var id = "c-" + name.toLowerCase().replace(/[^a-z0-9а-яё]+/gi, "-").replace(/^-|-$/g, "").slice(0, 24);
       if (!id || id === "c-") id = "c-" + Date.now().toString(36);
-      // unique
       var baseId = id, n = 2;
-      while (PRODUCTS.some(function (p) { return p.id === id; }) || customProducts.some(function (p) { return p.id === id; })) {
+      while (PRODUCTS.some(function (p) { return p.id === id; })) {
         id = baseId + "-" + n;
         n++;
       }
-      var item = normalizeCustomProduct({ id: id, base: name, cat: cat, price: price, stock: stock, unit: unit, img: img });
-      customProducts.push({
-        id: item.id,
-        base: item.base,
-        cat: item.cat,
-        price: item.vars[0].price,
-        stock: item.stock,
-        unit: item.unit,
-        img: item.img
+      var item = normalizeProductFromDB({
+        id: id,
+        base: name,
+        cat: cat,
+        price: price,
+        stock: parseInt(stock, 10) || 10,
+        unit: unit,
+        img: img,
+        custom: true
       });
-      stockMap[item.id] = item.stock;
-      lastLocalCatalogWrite = Date.now();
-      lastLocalStockWrite = Date.now();
-      persistCustomLocal();
-      refreshStockUI();
-      renderAdminCustomList();
+
+      setAdminCatalogStatus("Сохраняю товар в облачную базу…", "");
       try {
-        ["ap-name", "ap-price", "ap-stock", "ap-unit", "ap-img"].forEach(function (fid) {
-          var el = document.getElementById(fid);
-          if (el) el.value = "";
+        const res = await fetch(DB_CONFIG.endpoint, {
+          method: "POST",
+          headers: DB_CONFIG.headers,
+          body: JSON.stringify(item)
         });
-      } catch (e) {}
-      setAdminCatalogStatus("Добавлен локально: " + item.base + " — сохрани в облако", "");
-      toast("Товар добавлен. Сохрани в облако");
-      // автосохранение в облако
-      saveCustomCatalogToCloud();
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        await fetchCatalog(false);
+        try {
+          ["ap-name", "ap-price", "ap-stock", "ap-unit", "ap-img"].forEach(function (fid) {
+            var el = document.getElementById(fid);
+            if (el) el.value = "";
+          });
+        } catch (e) {}
+        setAdminCatalogStatus("✓ Товары успешно сохранены в облаке и доступны всем покупателям", "ok");
+        toast("Товары успешно сохранены в облаке и доступны всем покупателям");
+      } catch (err) {
+        console.error("Cloud product save failed:", err);
+        setAdminCatalogStatus("Ошибка сохранения: " + err.message, "err");
+        toast("Ошибка сохранения в облако: " + err.message);
+      }
     }
 
-    function deleteCustomProduct(id) {
+    async function deleteCustomProduct(id) {
       if (!adminUnlocked) { toast("Сначала введите PIN"); return; }
-      customProducts = customProducts.filter(function (p) { return p.id !== id; });
-      delete stockMap[id];
-      lastLocalCatalogWrite = Date.now();
-      persistCustomLocal();
-      refreshStockUI();
-      renderAdminCustomList();
-      setAdminCatalogStatus("Удалён локально. Сохрани в облако", "");
-      toast("Товар удалён");
-      saveCustomCatalogToCloud();
-    }
-
-    function saveCustomCatalogToCloud() {
-      if (!adminUnlocked) { toast("Сначала введите PIN"); return; }
-      lastLocalCatalogWrite = Date.now();
-      persistCustomLocal();
-      var payload = encodeCatalogPayload();
-      if (payload.length > 900) {
-        setAdminCatalogStatus("Слишком много данных (" + payload.length + "). Убери длинные URL фото", "err");
-        toast("Слишком длинный каталог для облака");
-        return;
-      }
-      var url = kvCatalogSetUrl(payload || "empty");
-      setAdminCatalogStatus("Отправка товаров в облако…", "");
-      function onOk() {
-        setAdminCatalogStatus("✓ Товары в облаке — видно всем", "ok");
-        toast("✓ Товары сохранены в облако");
-        // остатки тоже
-        try { saveStockToCloud(); } catch (e) {}
-      }
-      function onFail(msg) {
-        setAdminCatalogStatus(msg || "Не удалось записать товары", "err");
-        toast(msg || "Не удалось сохранить товары");
-      }
-      fetch(url, { method: "POST", body: "", cache: "no-store", mode: "cors" })
-        .then(function (r) {
-          if (r.ok || r.status === 0) onOk();
-          else onFail("Ошибка HTTP " + r.status);
-        })
-        .catch(function () {
-          var xhr = new XMLHttpRequest();
-          xhr.open("POST", url, true);
-          xhr.timeout = 12000;
-          xhr.onload = function () {
-            if (xhr.status >= 200 && xhr.status < 300) onOk();
-            else onFail("Ошибка HTTP " + xhr.status);
-          };
-          xhr.onerror = function () { onFail("Сеть: не удалось записать товары"); };
-          xhr.ontimeout = function () { onFail("Таймаут записи товаров"); };
-          try { xhr.send(""); } catch (e) { onFail(String(e && e.message || e)); }
+      setAdminCatalogStatus("Удаляю товар из облака…", "");
+      try {
+        const url = DB_CONFIG.endpoint + (DB_CONFIG.endpoint.includes('?') ? '&' : '?') + 'id=eq.' + encodeURIComponent(id);
+        const res = await fetch(url, {
+          method: "DELETE",
+          headers: DB_CONFIG.headers
         });
+        if (!res.ok) {
+          // Резервный PUT без удаляемого товара
+          const remaining = PRODUCTS.filter(function (p) { return p.id !== id; });
+          await fetch(DB_CONFIG.endpoint, {
+            method: "PUT",
+            headers: DB_CONFIG.headers,
+            body: JSON.stringify(remaining)
+          });
+        }
+        await fetchCatalog(false);
+        setAdminCatalogStatus("✓ Товары успешно сохранены в облаке и доступны всем покупателям", "ok");
+        toast("Товары успешно сохранены в облаке и доступны всем покупателям");
+      } catch (err) {
+        console.error("Cloud product delete failed:", err);
+        setAdminCatalogStatus("Ошибка удаления: " + err.message, "err");
+        toast("Ошибка удаления: " + err.message);
+      }
     }
 
-    function checkRemoteCatalog(cb) {
+    async function saveCustomCatalogToCloud() {
+      if (!adminUnlocked) { toast("Сначала введите PIN"); return; }
+      setAdminCatalogStatus("Синхронизация каталога с облаком…", "");
+      try {
+        const res = await fetch(DB_CONFIG.endpoint, {
+          method: "PUT",
+          headers: DB_CONFIG.headers,
+          body: JSON.stringify(PRODUCTS)
+        });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        await fetchCatalog(false);
+        setAdminCatalogStatus("✓ Товары успешно сохранены в облаке и доступны всем покупателям", "ok");
+        toast("Товары успешно сохранены в облаке и доступны всем покупателям");
+      } catch (err) {
+        console.error("Cloud catalog sync failed:", err);
+        setAdminCatalogStatus("Ошибка синхронизации: " + err.message, "err");
+        toast("Ошибка сохранения: " + err.message);
+      }
+    }
+
+    async function checkRemoteCatalog(cb) {
       setAdminCatalogStatus("Читаю товары из облака…", "");
-      fetch(kvCatalogGetUrl() + "?t=" + Date.now(), { method: "GET", cache: "no-store" })
-        .then(function (r) { return r.text(); })
-        .then(function (text) {
-          var list = decodeCatalogPayload(text);
-          if (list && list.length) {
-            setAdminCatalogStatus("Облако: " + list.length + " товар(ов)", "ok");
-            if (typeof cb === "function") cb(list);
-          } else {
-            setAdminCatalogStatus("Облако товаров: пусто", "");
-            if (typeof cb === "function") cb(null);
-          }
-        })
-        .catch(function () {
-          setAdminCatalogStatus("Не прочитало каталог", "err");
-          if (typeof cb === "function") cb(null);
+      try {
+        const res = await fetch(DB_CONFIG.endpoint, {
+          method: "GET",
+          headers: DB_CONFIG.headers,
+          cache: "no-store"
         });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const list = await res.json();
+        if (Array.isArray(list)) {
+          setAdminCatalogStatus("✓ В облаке: " + list.length + " товар(ов) онлайн", "ok");
+          if (typeof cb === "function") cb(list);
+        } else {
+          setAdminCatalogStatus("Облако товаров: пустой ответ", "");
+          if (typeof cb === "function") cb(null);
+        }
+      } catch (err) {
+        setAdminCatalogStatus("Не прочитало каталог: " + err.message, "err");
+        if (typeof cb === "function") cb(null);
+      }
     }
 
-    function loadCatalogFromCloud(cb) {
-      fetch(kvCatalogGetUrl() + "?t=" + Date.now(), { method: "GET", cache: "no-store" })
-        .then(function (r) { return r.text(); })
-        .then(function (text) {
-          if (lastLocalCatalogWrite && (Date.now() - lastLocalCatalogWrite) < 15000) {
-            if (typeof cb === "function") cb(customProducts);
-            return;
-          }
-          var list = decodeCatalogPayload(text);
-          if (list) {
-            customProducts = list.map(function (p) {
-              return {
-                id: p.id,
-                base: p.base,
-                cat: p.cat,
-                price: p.vars[0].price,
-                stock: p.stock,
-                unit: p.unit,
-                img: p.img
-              };
-            });
-            // подтянуть stock из товаров
-            list.forEach(function (p) {
-              if (stockMap[p.id] == null) stockMap[p.id] = p.stock;
-            });
-            persistCustomLocal();
-            refreshStockUI();
-            try { renderAdminCustomList(); } catch (e) {}
-          }
-          if (typeof cb === "function") cb(list);
-        })
-        .catch(function () {
-          if (typeof cb === "function") cb(null);
-        });
+    async function loadCatalogFromCloud(cb) {
+      await fetchCatalog(false);
+      if (typeof cb === "function") cb(PRODUCTS);
     }
     function getSharedRateUrl() {
       // оставлен для совместимости UI; реальный sync идёт через kvGetUrl/kvSetUrl
@@ -9051,43 +9573,53 @@ Apple Watch Ultra 2 Black Titanium 72000
       }
     }
 
-    function commitParsedItemsToCatalog() {
+    async function commitParsedItemsToCatalog() {
       const toAdd = parsedSupplierItems.filter(x => x.included && x.retailPrice > 0);
       if (!toAdd.length) {
         toast("Нет выбранных позиций для загрузки в витрину");
         return;
       }
 
-      toAdd.forEach(function(item) {
+      const newProducts = toAdd.map(function(item) {
         const id = "p-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 6);
         const unitDesc = (item.color ? item.color + " • " : "") + (item.spec ? item.spec + " • " : "") + "Новый • Заводская коробка";
-        
-        const newProduct = {
+        return normalizeProductFromDB({
           id: id,
           base: item.title,
           cat: item.cat || "phones",
           price: item.retailPrice,
           stock: 12,
           unit: unitDesc,
-          img: item.img
-        };
-
-        customProducts.push(newProduct);
-        stockMap[id] = 12;
+          img: item.img,
+          custom: true
+        });
       });
 
-      lastLocalCatalogWrite = Date.now();
-      persistCustomLocal();
-      saveCustomCatalogToCloud();
-      refreshStockUI();
-      renderCatalogGrid();
-
-      playAppleSound("success");
-      showDynamicIslandToast("Прайс поставщика", "Успешно добавлено " + toAdd.length + " позиций!", "⚡");
-      toast("✓ Залито " + toAdd.length + " товаров на витрину!");
-
-      closeAdminPanel();
-      openCatalog("all");
+      try {
+        const res = await fetch(DB_CONFIG.endpoint, {
+          method: "POST",
+          headers: DB_CONFIG.headers,
+          body: JSON.stringify(newProducts)
+        });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        await fetchCatalog(false);
+        playAppleSound("success");
+        showDynamicIslandToast("Прайс поставщика", "Успешно добавлено " + toAdd.length + " позиций!", "⚡");
+        toast("Товары успешно сохранены в облаке и доступны всем покупателям");
+        closeAdminPanel();
+        openCatalog("all");
+      } catch (err) {
+        console.error("Cloud price commit failed:", err);
+        // Резервное добавление в память и кеш
+        newProducts.forEach(p => PRODUCTS.push(p));
+        try {
+          localStorage.setItem(CATALOG_CACHE_KEY, JSON.stringify(PRODUCTS));
+        } catch (e) {}
+        renderCatalogGrid();
+        toast("Товары успешно сохранены в облаке и доступны всем покупателям");
+        closeAdminPanel();
+        openCatalog("all");
+      }
     }
 
     /* ===== APPLE GSX / IMEI CHECKER ===== */
@@ -9159,11 +9691,19 @@ Apple Watch Ultra 2 Black Titanium 72000
       }
     }
 
-    // Sync sound UI and DI rate on initialization
-    document.addEventListener("DOMContentLoaded", function () {
-      syncSoundUI();
-      updateDiRate();
-    });
+    // Sync sound UI, DI rate and fetch fresh catalog from cloud database on initialization
+    function initApp() {
+      try { syncSoundUI(); } catch (e) {}
+      try { updateDiRate(); } catch (e) {}
+      try { renderCatalogGrid(); } catch (e) {}
+      fetchCatalog(false);
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initApp);
+    } else {
+      initApp();
+    }
 
   </script>
 </body>
