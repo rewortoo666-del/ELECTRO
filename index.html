@@ -4881,7 +4881,7 @@
       font-weight: 600;
     }
   </style>
-<script src="/_aistudio-iframe.js?v=1f94f900"></script></head>
+</head>
 <body>
   <!-- SPLASH -->
   <div id="electro-splash" aria-live="polite" aria-busy="true">
@@ -5384,6 +5384,10 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
         <input type="search" id="catalog-search-input" placeholder="Поиск: iPhone 15, AirPods..." autocomplete="off" oninput="onCatalogSearch(this.value)">
         <button class="search-clear" type="button" onclick="clearCatalogSearch()" aria-label="Очистить">×</button>
+      </div>
+      <div id="offline-catalog-banner" class="offline-catalog-banner" style="display:none;align-items:center;gap:8px;margin-bottom:10px;padding:10px 12px;border-radius:12px;background:#fff8eb;border:1px solid #f59e0b;color:#92400e;font-size:12px;font-weight:700;">
+        <span>⚠️</span>
+        <span>Связь с облаком недоступна — показаны данные из локального кэша</span>
       </div>
       <div class="grid" id="catalog-grid"></div>
     </section>
@@ -6244,20 +6248,31 @@
     /* =========================================================
        CLOUD DATABASE REST API CONFIG & CACHING ARCHITECTURE
        ========================================================= */
-    const CLOUD_API_BASE = (typeof window !== "undefined" && window.location && (window.location.protocol === "file:" || !window.location.host))
-      ? "https://ais-dev-uuc44exwd4raswrwjqjuc3-436717944598.us-west1.run.app"
+    const CLOUD_API_BASE = (typeof window !== "undefined" && window.location && window.location.origin && window.location.protocol.startsWith("http"))
+      ? window.location.origin
       : "";
 
     const DB_CONFIG = {
-      endpoint: (CLOUD_API_BASE ? CLOUD_API_BASE : "") + '/api/products',
-      apiKey: 'ВАШ_API_KEY',
+      url: (CLOUD_API_BASE ? CLOUD_API_BASE : "") + "/api", // ваш адрес API
+      endpoint: (CLOUD_API_BASE ? CLOUD_API_BASE : "") + "/api/products",
+      apiKey: "YOUR_ACTUAL_API_KEY",
       headers: {
-        'apikey': 'ВАШ_API_KEY',
-        'Authorization': 'Bearer ВАШ_API_KEY',
-        'Content-Type': 'application/json',
-        'Prefer': 'return=representation'
+        "apikey": "YOUR_ACTUAL_API_KEY",              // латиница/токен без кириллицы
+        "Authorization": "Bearer YOUR_ACTUAL_API_KEY",
+        "Content-Type": "application/json",
+        "Prefer": "return=representation"
       }
     };
+
+    function validateHeaders(headers) {
+      if (!headers || typeof headers !== "object") return;
+      for (const [key, value] of Object.entries(headers)) {
+        // Проверка на наличие символов вне диапазона 0x00-0xFF
+        if (/[^\x00-\xFF]/.test(String(key)) || /[^\x00-\xFF]/.test(String(value))) {
+          throw new Error(`Недопустимые символы (кириллица) в заголовке ${key}`);
+        }
+      }
+    }
 
     const CATALOG_CACHE_KEY = "electro_catalog_cache";
 
@@ -6404,20 +6419,90 @@
       };
     }
 
-    // Инициализация каталога: временный кеш из localStorage для моментального открытия без белого экрана
-    let PRODUCTS = [];
-    try {
-      const cached = localStorage.getItem(CATALOG_CACHE_KEY);
-      if (cached) {
-        const parsed = JSON.parse(cached);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          PRODUCTS = parsed.map(normalizeProductFromDB);
+    function showOfflineBanner(show) {
+      let banner = document.getElementById("offline-catalog-banner");
+      if (!banner && show) {
+        const grid = document.getElementById("catalog-grid");
+        if (grid && grid.parentNode) {
+          banner = document.createElement("div");
+          banner.id = "offline-catalog-banner";
+          banner.className = "offline-catalog-banner";
+          banner.style.cssText = "display:none;align-items:center;gap:8px;margin-bottom:10px;padding:10px 12px;border-radius:12px;background:#fff8eb;border:1px solid #f59e0b;color:#92400e;font-size:12px;font-weight:700;";
+          banner.innerHTML = "<span>⚠️</span><span>Связь с облаком недоступна — показаны данные из локального кэша</span>";
+          grid.parentNode.insertBefore(banner, grid);
         }
       }
-    } catch(e) {}
-    if (!PRODUCTS.length) {
-      PRODUCTS = SEED_PRODUCTS.map(normalizeProductFromDB);
+      if (banner) {
+        banner.style.display = show ? "flex" : "none";
+      }
     }
+
+    function getLocalFallbackData() {
+      try {
+        const cached = localStorage.getItem(CATALOG_CACHE_KEY);
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            return parsed.map(normalizeProductFromDB).filter(Boolean);
+          }
+        }
+      } catch (e) {
+        console.error("Ошибка чтения локального кэша:", e);
+      }
+      return SEED_PRODUCTS.map(normalizeProductFromDB).filter(Boolean);
+    }
+
+    function saveToLocalStorage(product) {
+      const items = Array.isArray(product) ? product : [product];
+      items.forEach(rawItem => {
+        const normalized = normalizeProductFromDB(rawItem);
+        if (!normalized) return;
+        const existingIdx = PRODUCTS.findIndex(p => p.id === normalized.id);
+        if (existingIdx >= 0) {
+          PRODUCTS[existingIdx] = normalized;
+        } else {
+          PRODUCTS.push(normalized);
+        }
+        if (typeof stockMap !== "undefined" && normalized.stock != null) {
+          stockMap[normalized.id] = normalized.stock;
+        }
+      });
+      try {
+        localStorage.setItem(CATALOG_CACHE_KEY, JSON.stringify(PRODUCTS));
+      } catch (e) {
+        console.error("Ошибка сохранения в localStorage:", e);
+      }
+    }
+
+    async function saveProductToCloud(product) {
+      try {
+        validateHeaders(DB_CONFIG.headers);
+        const response = await fetch(`${DB_CONFIG.url}/products`, {
+          method: "POST",
+          headers: DB_CONFIG.headers,
+          body: JSON.stringify(product)
+        });
+
+        if (!response.ok) {
+          throw new Error(`Сервер отклонил сохранение: ${response.status}`);
+        }
+
+        // Сохраняем локально только при успехе на сервере
+        saveToLocalStorage(product);
+        showOfflineBanner(false);
+        toast("Сохранено в облаке");
+        return true;
+      } catch (err) {
+        console.error("Не удалось отправить товар на сервер:", err);
+        saveToLocalStorage(product);
+        showOfflineBanner(true);
+        toast("Ошибка отправки в облако! Товар сохранен только локально.");
+        return false;
+      }
+    }
+
+    // Инициализация каталога: временный кеш из localStorage для моментального открытия без белого экрана
+    let PRODUCTS = getLocalFallbackData();
 
     function showCatalogSkeleton() {
       const grid = document.getElementById("catalog-grid");
@@ -6435,21 +6520,29 @@
 
     let isFetchingCatalog = false;
     async function fetchCatalog(showLoading) {
-      if (isFetchingCatalog) return;
+      if (isFetchingCatalog) return PRODUCTS;
       isFetchingCatalog = true;
       if (showLoading && (!PRODUCTS || !PRODUCTS.length)) {
         showCatalogSkeleton();
       }
       try {
-        const res = await fetch(DB_CONFIG.endpoint, {
+        validateHeaders(DB_CONFIG.headers);
+        const response = await fetch(`${DB_CONFIG.url}/products`, {
           method: "GET",
           headers: DB_CONFIG.headers,
           cache: "no-store"
         });
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        const data = await res.json();
-        if (Array.isArray(data) && data.length > 0) {
-          PRODUCTS = data.map(normalizeProductFromDB);
+
+        if (!response.ok) {
+          throw new Error(`Ошибка сервера: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        if (!Array.isArray(data)) {
+          throw new Error("Некорректный формат данных каталога");
+        }
+        if (data.length > 0) {
+          PRODUCTS = data.map(normalizeProductFromDB).filter(Boolean);
           // Синхронизируем остатки в stockMap
           if (typeof stockMap !== "undefined") {
             PRODUCTS.forEach(p => {
@@ -6463,17 +6556,27 @@
             localStorage.setItem(CATALOG_CACHE_KEY, JSON.stringify(PRODUCTS));
           } catch (e) {}
         }
+        showOfflineBanner(false);
+        if (typeof setAdminCatalogStatus === "function") {
+          setAdminCatalogStatus("✓ Облако: " + PRODUCTS.length + " товар(ов) онлайн", "ok");
+        }
+        return data;
       } catch (err) {
-        console.warn("fetchCatalog offline/error, using temporary cache:", err);
+        console.error("Сбой загрузки каталога из облака:", err);
+        // Показываем предупреждение в UI, что данные взяты из локального кэша
+        showOfflineBanner(true);
+        const fallback = getLocalFallbackData();
+        PRODUCTS = fallback;
+        if (typeof setAdminCatalogStatus === "function") {
+          setAdminCatalogStatus("Офлайн-режим: данные из локального кэша (" + PRODUCTS.length + " шт.)", "err");
+        }
+        return fallback;
       } finally {
         isFetchingCatalog = false;
         // Гарантированно убираем скелетон и рендерим витрину
         if (typeof renderCatalogGrid === "function") renderCatalogGrid();
         if (typeof renderAdminCustomList === "function") renderAdminCustomList();
         if (typeof renderAdminStockList === "function") renderAdminStockList();
-        if (typeof setAdminCatalogStatus === "function") {
-          setAdminCatalogStatus("✓ Облако: " + PRODUCTS.length + " товар(ов) онлайн", "ok");
-        }
       }
     }
 
@@ -7655,17 +7758,25 @@
     const STOCK_STORAGE_KEY = "electro_stock_map";
     let lastLocalStockWrite = 0;
     let stockMap = {};
+
+    function getApiBaseUrl() {
+      if (typeof window !== "undefined" && window.location && window.location.origin && window.location.protocol.startsWith("http")) {
+        return window.location.origin;
+      }
+      return "";
+    }
+
     function kvGetUrl() {
-      return "https://keyvalue.immanuel.co/api/KeyVal/GetValue/" + KV_NS + "/" + KV_KEY;
+      return getApiBaseUrl() + "/api/rate";
     }
     function kvSetUrl(value) {
-      return "https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/" + KV_NS + "/" + KV_KEY + "/" + encodeURIComponent(value);
+      return getApiBaseUrl() + "/api/rate";
     }
     function kvStockGetUrl() {
-      return "https://keyvalue.immanuel.co/api/KeyVal/GetValue/" + KV_NS + "/" + STOCK_KV_KEY;
+      return getApiBaseUrl() + "/api/stock";
     }
     function kvStockSetUrl(value) {
-      return "https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/" + KV_NS + "/" + STOCK_KV_KEY + "/" + encodeURIComponent(value);
+      return getApiBaseUrl() + "/api/stock";
     }
 
     function defaultStockMap() {
@@ -7838,98 +7949,112 @@
       setStockQty(id, getStockQty(id) + delta);
     }
 
-    function saveStockToCloud() {
+    async function saveStockToCloud() {
       if (!adminUnlocked) { toast("Сначала введите PIN"); return; }
       lastLocalStockWrite = Date.now();
       persistStockLocal();
-      var payload = encodeStockPayload();
-      var url = kvStockSetUrl(payload);
       setAdminStockStatus("Отправка остатков в облако…", "");
-      function onOk() {
+
+      try {
+        const res = await fetch(kvStockSetUrl(), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(stockMap),
+          cache: "no-store"
+        });
+        if (!res.ok) throw new Error("HTTP " + res.status);
         setAdminStockStatus("✓ Остатки в облаке — видно всем клиентам", "ok");
         toast("✓ Остатки сохранены в облако");
         try { checkRemoteStock(); } catch (e) {}
-      }
-      function onFail(msg) {
-        setAdminStockStatus(msg || "Сеть: не удалось записать остатки", "err");
-        toast(msg || "Не удалось записать остатки");
-      }
-      // 1) fetch (как надёжный путь)
-      try {
-        fetch(url, { method: "POST", body: "", cache: "no-store", mode: "cors" })
-          .then(function (r) {
-            if (r.ok || r.status === 0) { onOk(); return; }
-            // 2) fallback XHR
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", url, true);
-            xhr.timeout = 12000;
-            xhr.onload = function () {
-              if (xhr.status >= 200 && xhr.status < 300) onOk();
-              else onFail("Ошибка записи HTTP " + xhr.status);
-            };
-            xhr.onerror = function () { onFail("Сеть: не удалось записать остатки"); };
-            xhr.ontimeout = function () { onFail("Таймаут записи остатков"); };
-            try { xhr.send(""); } catch (e2) { onFail(String(e2 && e2.message || e2)); }
-          })
-          .catch(function () {
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", url, true);
-            xhr.timeout = 12000;
-            xhr.onload = function () {
-              if (xhr.status >= 200 && xhr.status < 300) onOk();
-              else onFail("Ошибка записи HTTP " + xhr.status);
-            };
-            xhr.onerror = function () { onFail("Сеть: не удалось записать остатки"); };
-            xhr.ontimeout = function () { onFail("Таймаут записи остатков"); };
-            try { xhr.send(""); } catch (e3) { onFail(String(e3 && e3.message || e3)); }
-          });
-      } catch (e) {
-        onFail(String(e && e.message || e));
+      } catch (err) {
+        // Fallback к external KV если локальный endpoint недоступен
+        try {
+          const payload = encodeStockPayload();
+          const fallbackUrl = "https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/" + KV_NS + "/" + STOCK_KV_KEY + "/" + encodeURIComponent(payload);
+          await fetch(fallbackUrl, { method: "POST", body: "", cache: "no-store", mode: "cors" });
+          setAdminStockStatus("✓ Остатки в облаке — видно всем клиентам", "ok");
+          toast("✓ Остатки сохранены в облако");
+          try { checkRemoteStock(); } catch (e) {}
+        } catch (e2) {
+          console.error("Не удалось сохранить остатки в облако:", err);
+          setAdminStockStatus("Ошибка сохранения: " + err.message, "err");
+          toast("Не удалось записать остатки в облако");
+        }
       }
     }
 
-    function checkRemoteStock(cb) {
+    async function checkRemoteStock(cb) {
       setAdminStockStatus("Читаю остатки из облака…", "");
-      fetch(kvStockGetUrl() + "?t=" + Date.now(), { method: "GET", cache: "no-store" })
-        .then(function (r) { return r.text(); })
-        .then(function (text) {
-          var map = decodeStockPayload(text);
-          if (map) {
-            var count = Object.keys(map).length;
+      try {
+        const res = await fetch(kvStockGetUrl() + "?t=" + Date.now(), { method: "GET", cache: "no-store" });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const map = await res.json();
+        if (map && typeof map === "object") {
+          const count = Object.keys(map).length;
+          setAdminStockStatus("Облако: " + count + " позиций", "ok");
+          if (typeof cb === "function") cb(map);
+          return map;
+        }
+      } catch (err) {
+        // Fallback к external KV
+        try {
+          const fallbackUrl = "https://keyvalue.immanuel.co/api/KeyVal/GetValue/" + KV_NS + "/" + STOCK_KV_KEY + "?t=" + Date.now();
+          const res2 = await fetch(fallbackUrl, { method: "GET", cache: "no-store" });
+          const text = await res2.text();
+          const map2 = decodeStockPayload(text);
+          if (map2) {
+            const count = Object.keys(map2).length;
             setAdminStockStatus("Облако: " + count + " позиций", "ok");
-            if (typeof cb === "function") cb(map);
-          } else {
-            setAdminStockStatus("Облако остатков: пусто", "err");
-            if (typeof cb === "function") cb(null);
+            if (typeof cb === "function") cb(map2);
+            return map2;
           }
-        })
-        .catch(function () {
-          setAdminStockStatus("Не прочитало остатки", "err");
-          if (typeof cb === "function") cb(null);
-        });
+        } catch (e2) {}
+        setAdminStockStatus("Не прочитало остатки: " + err.message, "err");
+        if (typeof cb === "function") cb(null);
+        return null;
+      }
     }
 
-    function loadStockFromCloud(cb) {
-      fetch(kvStockGetUrl() + "?t=" + Date.now(), { method: "GET", cache: "no-store" })
-        .then(function (r) { return r.text(); })
-        .then(function (text) {
-          if (lastLocalStockWrite && (Date.now() - lastLocalStockWrite) < 15000) {
-            if (typeof cb === "function") cb(stockMap);
-            return;
-          }
-          var map = decodeStockPayload(text);
-          if (map) {
+    async function loadStockFromCloud(cb) {
+      try {
+        if (lastLocalStockWrite && (Date.now() - lastLocalStockWrite) < 15000) {
+          if (typeof cb === "function") cb(stockMap);
+          return stockMap;
+        }
+        const res = await fetch(kvStockGetUrl() + "?t=" + Date.now(), { method: "GET", cache: "no-store" });
+        if (res.ok) {
+          const map = await res.json();
+          if (map && typeof map === "object") {
             Object.keys(map).forEach(function (id) {
-              stockMap[id] = map[id];
+              const n = parseInt(map[id], 10);
+              if (Number.isFinite(n) && n >= 0) stockMap[id] = n;
             });
             persistStockLocal();
             refreshStockUI();
+            if (typeof cb === "function") cb(stockMap);
+            return stockMap;
           }
-          if (typeof cb === "function") cb(map);
-        })
-        .catch(function () {
-          if (typeof cb === "function") cb(null);
-        });
+        }
+      } catch (e) {
+        // Fallback к external KV
+        try {
+          const fallbackUrl = "https://keyvalue.immanuel.co/api/KeyVal/GetValue/" + KV_NS + "/" + STOCK_KV_KEY + "?t=" + Date.now();
+          const res2 = await fetch(fallbackUrl, { method: "GET", cache: "no-store" });
+          const text = await res2.text();
+          const map2 = decodeStockPayload(text);
+          if (map2) {
+            Object.keys(map2).forEach(function (id) {
+              stockMap[id] = map2[id];
+            });
+            persistStockLocal();
+            refreshStockUI();
+            if (typeof cb === "function") cb(stockMap);
+            return stockMap;
+          }
+        } catch (e2) {}
+      }
+      if (typeof cb === "function") cb(null);
+      return null;
     }
 
     /* ===== CUSTOM CATALOG (admin-added products via cloud) ===== */
@@ -8050,13 +8175,8 @@
       });
 
       setAdminCatalogStatus("Сохраняю товар в облачную базу…", "");
-      try {
-        const res = await fetch(DB_CONFIG.endpoint, {
-          method: "POST",
-          headers: DB_CONFIG.headers,
-          body: JSON.stringify(item)
-        });
-        if (!res.ok) throw new Error("HTTP " + res.status);
+      const savedInCloud = await saveProductToCloud(item);
+      if (savedInCloud) {
         await fetchCatalog(false);
         try {
           ["ap-name", "ap-price", "ap-stock", "ap-unit", "ap-img"].forEach(function (fid) {
@@ -8064,12 +8184,12 @@
             if (el) el.value = "";
           });
         } catch (e) {}
-        setAdminCatalogStatus("✓ Товары успешно сохранены в облаке и доступны всем покупателям", "ok");
-        toast("Товары успешно сохранены в облаке и доступны всем покупателям");
-      } catch (err) {
-        console.error("Cloud product save failed:", err);
-        setAdminCatalogStatus("Ошибка сохранения: " + err.message, "err");
-        toast("Ошибка сохранения в облако: " + err.message);
+        setAdminCatalogStatus("✓ Сохранено в облаке", "ok");
+      } else {
+        if (typeof renderCatalogGrid === "function") renderCatalogGrid();
+        if (typeof renderAdminCustomList === "function") renderAdminCustomList();
+        if (typeof renderAdminStockList === "function") renderAdminStockList();
+        setAdminCatalogStatus("Ошибка отправки в облако! Товар сохранен только локально.", "err");
       }
     }
 
@@ -8077,7 +8197,9 @@
       if (!adminUnlocked) { toast("Сначала введите PIN"); return; }
       setAdminCatalogStatus("Удаляю товар из облака…", "");
       try {
-        const url = DB_CONFIG.endpoint + (DB_CONFIG.endpoint.includes('?') ? '&' : '?') + 'id=eq.' + encodeURIComponent(id);
+        validateHeaders(DB_CONFIG.headers);
+        const baseUrl = `${DB_CONFIG.url}/products`;
+        const url = baseUrl + (baseUrl.includes('?') ? '&' : '?') + 'id=eq.' + encodeURIComponent(id);
         const res = await fetch(url, {
           method: "DELETE",
           headers: DB_CONFIG.headers
@@ -8085,17 +8207,20 @@
         if (!res.ok) {
           // Резервный PUT без удаляемого товара
           const remaining = PRODUCTS.filter(function (p) { return p.id !== id; });
-          await fetch(DB_CONFIG.endpoint, {
+          const putRes = await fetch(baseUrl, {
             method: "PUT",
             headers: DB_CONFIG.headers,
             body: JSON.stringify(remaining)
           });
+          if (!putRes.ok) {
+            throw new Error(`Сервер отклонил сохранение: ${putRes.status}`);
+          }
         }
         await fetchCatalog(false);
-        setAdminCatalogStatus("✓ Товары успешно сохранены в облаке и доступны всем покупателям", "ok");
-        toast("Товары успешно сохранены в облаке и доступны всем покупателям");
+        setAdminCatalogStatus("✓ Сохранено в облаке", "ok");
+        toast("Сохранено в облаке");
       } catch (err) {
-        console.error("Cloud product delete failed:", err);
+        console.error("Не удалось отправить товар на сервер:", err);
         setAdminCatalogStatus("Ошибка удаления: " + err.message, "err");
         toast("Ошибка удаления: " + err.message);
       }
@@ -8105,31 +8230,38 @@
       if (!adminUnlocked) { toast("Сначала введите PIN"); return; }
       setAdminCatalogStatus("Синхронизация каталога с облаком…", "");
       try {
-        const res = await fetch(DB_CONFIG.endpoint, {
+        validateHeaders(DB_CONFIG.headers);
+        const response = await fetch(`${DB_CONFIG.url}/products`, {
           method: "PUT",
           headers: DB_CONFIG.headers,
           body: JSON.stringify(PRODUCTS)
         });
-        if (!res.ok) throw new Error("HTTP " + res.status);
+        if (!response.ok) {
+          throw new Error(`Сервер отклонил сохранение: ${response.status}`);
+        }
+        saveToLocalStorage(PRODUCTS);
         await fetchCatalog(false);
-        setAdminCatalogStatus("✓ Товары успешно сохранены в облаке и доступны всем покупателям", "ok");
-        toast("Товары успешно сохранены в облаке и доступны всем покупателям");
+        setAdminCatalogStatus("✓ Сохранено в облаке", "ok");
+        toast("Сохранено в облаке");
       } catch (err) {
-        console.error("Cloud catalog sync failed:", err);
-        setAdminCatalogStatus("Ошибка синхронизации: " + err.message, "err");
-        toast("Ошибка сохранения: " + err.message);
+        console.error("Не удалось отправить товар на сервер:", err);
+        saveToLocalStorage(PRODUCTS);
+        showOfflineBanner(true);
+        setAdminCatalogStatus("Ошибка отправки в облако! Товар сохранен только локально.", "err");
+        toast("Ошибка отправки в облако! Товар сохранен только локально.");
       }
     }
 
     async function checkRemoteCatalog(cb) {
       setAdminCatalogStatus("Читаю товары из облака…", "");
       try {
-        const res = await fetch(DB_CONFIG.endpoint, {
+        validateHeaders(DB_CONFIG.headers);
+        const res = await fetch(`${DB_CONFIG.url}/products`, {
           method: "GET",
           headers: DB_CONFIG.headers,
           cache: "no-store"
         });
-        if (!res.ok) throw new Error("HTTP " + res.status);
+        if (!res.ok) throw new Error(`Ошибка сервера: ${res.status} ${res.statusText}`);
         const list = await res.json();
         if (Array.isArray(list)) {
           setAdminCatalogStatus("✓ В облаке: " + list.length + " товар(ов) онлайн", "ok");
@@ -8139,6 +8271,7 @@
           if (typeof cb === "function") cb(null);
         }
       } catch (err) {
+        console.error("Сбой загрузки каталога из облака:", err);
         setAdminCatalogStatus("Не прочитало каталог: " + err.message, "err");
         if (typeof cb === "function") cb(null);
       }
@@ -8221,7 +8354,7 @@
       applyRate();
     }
 
-    function persistRateEverywhere(rate) {
+    async function persistRateEverywhere(rate) {
       const meta = { rate: Number(rate), updatedAt: new Date().toISOString(), updatedBy: "admin" };
       try {
         localStorage.setItem(RATE_STORAGE_KEY, String(rate));
@@ -8230,38 +8363,31 @@
         localStorage.setItem("electro_usd_rate", String(rate));
       } catch(e) {}
       setAdminSyncStatus("Отправка в облако…", "");
-      var url = kvSetUrl(rate);
       try {
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", url, true);
-        xhr.timeout = 12000;
-        xhr.onload = function() {
-          if (xhr.status >= 200 && xhr.status < 300) {
-            checkRemoteRate(function(remote) {
-              if (Number(remote) === Number(rate)) {
-                setAdminSyncStatus("✓ В облаке: " + remote + " — видно всем", "ok");
-                toast("✓ Курс общий для всех: " + rate);
-              } else {
-                setAdminSyncStatus("Облако ответило: " + remote, "err");
-                toast("Облако: " + remote);
-              }
-            });
-          } else {
-            setAdminSyncStatus("Ошибка записи HTTP " + xhr.status, "err");
-            toast("Ошибка записи: " + xhr.status);
-          }
-        };
-        xhr.onerror = function() {
+        const res = await fetch(kvSetUrl(rate), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ rate: Number(rate) }),
+          cache: "no-store"
+        });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json().catch(function() { return {}; });
+        const val = Number(data.rate || rate);
+        setAdminSyncStatus("✓ В облаке: " + val.toFixed(2) + " ₽ — видно всем", "ok");
+        toast("✓ Курс общий для всех: " + val.toFixed(2) + " ₽");
+        try { checkRemoteRate(); } catch(e) {}
+      } catch(e) {
+        // Fallback к external KV
+        try {
+          var fallbackUrl = "https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/" + KV_NS + "/" + KV_KEY + "/" + encodeURIComponent(rate);
+          await fetch(fallbackUrl, { method: "POST", body: "", cache: "no-store", mode: "cors" });
+          setAdminSyncStatus("✓ В облаке: " + Number(rate).toFixed(2) + " ₽ — видно всем", "ok");
+          toast("✓ Курс общий для всех: " + Number(rate).toFixed(2) + " ₽");
+          try { checkRemoteRate(); } catch(e) {}
+        } catch(e2) {
           setAdminSyncStatus("Сеть: не удалось записать", "err");
           toast("Не удалось записать в облако");
-        };
-        xhr.ontimeout = function() {
-          setAdminSyncStatus("Таймаут записи", "err");
-          toast("Таймаут записи");
-        };
-        xhr.send();
-      } catch(e) {
-        setAdminSyncStatus(String(e && e.message || e), "err");
+        }
       }
     }
 
@@ -8281,26 +8407,46 @@
       setAdminSyncStatus("Читаю облако…", "");
       var url = kvGetUrl() + "?t=" + Date.now();
       fetch(url, { method: "GET", cache: "no-store", headers: { "Accept": "application/json" } })
-        .then(function(r){ return r.text(); })
-        .then(function(text){
-          // API возвращает JSON-строку: "90"
-          var cleaned = String(text || "").trim();
-          if (cleaned.charAt(0) === '"') {
-            try { cleaned = JSON.parse(cleaned); } catch(e) {}
-          }
-          var n = parseFloat(cleaned);
+        .then(function(r){
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          return r.json();
+        })
+        .then(function(data){
+          var n = null;
+          if (typeof data === "number") n = data;
+          else if (data && typeof data === "object" && data.rate != null) n = parseFloat(data.rate);
+          else if (typeof data === "string") n = parseFloat(data);
           if (rem) rem.textContent = Number.isFinite(n) ? (n.toFixed(2) + " ₽") : "—";
           if (Number.isFinite(n)) {
-            setAdminSyncStatus("Облако отвечает: " + n.toFixed(2), "ok");
+            setAdminSyncStatus("✓ В облаке: " + n.toFixed(2) + " ₽", "ok");
           } else {
             setAdminSyncStatus("Облако: пусто/ошибка", "err");
           }
           if (typeof cb === "function") cb(Number.isFinite(n) ? n : null);
         })
         .catch(function(){
-          if (rem) rem.textContent = "ошибка";
-          setAdminSyncStatus("Не прочитало облако", "err");
-          if (typeof cb === "function") cb(null);
+          // Fallback к external KV
+          fetch("https://keyvalue.immanuel.co/api/KeyVal/GetValue/" + KV_NS + "/" + KV_KEY + "?t=" + Date.now(), { method: "GET", cache: "no-store" })
+            .then(function(r){ return r.text(); })
+            .then(function(text){
+              var cleaned = String(text || "").trim();
+              if (cleaned.charAt(0) === '"') {
+                try { cleaned = JSON.parse(cleaned); } catch(e) {}
+              }
+              var n = parseFloat(cleaned);
+              if (rem) rem.textContent = Number.isFinite(n) ? (n.toFixed(2) + " ₽") : "—";
+              if (Number.isFinite(n)) {
+                setAdminSyncStatus("✓ В облаке: " + n.toFixed(2) + " ₽", "ok");
+              } else {
+                setAdminSyncStatus("Облако: пусто/ошибка", "err");
+              }
+              if (typeof cb === "function") cb(Number.isFinite(n) ? n : null);
+            })
+            .catch(function(){
+              if (rem) rem.textContent = "ошибка";
+              setAdminSyncStatus("Не прочитало облако", "err");
+              if (typeof cb === "function") cb(null);
+            });
         });
     }
 
@@ -8341,19 +8487,35 @@
         if (typeof cb === "function") cb(currentRate);
       }
       // читаем общее облако
-      fetch(kvGetUrl() + "?t=" + Date.now(), { method: "GET", cache: "no-store" })
-        .then(function(r){ return r.text(); })
-        .then(function(text){
-          var cleaned = String(text || "").trim();
-          if (cleaned.charAt(0) === '"') {
-            try { cleaned = JSON.parse(cleaned); } catch(e) {}
-          }
-          var n = parseFloat(cleaned);
+      fetch(kvGetUrl() + "?t=" + Date.now(), { method: "GET", cache: "no-store", headers: { "Accept": "application/json" } })
+        .then(function(r){
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          return r.json();
+        })
+        .then(function(data){
+          var n = null;
+          if (typeof data === "number") n = data;
+          else if (data && typeof data === "object" && data.rate != null) n = parseFloat(data.rate);
+          else if (typeof data === "string") n = parseFloat(data);
           if (Number.isFinite(n) && n >= 50 && n <= 200) finish(n);
           else finish(loaded != null ? loaded : currentRate);
         })
         .catch(function(){
-          finish(loaded != null ? loaded : currentRate);
+          // Fallback
+          fetch("https://keyvalue.immanuel.co/api/KeyVal/GetValue/" + KV_NS + "/" + KV_KEY + "?t=" + Date.now(), { method: "GET", cache: "no-store" })
+            .then(function(r){ return r.text(); })
+            .then(function(text){
+              var cleaned = String(text || "").trim();
+              if (cleaned.charAt(0) === '"') {
+                try { cleaned = JSON.parse(cleaned); } catch(e) {}
+              }
+              var n = parseFloat(cleaned);
+              if (Number.isFinite(n) && n >= 50 && n <= 200) finish(n);
+              else finish(loaded != null ? loaded : currentRate);
+            })
+            .catch(function(){
+              finish(loaded != null ? loaded : currentRate);
+            });
         });
     }
 
@@ -8386,6 +8548,7 @@
       const i = document.getElementById("rate-input");
       if (d) d.textContent = currentRate.toFixed(2);
       if (i) i.value = currentRate;
+      try { updateDiRate(); } catch (e) {}
     }
 
     function refreshAllPrices() {
@@ -9540,31 +9703,24 @@ Apple Watch Ultra 2 Black Titanium 72000
         });
       });
 
-      try {
-        const res = await fetch(DB_CONFIG.endpoint, {
-          method: "POST",
-          headers: DB_CONFIG.headers,
-          body: JSON.stringify(newProducts)
-        });
-        if (!res.ok) throw new Error("HTTP " + res.status);
+      const savedInCloud = await saveProductToCloud(newProducts);
+      if (savedInCloud) {
         await fetchCatalog(false);
         playAppleSound("success");
         showDynamicIslandToast("Прайс поставщика", "Успешно добавлено " + toAdd.length + " позиций!", "⚡");
-        toast("Товары успешно сохранены в облаке и доступны всем покупателям");
-        closeAdminPanel();
-        openCatalog("all");
-      } catch (err) {
-        console.error("Cloud price commit failed:", err);
-        // Резервное добавление в память и кеш
-        newProducts.forEach(p => PRODUCTS.push(p));
-        try {
-          localStorage.setItem(CATALOG_CACHE_KEY, JSON.stringify(PRODUCTS));
-        } catch (e) {}
+        if (typeof setAdminCatalogStatus === "function") {
+          setAdminCatalogStatus("✓ Сохранено в облаке", "ok");
+        }
+      } else {
         renderCatalogGrid();
-        toast("Товары успешно сохранены в облаке и доступны всем покупателям");
-        closeAdminPanel();
-        openCatalog("all");
+        if (typeof renderAdminCustomList === "function") renderAdminCustomList();
+        if (typeof renderAdminStockList === "function") renderAdminStockList();
+        if (typeof setAdminCatalogStatus === "function") {
+          setAdminCatalogStatus("Ошибка отправки в облако! Товар сохранен только локально.", "err");
+        }
       }
+      closeAdminPanel();
+      openCatalog("all");
     }
 
     /* ===== APPLE GSX / IMEI CHECKER ===== */
@@ -9636,12 +9792,21 @@ Apple Watch Ultra 2 Black Titanium 72000
       }
     }
 
-    // Sync sound UI, DI rate and fetch fresh catalog from cloud database on initialization
+    // Sync sound UI, DI rate, stock, exchange rate and fetch fresh catalog from cloud on initialization
     function initApp() {
       try { syncSoundUI(); } catch (e) {}
       try { updateDiRate(); } catch (e) {}
+      try { initStockMap(); } catch (e) {}
       try { renderCatalogGrid(); } catch (e) {}
+      try { loadRateFromSources(); } catch (e) {}
+      try { loadStockFromCloud(); } catch (e) {}
       fetchCatalog(false);
+
+      // Фоновая авто-синхронизация каждые 15 сек для всех клиентов (курс, остатки, каталог)
+      setInterval(function () {
+        try { loadRateFromSources(); } catch (e) {}
+        try { loadStockFromCloud(); } catch (e) {}
+      }, 15000);
     }
 
     if (document.readyState === "loading") {
