@@ -7584,43 +7584,98 @@
       const tkDoc = document.getElementById("tk-doc").value.trim();
       const busStand = document.getElementById("bus-stand").value.trim();
       const busPlate = document.getElementById("bus-plate").value.trim();
+      const deliveryAddress = pvz || tkDoc || busStand || (shipMode === "pickup" ? "Самовывоз" : (city || "Москва"));
+
+      const orderSum = Number(cartSum()) || 0;
+      const orderId = "EL-" + Date.now().toString(36).toUpperCase() + "-" + Math.floor(100 + Math.random() * 900);
+
+      let tgUser = null;
+      try {
+        if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
+          tgUser = tg.initDataUnsafe.user;
+        }
+      } catch(e) {}
 
       /*
        * Важно:
-       * Бот принимает items/cart, а внутри каждого товара понимает
-       * title/name, qty/boxes и total/amount.
+       * Бот принимает items / cart / products, а внутри каждого товара понимает
+       * id, product_id, title/name, qty/boxes/count и total/amount/price.
        */
-      const items = Object.values(cart).map(function(i) {
+      const items = Object.entries(cart).map(function([key, i], idx) {
         const qty = Math.max(1, Number(i.qty) || 1);
         const total = Math.max(0, Number(i.total) || 0);
+        const unitPrice = qty ? Math.round(total / qty) : total;
+        const prodId = String(i.id || key.split("-")[0] || ("item-" + (idx + 1)));
+        const titleStr = String(i.title || "Товар").slice(0, 200);
         return {
-          name: String(i.title || "Товар").slice(0, 200),
-          title: String(i.title || "Товар").slice(0, 200),
+          id: prodId,
+          product_id: prodId,
+          item_id: prodId,
+          name: titleStr,
+          title: titleStr,
+          product: titleStr,
           qty: qty,
+          count: qty,
+          quantity: qty,
           boxes: qty,
           amount: total,
           total: total,
-          unit_price: qty ? total / qty : total,
-          price: qty ? total / qty : total,
-          meta: String(i.meta || "").slice(0, 200)
+          total_price: total,
+          sum: total,
+          unit_price: unitPrice,
+          price: unitPrice,
+          cost: unitPrice,
+          meta: String(i.meta || "").slice(0, 200),
+          variant: String(i.meta || "").slice(0, 200),
+          color: String(i.color || "").slice(0, 100)
         };
       });
 
       const payload = {
+        id: orderId,
+        order_id: orderId,
+        number: orderId,
         type: "order",
+        action: "order",
+        event: "order",
+        channel: "Store",
         version: 2,
+        status: "new",
+
+        user: tgUser ? {
+          id: tgUser.id,
+          user_id: tgUser.id,
+          username: tgUser.username || "",
+          first_name: tgUser.first_name || "",
+          last_name: tgUser.last_name || ""
+        } : null,
+        user_id: tgUser ? tgUser.id : null,
+        chat_id: tgUser ? tgUser.id : null,
+        username: (tgUser && tgUser.username) ? tgUser.username : "",
 
         name: name,
+        client_name: name,
+        fio: name,
+        buyer_name: name,
         phone: phone,
+        telephone: phone,
+        buyer_phone: phone,
+        phone_clean: phone.replace(/[^\d+]/g, ""),
         city: city,
 
         ship: shipLabel,
+        shipping: shipLabel,
+        delivery_method: shipLabel,
+        delivery_type: shipLabel,
         pvz: pvz,
+        address: deliveryAddress,
 
         delivery: {
           method: shipLabel,
+          type: shipLabel,
           city: city,
-          address: pvz || tkDoc || busStand || (shipMode === "pickup" ? "Самовывоз" : ""),
+          pvz: pvz,
+          address: deliveryAddress,
           tk_fio: tkFio,
           tk_doc: tkDoc,
           bus_stand: busStand,
@@ -7629,10 +7684,16 @@
 
         items: items,
         cart: items,
-        total: Number(cartSum()) || 0,
-        total_sum: Number(cartSum()) || 0,
+        products: items,
+        total: orderSum,
+        total_sum: orderSum,
+        total_price: orderSum,
+        sum: orderSum,
+        amount: orderSum,
 
-        created_at: new Date().toISOString()
+        created_at: new Date().toISOString(),
+        date: new Date().toLocaleString("ru-RU"),
+        timestamp: Date.now()
       };
 
       let serialized = "";
@@ -7642,6 +7703,16 @@
         toast("Не удалось подготовить заказ");
         return;
       }
+
+      // Фоновое сохранение в /api/orders для синхронизации
+      try {
+        fetch("/api/orders", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: serialized,
+          keepalive: true
+        }).catch(function(){});
+      } catch(e) {}
 
       /*
        * Telegram WebApp передаёт это событие прямо боту.
@@ -7658,11 +7729,13 @@
 
       Object.values(cart).forEach(function(i) {
         orders.unshift({
-          id: Date.now() + Math.random(),
+          id: orderId,
+          order_id: orderId,
           product: i.title,
           price: i.total,
           qty: i.qty,
-          date: new Date().toLocaleString("ru-RU")
+          date: new Date().toLocaleString("ru-RU"),
+          status: "В обработке"
         });
       });
 
@@ -7672,7 +7745,7 @@
       saveCart();
       updateCartBadge();
       hideCheckout();
-      try { electroLeadEvent("order", { total: Number(cartSum()) || 0 }); } catch(e) {}
+      try { electroLeadEvent("order", { id: orderId, total: orderSum, items: items.length }); } catch(e) {}
       toast("Заказ отправлен в Telegram-бот");
     }
     updateCartBadge();
@@ -8732,41 +8805,151 @@
 
       const targetName = p ? (p.base + (p.article ? " " + p.article : "")) : "—";
       const targetPrice = p ? displayPrice(p.vars[modalVar || 0].price) : 0;
+      const topupVal = Number(r.topup) || 0;
+      const estimateVal = Number(r.value) || 0;
+      const orderId = "TI-" + Date.now().toString(36).toUpperCase() + "-" + Math.floor(100 + Math.random() * 900);
+
+      const tg = window.Telegram && window.Telegram.WebApp;
+      let tgUser = null;
+      try {
+        if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
+          tgUser = tg.initDataUnsafe.user;
+        }
+      } catch(e) {}
+
+      const summaryText = (document.getElementById("ti-summary") || {}).textContent || "";
+
+      const tradeinItem = {
+        id: "tradein-" + (p ? p.id : "dev"),
+        product_id: p ? p.id : "tradein",
+        item_id: p ? p.id : "tradein",
+        name: "Trade-In: " + r.model + " ➔ " + targetName,
+        title: "Trade-In: " + r.model + " ➔ " + targetName,
+        product: "Trade-In: " + r.model + " ➔ " + targetName,
+        qty: 1,
+        count: 1,
+        boxes: 1,
+        quantity: 1,
+        price: topupVal,
+        unit_price: topupVal,
+        amount: topupVal,
+        total: topupVal,
+        total_price: topupVal,
+        sum: topupVal,
+        meta: "Оценка " + r.model + ": " + (estimateVal ? money(estimateVal) : "0 ₽") + " • Доплата: " + (topupVal ? money(topupVal) : "0 ₽")
+      };
 
       const payload = {
+        id: orderId,
+        order_id: orderId,
+        number: orderId,
         type: "in_trade",
+        action: "in_trade",
+        event: "in_trade",
         channel: "In-Trade",
-        name: name || "Клиент In-Trade",
+        version: 2,
+        status: "new",
+
+        user: tgUser ? {
+          id: tgUser.id,
+          user_id: tgUser.id,
+          username: tgUser.username || "",
+          first_name: tgUser.first_name || "",
+          last_name: tgUser.last_name || ""
+        } : null,
+        user_id: tgUser ? tgUser.id : null,
+        chat_id: tgUser ? tgUser.id : null,
+        username: (tgUser && tgUser.username) ? tgUser.username : "",
+
+        name: name || (tgUser ? [tgUser.first_name, tgUser.last_name].filter(Boolean).join(" ") : "") || "Клиент In-Trade",
+        client_name: name || (tgUser ? [tgUser.first_name, tgUser.last_name].filter(Boolean).join(" ") : "") || "Клиент In-Trade",
+        fio: name || "Клиент In-Trade",
         phone: phone,
+        telephone: phone,
+        buyer_phone: phone,
+        phone_clean: phone.replace(/[^\d+]/g, ""),
         story: String(story).trim().slice(0, 2000),
+        comment: String(story).trim().slice(0, 2000),
+
         tradein: {
           model: r.model,
           battery: tiBattery,
           defects: tiDefects,
           repair: tiRepair,
-          estimate: r.value,
-          topup: r.topup,
-          summary: (document.getElementById("ti-summary") || {}).textContent || ""
+          estimate: estimateVal,
+          topup: topupVal,
+          summary: summaryText
+        },
+        trade_in: {
+          model: r.model,
+          battery: tiBattery,
+          defects: tiDefects,
+          repair: tiRepair,
+          estimate: estimateVal,
+          topup: topupVal,
+          summary: summaryText
         },
         target: {
+          id: p ? p.id : "",
           product: targetName,
+          title: targetName,
           price: targetPrice
         },
-        total: r.topup,
-        total_sum: r.topup,
-        created_at: new Date().toISOString()
+
+        items: [tradeinItem],
+        cart: [tradeinItem],
+        products: [tradeinItem],
+
+        total: topupVal,
+        total_sum: topupVal,
+        total_price: topupVal,
+        sum: topupVal,
+        amount: topupVal,
+
+        created_at: new Date().toISOString(),
+        date: new Date().toLocaleString("ru-RU"),
+        timestamp: Date.now()
       };
 
-      const tg = window.Telegram && window.Telegram.WebApp;
       if (!tg || typeof tg.sendData !== "function") {
         toast("Откройте витрину через Telegram-бота");
         try { sessionStorage.setItem("last_intrade", JSON.stringify(payload)); } catch(e) {}
         return;
       }
 
+      let serialized = "";
+      try {
+        serialized = JSON.stringify(payload);
+      } catch (e) {
+        toast("Не удалось подготовить заявку");
+        return;
+      }
+
+      // Сохраняем в облако сервера /api/orders (фоново)
+      try {
+        fetch("/api/orders", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: serialized,
+          keepalive: true
+        }).catch(function(){});
+      } catch(e) {}
+
       try {
         tg.ready();
-        tg.sendData(JSON.stringify(payload));
+        tg.sendData(serialized);
+
+        orders.unshift({
+          id: orderId,
+          order_id: orderId,
+          product: "Trade-In: " + r.model + " ➔ " + targetName,
+          price: topupVal,
+          qty: 1,
+          date: new Date().toLocaleString("ru-RU"),
+          status: "Заявка принята"
+        });
+        try { localStorage.setItem("electro_orders", JSON.stringify(orders)); } catch(e) {}
+
         toast("Заявка In-Trade отправлена");
         closeTradeIn();
       } catch (e) {
