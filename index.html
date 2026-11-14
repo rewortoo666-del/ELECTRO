@@ -6,7 +6,7 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover"
   >
-  <meta name="theme-color" content="#f4f7fc">
+  <meta name="theme-color" content="#030b1f">
   <title>ELECTRO | Демо-витрина Apple</title>
   <meta name="description" content="Демо-витрина техники Apple для опта и розницы с каталогом, калькулятором маржи, трейд-ин и интеграцией с Telegram WebApp." />
   <meta property="og:title" content="ELECTRO | Демо-витрина Apple" />
@@ -10174,12 +10174,290 @@ Apple Watch Ultra 2 Black Titanium 72000
 #margin-sheet #mg-range, #margin-sheet #mg-qty-range { background:linear-gradient(90deg,#00e5ff,#2b7cff 55%,#8a5cff) !important; border:0 !important; }
 .take, .mg-btn { color:#fff !important; text-shadow:0 1px 8px rgba(0,40,140,.55); }
 #margin-sheet .disc { display:grid !important; grid-template-columns:repeat(3,1fr); gap:6px; border:0 !important; background:transparent !important; padding:0 !important; }
-#margin-sheet .disc div { text-align:center; padding:8px 4px; border-radius:12px; font-size:11px; font-weight:800; color:#0b1b33;
-  background:linear-gradient(160deg,#eaf6ff,#dcecff); border:1px solid rgba(0,160,255,.3); box-shadow:0 0 12px rgba(0,180,255,.18); }
 @media (prefers-reduced-motion:reduce) {
   .fx-waves svg, .fx-wavebar svg, .tabbar::before, .pm-gallery::before, .pm-price, .pm-hot, .fx-charge-bar i::after, .take::after, .mg-btn::after, .mg-ping { animation:none !important; }
   #fx-sweep { display:none !important; }
 }
+
+/* ================= DARK NAVY ELECTRIC THEME ================= */
+:root {
+  --bg:#030a1e; --card:#0a1b45; --text:#e8f2ff; --muted:#8aa9d6; --accent:#2d8cff; --accent-2:#19d3ff;
+  --n0:#020716; --n1:#040d27; --n2:#07163a; --n3:#0c2159; --nb:rgba(70,150,255,.3); --nt:#e8f2ff; --nm:#8aa9d6; --nc:#19d3ff;
+  --shadow:0 10px 34px rgba(0,0,0,.55);
+}
+html, body { background:#01040f !important; color:var(--nt) !important; color-scheme:dark; }
+html body .app-container {
+  background:
+    radial-gradient(120% 50% at 50% -8%, rgba(30,100,255,.38), transparent 62%),
+    radial-gradient(70% 40% at 100% 38%, rgba(100,60,255,.20), transparent 70%),
+    radial-gradient(80% 40% at 0% 78%, rgba(0,200,255,.14), transparent 70%),
+    linear-gradient(180deg,#030b22 0%,#020817 55%,#01040f 100%) !important;
+  color:var(--nt);
+}
+/* вся тёмная «сетка-схема» на фоне */
+html body .app-container::before { content:""; position:fixed; inset:0; max-width:430px; margin:0 auto; pointer-events:none; z-index:0; opacity:.5;
+  background-image:linear-gradient(rgba(60,140,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(60,140,255,.07) 1px, transparent 1px); background-size:34px 34px;
+  -webkit-mask-image:radial-gradient(ellipse at 50% 0%, #000, transparent 75%); mask-image:radial-gradient(ellipse at 50% 0%, #000, transparent 75%); }
+html body .app-container > * { position:relative; z-index:1; }
+body::before { background:transparent !important; }
+
+/* ---------- текст ---------- */
+html body h1, html body h2, html body h3, html body h4,
+html body .brand-text h1, html body .hero h2, html body .pm-title, html body .section-head h3, html body .profile-section-title h3,
+html body .product-card h4, html body .cat-name, html body .js-title, html body .sheet-title b, html body .home-how-title,
+html body .metric b, html body .metric strong, html body .home-order-product, html body .home-order-city, html body .benefit b {
+  color:#f3f8ff !important; text-shadow:none;
+}
+html body .brand-text p, html body .hero p, html body small, html body .pm-lab, html body .pm-unit, html body .section-head a,
+html body .metric span, html body .benefit span, html body .home-order-time, html body .sell-row, html body .pm-rate, html body .unit, html body .js-unit { color:var(--nm) !important; }
+html body .section-head a, html body .profile-section-title span { color:#4fb4ff !important; }
+
+/* ---------- стеклянные тёмные поверхности ---------- */
+html body .benefits, html body .metric, html body .cat, html body .home-live, html body .home-order-card, html body .home-how-step,
+html body .pm-gsx-card, html body .pm-gsx-item, html body .pm-tier-card, html body .pm-tier-row, html body .pm-stocks-card, html body .pm-specs-card,
+html body .rev-card, html body .rev-add, html body .calc, html body .vol-row, html body .imei-search-box, html body .imei-pill, html body .imei-spec-item,
+html body .imei-result-card, html body .ti-chip, html body .ti-result, html body .co-head, html body .co-cancel, html body .ship, html body .catalog-vip-bar,
+html body .empty, html body .orders-pass-card, html body .orders-btn-secondary, html body .profile-service-item, html body .delivery-card, html body .material-btn,
+html body .manager-card, html body .link-row, html body .pm-close-mid, html body .pm-close-bottom, html body .quick, html body .pm-chip, html body .chip, html body .catalog-filter-chip,
+html body .mg-tab, html body .var, html body .stepper button, html body .pm-video, html body .theme-btn, html body .sound-btn, html body .w-btn, html body .menu-btn, html body .hero-next,
+html body .qd-ico, html body .pm-close, html body .profile-edit-btn, html body .manager-avatar, html body .mat-ico, html body .ben-ico, html body .metric-ico, html body .how-ico, html body .delivery-icon, html body .co-input, html body input, html body textarea {
+  background:linear-gradient(160deg, rgba(16,40,98,.88), rgba(6,18,50,.92)) !important;
+  border:1px solid var(--nb) !important; color:var(--nt) !important;
+  box-shadow:0 6px 22px rgba(0,0,0,.45), inset 0 1px 0 rgba(120,190,255,.14) !important;
+}
+html body .catalog-vip-bar { background:linear-gradient(90deg, rgba(0,200,255,.14), rgba(40,90,255,.12)), linear-gradient(160deg,#0a1d4c,#06122f) !important; border-color:rgba(0,229,255,.35) !important; }
+html body .catalog-vip-status, html body .catalog-vip-status span { color:#dff2ff !important; }
+html body input::placeholder, html body textarea::placeholder { color:#6f8fbd !important; }
+html body input, html body textarea { color:#fff !important; }
+
+/* шапка и бренд */
+html body .brand-text h1 { text-shadow:0 0 18px rgba(0,200,255,.45); }
+html body .logo { filter:drop-shadow(0 0 12px rgba(0,160,255,.6)); }
+html body .tabbar { background:linear-gradient(180deg, rgba(10,26,66,.94), rgba(3,10,30,.96)) !important; border:1px solid rgba(70,150,255,.38) !important;
+  box-shadow:0 18px 50px rgba(0,0,0,.7), 0 0 30px rgba(0,120,255,.28), inset 0 1px 0 rgba(150,210,255,.2) !important; }
+html body .tab { color:#7f9fcf !important; }
+html body .tab.active { color:#5fe4ff !important; background:linear-gradient(135deg, rgba(0,160,255,.28), rgba(120,70,255,.22)) !important; }
+html body .tab.active svg { stroke:#5fe4ff; }
+html body .badge { background:linear-gradient(135deg,#ff3b6a,#ff7a3b) !important; box-shadow:0 0 12px rgba(255,60,100,.7); }
+
+/* герой */
+html body .hero { background:radial-gradient(90% 90% at 80% 30%, rgba(40,110,255,.55), transparent 60%), radial-gradient(70% 80% at 10% 100%, rgba(120,60,255,.35), transparent 60%), linear-gradient(135deg,#071a4d,#040f2d 60%,#0a1f5c) !important;
+  border:1px solid rgba(0,229,255,.38) !important; box-shadow:0 0 40px rgba(0,110,255,.35), 0 18px 50px rgba(0,0,0,.6), inset 0 1px 0 rgba(160,220,255,.25) !important; }
+html body .hero-badge { background:linear-gradient(120deg,#0a5cff,#00c8ff) !important; color:#fff !important; box-shadow:0 0 18px rgba(0,200,255,.6); }
+html body .hero h2 { text-shadow:0 0 26px rgba(0,180,255,.45); }
+
+/* категории, плитки */
+html body .cat { border-color:rgba(0,200,255,.3) !important; }
+html body .cat.active { border-color:#19d3ff !important; box-shadow:0 0 0 1px #19d3ff, 0 0 26px rgba(0,210,255,.5), 0 10px 30px rgba(0,0,0,.5) !important; }
+html body .cat-name { color:#fff !important; }
+
+/* чипсы / поиск */
+html body .chip.on, html body .pm-chip.on, html body .catalog-filter-chip.active, html body .var.on, html body .mg-tab.on {
+  background:linear-gradient(120deg,#0a5cff,#00c8ff) !important; color:#fff !important; border-color:rgba(160,240,255,.8) !important;
+  box-shadow:0 0 22px rgba(0,200,255,.65), inset 0 1px 0 rgba(255,255,255,.4) !important; }
+html body .chip, html body .catalog-filter-chip { color:#cfe4ff !important; }
+html body .catalog-search { border-color:rgba(0,200,255,.4) !important; }
+html body .catalog-search:focus-within { border-color:#19d3ff !important; box-shadow:0 0 0 2px rgba(25,211,255,.35), 0 0 30px rgba(0,200,255,.5) !important; }
+html body .catalog-search svg { stroke:#4fd8ff !important; }
+html body .offline-catalog-banner { background:linear-gradient(90deg,rgba(255,150,0,.16),rgba(255,90,0,.1)) !important; border-color:rgba(255,170,60,.5) !important; color:#ffc680 !important; }
+
+/* ---------- КАРТОЧКА ТОВАРА В КАТАЛОГЕ ---------- */
+html body .product-card {
+  background:
+    linear-gradient(165deg, #0d2563 0%, #081a48 45%, #050f2c 100%) padding-box,
+    conic-gradient(from 210deg at 50% 50%, rgba(0,229,255,.75), rgba(43,124,255,.25) 22%, rgba(138,92,255,.7) 45%, rgba(43,124,255,.2) 70%, rgba(0,229,255,.75)) border-box !important;
+  border:1.5px solid transparent !important; color:var(--nt) !important;
+  box-shadow:0 10px 30px rgba(0,0,0,.55), 0 0 22px rgba(0,110,255,.18), inset 0 1px 0 rgba(150,210,255,.2) !important;
+}
+html body .product-card::before { background:radial-gradient(120% 60% at 50% 0%, rgba(80,170,255,.2), transparent 60%) !important; opacity:1 !important; }
+html body .product-card .product-photo {
+  background:radial-gradient(70% 70% at 50% 40%, rgba(60,150,255,.5), rgba(8,26,72,.9) 70%), linear-gradient(160deg,#0a2057,#050e2b) !important;
+  border:1px solid rgba(0,200,255,.28) !important; box-shadow:inset 0 0 24px rgba(0,120,255,.25) !important; }
+html body .product-card .product-photo img { filter:drop-shadow(0 10px 18px rgba(0,0,0,.6)) saturate(1.08); mix-blend-mode:normal; }
+html body .product-card .price { background:linear-gradient(90deg,#ffffff,#7defff 55%,#5aa8ff); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent !important; text-shadow:none; filter:drop-shadow(0 0 10px rgba(0,200,255,.35)); }
+html body .product-card .price .pc-old { -webkit-text-fill-color:#6f8fbd !important; filter:none; }
+html body .product-card .unit, html body .product-card .margin-box { background:rgba(10,30,80,.65) !important; border:1px solid rgba(70,150,255,.25) !important; color:#9fbbe4 !important; box-shadow:none !important; }
+html body .product-card .margin-box span { color:#3dff9a !important; text-shadow:0 0 10px rgba(61,255,154,.5); }
+html body .stock-pill { background:rgba(10,30,80,.7) !important; border:1px solid rgba(70,150,255,.3) !important; }
+html body .stock-pill.in { color:#3dff9a !important; border-color:rgba(61,255,154,.45) !important; background:rgba(61,255,154,.1) !important; }
+html body .stock-pill.low { color:#ffb84d !important; border-color:rgba(255,184,77,.5) !important; background:rgba(255,184,77,.1) !important; }
+html body .stock-pill.out { color:#ff6b86 !important; border-color:rgba(255,107,134,.5) !important; background:rgba(255,77,106,.1) !important; }
+html body .fav-btn { background:rgba(4,14,40,.75) !important; color:#9ecbff !important; backdrop-filter:blur(6px); }
+html body .fav-btn.on { color:#ff4d7a !important; text-shadow:0 0 12px rgba(255,60,110,.9); }
+html body .rate { background:rgba(4,14,40,.78) !important; color:#ffe08a !important; border:1px solid rgba(255,214,102,.3) !important; }
+html body .product-card .quick, html body .quick { background:linear-gradient(160deg,rgba(18,44,108,.85),rgba(8,22,60,.9)) !important; color:#7ee6ff !important; border:1px solid rgba(0,200,255,.4) !important; }
+html body .pc-badge.hot { background:linear-gradient(135deg,#ff2d6f,#ff7a2d) !important; box-shadow:0 0 16px rgba(255,60,100,.7) !important; color:#fff !important; border:0 !important; }
+html body .pc-badge.sale { background:linear-gradient(135deg,#ffb020,#ff7a00) !important; box-shadow:0 0 16px rgba(255,150,0,.6) !important; color:#fff !important; border:0 !important; }
+html body .pc-badge.new { background:linear-gradient(135deg,#00c8ff,#2b7cff) !important; box-shadow:0 0 16px rgba(0,200,255,.6) !important; color:#fff !important; border:0 !important; }
+
+/* ---------- МОДАЛКА / ШТОРКИ ---------- */
+html body #product-modal, html body .sheet-panel {
+  background:radial-gradient(120% 40% at 50% -5%, rgba(30,100,255,.35), transparent 60%), linear-gradient(180deg,#061336,#030a21 60%,#020716) !important;
+  color:var(--nt) !important; border-color:rgba(70,150,255,.35) !important;
+}
+html body .sheet-panel { box-shadow:0 -18px 60px rgba(0,100,255,.35), 0 -2px 0 rgba(0,229,255,.5) !important; }
+html body #video-sheet, html body #margin-sheet, html body #tradein-sheet, html body #checkout-sheet, html body #admin-sheet { background:rgba(0,3,14,.72) !important; }
+html body .pm-hero, html body .pm-thumbs img { background:radial-gradient(70% 70% at 50% 40%, rgba(60,150,255,.4), #061336 70%) !important; border:1px solid rgba(0,200,255,.3) !important; }
+html body .pm-hot { background:linear-gradient(135deg,rgba(255,150,0,.22),rgba(255,70,0,.16)) !important; color:#ffc680 !important; border:1px solid rgba(255,170,60,.6) !important; }
+html body .pm-old { color:#6f8fbd !important; }
+html body .pm-sale { box-shadow:0 0 14px rgba(255,40,80,.6); }
+html body .pm-chip { color:#cfe4ff !important; }
+html body .pm-tier-row.highlight, html body .pm-tier-row.vip { background:linear-gradient(135deg,rgba(0,200,255,.22),rgba(80,60,255,.2)) !important; border-color:rgba(0,229,255,.6) !important; }
+html body .pm-gsx-status, html body .pm-loc-count, html body .pm-tier-price { color:#5fe4ff !important; }
+html body .pm-specs-title, html body .pm-stocks-title { color:#fff !important; }
+html body .pm-close, html body .pm-close-mid, html body .pm-close-bottom { color:#9ccfff !important; }
+html body .pm-drag-handle { background:linear-gradient(90deg,#00e5ff,#8a5cff) !important; box-shadow:0 0 12px rgba(0,229,255,.7); }
+html body .pm-brand b { color:#fff !important; text-shadow:0 0 14px rgba(0,200,255,.6); }
+html body .pm-range, html body input.pm-range { background:linear-gradient(90deg,#00e5ff,#2b7cff,#8a5cff) !important; border:0 !important; box-shadow:0 0 12px rgba(0,229,255,.5) !important; }
+html body .link-row { color:#7ee6ff !important; }
+
+/* маржинальность — тёмные плашки */
+html body #margin-sheet .calc { background:linear-gradient(160deg,rgba(16,40,98,.88),rgba(6,18,50,.92)) !important; color:#e8f2ff !important; }
+html body #margin-sheet .calc b, html body #margin-sheet .step b { color:#fff !important; }
+html body #margin-sheet .disc div { background:linear-gradient(160deg,rgba(0,150,255,.28),rgba(60,70,255,.22)) !important; color:#e8f6ff !important; border:1px solid rgba(0,229,255,.4) !important; box-shadow:0 0 14px rgba(0,180,255,.25); text-align:center; padding:8px 4px; border-radius:12px; font-size:11px; font-weight:800; }
+html body #mg-head, html body .sheet-title b { color:#fff !important; }
+html body #mg-sub { color:#8aa9d6 !important; }
+html body .stepper button { color:#fff !important; }
+
+/* корзина, оформление, профиль, заказы */
+html body .co-input { color:#fff !important; }
+html body .ship.on, html body .ship.active { background:linear-gradient(120deg,rgba(0,150,255,.35),rgba(100,70,255,.3)) !important; border-color:#19d3ff !important; box-shadow:0 0 24px rgba(0,200,255,.45) !important; }
+html body .profile-page, html body .delivery-value, html body .mat-text, html body .orders-status-pill { color:#e8f2ff !important; }
+html body .profile-page { background:transparent !important; box-shadow:none !important; border:0 !important; }
+html body .delivery-label, html body .mat-sub { color:#8aa9d6 !important; }
+html body .pro-badge { color:#5fe4ff !important; }
+html body .profile-avatar, html body .profile-avatar-inner { color:#5fe4ff !important; }
+html body .home-order-card, html body .home-live { border-color:rgba(0,200,255,.3) !important; }
+html body .home-live { background:linear-gradient(135deg,rgba(0,200,150,.16),rgba(0,90,255,.16)), linear-gradient(160deg,#08204e,#050f2c) !important; }
+html body .catalog-vip-link, html body .channel-btn { color:#fff !important; }
+html body .imei-pill, html body .imei-spec-item, html body .ti-chip { color:#e8f2ff !important; }
+
+/* ---------- каталог: появление карточек — «заряд» ---------- */
+html body .product-card.card-enter { animation:fxCardCharge .62s cubic-bezier(.16,1,.3,1) both !important; }
+@keyframes fxCardCharge {
+  0%   { opacity:0; transform:translateY(22px) scale(.94); filter:brightness(2.4) saturate(1.6) drop-shadow(0 0 18px #00e5ff); }
+  45%  { opacity:1; filter:brightness(1.6) drop-shadow(0 0 14px #00e5ff); }
+  100% { opacity:1; transform:none; filter:none; }
+}
+html body .product-card:active { transform:scale(.965) !important; }
+
+/* вспышка экрана и дрожь при ударе */
+#fx-flash { position:fixed; inset:0; z-index:9600; pointer-events:none; background:radial-gradient(80% 60% at 50% 30%, rgba(190,235,255,.85), rgba(40,120,255,.35) 55%, transparent 80%); opacity:0; mix-blend-mode:screen; }
+#fx-flash.on { animation:fxFlashScr .38s ease-out; }
+@keyframes fxFlashScr { 0%{opacity:0;} 8%{opacity:.85;} 22%{opacity:.18;} 34%{opacity:.6;} 100%{opacity:0;} }
+html body .app-container.fx-shake { animation:fxShake .32s linear; }
+@keyframes fxShake { 0%,100%{transform:none;} 15%{transform:translate(-3px,1px);} 30%{transform:translate(3px,-1px);} 45%{transform:translate(-2px,0);} 60%{transform:translate(2px,1px);} 80%{transform:translate(-1px,0);} }
+.fx-layer { mix-blend-mode:screen; }
+/* суровые молнии — толще и ярче */
+.fx-bolt.core { stroke:#fff; stroke-width:2.6; filter:drop-shadow(0 0 3px #fff); }
+.fx-bolt.glow { stroke:rgba(0,229,255,.95); stroke-width:8; filter:blur(3px); }
+.fx-bolt.vio  { stroke:rgba(120,80,255,.9); stroke-width:14; filter:blur(5px); }
+
+/* ===== MARGIN-VIBE: стиль блока «Маржа» на всех карточках и плашках ===== */
+:root{
+  --mgwave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 60' preserveAspectRatio='none'%3E%3Cpath d='M0 40 C40 20 70 56 120 38 S210 14 260 34 S305 44 320 30 V60 H0Z' fill='%232b7cff' fill-opacity='.16'/%3E%3Cpath d='M0 48 C50 32 90 58 140 46 S230 28 280 44 S310 50 320 42 V60 H0Z' fill='%2300e5ff' fill-opacity='.10'/%3E%3Cpath d='M0 40 C40 20 70 56 120 38 S210 14 260 34 S305 44 320 30' fill='none' stroke='%2300e5ff' stroke-opacity='.55' stroke-width='1.2'/%3E%3C/svg%3E");
+  --mggrid:linear-gradient(rgba(0,229,255,.05) 1px,transparent 1px) 0 0/22px 22px, linear-gradient(90deg,rgba(0,229,255,.05) 1px,transparent 1px) 0 0/22px 22px;
+  --mgbg:var(--mgwave) bottom/100% 44px no-repeat,
+         radial-gradient(120% 90% at 85% 0%, rgba(43,124,255,.42), transparent 60%),
+         radial-gradient(90% 80% at 0% 100%, rgba(138,92,255,.28), transparent 60%),
+         var(--mggrid),
+         linear-gradient(160deg,#061430,#0a2250 60%,#0b1b3d);
+}
+html body :is(.product-card,.cat-card,.cat,.metric,.benefit,.benefits,.hero,.home-live,.home-order-card,.home-how-step,.manager-card,.manager-contact,
+  .orders-pass-card,.orders-tracker,.fav-pool-card,.rev-card,.delivery-card,.pf-hero,.profile-materials,.profile-service-item,.profile-stats,
+  .pm-gsx-card,.pm-stocks-card,.pm-tier-card,.pm-specs-card,.imei-panel,.imei-result-card,.parser-box,.ti-result,.empty,.calc,.co-item,.co-extra,
+  .material-btn,.catalog-vip-bar,.unit,.margin-box){
+  background:var(--mgbg) !important;
+  border:1px solid rgba(0,229,255,.38) !important;
+  color:#eaf6ff;
+  box-shadow:0 12px 34px rgba(0,80,200,.32), inset 0 1px 0 rgba(140,235,255,.35), inset 0 0 0 1px rgba(255,255,255,.04) !important;
+  position:relative;
+}
+/* мелкие плашки — без волны, чтобы не рябило */
+html body :is(.unit,.margin-box,.material-btn,.co-item,.profile-service-item,.home-how-step,.manager-contact,.catalog-vip-bar,.metric,.benefit){
+  background:radial-gradient(120% 90% at 85% 0%, rgba(43,124,255,.38), transparent 62%), radial-gradient(90% 80% at 0% 100%, rgba(138,92,255,.24), transparent 60%), linear-gradient(160deg,#061430,#0a2250 60%,#0b1b3d) !important;
+}
+html body .product-card{ box-shadow:0 14px 38px rgba(0,90,230,.38), inset 0 1px 0 rgba(140,235,255,.4) !important; }
+html body .product-card:active,html body .cat-card:active,html body .cat:active{ border-color:#5ff3ff !important; box-shadow:0 0 30px rgba(0,229,255,.8), inset 0 0 22px rgba(0,229,255,.25) !important; }
+/* неоновая «молния»-полоска по верхнему краю */
+html body :is(.product-card,.cat-card,.hero,.home-live,.orders-pass-card,.pm-tier-card,.pm-stocks-card,.pm-gsx-card,.fav-pool-card,.manager-card,.calc)::after{
+  content:""; position:absolute; left:14%; right:14%; top:0; height:2px; border-radius:2px; pointer-events:none; z-index:3;
+  background:linear-gradient(90deg,transparent,#00e5ff 30%,#fff 50%,#8a5cff 70%,transparent); box-shadow:0 0 12px 1px rgba(0,229,255,.85);
+}
+/* тексты на тёмных плашках */
+html body :is(.metric,.benefit,.home-live,.home-order-card,.manager-card,.orders-pass-card,.pm-stocks-card,.pm-tier-card,.pm-gsx-card,.profile-section,.fav-pool-card,.rev-card,.delivery-card,.hero,.calc) :is(h1,h2,h3,h4,b,strong,.section-head,.home-live-title){ color:#fff; }
+html body :is(.metric,.benefit,.home-live,.home-order-card,.manager-card,.pm-stocks-card,.pm-tier-card,.pm-gsx-card,.profile-section,.fav-pool-card,.rev-card,.delivery-card) :is(p,small,span,label,.sub){ color:#a9c9f2; }
+html body .metric b,html body .metric strong{ color:#5ff3ff !important; text-shadow:0 0 12px rgba(0,229,255,.7); font-variant-numeric:tabular-nums; white-space:nowrap; overflow:visible; }
+html body .home-live *:is(.title,h3,h2,.home-live-title){ color:#fff !important; text-shadow:0 0 14px rgba(0,200,255,.5); }
+/* шторки: тёмный фон везде, без белых зон */
+html body .sheet-panel{ background:var(--mgbg) !important; color:#eaf6ff; }
+html body .sheet-panel :is(.sheet-title,.sheet-head,.sheet-top,.sheet-header){ background:transparent !important; color:#fff !important; }
+html body :is(.cat-card,.cat) .cat-name,html body .product-card :is(.title,.name,h3){ color:#fff !important; }
+html body :is(.catalog-search){ background:linear-gradient(160deg,#061430,#0a2250) !important; }
+html body .catalog-search input{ background:transparent !important; }
+/* «подсветка нажатия»: вспышка у любой плашки */
+@keyframes mgTap{0%{box-shadow:0 0 0 0 rgba(0,229,255,.9)}100%{box-shadow:0 0 0 18px rgba(0,229,255,0)}}
+html body :is(.hero,.metric,.benefit,.home-how-step,.manager-card,.orders-pass-card,.profile-service-item,.pm-tier-card,.fav-pool-card,.rev-card):active{ animation:mgTap .5s ease-out; }
+@media (prefers-reduced-motion:reduce){ html body *{ animation-duration:.01ms !important } }
+/* --- фиксы читаемости --- */
+html body .metric b, html body .metric strong{ background:none !important; -webkit-background-clip:border-box !important; background-clip:border-box !important; -webkit-text-fill-color:#5ff3ff !important; color:#5ff3ff !important; }
+html body .metric span, html body .benefit span, html body .benefit b{ color:#b9d4f5 !important; -webkit-text-fill-color:currentColor !important; }
+html body .metric-ico, html body .benefit-ico{ background:linear-gradient(145deg,rgba(0,150,255,.35),rgba(80,60,255,.3)) !important; border-color:rgba(0,229,255,.5) !important; box-shadow:0 0 16px rgba(0,200,255,.45) !important; }
+html body .metric-ico svg{ stroke:#7defff !important; }
+html body .hero p, html body .hero-sub{ color:#cfe4ff !important; -webkit-text-fill-color:currentColor !important; }
+html body .hero h2{ color:#fff !important; -webkit-text-fill-color:#fff !important; }
+html body #margin-sheet .sheet-panel, html body #video-sheet .sheet-panel, html body #tradein-sheet .sheet-panel{ background:var(--mgbg) !important; }
+html body #mg-sub{ color:#9fc3ee !important; } html body #mg-head{ color:#fff !important; }
+html body .home-live :is(.home-live-sub,.sub,small,span){ color:#9fc3ee !important; }
+html body .home-live .home-live-eyebrow, html body .home-live > :first-child{ color:#8fc4ff; }
+html body .hero-slide .hero-copy h2, html body .hero-copy h2{ color:#fff !important; -webkit-text-fill-color:#fff !important; text-shadow:0 0 24px rgba(0,180,255,.5); }
+html body .hero-slide .hero-copy p, html body .hero-copy p{ color:#cfe4ff !important; -webkit-text-fill-color:#cfe4ff !important; }
+html body :is(.profile-avatar,.profile-avatar-inner){ background:linear-gradient(145deg,#0a2a66,#123a8f) !important; border-color:rgba(0,229,255,.6) !important; box-shadow:0 0 22px rgba(0,200,255,.55) !important; }
+
+/* ===== TECH / HUD LAYER ===== */
+:root{
+  --hud:linear-gradient(#5ff3ff,#5ff3ff) 0 0/16px 2px no-repeat, linear-gradient(#5ff3ff,#5ff3ff) 0 0/2px 16px no-repeat,
+        linear-gradient(#5ff3ff,#5ff3ff) 100% 0/16px 2px no-repeat, linear-gradient(#5ff3ff,#5ff3ff) 100% 0/2px 16px no-repeat,
+        linear-gradient(#5ff3ff,#5ff3ff) 0 100%/16px 2px no-repeat, linear-gradient(#5ff3ff,#5ff3ff) 0 100%/2px 16px no-repeat,
+        linear-gradient(#5ff3ff,#5ff3ff) 100% 100%/16px 2px no-repeat, linear-gradient(#5ff3ff,#5ff3ff) 100% 100%/2px 16px no-repeat;
+  --gloss:linear-gradient(118deg,rgba(255,255,255,.13) 0%,rgba(255,255,255,.04) 26%,transparent 42%);
+  --scan:repeating-linear-gradient(0deg,rgba(255,255,255,.028) 0 1px,transparent 1px 3px);
+}
+/* крупные карточки: уголки HUD + стеклянный блик + сканлайны */
+html body :is(.product-card,.hero,.home-live,.orders-pass-card,.pm-tier-card,.pm-stocks-card,.pm-gsx-card,.pm-specs-card,.fav-pool-card,.manager-card,.calc,.pf-hero,.rev-card,.delivery-card,.cat-card,.imei-panel){
+  background:var(--hud),var(--gloss),var(--scan),var(--mgbg) !important;
+  border-color:rgba(0,229,255,.34) !important;
+  box-shadow:0 18px 40px rgba(0,60,180,.38), 0 2px 0 rgba(0,0,0,.5), inset 0 1px 0 rgba(160,240,255,.45), inset 0 -22px 40px rgba(0,10,40,.45) !important;
+}
+html body :is(.metric,.benefit,.home-how-step,.profile-service-item,.material-btn,.manager-contact){
+  background:var(--gloss),var(--scan),radial-gradient(120% 90% at 85% 0%,rgba(43,124,255,.38),transparent 62%),radial-gradient(90% 80% at 0% 100%,rgba(138,92,255,.24),transparent 60%),linear-gradient(160deg,#061430,#0a2250 60%,#0b1b3d) !important;
+}
+/* заголовки секций: неоновый маркер */
+html body .section-head h2, html body .section-head h3, html body .profile-section-title{ color:#fff !important; -webkit-text-fill-color:#fff !important; text-shadow:0 0 16px rgba(0,200,255,.45); }
+html body .section-head h2::before, html body .section-head h3::before{ content:""; display:inline-block; width:4px; height:.95em; margin-right:9px; vertical-align:-.12em; border-radius:2px; background:linear-gradient(#5ff3ff,#2b7cff); box-shadow:0 0 10px #00e5ff; }
+/* заголовки шагов / отзывы / характеристики */
+html body :is(.home-how-step,.rev-card,.pm-specs-card,.pm-spec-row,.step) :is(h3,h4,b,strong,.rev-name,.rev-author){ color:#fff !important; -webkit-text-fill-color:#fff !important; }
+html body :is(.pm-spec-row,.pm-spec-row *){ color:#eaf6ff; } html body .pm-spec-row > :first-child{ color:#8fb4e6 !important; }
+html body .rev-card :is(p,div,span){ color:#dcecff !important; -webkit-text-fill-color:currentColor !important; }
+/* пилюли: тёмное стекло */
+html body :is(.home-how-badge,.how-badge,.pill,.step-pill,.section-pill,.profile-badge,.pro-badge,.profile-vip-tier-badge,.orders-status-pill){ background:linear-gradient(160deg,rgba(0,150,255,.3),rgba(40,70,255,.28)) !important; border:1px solid rgba(0,229,255,.5) !important; color:#9ff3ff !important; -webkit-text-fill-color:#9ff3ff !important; box-shadow:0 0 14px rgba(0,200,255,.35); }
+/* слайдеры везде */
+html body input[type=range]{ -webkit-appearance:none; appearance:none; height:6px !important; border-radius:9px; background:linear-gradient(90deg,#00e5ff,#2b7cff 55%,#8a5cff) !important; border:0 !important; outline:none; box-shadow:0 0 12px rgba(0,200,255,.45); }
+html body input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width:26px; height:26px; border-radius:50%; background:radial-gradient(circle at 35% 30%,#fff,#9fe9ff 45%,#2b7cff); border:2px solid #fff; box-shadow:0 0 18px rgba(0,229,255,.95); }
+/* карта VIP: стальное стекло */
+html body .profile-titanium-card{ background:var(--gloss),var(--scan),radial-gradient(90% 120% at 100% 0%,rgba(43,124,255,.45),transparent 60%),linear-gradient(145deg,#1b2b4a,#0a1530 55%,#16294d) !important; border:1px solid rgba(160,220,255,.4) !important; box-shadow:0 18px 44px rgba(0,60,180,.45), inset 0 1px 0 rgba(255,255,255,.4) !important; }
+html body .profile-titanium-card *{ color:#eaf6ff; } html body .profile-card-top *{ color:inherit; }
+/* цифры — технический вид */
+html body :is(.price,.pm-price,.metric b,.pm-tier-price,.home-order-price){ font-variant-numeric:tabular-nums; letter-spacing:-.01em; }
+/* текст внутри формы заказа/доставки */
+html body .delivery-card :is(span,div,b){ color:#eaf6ff; } html body .delivery-label{ color:#8fb4e6 !important; }
+html body .home-how-head span, html body .rev-head button, html body .rev-add{ background:linear-gradient(160deg,rgba(0,150,255,.3),rgba(40,70,255,.28)) !important; border:1px solid rgba(0,229,255,.5) !important; color:#9ff3ff !important; -webkit-text-fill-color:#9ff3ff !important; }
+html body .rev-head h2, html body .home-how-head h2, html body .rev-head *{ color:#fff !important; -webkit-text-fill-color:#fff !important; }
+html body .pm-unit, html body .pm-warranty, html body .pm-price-row{ background:transparent !important; }
+html body #pm-disc, html body .disc{ display:grid !important; grid-template-columns:repeat(3,1fr); gap:6px; background:transparent !important; border:0 !important; padding:0 !important; }
+html body .disc > div, html body #pm-disc > div{ background:linear-gradient(160deg,rgba(0,150,255,.26),rgba(60,70,255,.18)) !important; border:1px solid rgba(0,229,255,.4) !important; border-radius:12px !important; color:#e6f6ff !important; -webkit-text-fill-color:#e6f6ff !important; padding:8px 7px !important; font-size:11px !important; font-weight:700 !important; box-shadow:0 0 14px rgba(0,180,255,.2), inset 0 1px 0 rgba(160,240,255,.35); }
+html body .manager-copy strong, html body #home-how-title, html body .home-how-head h3{ color:#fff !important; -webkit-text-fill-color:#fff !important; text-shadow:0 0 14px rgba(0,200,255,.45); }
+html body .manager-copy span{ color:#a9c9f2 !important; }
 
 </style>
 <script id="electric-fx-js">
@@ -10486,6 +10764,56 @@ Apple Watch Ultra 2 Black Titanium 72000
 
   function init() { heroWaves(); watchSheets(); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
+})();
+
+/* ===== CONTRAST GUARD: гарантирует читаемость на тёмной теме ===== */
+(function () {
+  if (window.__fxGuard) return; window.__fxGuard = 1;
+  function parse(c) { var m = c && c.match(/rgba?\(([^)]+)\)/); if (!m) return null; var p = m[1].split(/[ ,\/]+/).filter(Boolean).map(parseFloat); return { r: p[0], g: p[1], b: p[2], a: p.length > 3 ? p[3] : 1 }; }
+  function lin(v) { v /= 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); }
+  function lum(c) { return .2126 * lin(c.r) + .7152 * lin(c.g) + .0722 * lin(c.b); }
+  function toHsl(c) { var r = c.r / 255, g = c.g / 255, b = c.b / 255, mx = Math.max(r, g, b), mn = Math.min(r, g, b), h = 0, s = 0, l = (mx + mn) / 2, d = mx - mn;
+    if (d) { s = l > .5 ? d / (2 - mx - mn) : d / (mx + mn); h = mx === r ? (g - b) / d + (g < b ? 6 : 0) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h /= 6; } return [h, s, l]; }
+  function hue(p, q, t) { if (t < 0) t += 1; if (t > 1) t -= 1; return t < 1 / 6 ? p + (q - p) * 6 * t : t < .5 ? q : t < 2 / 3 ? p + (q - p) * (2 / 3 - t) * 6 : p; }
+  function fromHsl(h, s, l) { var q = l < .5 ? l * (1 + s) : l + s - l * s, p = 2 * l - q; return 'rgb(' + [hue(p, q, h + 1 / 3), hue(p, q, h), hue(p, q, h - 1 / 3)].map(function (x) { return Math.round(x * 255); }).join(',') + ')'; }
+  function lighten(c) { var h = toHsl(c); if (h[1] < .18) return '#eaf6ff'; return fromHsl(h[0], Math.min(h[1], .9), Math.max(h[2], .76)); }
+  var SKIP = { SCRIPT: 1, STYLE: 1, IMG: 1, CANVAS: 1, SVG: 1, PATH: 1, INPUT: 1, TEXTAREA: 1, VIDEO: 1, svg: 1 };
+  function hasOwnText(el) { for (var n = el.firstChild; n; n = n.nextSibling) if (n.nodeType === 3 && n.nodeValue.trim()) return true; return false; }
+  function run() {
+    var root = document.querySelector('.app-container') || document.body;
+    var all = root.querySelectorAll('*');
+    for (var i = 0; i < all.length; i++) {
+      var el = all[i]; if (SKIP[el.tagName] || el.closest('svg')) continue;
+      if (!(el.offsetWidth || el.offsetHeight)) continue;
+      var cs = getComputedStyle(el);
+      /* светлые плашки -> тёмное стекло */
+      if (el.textContent.trim() && el.offsetWidth > 36 && el.offsetHeight > 18 && cs.backgroundImage === 'none') {
+        var bg = parse(cs.backgroundColor);
+        if (bg && bg.a > .55 && lum(bg) > .55 && !el.dataset.fxLight) {
+          el.dataset.fxLight = 1;
+          el.style.setProperty('background', 'linear-gradient(160deg,rgba(16,44,110,.94),rgba(7,22,60,.96))', 'important');
+          el.style.setProperty('border-color', 'rgba(0,229,255,.38)', 'important');
+        }
+      }
+      /* тёмный текст -> светлый */
+      if (hasOwnText(el)) {
+        if (cs.webkitTextFillColor === 'rgba(0, 0, 0, 0)' || cs.color === 'rgba(0, 0, 0, 0)') continue;
+        var c = parse(cs.color); if (!c || c.a < .3) continue;
+        if (lum(c) < .30 && !el.dataset.fxTxt) {
+          var nc = lighten(c); el.dataset.fxTxt = 1;
+          el.style.setProperty('color', nc, 'important'); el.style.setProperty('-webkit-text-fill-color', nc, 'important');
+        }
+      }
+    }
+  }
+  var t; function sched() { clearTimeout(t); t = setTimeout(function () { (window.requestIdleCallback || function (f) { f(); })(run); }, 160); }
+  function start() {
+    run(); setTimeout(run, 1200); setTimeout(run, 3500);
+    var root = document.querySelector('.app-container') || document.body;
+    new MutationObserver(sched).observe(root, { childList: true, subtree: true });
+    document.addEventListener('click', sched, true);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
 
 </script>
