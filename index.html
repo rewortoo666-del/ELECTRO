@@ -16,7 +16,8 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
   <style>
     :root {
       --bg: #f4f7fc;
@@ -50,13 +51,13 @@
       min-height: 100dvh;
       margin: 0 auto; padding: calc(12px + var(--safe-top)) 16px 90px;
       background: var(--bg); overflow-y: auto; overflow-x: hidden;
-      scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
+      scroll-behavior: auto; -webkit-overflow-scrolling: touch;
     }
     @media (max-width: 389px) { .app-container { min-width: 100%; } }
 
     .header {
       display: flex; align-items: center; justify-content: space-between; gap: 10px;
-      animation: headerIn .55s cubic-bezier(.16,1,.3,1) both;
+      
     }
     .brand { display: flex; align-items: center; gap: 9px; min-width: 0; flex: 1; overflow: hidden; }
 
@@ -149,7 +150,7 @@
       box-shadow:
         0 8px 24px rgba(15, 40, 90, 0.07),
         inset 0 1px 0 rgba(255,255,255,.9);
-      animation: riseIn .6s .08s cubic-bezier(.16,1,.3,1) both;
+      
     }
     .benefit {
       display: flex; flex-direction: column; align-items: center; gap: 7px;
@@ -196,7 +197,7 @@
       box-shadow:
         0 0 28px rgba(0, 119, 255, 0.18),
         0 12px 36px rgba(15, 40, 90, 0.08);
-      animation: riseIn .65s .12s cubic-bezier(.16,1,.3,1) both;
+      
     }
     .hero-track {
       display: flex;
@@ -204,7 +205,7 @@
       height: 180px;
       transform: translateX(0);
       transition: transform .6s cubic-bezier(.22,.61,.36,1);
-      will-change: transform;
+      
     }
     .hero-slide {
       position: relative;
@@ -272,19 +273,19 @@
     }
 
     .hero-slide.is-active .hero-badge {
-      animation: heroBadgeIn .55s cubic-bezier(.16,1,.3,1) both;
+      
     }
 
     .hero-slide.is-active .hero-copy h2 {
-      animation: heroTextIn .65s .04s cubic-bezier(.16,1,.3,1) both;
+      
     }
 
     .hero-slide.is-active .hero-copy p {
-      animation: heroTextIn .65s .10s cubic-bezier(.16,1,.3,1) both;
+      
     }
 
     .hero-slide.is-active .hero-nav {
-      animation: heroTextIn .65s .16s cubic-bezier(.16,1,.3,1) both;
+      
     }
 
     @keyframes heroBadgeIn {
@@ -312,7 +313,7 @@
       width: 34px; height: 34px;
       border: 1px solid rgba(0, 119, 255, 0.18); border-radius: 50%;
       background: rgba(255, 255, 255, 0.85); display: grid; place-items: center;
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+       
       box-shadow: 0 4px 14px rgba(0, 80, 180, 0.14);
       transition: transform .22s cubic-bezier(.16,1,.3,1), background .2s ease;
     }
@@ -337,7 +338,7 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 8px;
-      animation: riseIn .65s .18s cubic-bezier(.16,1,.3,1) both;
+      
     }
     .metric {
       background:
@@ -394,7 +395,7 @@
       position: relative; z-index: 1;
     }
 
-    .section { margin-top: 22px; animation: riseIn .6s .2s cubic-bezier(.16,1,.3,1) both; }
+    .section { margin-top: 22px;  }
     .section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
     .section-head h3 { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
     .section-head a {
@@ -485,8 +486,8 @@
       display: grid; grid-template-columns: repeat(5, 1fr);
       padding: 9px 6px calc(9px + var(--safe-bottom));
       background: rgba(244, 247, 252, 0.92);
-      backdrop-filter: blur(24px) saturate(1.4);
-      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      
+      
       border-top: 1px solid rgba(0, 119, 255, 0.14);
       box-shadow: 0 -6px 24px rgba(15, 40, 90, 0.06);
     }
@@ -580,7 +581,7 @@
       height: 100%;
       position: relative;
       isolation: isolate;
-      animation: cardBorderFlow 5.5s linear infinite;
+      
       transition:
         transform .28s cubic-bezier(.16,1,.3,1),
         box-shadow .28s ease,
@@ -1154,7 +1155,7 @@
       display: flex; align-items: flex-end; justify-content: center;
       opacity: 0; pointer-events: none;
       transition: opacity .3s cubic-bezier(.16,1,.3,1);
-      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+       
     }
     #video-sheet.open, #margin-sheet.open { opacity: 1; pointer-events: auto; }
     .sheet-panel {
@@ -1269,7 +1270,7 @@
       color: #fff;
       overflow: hidden;
       box-shadow: 0 14px 40px rgba(0, 60, 140, 0.22);
-      animation: riseIn .55s cubic-bezier(.16,1,.3,1) both;
+      
     }
     .pf-hero::before {
       content: "";
@@ -1342,7 +1343,7 @@
       background: rgba(255,255,255,.08);
       border: 1px solid rgba(255,255,255,.1);
       text-align: center;
-      backdrop-filter: blur(8px);
+      
     }
     .pf-stat strong {
       display: block; font-size: 15px; font-weight: 800;
@@ -1381,7 +1382,7 @@
 
     .profile-section {
       margin-top: 16px;
-      animation: riseIn .5s cubic-bezier(.16,1,.3,1) both;
+      
     }
     .profile-section:nth-of-type(2) { animation-delay: .06s; }
     .profile-section:nth-of-type(3) { animation-delay: .12s; }
@@ -1652,7 +1653,7 @@
       background: rgba(0, 255, 128, .12);
       filter: blur(28px);
       pointer-events: none;
-      animation: liveOrb 4s ease-in-out infinite alternate;
+      
     }
     .home-live::after {
       content: "";
@@ -1719,7 +1720,7 @@
       font-weight: 800;
       letter-spacing: .1em;
       box-shadow: 0 0 16px rgba(0,220,120,.18);
-      animation: liveBadgePulse 2s ease-in-out infinite;
+      
     }
 
     .home-live-status i {
@@ -1733,20 +1734,7 @@
       animation: home-live-pulse 1.4s ease-in-out infinite;
     }
 
-    @keyframes home-live-pulse {
-      0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(18,216,106,.5), 0 0 8px rgba(18,216,106,.85);
-      }
-      70% {
-        transform: scale(1.25);
-        box-shadow: 0 0 0 8px rgba(18,216,106,0), 0 0 12px rgba(18,216,106,.95);
-      }
-      100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(18,216,106,0), 0 0 8px rgba(18,216,106,.85);
-      }
-    }
+    @keyframes home-live-pulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.25); opacity: .65; } }
     @keyframes liveBadgePulse {
       0%, 100% { box-shadow: 0 0 12px rgba(0,220,120,.12); }
       50% { box-shadow: 0 0 20px rgba(0,220,120,.28); }
@@ -1785,7 +1773,7 @@
     .home-live-track {
       display: flex;
       width: max-content;
-      will-change: transform;
+      
       animation: home-live-scroll 26s linear infinite;
     }
 
@@ -2010,10 +1998,10 @@
       font-weight: 800;
     }
 
-    .home-how-step:nth-child(1) { animation: riseIn .5s .05s cubic-bezier(.16,1,.3,1) both; }
-    .home-how-step:nth-child(2) { animation: riseIn .5s .12s cubic-bezier(.16,1,.3,1) both; }
-    .home-how-step:nth-child(3) { animation: riseIn .5s .19s cubic-bezier(.16,1,.3,1) both; }
-    .home-how-step:nth-child(4) { animation: riseIn .5s .26s cubic-bezier(.16,1,.3,1) both; }
+    .home-how-step:nth-child(1) {  }
+    .home-how-step:nth-child(2) {  }
+    .home-how-step:nth-child(3) {  }
+    .home-how-step:nth-child(4) {  }
 
     @media (max-width: 400px) {
       .home-order-card {
@@ -2787,7 +2775,7 @@
     .splash-ring-wrap {
       width: 96px; height: 96px; margin: 0 auto 20px;
       position: relative;
-      animation: splashFadeUp .55s .05s cubic-bezier(.16,1,.3,1) both;
+      
     }
     .splash-ring {
       position: absolute; inset: 0;
@@ -2827,19 +2815,19 @@
       font-size: 30px; font-weight: 800; letter-spacing: 0.16em;
       text-transform: uppercase; color: #fff;
       text-shadow: 0 0 28px rgba(0,150,255,.55);
-      animation: splashFadeUp .55s .12s cubic-bezier(.16,1,.3,1) both;
+      
     }
     .splash-sub {
       margin-top: 7px; font-size: 11px; font-weight: 600;
       color: rgba(170,205,255,.72); letter-spacing: 0.08em;
-      animation: splashFadeUp .55s .22s cubic-bezier(.16,1,.3,1) both;
+      
     }
     .splash-bar-wrap {
       margin: 30px auto 0; width: 210px; height: 5px;
       border-radius: 99px; background: rgba(255,255,255,.08);
       overflow: hidden;
       box-shadow: inset 0 1px 2px rgba(0,0,0,.25);
-      animation: splashFadeUp .55s .32s cubic-bezier(.16,1,.3,1) both;
+      
     }
     .splash-bar {
       height: 100%; width: 0%;
@@ -2857,12 +2845,12 @@
     .splash-pct {
       margin-top: 8px; font-size: 12px; font-weight: 800;
       color: #7ec8ff; letter-spacing: .04em;
-      animation: splashFadeUp .55s .38s cubic-bezier(.16,1,.3,1) both;
+      
     }
     .splash-status {
       margin-top: 10px; font-size: 11px; font-weight: 600;
       color: rgba(150,185,230,.8); min-height: 16px;
-      animation: splashFadeUp .55s .44s cubic-bezier(.16,1,.3,1) both;
+      
     }
     .splash-dots span {
       display: inline-block; animation: splashDot 1.2s ease-in-out infinite;
@@ -2902,7 +2890,7 @@
       height: 20px; padding: 0 8px; border-radius: 7px;
       font-size: 9px; font-weight: 800; letter-spacing: .03em;
       display: inline-flex; align-items: center; gap: 3px;
-      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+       
     }
     .pc-badge.hot {
       background: linear-gradient(135deg, #ff5a3c, #ff2d55);
@@ -2953,13 +2941,13 @@
       color: #0b1b33 !important;
       border: 1px solid rgba(15,40,80,.08);
       box-shadow: 0 2px 8px rgba(0,20,60,.08);
-      backdrop-filter: blur(6px);
+      
     }
     .product-card .rate::before {
       content: "";
     }
     .card-enter {
-      animation: cardEnter .5s cubic-bezier(.16,1,.3,1) both;
+      
     }
     @keyframes cardEnter {
       from { opacity: 0; transform: translateY(18px) scale(.96); }
@@ -3001,7 +2989,7 @@
         linear-gradient(180deg, rgba(255,255,255,.7) 0%, rgba(244,247,252,0) 220px),
         var(--bg);
       padding-bottom: calc(118px + var(--safe-bottom));
-      scroll-behavior: smooth;
+      scroll-behavior: auto;
     }
 
     /* Crisp Custom Scrollbar */
@@ -3024,7 +3012,7 @@
 
     /* Screen Transitions */
     .screen.on {
-      animation: screenIn .48s cubic-bezier(.16,1,.3,1) both;
+      
     }
     @keyframes screenIn {
       from { opacity: 0; transform: translateY(16px) scale(0.99); filter: blur(2px); }
@@ -3039,8 +3027,8 @@
       border-radius: 26px !important;
       padding: 7px 6px 7px !important;
       background: rgba(255, 255, 255, 0.84) !important;
-      backdrop-filter: blur(28px) saturate(190%) !important;
-      -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+      
+      
       border: 1px solid rgba(255, 255, 255, 0.85) !important;
       box-shadow:
         0 16px 42px -6px rgba(10, 35, 80, 0.15),
@@ -3064,7 +3052,7 @@
     .tab.active svg {
       transform: translateY(-1px) scale(1.06);
       filter: drop-shadow(0 2px 6px rgba(0, 119, 255, 0.35));
-      animation: tabPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      
     }
     @keyframes tabPop {
       0% { transform: scale(0.85) translateY(2px); }
@@ -3074,10 +3062,7 @@
     .tab .badge {
       animation: badgePing 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
-    @keyframes badgePing {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.12); filter: drop-shadow(0 0 6px rgba(255, 77, 106, 0.6)); }
-    }
+    @keyframes badgePing { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
 
     .back svg { stroke: #0b1b33 !important; }
 
@@ -3089,7 +3074,7 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
       transition: border-color .22s ease, box-shadow .22s ease, transform .22s ease !important;
       background: rgba(255, 255, 255, 0.95) !important;
-      backdrop-filter: blur(12px) !important;
+      
     }
     .catalog-search:focus-within {
       border-color: rgba(0, 119, 255, 0.5) !important;
@@ -3113,7 +3098,7 @@
         transform .26s cubic-bezier(0.34, 1.56, 0.64, 1),
         box-shadow .26s ease,
         filter .26s ease !important;
-      will-change: transform;
+      
     }
     .product-card:active {
       transform: scale(0.96) translateY(1px) !important;
@@ -3123,7 +3108,7 @@
       filter: brightness(1.02);
     }
     .product-card.card-enter {
-      animation: cardEnter .48s cubic-bezier(.16,1,.3,1) both !important;
+      
     }
     @keyframes cardEnter {
       from { opacity: 0; transform: translateY(16px) scale(.95); filter: blur(3px); }
@@ -3203,8 +3188,8 @@
     }
     .hero-next {
       background: rgba(255, 255, 255, 0.88) !important;
-      backdrop-filter: blur(14px) !important;
-      -webkit-backdrop-filter: blur(14px) !important;
+      
+      
       border: 1px solid rgba(255, 255, 255, 0.95) !important;
       box-shadow: 0 4px 14px rgba(0, 30, 80, 0.12) !important;
       transition: transform .22s cubic-bezier(0.34, 1.56, 0.64, 1), background .2s ease !important;
@@ -3250,8 +3235,8 @@
       background: rgba(6, 16, 36, 0.35);
       opacity: 0; pointer-events: none;
       transition: opacity .3s ease;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
+      
+      
     }
     .quick-veil.open { opacity: 1; pointer-events: auto; }
     .quick-dock {
@@ -3272,8 +3257,8 @@
       border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.85);
       background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      
+      
       color: #0b1b33;
       font-size: 13px;
       font-weight: 800;
@@ -3355,8 +3340,8 @@
     /* Modal Sheets & Backdrops */
     #video-sheet, #margin-sheet, #tradein-sheet, #checkout-sheet, #admin-sheet {
       background: rgba(6, 18, 38, 0.45) !important;
-      backdrop-filter: blur(14px) saturate(160%) !important;
-      -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
+      
+      
       transition: opacity .32s cubic-bezier(.16,1,.3,1) !important;
     }
     .sheet-panel {
@@ -3392,7 +3377,7 @@
 
     /* Splash Screen High-Tech Visual Polish */
     #electro-splash {
-      backdrop-filter: blur(20px);
+      
     }
     .splash-particle {
       box-shadow: 0 0 8px rgba(90, 200, 255, 0.7), 0 0 2px #ffffff !important;
@@ -3424,8 +3409,8 @@
       pointer-events: auto;
       position: relative;
       background: rgba(10, 16, 28, 0.94);
-      backdrop-filter: blur(28px) saturate(190%);
-      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      
+      
       border: 1px solid rgba(255, 255, 255, 0.16);
       border-radius: 999px;
       box-shadow:
@@ -3478,10 +3463,7 @@
       animation: diLivePulse 1.8s ease-in-out infinite;
       flex-shrink: 0;
     }
-    @keyframes diLivePulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.35); opacity: 0.65; box-shadow: 0 0 14px #12d86a; }
-    }
+    @keyframes diLivePulse { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.35); opacity: .65; } }
     .di-icon {
       font-size: 11px;
       color: #00b4ff;
@@ -3799,8 +3781,8 @@
       background: rgba(6, 18, 38, 0.5);
       display: flex; align-items: flex-end; justify-content: center;
       opacity: 0; pointer-events: none; transition: opacity .28s ease;
-      backdrop-filter: blur(14px) saturate(160%);
-      -webkit-backdrop-filter: blur(14px) saturate(160%);
+      
+      
     }
     #imei-sheet.open { opacity: 1; pointer-events: auto; }
     .imei-panel {
@@ -4888,7 +4870,7 @@
     .hero { background:radial-gradient(ellipse at 85% 35%,rgba(67,142,255,.3),transparent 45%),linear-gradient(125deg,#101d32 0%,#172d4a 58%,#244a77 100%) !important; border:1px solid rgba(255,255,255,.12) !important; box-shadow:0 16px 34px rgba(16,32,54,.18) !important; }
     .hero h2 { color:#fff !important; } .hero p { color:rgba(255,255,255,.78) !important; } .hero-badge { background:rgba(255,255,255,.14) !important; border:1px solid rgba(255,255,255,.2); box-shadow:none !important; }
     .section-head h3 { letter-spacing:-.035em; } .cat,.cat-card,.product-card { border-radius:18px; } .product-card::before,.product-card::after,.metric::after,.cat::before { filter:none !important; }
-    .tabbar { backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); } .contact-btn,.take,button.take { background:linear-gradient(135deg,#2879f3,#145fcf) !important; }
+    .tabbar {   } .contact-btn,.take,button.take { background:linear-gradient(135deg,#2879f3,#145fcf) !important; }
     .product-card,.metric,.cat,.cat-card,.benefit,.tab,.menu-btn,.theme-btn,.contact-btn { transition-duration:.18s !important; }
     @media (hover:hover) and (pointer:fine) { .product-card:hover,.cat:hover,.cat-card:hover { transform:translateY(-2px); } }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; transition-duration:.01ms !important; } }
@@ -6525,6 +6507,7 @@
     function showCatalogSkeleton() {
       const grid = document.getElementById("catalog-grid");
       if (!grid) return;
+      __catSigLast = "";
       grid.innerHTML = Array.from({ length: 6 }).map(() => `
         <div class="catalog-skeleton-card">
           <div class="skel-box skel-img"></div>
@@ -6674,21 +6657,20 @@
     }
     function showScreen(id) {
       closeQuick();
-      document.querySelectorAll(".screen").forEach(s => s.classList.remove("on"));
       var el = document.getElementById("screen-" + id);
-      if (el) {
-        el.classList.add("on");
-        el.style.animation = "none";
-        void el.offsetWidth;
-        el.style.animation = "";
+      var screens = document.querySelectorAll(".screen");
+      for (var si = 0; si < screens.length; si++) {
+        if (screens[si] !== el && screens[si].classList.contains("on")) screens[si].classList.remove("on");
       }
+      if (el && !el.classList.contains("on")) el.classList.add("on");
       if (id === "home") setTab("home");
       if (id === "catalog" || id === "product") setTab("catalog");
       if (id === "orders") { setTab("orders"); renderOrders(); }
       if (id === "fav") setTab("fav");
       if (id === "profile") setTab("profile");
       var app = document.querySelector(".app-container");
-      if (app) app.scrollTo({ top: 0, behavior: "smooth" });
+      if (app) app.scrollTop = 0;
+      window.scrollTo(0, 0);
     }
     function goHome() { showScreen("home"); }
     function catName(id) { return (CATS.find(c => c.id === id) || {}).name || "Каталог"; }
@@ -6724,11 +6706,11 @@
       const stockHtml = `<span class="stock-pill ${st.cls} js-stock">${st.label}</span>`;
       const outCls = st.qty <= 0 ? " is-out" : "";
       const buyLabel = st.qty <= 0 ? "НЕТ В НАЛИЧИИ" : "КУПИТЬ / БРОНЬ";
-      return `<article class="product-card card-enter${outCls}" id="card-${p.id}" style="animation-delay:${delay}ms" onclick="openProductSheet('${p.id}')">
+      return `<article class="product-card${outCls}" id="card-${p.id}" onclick="openProductSheet('${p.id}')">
         <div class="product-photo">
           <button class="fav-btn ${liked ? "on" : ""}" type="button" aria-label="В избранное" onclick="event.stopPropagation();toggleFav('${p.id}', this)">${liked ? "♥" : "♡"}</button>
           ${badge}
-          <img src="${p.img}" alt="${p.base}" loading="lazy">
+          <img src="${p.img}" alt="${p.base}" loading="lazy" decoding="async" width="200" height="200">
           <span class="rate">★ ${p.rating} <small style="opacity:.7">(${p.reviews})</small></span>
         </div>
         <h4 class="js-title">${title}</h4>
@@ -6805,10 +6787,25 @@
       });
     }
 
+    /* сигнатура данных: если она не изменилась, готовый DOM не пересобираем */
+    function __dataSig(withChosen) {
+      var parts = [PRODUCTS.length, currentRate, fav.join(",")];
+      for (var i = 0; i < PRODUCTS.length; i++) {
+        var p = PRODUCTS[i];
+        if (!p) continue;
+        var ci = withChosen ? (p.chosen || 0) : 0, v = p.vars && p.vars[ci];
+        parts.push(p.id + "|" + (p.base || "") + "|" + String(p.img || "").length + "|" + (v ? v.price : "") + "|" + ci + "|" + getStockInfo(p.id).qty);
+      }
+      return parts.join(";");
+    }
+    var __catSigLast = "";
     function renderCatalogGrid() {
-      const list = filterBySearch(listByCat(currentCat));
       const grid = document.getElementById("catalog-grid");
       if (!grid) return;
+      const sig = currentCat + "~" + currentCatalogFilter + "~" + catalogQuery + "~" + __dataSig(false);
+      if (sig === __catSigLast && grid.firstElementChild && !grid.querySelector(".catalog-skeleton-card")) return;
+      __catSigLast = sig;
+      const list = filterBySearch(listByCat(currentCat));
       grid.innerHTML = list.length
         ? list.map(function(p, i) { return cardHTML(p, i); }).join("")
         : '<div class="empty" style="grid-column:1/-1">Ничего не найдено по фильтрам</div>';
@@ -6817,13 +6814,12 @@
     function openCatalog(cat) {
       currentCat = cat || "all";
       showScreen("catalog");
-      document.getElementById("cat-chips").innerHTML = CATS.map(c =>
-        `<button class="chip ${c.id === currentCat ? "on" : ""}" type="button" onclick="openCatalog('${c.id}')">${c.name}</button>`
-      ).join("");
-      // keep search query when switching chips
-      const inp = document.getElementById("catalog-search-input");
-      if (inp && catalogQuery && inp.value !== catalogQuery) {
-        /* keep */
+      var chipsEl = document.getElementById("cat-chips");
+      if (chipsEl && (chipsEl.getAttribute("data-cat") !== currentCat || !chipsEl.firstChild)) {
+        chipsEl.innerHTML = CATS.map(c =>
+          `<button class="chip ${c.id === currentCat ? "on" : ""}" type="button" onclick="openCatalog('${c.id}')">${c.name}</button>`
+        ).join("");
+        chipsEl.setAttribute("data-cat", currentCat);
       }
       renderCatalogGrid();
     }
@@ -6872,8 +6868,12 @@
       }
       if (typeof playAppleSound === "function") playAppleSound(nowOn ? "success" : "click");
     }
+    var __favSigLast = "";
     function showFav() {
       showScreen("fav");
+      var __fs = __dataSig(true), __pool = document.getElementById("fav-pool-container");
+      if (__fs === __favSigLast && __pool && __pool.firstChild) return;
+      __favSigLast = __fs;
       const list = PRODUCTS.filter(p => fav.includes(p.id));
       const poolContainer = document.getElementById("fav-pool-container");
       if (poolContainer) {
@@ -6991,9 +6991,13 @@
       }
     }
 
+    var __ordSigLast = "";
     function renderOrders() {
       const box = document.getElementById("orders-box");
       const badge = document.getElementById("orders-badge-count");
+      var __os = JSON.stringify(orders) + "|" + currentRate;
+      if (__os === __ordSigLast && box && box.firstChild) return;
+      __ordSigLast = __os;
       if (!orders.length) {
         if (badge) badge.textContent = "0 заказов";
         box.innerHTML = `
@@ -10001,7 +10005,7 @@ Apple Watch Ultra 2 Black Titanium 72000
 #fx-sweep { position:fixed; inset:0; z-index:9500; pointer-events:none; overflow:hidden; display:none; }
 #fx-sweep.on { display:block; }
 #fx-sweep .fx-wave { position:absolute; left:0; right:0; top:100%; height:calc(100% + 90px);
-  transform:translateY(0); animation:fxSweepUp .78s cubic-bezier(.55,.05,.25,1) forwards; will-change:transform; }
+  transform:translateY(0); animation:fxSweepUp .78s cubic-bezier(.55,.05,.25,1) forwards;  }
 #fx-sweep .fx-wave svg { display:block; width:200%; height:90px; animation:fxWaveX 1.1s linear infinite; }
 #fx-sweep .fx-wave b { display:block; height:calc(100% - 90px + 2px); margin-top:-1px;
   background:linear-gradient(180deg, rgba(0,229,255,.5), rgba(43,124,255,.34) 30%, rgba(138,92,255,.22) 65%, rgba(138,92,255,0)); }
@@ -10012,7 +10016,7 @@ Apple Watch Ultra 2 Black Titanium 72000
 
 /* ---------- волны в шапке-герое и в шторках ---------- */
 .fx-waves { position:absolute; left:0; right:0; bottom:0; height:46px; pointer-events:none; z-index:3; overflow:hidden; opacity:.55; }
-.fx-waves svg, .fx-wavebar svg { position:absolute; left:0; bottom:0; width:200%; height:100%; animation:fxWaveX linear infinite; will-change:transform; }
+.fx-waves svg, .fx-wavebar svg { position:absolute; left:0; bottom:0; width:200%; height:100%; animation:fxWaveX linear infinite;  }
 .fx-waves svg:nth-child(1) { animation-duration:7s; opacity:.9; }
 .fx-waves svg:nth-child(2) { animation-duration:11s; animation-direction:reverse; opacity:.7; }
 .fx-waves svg:nth-child(3) { animation-duration:16s; opacity:.5; }
@@ -10088,7 +10092,7 @@ Apple Watch Ultra 2 Black Titanium 72000
   border:1px solid rgba(0,229,255,.4) !important; color:#eaf6ff !important; box-shadow:0 12px 36px rgba(0,80,200,.35), inset 0 0 0 1px rgba(255,255,255,.04) !important; position:relative; overflow:hidden; }
 #margin-sheet .mg-box > div, #margin-sheet .sell-row { color:#b9d4f5 !important; }
 #margin-sheet #mg-box-net { color:#5ff3ff !important; text-shadow:0 0 10px rgba(0,229,255,.7); }
-#margin-sheet .mg-stats div { background:rgba(255,255,255,.07) !important; border:1px solid rgba(0,229,255,.22) !important; color:#fff !important; backdrop-filter:blur(6px); }
+#margin-sheet .mg-stats div { background:rgba(255,255,255,.07) !important; border:1px solid rgba(0,229,255,.22) !important; color:#fff !important;  }
 #margin-sheet .mg-stats b { color:#fff !important; }
 #margin-sheet .mg-stats span { color:#8fb9ea !important; }
 #margin-sheet #mg-clean { color:var(--eg) !important; text-shadow:0 0 12px rgba(61,255,154,.65); }
@@ -10233,7 +10237,7 @@ html body .stock-pill { background:rgba(10,30,80,.7) !important; border:1px soli
 html body .stock-pill.in { color:#3dff9a !important; border-color:rgba(61,255,154,.45) !important; background:rgba(61,255,154,.1) !important; }
 html body .stock-pill.low { color:#ffb84d !important; border-color:rgba(255,184,77,.5) !important; background:rgba(255,184,77,.1) !important; }
 html body .stock-pill.out { color:#ff6b86 !important; border-color:rgba(255,107,134,.5) !important; background:rgba(255,77,106,.1) !important; }
-html body .fav-btn { background:rgba(4,14,40,.75) !important; color:#9ecbff !important; backdrop-filter:blur(6px); }
+html body .fav-btn { background:rgba(4,14,40,.75) !important; color:#9ecbff !important;  }
 html body .fav-btn.on { color:#ff4d7a !important; text-shadow:0 0 12px rgba(255,60,110,.9); }
 html body .rate { background:rgba(4,14,40,.78) !important; color:#ffe08a !important; border:1px solid rgba(255,214,102,.3) !important; }
 html body .product-card .quick, html body .quick { background:linear-gradient(160deg,rgba(18,44,108,.85),rgba(8,22,60,.9)) !important; color:#7ee6ff !important; border:1px solid rgba(0,200,255,.4) !important; }
@@ -10284,7 +10288,7 @@ html body .catalog-vip-link, html body .channel-btn { color:#fff !important; }
 html body .imei-pill, html body .imei-spec-item, html body .ti-chip { color:#e8f2ff !important; }
 
 /* ---------- каталог: появление карточек — «заряд» ---------- */
-html body .product-card.card-enter { animation:fxCardCharge .62s cubic-bezier(.16,1,.3,1) both !important; }
+html body .product-card.card-enter {  }
 @keyframes fxCardCharge {
   0%   { opacity:0; transform:translateY(22px) scale(.94); filter:brightness(2.4) saturate(1.6) drop-shadow(0 0 18px #00e5ff); }
   45%  { opacity:1; filter:brightness(1.6) drop-shadow(0 0 14px #00e5ff); }
@@ -10412,7 +10416,7 @@ html body .manager-copy span{ color:#a9c9f2 !important; }
 
 /* ===== PERF LAYER: меньше перерисовок, стабильный FPS ===== */
 /* 1. Размытие фона (backdrop-filter) — самое дорогое на мобильных: убираем везде, фон и так непрозрачный */
-html body *, html body *::before, html body *::after{ -webkit-backdrop-filter:none !important; backdrop-filter:none !important; }
+html body *, html body *::before, html body *::after{   }
 html body .tabbar{ background:linear-gradient(180deg,rgba(10,26,66,.98),rgba(3,10,30,.99)) !important; }
 html body .sheet-panel, html body #product-modal{ background-color:#061430; }
 /* 2. Фильтры на картинках и анимируемых элементах */
@@ -10426,16 +10430,16 @@ body.fx-pm .screen *, body.fx-pm .screen *::before, body.fx-pm .screen *::after,
 body.fx-mg #product-modal *, body.fx-mg #product-modal *::after{ animation-play-state:paused !important; }
 body.fx-drag svg .mg-ping{ display:none; }
 /* 4. Изоляция: перерисовка карточки не трогает остальную страницу */
-html body :is(.product-card,.metric,.benefit,.home-how-step,.rev-card,.cat-card,.cat,.home-live,.pm-tier-card,.pm-stocks-card,.pm-gsx-card,.pm-specs-card,.orders-pass-card,.fav-pool-card){ contain:layout paint style; }
-html body .home-how, html body .rev-head, html body #screen-home > section:not(:first-child){ content-visibility:auto; contain-intrinsic-size:auto 360px; }
+html body :is(.product-card,.metric,.benefit,.home-how-step,.rev-card,.cat-card,.cat,.home-live,.pm-tier-card,.pm-stocks-card,.pm-gsx-card,.pm-specs-card,.orders-pass-card,.fav-pool-card){ contain:layout style; }
+html body .home-how, html body .rev-head, html body #screen-home > section:not(:first-child){   }
 /* 5. Тени дешевле: крупные размытия урезаны вдвое у многократно повторяющихся плашек */
 html body :is(.product-card,.metric,.benefit,.home-how-step,.rev-card,.cat-card,.cat){ box-shadow:0 8px 20px rgba(0,60,180,.30), inset 0 1px 0 rgba(160,240,255,.4) !important; }
 /* 6. Перенос бесконечных волн на compositor */
-.fx-waves svg, .fx-wavebar svg{ will-change:transform; transform:translateZ(0); }
+.fx-waves svg, .fx-wavebar svg{  transform:translateZ(0); }
 
 /* ===== CALM: меньше слепящего света, плашки не исчезают, лента всегда едет ===== */
 /* тонкая синяя волна при смене экрана */
-#fx-sweep .fx-wave{ position:absolute; left:0; right:0; top:100%; height:40px; transform:translateY(0); animation:fxThinWave .7s cubic-bezier(.4,.1,.3,1) forwards; will-change:transform; }
+#fx-sweep .fx-wave{ position:absolute; left:0; right:0; top:100%; height:40px; transform:translateY(0); animation:fxThinWave .7s cubic-bezier(.4,.1,.3,1) forwards;  }
 #fx-sweep .fx-wave svg{ display:block; width:100%; height:40px; animation:none !important; }
 #fx-sweep .fx-wave b, #fx-sweep .fx-sbolt{ display:none !important; }
 @keyframes fxThinWave{ to{ transform:translateY(calc(-100vh - 80px)); } }
@@ -10476,9 +10480,9 @@ html.fx-lite body :is(.product-card,.hero,.home-live,.cat-card,.calc)::after{ di
 html.fx-lite .mg-draw, html.fx-lite .mg-fade{ animation:none !important; stroke-dashoffset:0 !important; opacity:1 !important; }
 html.fx-lite .home-how-step .how-more{ transition:none; }
 /* вспышки при появлении карточек и переключении вкладок -> мягкое появление */
-html body .product-card.card-enter{ animation:calmIn .35s ease-out both !important; }
+html body .product-card.card-enter{  }
 @keyframes calmIn{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;} }
-.tab.active svg{ filter:none !important; animation:calmTab .3s ease-out !important; }
+.tab.active svg{ filter:none !important;  }
 @keyframes calmTab{ from{transform:scale(.85);} to{transform:none;} }
 .tab.active{ text-shadow:none !important; }
 /* пока двигаете ползунок в марже — временно без свечений и волн, график не тормозит */
@@ -10487,6 +10491,66 @@ body.fx-drag #margin-sheet *{ box-shadow:none !important; text-shadow:none !impo
 body.fx-drag #margin-sheet .mg-box, body.fx-drag #margin-sheet .calc{ background-image:none !important; background-color:#0a2250 !important; }
 
 </style>
+
+<style id="perf-android">
+/* ===== PERF-ANDROID: стабильная прокрутка в Android System WebView ===== */
+/* прокрутка контейнера — мгновенная и без лишних слоёв */
+html body .app-container{ scroll-behavior:auto !important; -webkit-overflow-scrolling:touch; overscroll-behavior-y:contain; }
+html body button, html body a, html body .tab, html body .chip, html body .product-card{ touch-action:manipulation; -webkit-tap-highlight-color:transparent; }
+
+/* появление блоков: ничего не стартует с opacity:0 */
+html body .screen.on, html body .product-card, html body .section, html body .hero{ animation:none; }
+
+/* ---- каталог: строго 2 колонки, ровные карточки ---- */
+html body #catalog-grid, html body #fav-grid, html body .grid{
+  display:grid !important; grid-template-columns:repeat(2, minmax(0, 1fr)) !important; gap:8px !important; align-items:stretch; }
+html body .product-card{
+  display:flex; flex-direction:column; justify-content:space-between;
+  min-width:0; height:100%; box-sizing:border-box; contain:layout style; }
+html body .product-card h4{
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+  overflow:hidden; word-break:break-word; line-height:1.25; min-height:32px; }
+html body .product-card .card-actions{ margin-top:auto; }
+
+/* фото: квадратный контейнер фиксированной пропорции — без прыжков при подгрузке */
+html body .product-card .product-photo{
+  position:relative; display:block; flex:0 0 auto; width:100%; height:auto !important;
+  aspect-ratio:1 / 1; overflow:hidden; }
+html body .product-card .product-photo img{
+  position:absolute; left:0; top:0; width:100%; height:100%; z-index:0;
+  object-fit:cover; display:block; }
+@supports not (aspect-ratio:1 / 1){
+  html body .product-card .product-photo::before{ content:""; display:block; padding-top:100%; }
+}
+
+/* ---- тени и фильтры: один лёгкий слой вместо тяжёлых многослойных ---- */
+html body :is(.product-card,.cat-card,.cat,.metric,.benefit,.home-how-step,.rev-card,.home-order-card,.orders-pass-card,.fav-pool-card,.profile-service-item){
+  box-shadow:0 4px 10px rgba(0,60,180,.24), inset 0 1px 0 rgba(160,240,255,.3) !important; }
+html body :is(.take,.quick,.var.on,.chip.on){ box-shadow:0 3px 8px rgba(0,80,200,.28) !important; }
+html body :is(.product-card,.home-order-card,.cat,.cat-card,.metric,.benefit,.rev-card) *{ filter:none !important; }
+
+/* ---- светящиеся шары: радиальный градиент вместо blur() ---- */
+html body .home-live::before{
+  width:200px; height:200px; left:-70px; top:-80px; filter:none !important; animation:none !important;
+  background:radial-gradient(circle, rgba(0,255,128,.18) 0%, rgba(0,255,128,0) 70%) !important; }
+html body .pf-hero::before{
+  width:180px; height:180px; left:-60px; bottom:-70px; filter:none !important;
+  background:radial-gradient(circle, rgba(0,180,255,.16) 0%, rgba(0,180,255,0) 70%) !important; }
+html body .splash-orb{ filter:none !important; animation:none !important; }
+html body .splash-orb.a{ width:340px; height:340px; background:radial-gradient(circle, rgba(0,130,255,.34) 0%, rgba(0,130,255,0) 70%) !important; }
+html body .splash-orb.b{ width:260px; height:260px; background:radial-gradient(circle, rgba(0,210,255,.2) 0%, rgba(0,210,255,0) 70%) !important; }
+html body #electro-splash.done{ filter:none !important; }
+
+/* ---- LIVE-лента: едет всегда, ничего её не останавливает ---- */
+html body .home-live-status{ animation:none !important; }
+html:root body .home-live .home-live-window .home-live-track,
+html:root body .home-live-window:active .home-live-track,
+html:root body .home-live-window:hover .home-live-track,
+html:root body .home-live-window:focus .home-live-track{
+  animation:home-live-scroll 26s linear infinite !important; animation-play-state:running !important;
+  will-change:transform; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
+</style>
+
 <script id="electric-fx-js">
 (function () {
   "use strict";
@@ -10826,30 +10890,45 @@ body.fx-drag #margin-sheet .mg-box, body.fx-drag #margin-sheet .calc{ background
   var pend = [];
   function run(scope) {
     var root = scope || document.querySelector('.app-container') || document.body;
-    var all = root.querySelectorAll('*');
-    for (var i = 0; i < all.length; i++) {
-      var el = all[i]; if (SKIP[el.tagName] || el.closest('svg')) continue;
-      if (!(el.offsetWidth || el.offsetHeight)) continue;
-      var cs = getComputedStyle(el);
-      /* светлые плашки -> тёмное стекло */
-      if (el.textContent.trim() && el.offsetWidth > 36 && el.offsetHeight > 18 && cs.backgroundImage === 'none') {
-        var bg = parse(cs.backgroundColor);
-        if (bg && bg.a > .55 && lum(bg) > .55 && !el.dataset.fxLight) {
-          el.dataset.fxLight = 1;
-          el.style.setProperty('background', 'linear-gradient(160deg,rgba(16,44,110,.94),rgba(7,22,60,.96))', 'important');
-          el.style.setProperty('border-color', 'rgba(0,229,255,.38)', 'important');
+    var all = root.querySelectorAll('*'), i = 0, N = all.length;
+    function step() {
+      var end = Math.min(i + 60, N), jobs = [];
+      for (; i < end; i++) {
+        var el = all[i];
+        if (!el.isConnected || SKIP[el.tagName]) continue;
+        if (el.__fxs && el.__fxc === el.className) continue;
+        if (!(el.offsetWidth || el.offsetHeight)) continue;
+        if (el.closest('svg')) continue;
+        el.__fxs = 1; el.__fxc = el.className;
+        var cs = getComputedStyle(el), job = null;
+        /* светлые плашки -> тёмное стекло */
+        if (el.textContent.trim() && el.offsetWidth > 36 && el.offsetHeight > 18 && cs.backgroundImage === 'none') {
+          var bg = parse(cs.backgroundColor);
+          if (bg && bg.a > .55 && lum(bg) > .55 && !el.dataset.fxLight) { job = job || { el: el }; job.light = 1; }
+        }
+        /* тёмный текст -> светлый */
+        if (hasOwnText(el)) {
+          if (cs.webkitTextFillColor === 'rgba(0, 0, 0, 0)' || cs.color === 'rgba(0, 0, 0, 0)') { if (job) jobs.push(job); continue; }
+          var c = parse(cs.color);
+          if (c && c.a >= .3 && lum(c) < .30 && !el.dataset.fxTxt) { job = job || { el: el }; job.txt = lighten(c); }
+        }
+        if (job) jobs.push(job);
+      }
+      for (var j = 0; j < jobs.length; j++) {
+        var b = jobs[j], e = b.el;
+        if (b.light) {
+          e.dataset.fxLight = 1;
+          e.style.setProperty('background', 'linear-gradient(160deg,rgba(16,44,110,.94),rgba(7,22,60,.96))', 'important');
+          e.style.setProperty('border-color', 'rgba(0,229,255,.38)', 'important');
+        }
+        if (b.txt) {
+          e.dataset.fxTxt = 1;
+          e.style.setProperty('color', b.txt, 'important'); e.style.setProperty('-webkit-text-fill-color', b.txt, 'important');
         }
       }
-      /* тёмный текст -> светлый */
-      if (hasOwnText(el)) {
-        if (cs.webkitTextFillColor === 'rgba(0, 0, 0, 0)' || cs.color === 'rgba(0, 0, 0, 0)') continue;
-        var c = parse(cs.color); if (!c || c.a < .3) continue;
-        if (lum(c) < .30 && !el.dataset.fxTxt) {
-          var nc = lighten(c); el.dataset.fxTxt = 1;
-          el.style.setProperty('color', nc, 'important'); el.style.setProperty('-webkit-text-fill-color', nc, 'important');
-        }
-      }
+      if (i < N) setTimeout(step, 16);
     }
+    step();
   }
   var t;
   function flush() { var list = pend; pend = []; list.forEach(function (n) { if (n.isConnected) { run(n); } }); }
@@ -10870,9 +10949,7 @@ body.fx-drag #margin-sheet .mg-box, body.fx-drag #margin-sheet .calc{ background
 /* ===== PERF: пауза анимаций при скролле/перетаскивании, rAF-склейка расчёта маржи ===== */
 (function () {
   var root = document.documentElement, st;
-  function onScroll() { if (!root.classList.contains('fx-scroll')) root.classList.add('fx-scroll'); clearTimeout(st); st = setTimeout(function () { root.classList.remove('fx-scroll'); }, 140); }
-  window.addEventListener('scroll', onScroll, { passive: true, capture: true });
-  document.addEventListener('touchmove', onScroll, { passive: true, capture: true });
+  /* пауза анимаций на скролле убрана: смена класса на <html> пересчитывала стили всей страницы */
   /* перетаскивание ползунков */
   document.addEventListener('pointerdown', function (e) { if (e.target && e.target.type === 'range') document.body.classList.add('fx-drag'); }, true);
   ['pointerup', 'pointercancel', 'touchend'].forEach(function (n) { document.addEventListener(n, function () { document.body.classList.remove('fx-drag'); }, true); });
@@ -10900,7 +10977,7 @@ body.fx-drag #margin-sheet .mg-box, body.fx-drag #margin-sheet .calc{ background
   function setLite(on, persist) { root.classList.toggle('fx-lite', !!on); if (persist) { try { localStorage.setItem(KEY, on ? '1' : '0'); } catch (e) {} } }
   var q = location.search, saved = null; try { saved = localStorage.getItem(KEY); } catch (e) {}
   var cores = navigator.hardwareConcurrency || 8, mem = navigator.deviceMemory || 8, ua = navigator.userAgent || '';
-  var weak = cores <= 4 || mem <= 3 || /Android [4-9][.;\s]|Android 10[;\s]/.test(ua) || (navigator.connection && navigator.connection.saveData);
+  var weak = cores <= 4 || mem <= 3 || /Android/i.test(ua) || (navigator.connection && navigator.connection.saveData);
   var rm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (/[?&]lite=1/.test(q)) setLite(true, true); else if (/[?&]full=1/.test(q)) setLite(false, true);
   else if (weak || rm || saved === '1') setLite(true, false);
@@ -10953,6 +11030,18 @@ body.fx-drag #margin-sheet .mg-box, body.fx-drag #margin-sheet .calc{ background
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
 
+
+/* ===== LIVE-лента: страховка, чтобы бегущая строка никогда не вставала ===== */
+(function () {
+  function kick() {
+    var t = document.querySelector('.home-live-track');
+    if (!t || !t.getAnimations) return;
+    try { t.getAnimations().forEach(function (a) { if (a.playState === 'paused') a.play(); }); } catch (e) {}
+  }
+  setInterval(kick, 1500);
+  document.addEventListener('visibilitychange', kick);
+  window.addEventListener('pageshow', kick);
+})();
 </script>
 </body>
 </html>
