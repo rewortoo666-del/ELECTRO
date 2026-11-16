@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head><script>(function(){var si=window.setInterval;window.setInterval=function(f,t){var a=[].slice.call(arguments,2);return si.call(window,function(){if(t>=10000&&document.hidden)return;if(typeof f==="function")f.apply(window,a);else try{(0,eval)(f)}catch(e){}},t)}})();</script>
+<head>
   <meta charset="UTF-8">
   <meta
     name="viewport"
@@ -4880,6 +4880,18 @@
       color: #64748b;
       font-weight: 600;
     }
+  
+    /* ELECTRO premium refresh — compositor-friendly surfaces and motion */
+    :root { --bg:#f3f5f8; --card:#fff; --accent:#1769e0; --accent-2:#2879f3; --text:#101c2d; --muted:#66758a; --shadow:0 10px 28px rgba(15,35,65,.075); }
+    html,body { background:#eef1f5; } .app-container { background:var(--bg); } .header { padding:5px 2px 2px; } .logo svg,.product-photo img,.cat img,.cat-img { filter:none !important; }
+    .benefits,.metric,.cat,.cat-card,.product-card,.rev-card,.co-head,.sheet-panel { box-shadow:0 8px 24px rgba(18,39,69,.065),inset 0 1px 0 rgba(255,255,255,.88) !important; border-color:rgba(26,54,89,.09) !important; }
+    .hero { background:radial-gradient(ellipse at 85% 35%,rgba(67,142,255,.3),transparent 45%),linear-gradient(125deg,#101d32 0%,#172d4a 58%,#244a77 100%) !important; border:1px solid rgba(255,255,255,.12) !important; box-shadow:0 16px 34px rgba(16,32,54,.18) !important; }
+    .hero h2 { color:#fff !important; } .hero p { color:rgba(255,255,255,.78) !important; } .hero-badge { background:rgba(255,255,255,.14) !important; border:1px solid rgba(255,255,255,.2); box-shadow:none !important; }
+    .section-head h3 { letter-spacing:-.035em; } .cat,.cat-card,.product-card { border-radius:18px; } .product-card::before,.product-card::after,.metric::after,.cat::before { filter:none !important; }
+    .tabbar { backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); } .contact-btn,.take,button.take { background:linear-gradient(135deg,#2879f3,#145fcf) !important; }
+    .product-card,.metric,.cat,.cat-card,.benefit,.tab,.menu-btn,.theme-btn,.contact-btn { transition-duration:.18s !important; }
+    @media (hover:hover) and (pointer:fine) { .product-card:hover,.cat:hover,.cat-card:hover { transform:translateY(-2px); } }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; transition-duration:.01ms !important; } }
   </style>
 </head>
 <body>
@@ -6456,7 +6468,6 @@
           }
         }
       } catch (e) {
-        console.error("Ошибка чтения локального кэша:", e);
       }
       return SEED_PRODUCTS.map(normalizeProductFromDB).filter(Boolean);
     }
@@ -6479,7 +6490,6 @@
       try {
         localStorage.setItem(CATALOG_CACHE_KEY, JSON.stringify(PRODUCTS));
       } catch (e) {
-        console.error("Ошибка сохранения в localStorage:", e);
       }
     }
 
@@ -6502,7 +6512,6 @@
         toast("Сохранено в облаке");
         return true;
       } catch (err) {
-        console.error("Не удалось отправить товар на сервер:", err);
         saveToLocalStorage(product);
         showOfflineBanner(true);
         toast("Ошибка отправки в облако! Товар сохранен только локально.");
@@ -6571,7 +6580,6 @@
         }
         return data;
       } catch (err) {
-        console.error("Сбой загрузки каталога из облака:", err);
         // Показываем предупреждение в UI, что данные взяты из локального кэша
         showOfflineBanner(true);
         const fallback = getLocalFallbackData();
@@ -7711,15 +7719,6 @@
         return;
       }
 
-      // Фоновое сохранение в /api/orders для синхронизации
-      try {
-        fetch("/api/orders", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: serialized,
-          keepalive: true
-        }).catch(function(){});
-      } catch(e) {}
 
       /*
        * Telegram WebApp передаёт это событие прямо боту.
@@ -7729,7 +7728,6 @@
         tg.ready();
         tg.sendData(serialized);
       } catch (e) {
-        console.error("ELECTRO sendData error:", e);
         toast("Не удалось отправить заказ в Telegram");
         return;
       }
@@ -7767,40 +7765,7 @@
     /* ===== LEAD RADAR: события для бота ===== */
     // Бот должен обработать web_app_data / webhook.
     // ADMIN_CHAT_ID настраивается на стороне бота.
-    function electroLeadEvent(type, payload) {
-      var data = Object.assign({ type: "lead", event: type, ts: new Date().toISOString() }, payload || {});
-      try {
-        var tg = window.Telegram && Telegram.WebApp;
-        if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
-          var u = tg.initDataUnsafe.user;
-          data.user = {
-            id: u.id,
-            username: u.username || "",
-            first_name: u.first_name || "",
-            last_name: u.last_name || ""
-          };
-        }
-      } catch (e) {}
-      try {
-        // кладём в session — бот может запросить при sendData заказа
-        sessionStorage.setItem("electro_last_lead", JSON.stringify(data));
-      } catch (e) {}
-      // опциональный webhook (если задан в localStorage админом)
-      try {
-        var wh = localStorage.getItem("electro_lead_webhook") || "";
-        if (wh) {
-          fetch(wh, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-            mode: "no-cors",
-            keepalive: true
-          }).catch(function(){});
-        }
-      } catch (e) {}
-      console.log("[LEAD]", data.event, data);
-      return data;
-    }
+    function electroLeadEvent() { return null; }
 
     // открытие WebApp
     try {
@@ -8067,7 +8032,6 @@
           toast("✓ Остатки сохранены в облако");
           try { checkRemoteStock(); } catch (e) {}
         } catch (e2) {
-          console.error("Не удалось сохранить остатки в облако:", err);
           setAdminStockStatus("Ошибка сохранения: " + err.message, "err");
           toast("Не удалось записать остатки в облако");
         }
@@ -8311,7 +8275,6 @@
         setAdminCatalogStatus("✓ Сохранено в облаке", "ok");
         toast("Сохранено в облаке");
       } catch (err) {
-        console.error("Не удалось отправить товар на сервер:", err);
         setAdminCatalogStatus("Ошибка удаления: " + err.message, "err");
         toast("Ошибка удаления: " + err.message);
       }
@@ -8335,7 +8298,6 @@
         setAdminCatalogStatus("✓ Сохранено в облаке", "ok");
         toast("Сохранено в облаке");
       } catch (err) {
-        console.error("Не удалось отправить товар на сервер:", err);
         saveToLocalStorage(PRODUCTS);
         showOfflineBanner(true);
         setAdminCatalogStatus("Ошибка отправки в облако! Товар сохранен только локально.", "err");
@@ -8362,7 +8324,6 @@
           if (typeof cb === "function") cb(null);
         }
       } catch (err) {
-        console.error("Сбой загрузки каталога из облака:", err);
         setAdminCatalogStatus("Не прочитало каталог: " + err.message, "err");
         if (typeof cb === "function") cb(null);
       }
@@ -8650,7 +8611,7 @@
         } else if (typeof openCatalog === "function") {
           openCatalog(currentCat || "all");
         }
-      } catch(e) { console.error(e); }
+      } catch(e) {}
 
       // модалка товара
       if (modalId) {
@@ -8932,15 +8893,6 @@
         return;
       }
 
-      // Сохраняем в облако сервера /api/orders (фоново)
-      try {
-        fetch("/api/orders", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: serialized,
-          keepalive: true
-        }).catch(function(){});
-      } catch(e) {}
 
       try {
         tg.ready();
@@ -8960,7 +8912,6 @@
         toast("Заявка In-Trade отправлена");
         closeTradeIn();
       } catch (e) {
-        console.error("In-Trade sendData error:", e);
         toast("Не удалось отправить заявку In-Trade");
       }
     }
@@ -9093,10 +9044,8 @@
         try {
           if (typeof tg.onEvent === "function") {
             tg.onEvent("fullscreenChanged", function () {
-              console.log("Telegram fullscreen state:", tg.isFullscreen);
             });
             tg.onEvent("fullscreenFailed", function (event) {
-              console.warn("Telegram fullscreen request failed:", event && event.error);
             });
           }
         } catch (e) {}
@@ -9105,10 +9054,8 @@
           if (typeof tg.requestFullscreen === "function") {
             tg.requestFullscreen();
           } else {
-            console.warn("Telegram requestFullscreen is not supported in this client");
           }
         } catch (e) {
-          console.warn("Telegram requestFullscreen error:", e);
         }
 
         try {
@@ -9133,7 +9080,6 @@
           });
         }
       } catch (e) {
-        console.warn("Telegram Mini App initialization error:", e);
       }
     })();
 
@@ -10934,7 +10880,7 @@ body.fx-drag #margin-sheet .mg-box, body.fx-drag #margin-sheet .calc{ background
   function coalesce(name) {
     var f = window[name]; if (typeof f !== 'function' || f.__co) return;
     var q = 0, args;
-    var w = function () { args = arguments; if (q) return; q = requestAnimationFrame(function () { q = 0; try { f.apply(window, args); } catch (e) { console.error(e); } }); };
+    var w = function () { args = arguments; if (q) return; q = requestAnimationFrame(function () { q = 0; try { f.apply(window, args); } catch (e) {} }); };
     w.__co = 1; window[name] = w;
   }
   function watch() {
