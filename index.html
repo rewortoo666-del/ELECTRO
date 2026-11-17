@@ -4879,24 +4879,34 @@
 <body>
   <!-- SPLASH -->
   <div id="electro-splash" aria-live="polite" aria-busy="true">
-    <div class="splash-orb a"></div>
-    <div class="splash-orb b"></div>
-    <div class="splash-particles" id="splash-particles"></div>
+    <div class="sp-grid" aria-hidden="true"></div>
+    <div class="sp-glow g1" aria-hidden="true"></div>
+    <div class="sp-glow g2" aria-hidden="true"></div>
+    <div class="splash-particles" id="splash-particles" aria-hidden="true"></div>
     <div class="splash-inner">
-      <div class="splash-ring-wrap">
-        <div class="splash-ring"></div>
-        <div class="splash-ring slow"></div>
-        <div class="splash-logo" aria-hidden="true">
+      <div class="sp-stage" aria-hidden="true">
+        <i class="sp-pulse"></i><i class="sp-pulse b"></i><i class="sp-pulse c"></i>
+        <svg class="sp-orbit o1" viewBox="0 0 200 200"><circle cx="100" cy="100" r="96" fill="none" stroke="#35e0ff" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="200 403"/><circle cx="196" cy="100" r="7" fill="#35e0ff" opacity=".28"/><circle cx="196" cy="100" r="3.4" fill="#fff"/></svg>
+        <svg class="sp-orbit o2" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" fill="none" stroke="#2b7cff" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="130 373"/><circle cx="180" cy="100" r="6" fill="#2b7cff" opacity=".3"/><circle cx="180" cy="100" r="3" fill="#cfe4ff"/></svg>
+        <svg class="sp-orbit o3" viewBox="0 0 200 200"><circle cx="100" cy="100" r="64" fill="none" stroke="#8a5cff" stroke-width="2" stroke-linecap="round" stroke-dasharray="70 332"/><circle cx="164" cy="100" r="5" fill="#8a5cff" opacity=".3"/><circle cx="164" cy="100" r="2.6" fill="#e6dcff"/></svg>
+        <svg class="sp-bolts" viewBox="0 0 200 200" fill="none" stroke="#a8ecff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <polyline class="b1" points="150,46 160,34 154,30 168,14"/>
+          <polyline class="b2" points="46,150 36,162 44,166 30,184"/>
+          <polyline class="b3" points="40,52 30,44 36,40 24,28"/>
+          <polyline class="b4" points="160,152 170,160 164,166 176,180"/>
+        </svg>
+        <div class="sp-logo">
           <svg viewBox="0 0 36 36" fill="none">
-            <path d="M2 5h18L34 18 20 31H2l14-13L2 5z" fill="#0a4ea8"/>
-            <path d="M2 5h18L34 18 20 31H2l14-13L2 5z" stroke="#2ea4ff" stroke-width="2.2" stroke-linejoin="round"/>
-            <path d="M6 10h12l8 8-8 8H6l8-8-8-8z" fill="#1490ff"/>
+            <path class="d" d="M2 5h18L34 18 20 31H2l14-13L2 5z" stroke="#4fb6ff" stroke-width="2.2" stroke-linejoin="round" fill="#0a4ea8"/>
+            <path class="f" d="M6 10h12l8 8-8 8H6l8-8-8-8z" fill="#1490ff"/>
           </svg>
         </div>
       </div>
-      <div class="splash-brand">ELECTRO</div>
+      <div class="sp-brandwrap">
+        <div class="splash-brand" aria-label="ELECTRO"><span><b>E</b></span><span><b>L</b></span><span><b>E</b></span><span><b>C</b></span><span><b>T</b></span><span><b>R</b></span><span><b>O</b></span></div>
+      </div>
       <div class="splash-sub">Демо-витрина Apple</div>
-      <div class="splash-bar-wrap"><div class="splash-bar" id="splash-bar"></div></div>
+      <div class="sp-bar"><i id="splash-bar"></i></div>
       <div class="splash-pct" id="splash-pct">0%</div>
       <div class="splash-status" id="splash-status">Запуск витрины<span class="splash-dots"><span>.</span><span>.</span><span>.</span></span></div>
     </div>
@@ -6798,7 +6808,7 @@
       }
       return parts.join(";");
     }
-    var __catSigLast = "";
+    var __catSigLast = "", __catToken = 0;
     function renderCatalogGrid() {
       const grid = document.getElementById("catalog-grid");
       if (!grid) return;
@@ -6806,9 +6816,21 @@
       if (sig === __catSigLast && grid.firstElementChild && !grid.querySelector(".catalog-skeleton-card")) return;
       __catSigLast = sig;
       const list = filterBySearch(listByCat(currentCat));
-      grid.innerHTML = list.length
-        ? list.map(function(p, i) { return cardHTML(p, i); }).join("")
-        : '<div class="empty" style="grid-column:1/-1">Ничего не найдено по фильтрам</div>';
+      const token = ++__catToken, FIRST = 8, STEP = 8;
+      if (!list.length) {
+        grid.innerHTML = '<div class="empty" style="grid-column:1/-1">Ничего не найдено по фильтрам</div>';
+        return;
+      }
+      grid.innerHTML = list.slice(0, FIRST).map(function(p, i) { return cardHTML(p, i); }).join("");
+      var idx = FIRST;
+      function more() {
+        if (token !== __catToken || idx >= list.length) return;
+        var end = Math.min(idx + STEP, list.length);
+        grid.insertAdjacentHTML("beforeend", list.slice(idx, end).map(function(p, i) { return cardHTML(p, idx + i); }).join(""));
+        idx = end;
+        if (idx < list.length) setTimeout(more, 30);
+      }
+      if (list.length > FIRST) setTimeout(more, 30);
     }
 
     function openCatalog(cat) {
@@ -9148,6 +9170,7 @@
 
     // Apple Titanium Specular Foil tracking
     document.addEventListener("pointermove", function (e) {
+      if (e.pointerType && e.pointerType !== "mouse") return;
       var card = e.target.closest(".product-card");
       if (card) {
         var rect = card.getBoundingClientRect();
@@ -9174,7 +9197,7 @@
       try {
         var host = document.getElementById("splash-particles");
         if (host) {
-          for (var p = 0; p < 18; p++) {
+          for (var p = 0; p < 12; p++) {
             var el = document.createElement("span");
             el.className = "splash-particle";
             el.style.left = (Math.random() * 100) + "%";
@@ -9201,10 +9224,23 @@
       var minMs = 3000;
       var started = Date.now();
       var finished = false;
+      var shownPct = 0, pctRaf = 0;
+      function tweenPct(to) {
+        if (!pctEl) return;
+        if (pctRaf) cancelAnimationFrame(pctRaf);
+        var from = shownPct, t0 = (window.performance && performance.now) ? performance.now() : Date.now();
+        (function f() {
+          var now = (window.performance && performance.now) ? performance.now() : Date.now();
+          var k = Math.min(1, (now - t0) / 320);
+          shownPct = Math.round(from + (to - from) * k);
+          pctEl.textContent = shownPct + "%";
+          if (k < 1) pctRaf = requestAnimationFrame(f);
+        })();
+      }
 
       function setStep(step) {
-        if (bar) bar.style.width = step.pct + "%";
-        if (pctEl) pctEl.textContent = step.pct + "%";
+        if (bar) bar.style.transform = "scaleX(" + (step.pct / 100) + ")";
+        tweenPct(step.pct);
         if (status) {
           status.innerHTML = step.text +
             (step.pct < 100
@@ -9230,8 +9266,8 @@
       function finish() {
         if (finished) return;
         finished = true;
-        if (bar) bar.style.width = "100%";
-        if (pctEl) pctEl.textContent = "100%";
+        if (bar) bar.style.transform = "scaleX(1)";
+        tweenPct(100);
         if (app) {
           app.classList.remove("is-booting");
           app.classList.add("is-ready");
@@ -10551,6 +10587,126 @@ html:root body .home-live-window:focus .home-live-track{
   will-change:transform; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
 </style>
 
+<style id="perf-android-2">
+/* ===== LIVE: перезапуск / JS-привод ===== */
+html:root body .home-live .home-live-window .home-live-track.lv-stop,
+html:root body .home-live .home-live-window .home-live-track.lv-js{ animation:none !important; }
+
+/* ===== аккордеон «Как мы работаем» ===== */
+html body .home-how-step{ -webkit-tap-highlight-color:transparent; }
+
+/* ===== слабые телефоны: дешёвая отрисовка прокручиваемого списка ===== */
+html body .tabbar, html body .dynamic-island-wrap{ will-change:transform; }
+html.fx-lite body .product-card .price{
+  background:none !important; -webkit-background-clip:border-box !important; background-clip:border-box !important;
+  -webkit-text-fill-color:#aef2ff !important; color:#aef2ff !important; }
+html.fx-lite body .product-card .price .pc-old{ -webkit-text-fill-color:#6f8fbd !important; }
+
+/* ===================================================================
+   ЗАСТАВКА: только transform / opacity, без blur и backdrop — 60 fps
+   =================================================================== */
+html body #electro-splash{
+  background:
+    radial-gradient(ellipse 80% 55% at 50% 38%, rgba(0,110,255,.40), transparent 62%),
+    radial-gradient(ellipse 60% 40% at 10% 92%, rgba(0,229,255,.16), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 94% 78%, rgba(138,92,255,.20), transparent 60%),
+    linear-gradient(170deg,#030a1a 0%,#07132b 45%,#0a1d40 100%);
+  filter:none !important; }
+html body #electro-splash::after{
+  content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:radial-gradient(ellipse at 50% 42%, rgba(3,10,26,0) 38%, rgba(3,10,26,.88) 100%); }
+html body #electro-splash .splash-inner{
+  width:min(320px, 88vw); z-index:2; transition:transform .55s cubic-bezier(.4,0,.2,1), opacity .45s ease; }
+html body #electro-splash.done .splash-inner{ transform:scale(1.12); opacity:0; }
+
+html body #electro-splash .sp-grid{
+  position:absolute; left:0; right:0; top:-28px; bottom:0; pointer-events:none; opacity:.5;
+  background-image:radial-gradient(circle, rgba(120,190,255,.38) 1px, transparent 1.6px); background-size:28px 28px;
+  animation:spGrid 2.6s linear infinite !important; }
+html body #electro-splash .sp-glow{ position:absolute; border-radius:50%; pointer-events:none; }
+html body #electro-splash .sp-glow.g1{ width:420px; height:420px; left:50%; top:36%; margin:-210px 0 0 -210px;
+  background:radial-gradient(circle, rgba(0,140,255,.38) 0%, rgba(0,140,255,0) 68%); animation:spGlow 3.6s ease-in-out infinite !important; }
+html body #electro-splash .sp-glow.g2{ width:320px; height:320px; right:-120px; bottom:6%;
+  background:radial-gradient(circle, rgba(138,92,255,.30) 0%, rgba(138,92,255,0) 68%); animation:spGlow 4.4s ease-in-out -1.6s infinite !important; }
+html body #electro-splash .splash-particles{ z-index:1; }
+html body #electro-splash .splash-particle{
+  animation-name:splashFloat !important; animation-timing-function:linear !important;
+  animation-iteration-count:infinite !important; box-shadow:none !important; background:rgba(150,215,255,.8); }
+
+/* сцена: пульсы, орбиты, молнии, логотип */
+html body #electro-splash .sp-stage{ position:relative; width:min(200px, 56vw); height:min(200px, 56vw); margin:0 auto 26px; }
+html body #electro-splash .sp-stage > *{ position:absolute; left:0; top:0; width:100%; height:100%; }
+html body #electro-splash .sp-pulse{ border-radius:50%; border:2px solid rgba(0,229,255,.55); box-sizing:border-box;
+  opacity:0; animation:spPulse 2.7s cubic-bezier(.2,.6,.3,1) infinite !important; will-change:transform,opacity; }
+html body #electro-splash .sp-pulse.b{ animation-delay:.9s !important; border-color:rgba(43,124,255,.6); }
+html body #electro-splash .sp-pulse.c{ animation-delay:1.8s !important; border-color:rgba(138,92,255,.55); }
+html body #electro-splash .sp-orbit{ will-change:transform; }
+html body #electro-splash .sp-orbit.o1{ animation:spSpin 3.4s linear infinite !important; }
+html body #electro-splash .sp-orbit.o2{ animation:spSpinR 5.2s linear infinite !important; }
+html body #electro-splash .sp-orbit.o3{ animation:spSpin 2.5s linear infinite !important; }
+html body #electro-splash .sp-bolts polyline{ opacity:0; animation:spBolt 3.2s linear infinite !important; }
+html body #electro-splash .sp-bolts .b2{ animation-delay:.8s !important; }
+html body #electro-splash .sp-bolts .b3{ animation-delay:1.6s !important; }
+html body #electro-splash .sp-bolts .b4{ animation-delay:2.3s !important; }
+
+html body #electro-splash .sp-logo{
+  left:50%; top:50%; width:84px; height:84px; margin:-42px 0 0 -42px; border-radius:26px;
+  display:flex; align-items:center; justify-content:center; box-sizing:border-box;
+  background:linear-gradient(155deg,#0d4aa8 0%,#062a63 70%);
+  border:1.5px solid rgba(0,229,255,.5); box-shadow:0 0 26px rgba(0,160,255,.5);
+  animation:spLogoIn .9s cubic-bezier(.2,1.3,.4,1) both !important; }
+html body #electro-splash .sp-logo svg{ width:44px; height:44px; animation:spFloat 3s ease-in-out 1s infinite !important; }
+html body #electro-splash .sp-logo .d{ stroke-dasharray:130; stroke-dashoffset:130; animation:spDraw 1s ease-out .2s forwards !important; }
+html body #electro-splash .sp-logo .f{ opacity:0; animation:spFill .5s ease-out .9s forwards !important; }
+
+/* название, подпись, прогресс */
+html body #electro-splash .sp-brandwrap{ position:relative; display:inline-block; padding:6px 6px 2px; }
+html body #electro-splash .splash-brand{ display:flex; justify-content:center; gap:.12em; margin:0; font-size:38px; line-height:1.1;
+  font-weight:900; letter-spacing:.16em; color:#fff; text-shadow:0 0 18px rgba(0,170,255,.55); }
+html body #electro-splash .splash-brand span{ display:inline-block; opacity:0; animation:spLetter .55s cubic-bezier(.2,1.2,.4,1) both !important; }
+html body #electro-splash .splash-brand span:nth-child(1){ animation-delay:.55s !important; }
+html body #electro-splash .splash-brand span:nth-child(2){ animation-delay:.63s !important; }
+html body #electro-splash .splash-brand span:nth-child(3){ animation-delay:.71s !important; }
+html body #electro-splash .splash-brand span:nth-child(4){ animation-delay:.79s !important; }
+html body #electro-splash .splash-brand span:nth-child(5){ animation-delay:.87s !important; }
+html body #electro-splash .splash-brand span:nth-child(6){ animation-delay:.95s !important; }
+html body #electro-splash .splash-brand span:nth-child(7){ animation-delay:1.03s !important; }
+html body #electro-splash .splash-brand b{ display:inline-block; font-weight:inherit; animation:spWave 3.2s ease-in-out infinite !important; }
+html body #electro-splash .splash-brand span:nth-child(1) b{ animation-delay:2.0s !important; }
+html body #electro-splash .splash-brand span:nth-child(2) b{ animation-delay:2.1s !important; }
+html body #electro-splash .splash-brand span:nth-child(3) b{ animation-delay:2.2s !important; }
+html body #electro-splash .splash-brand span:nth-child(4) b{ animation-delay:2.3s !important; }
+html body #electro-splash .splash-brand span:nth-child(5) b{ animation-delay:2.4s !important; }
+html body #electro-splash .splash-brand span:nth-child(6) b{ animation-delay:2.5s !important; }
+html body #electro-splash .splash-brand span:nth-child(7) b{ animation-delay:2.6s !important; }
+html body #electro-splash .splash-sub{ margin-top:6px; opacity:0; animation:spFade .6s ease-out 1.2s forwards !important; }
+html body #electro-splash .sp-bar{ position:relative; width:78%; max-width:240px; height:6px; margin:22px auto 0; border-radius:99px;
+  background:rgba(120,170,255,.16); overflow:hidden; opacity:0; animation:spFade .5s ease-out 1.1s forwards !important; }
+html body #electro-splash .sp-bar i{ position:absolute; left:0; top:0; bottom:0; width:100%; border-radius:99px; transform:scaleX(0); transform-origin:0 50%;
+  background:linear-gradient(90deg,#2b7cff,#00e5ff 60%,#8a5cff); transition:transform .35s cubic-bezier(.3,.7,.2,1); }
+html body #electro-splash .sp-bar::after{ content:""; position:absolute; top:0; bottom:0; left:0; width:35%;
+  background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.55), rgba(255,255,255,0));
+  transform:translateX(-100%); animation:spBarShine 1.5s linear infinite !important; }
+html body #electro-splash .splash-pct{ margin-top:10px; font-weight:800; font-size:15px; letter-spacing:.12em; color:#7fdcff; opacity:0; animation:spFade .5s ease-out 1.2s forwards !important; }
+html body #electro-splash .splash-status{ margin-top:6px; min-height:18px; font-size:12px; font-weight:600; color:#8fb4e6; opacity:0; animation:spFade .5s ease-out 1.3s forwards !important; }
+
+@keyframes spPulse{ 0%{ transform:scale(.45); opacity:.6; } 100%{ transform:scale(1.5); opacity:0; } }
+@keyframes spSpin{ to{ transform:rotate(360deg); } }
+@keyframes spSpinR{ to{ transform:rotate(-360deg); } }
+@keyframes spLogoIn{ 0%{ transform:scale(.3); opacity:0; } 60%{ transform:scale(1.08); opacity:1; } 100%{ transform:scale(1); opacity:1; } }
+@keyframes spFloat{ 0%,100%{ transform:translateY(-2px); } 50%{ transform:translateY(3px); } }
+@keyframes spDraw{ to{ stroke-dashoffset:0; } }
+@keyframes spFill{ from{ opacity:0; } to{ opacity:1; } }
+@keyframes spLetter{ 0%{ transform:translateY(22px) scale(.9); opacity:0; } 100%{ transform:none; opacity:1; } }
+@keyframes spWave{ 0%,45%,100%{ transform:translateY(0); } 22%{ transform:translateY(-5px); } }
+@keyframes spFade{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:none; } }
+@keyframes spGlow{ 0%,100%{ transform:scale(1); opacity:.75; } 50%{ transform:scale(1.12); opacity:1; } }
+@keyframes spBolt{ 0%,82%,100%{ opacity:0; } 85%{ opacity:1; } 88%{ opacity:.15; } 91%{ opacity:.95; } 95%{ opacity:0; } }
+@keyframes spGrid{ from{ transform:translateY(0); } to{ transform:translateY(28px); } }
+@keyframes spBarShine{ 0%{ transform:translateX(-100%); } 100%{ transform:translateX(300%); } }
+</style>
+
+
 <script id="electric-fx-js">
 (function () {
   "use strict";
@@ -11022,7 +11178,14 @@ html:root body .home-live-window:focus .home-live-track{
       var c = document.createElement('i'); c.className = 'how-chev';
       st.appendChild(d); st.appendChild(c);
       st.setAttribute('role', 'button'); st.setAttribute('tabindex', '0'); st.setAttribute('aria-expanded', 'false');
-      function tog() { var o = st.classList.toggle('open'); st.setAttribute('aria-expanded', o ? 'true' : 'false'); }
+      function tog() {
+        var willOpen = !st.classList.contains('open');
+        steps.forEach(function (o2) {
+          if (o2 !== st && o2.classList.contains('open')) { o2.classList.remove('open'); o2.setAttribute('aria-expanded', 'false'); }
+        });
+        st.classList.toggle('open', willOpen);
+        st.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      }
       st.addEventListener('click', tog);
       st.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tog(); } });
     });
@@ -11031,16 +11194,41 @@ html:root body .home-live-window:focus .home-live-track{
 })();
 
 
-/* ===== LIVE-лента: страховка, чтобы бегущая строка никогда не вставала ===== */
+/* ===== LIVE-лента: никогда не встаёт (CSS-анимация + автоперезапуск + JS-запасной привод) ===== */
 (function () {
-  function kick() {
-    var t = document.querySelector('.home-live-track');
-    if (!t || !t.getAnimations) return;
-    try { t.getAnimations().forEach(function (a) { if (a.playState === 'paused') a.play(); }); } catch (e) {}
+  var track = null, mode = 'css', raf = 0, t0 = 0, half = 0, prev = null, same = 0, DUR = 26000;
+  function find() { if (!track || !track.isConnected) track = document.querySelector('.home-live-track'); return track; }
+  function homeOn() { var s = document.getElementById('screen-home'); return !!(s && s.classList.contains('on')) && !document.hidden; }
+  function restartCss() { var t = find(); if (!t) return; t.classList.add('lv-stop'); void t.offsetWidth; t.classList.remove('lv-stop'); }
+  function loop(ts) {
+    raf = requestAnimationFrame(loop);
+    var t = find(); if (!t || !homeOn()) return;
+    if (!half) half = t.scrollWidth / 2;
+    if (!half) return;
+    t.style.transform = 'translate3d(' + (-(((ts - t0) % DUR) / DUR) * half).toFixed(2) + 'px,0,0)';
   }
-  setInterval(kick, 1500);
-  document.addEventListener('visibilitychange', kick);
-  window.addEventListener('pageshow', kick);
+  function useJs() {
+    if (mode === 'js') return;
+    var t = find(); if (!t) return;
+    mode = 'js'; t.classList.add('lv-js'); half = 0; t0 = performance.now(); raf = requestAnimationFrame(loop);
+  }
+  setInterval(function () {
+    if (mode !== 'css' || !homeOn()) { prev = null; same = 0; return; }
+    var t = find(); if (!t) return;
+    var c = getComputedStyle(t).transform;
+    if (c === prev) { same++; if (same === 1) restartCss(); else if (same >= 2) useJs(); } else same = 0;
+    prev = c;
+  }, 1000);
+  var _ss = window.showScreen;
+  if (typeof _ss === 'function') {
+    window.showScreen = function (id) {
+      var r = _ss.apply(this, arguments);
+      prev = null; same = 0;
+      if (id === 'home' && mode === 'css') requestAnimationFrame(restartCss);
+      return r;
+    };
+  }
+  document.addEventListener('visibilitychange', function () { prev = null; same = 0; if (!document.hidden && mode === 'css') restartCss(); });
 })();
 </script>
 </body>
